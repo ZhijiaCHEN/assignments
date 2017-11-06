@@ -22,7 +22,8 @@ using std::function;
 using namespace std::placeholders;
 #include "bin_tree.h"
 using namespace BinTree;
-#define singleRChild (TreeItem *)0x01
+#define singleLChild (TreeItem *)0x01
+#define singleRChild (TreeItem *)0x02
 //#include "Robson.h"
 //using namespace Robson;
 //typedef void(visiCall)(TreeItem *);
@@ -61,6 +62,64 @@ void create(TreeItem *rootPtr, istream &inSrc)
 		cout << "Unable to parse input stream: " << e.what() << endl;
 	}
 	return;
+}
+TreeItem *create_tree(istream &inSrc)
+{
+	TreeItem *rootPtr = nullptr, *p = nullptr, *q = nullptr, *rtptr = nullptr;
+	vector<TreeItem *>s;
+	string aLine;
+	int nodeCnt = 0;
+	getline(inSrc, aLine);
+	istringstream lineIn(aLine);
+	int rootFlag;
+	lineIn >> rootFlag;
+	if (rootFlag == 1)
+	{
+		rootPtr = new TreeItem();
+	}
+	p = rootPtr;
+	while (p || !s.empty())
+	{
+		if (p)
+		{
+			p->item = ++nodeCnt;
+			int lFlag, rFlag;
+			getline(inSrc, aLine);
+			istringstream lineIn(aLine);
+			lineIn >> lFlag;
+			lineIn >> rFlag;
+			p->lPtr = lFlag ? new TreeItem() : nullptr;
+			p->rPtr = rFlag ? new TreeItem() : nullptr;
+			cout << "input: " << aLine << endl;
+			s.push_back(p);
+			if (p->lPtr)
+			{
+				p = p->lPtr;
+			}
+			else
+			{
+				p = p->rPtr;
+			}
+		}
+		else
+		{
+			do
+			{
+				q = s.back();
+				s.pop_back();
+				if (!s.empty())
+				{
+					rtptr = s.back()->rPtr;
+				}
+				else
+				{
+					rtptr = nullptr;
+				}
+			} while (!s.empty() && q == rtptr);
+			p = rtptr;
+		}
+	}
+	return rootPtr;
 }
 void print_child(TreeItem *nodePtr, istream &inSrc)
 {
@@ -164,42 +223,55 @@ void robson_preorder_traversal(TreeItem *root, function<void(TreeItem *)> visitF
 			cout << endl;
 			cout << "Back path: ";
 			printPtr = pred;
+			TreeItem *stackCopy = stack;
 			while (printPtr)
 			{
+				
 				cout << "(";
-				if (printPtr->lPtr) cout << printPtr->lPtr->item;
-				else cout << "null";
+				if (printPtr->lPtr == nullptr) cout << "null";
+				else if (printPtr->lPtr == singleRChild) cout << "singleRChild";
+				else cout << printPtr->lPtr->item;
 				cout << "<-" << printPtr->item << "->";
-				if (printPtr->rPtr)
-				{
-					if(printPtr->rPtr == singleRChild) cout << "singleRChild";
-					else cout << printPtr->rPtr->item;
-				}
-				else cout << "null";
+				if (printPtr->rPtr == nullptr) cout << "null";
+				else if (printPtr->rPtr == singleLChild) cout << "singleLChild";
+				else cout << printPtr->rPtr->item;
 				cout << "), ";
-				//cout << "(stack entry: " << printPtr->item << "->key node: " << printPtr->rPtr->item << ")" << "->";
-				printPtr = printPtr->lPtr;
+				//cout << "(stack entry: " << printPtr->item << "->key node: " << printPtr->rPtr->item << ")" << "->"; 
+				if (top == printPtr || (stackCopy != nullptr && stackCopy->rPtr == printPtr))
+				{				
+					if (stackCopy->rPtr == printPtr)
+					{
+						stackCopy = stackCopy->lPtr;
+					}
+					printPtr = printPtr->rPtr;
+				}
+				else if (printPtr->lPtr == singleRChild) printPtr = printPtr->rPtr;
+				else if (printPtr->rPtr == singleLChild) printPtr = printPtr->lPtr;
+				else printPtr = printPtr->lPtr;
 			}
 			cout << endl;
 			if (p->lPtr)
 			{
 				tmp = p->lPtr;
 				p->lPtr = pred;
+				p->rPtr = p->rPtr == nullptr ? singleLChild : p->rPtr;
 				pred = p;
 				p = tmp;
 			}
 			else
 			{
-				p->lPtr = pred;
 				if (p->rPtr)
 				{
+					tmp = p->rPtr;
+					p->rPtr = pred;
+					p->lPtr = singleRChild;
 					pred = p;
-					p = pred->rPtr;
-					pred->rPtr = singleRChild;
+					p = tmp;
 				}
 				else
 				{
 					avail = p;
+					p->lPtr = pred;
 					pred = p;
 					p = nullptr;
 				}
@@ -210,30 +282,43 @@ void robson_preorder_traversal(TreeItem *root, function<void(TreeItem *)> visitF
 			//jump back to root
 			do
 			{
-				//There are three cases, parent has not right child, parent has only one child at its right and parent has two children. Parent's left point retains to its parent while its right point indicates what child it has.
-				tmp = pred->lPtr;
-				if (pred->rPtr == nullptr)
+				if (!pred) return;
+				if (pred->lPtr == singleRChild || pred->rPtr == singleLChild || pred->rPtr == nullptr)
 				{
-					//This means parent has not right child, either child is parent's left child or the child itself is a null pointer. Under either case, we could set parent's left point to child.	
-					pred->lPtr = p;
-					p = pred;
-					pred = tmp;
-				}
-				else if (pred->rPtr == singleRChild)
-				{
-					//Parent only has one child at its right
-					pred->rPtr = p;
-					pred->lPtr = nullptr;
-					p = pred;
-					pred = tmp;
-				}
+					//parent do not have two children.
+					if (pred->rPtr == singleLChild)
+					{
+						//child is at left
+						tmp = pred->lPtr;
+						pred->lPtr = p;
+						pred->rPtr = nullptr;
+						p = pred;
+						pred = tmp;
+					}
+					else if (pred->lPtr == singleRChild)
+					{
+						//child is at right
+						tmp = pred->rPtr;
+						pred->rPtr = p;
+						pred->lPtr = nullptr;
+						p = pred;
+						pred = tmp;
+					}
+					else
+					{
+						//parent has no child
+						p = pred;
+						pred = pred->lPtr;
+						p->lPtr = nullptr;
+					}
+				}			
 				else
 				{
-					//Parent has two children. In such case, if budy stack's right points to parent, it means parent's troversal has finished, and child is at its right. Otherwise, it means parent's left torversal is completed and child is at its left.
+					//Parent has two children.
 					if (top == pred)
 					{
 						//Node pred's troversal finished
-						pred->lPtr = pred->rPtr;
+						tmp = pred->rPtr;
 						pred->rPtr = p;
 						//step back
 						p = pred;
@@ -244,22 +329,13 @@ void robson_preorder_traversal(TreeItem *root, function<void(TreeItem *)> visitF
 						stack->rPtr = nullptr;
 						stack->lPtr = nullptr;
 						stack = tmp;
-						if (pred)
-						{
-							continue;
-						}
-						else
-						{
-							//Traversal of whole tree finished
-							return;
-						}
-						
 					}
 					else
 					{
 						//Child is parent's left child, parent's left subtree finished troversal. Switch child with parent's rigt child and push parent into stack
 						tmp = pred->rPtr;
-						pred->rPtr = p;
+						pred->rPtr = pred->lPtr;
+						pred->lPtr = p;
 						p = tmp;
 						avail->lPtr = stack;
 						avail->rPtr = top;
@@ -270,7 +346,7 @@ void robson_preorder_traversal(TreeItem *root, function<void(TreeItem *)> visitF
 						break;
 					}
 				} 
-			} while (pred != nullptr);
+			} while (true);
 		}
 	}
 }
@@ -279,18 +355,20 @@ int main()
 	int nodeCnt = 0;
 	ifstream treefile("tree.txt");
 	cout << "Creat a tree from tree.txt..." << endl;
-	string aLine; 
-	getline(treefile, aLine);
-	istringstream lineIn(aLine);
-	TreeItem *rootPtr = nullptr;
-	int rootFlag;
-	lineIn >> rootFlag;
-	if (rootFlag)
+	//string aLine; 
+	//getline(treefile, aLine);
+	//istringstream lineIn(aLine);
+    TreeItem *rootPtr = nullptr;
+	//int rootFlag;
+	//lineIn >> rootFlag;
+	rootPtr = create_tree(treefile);
+	if (rootPtr)
 	{
-		rootPtr = new TreeItem(rootFlag);
-		rootPtr->item = ++nodeCnt;
-		auto callCreate = bind(&create, _1, std::ref(treefile));
-		preorder_traversal(rootPtr, callCreate);
+		//rootPtr = create_tree(treefile);
+		//rootPtr = new TreeItem(rootFlag);
+		//rootPtr->item = ++nodeCnt;
+		//auto callCreate = bind(&create, _1, std::ref(treefile));
+		//preorder_traversal(rootPtr, callCreate);
 		cout << "echo the tree..." << endl;
 		auto callPrint = bind(&extract_tree, _1, std::ref(treefile));
 		preorder_traversal(rootPtr, callPrint);
