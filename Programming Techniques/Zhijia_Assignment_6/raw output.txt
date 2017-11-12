@@ -1,0 +1,48 @@
+For N = 1, tree count = 1
+Possible strahler numbers:      1,
+Possible prunning numbers:      1,
+For N = 2, tree count = 2
+Possible strahler numbers:      1,
+Possible prunning numbers:      1,
+For N = 3, tree count = 5
+Possible strahler numbers:      1,      2,
+Possible prunning numbers:      1,      2,
+For N = 4, tree count = 14
+Possible strahler numbers:      1,      2,
+Possible prunning numbers:      1,      2,
+For N = 5, tree count = 42
+Possible strahler numbers:      1,      2,
+Possible prunning numbers:      1,      2,
+For N = 6, tree count = 132
+Possible strahler numbers:      1,      2,
+Possible prunning numbers:      1,      2,
+For N = 7, tree count = 429
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 8, tree count = 1430
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 9, tree count = 4862
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 10, tree count = 16796
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 11, tree count = 58786
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 12, tree count = 208012
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 13, tree count = 742900
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 14, tree count = 2674440
+Possible strahler numbers:      1,      2,      3,
+Possible prunning numbers:      1,      2,      3,
+For N = 15, tree count = 9694845
+Possible strahler numbers:      1,      2,      3,      4,
+Possible prunning numbers:      1,      2,      3,      4,
+For N = 16, tree count = 35357670
+Possible strahler numbers:      1,      2,      3,      4,
+Possible prunning numbers:      1,      2,      3,      4,
