@@ -1,2 +1,7 @@
-.vs
-x64
+*.d.byte
+**/_build/**
+*.dot
+*.pyc
+**/.vscode/**
+**/.vs/**
+*.exe

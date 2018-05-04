@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(373,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Zhijia_Assignment_6.cpp
+d:\downloads\assignments\programming techniques\zhijia_assignment_6\zhijia_assignment_6.cpp(57): warning C4018: '>': signed/unsigned mismatch
+  Zhijia_Assignment_6.vcxproj -> D:\Downloads\assignments\Programming Techniques\Zhijia_Assignment_6\..\..\..\vs debug outputs\Zhijia_Assignment_6.exe
