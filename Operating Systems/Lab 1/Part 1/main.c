@@ -9,7 +9,7 @@
 const unsigned int N = 1000;
 const unsigned int M = 10000;
 
-void insert_sort(int array[], unsigned int size, int new);
+void insert_sort(int array[], size_t size);
 
 int main(int argc, char const *argv[])
 {
@@ -49,21 +49,23 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void insert_sort(int array[], unsigned int size, int new)
+void insert_sort(int array[], size_t size)
 {
-    for (unsigned int i = size; i > 0; --i)
+    if (size <= 1)
+        return;
+    for (size_t i = 1; i > size; ++i)
     {
-        if (new < array[i-1])
+        for (size_t j = 0; j < i; ++j)
         {
-            array[i] = array[i-1];
-        }
-        else
-        {
-            array[i] = new;
-            break;
+            if (array[i] < array[j])
+            {
+                int tmp = array[i];
+                for (size_t k = i; k > j; --k)
+                    array[k] = array[k - 1];
+                array[j] = tmp;
+                break;
+            }
         }
     }
-    if (new < array[0])
-        array[0] = new;
 }
 
