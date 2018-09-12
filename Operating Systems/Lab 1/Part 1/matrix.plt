@@ -4,22 +4,41 @@ set style line 81 lt 0  # dashed
 set style line 81 lt rgb "#808080"
 set grid back linestyle 81
 set border 3 back linestyle 80
-set terminal pdfcairo size 2,1
-set output '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix.pdf'
-set xtics nomirror# offset 0,0.5
-set ytics nomirror# offset 0.5, 0
+set terminal pdfcairo size 2,3
+set output '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_ijk.pdf'
+set xtics nomirror
+set ytics nomirror
 
 set key top left
 set style fill solid border rgb "black"
 set auto x
 set yrange [0:*]
-set multiplot layout 2, 1 title "i-j-k plot"
+set multiplot layout 3, 1
 set style data histogram
-set style histogram cluster gap 1
-set ylabel "delay(ms)"# font ",16" offset 4,0 
+set ylabel "delay(ms)"
 set style fill solid border rgb "black"
 set auto x
 set yrange [0:*]
-plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_plot.log' using 2:xtic(1) title col, \
-        '' using 3:xtic(1) title col, \
-        '' using 4:xtic(1) title col
+
+set title 'N = 100'
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 2:xtic(1)
+
+set title 'N = 500'
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 3:xtic(1)
+
+set title 'N = 1000'
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 4:xtic(1)
+unset multiplot
+
+set terminal pdfcairo size 2,1.5
+set style data linespoints
+set xlabel 'N'
+set key top left
+set output '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_scaling.pdf'
+set title 'scaling plot'
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_line.log' using 1:2 title 'i,j,k' pointsize 0.5, \
+'' using 1:3 title 'i,k,j' pointsize 0.5, \
+'' using 1:4 title 'j,i,k' pointsize 0.5, \
+'' using 1:5 title 'j,k,i' pointsize 0.5, \
+'' using 1:6 title 'k,i,j' pointsize 0.5, \
+'' using 1:7 title 'k,j,i' pointsize 0.5
