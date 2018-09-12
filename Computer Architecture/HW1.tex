@@ -1,15 +1,15 @@
 \documentclass{article}
 \usepackage{amsmath}
 \begin{document}
-
+\paragraph{HW1 Zhijia Chen}\text{ }\\
 
 \noindent\textbf{1.1}\\
 \indent \textbf{a.}\\
 \begin{align*}
-    \text{Die area} &= 4\ cm^2\\
+    \text{Die area} &= 2\ cm^2\\
     \text{Yield} &= \frac{1}{{(1+\text{Defects per unit area}\times \text{Die area})}^N}\\
-    &= \frac{1}{{(1+0.04\times 4)}^{14}}\\
-    &=0.125
+    &= \frac{1}{{(1+0.04\times 2)}^{14}}\\
+    &=0.341
 \end{align*}
 
 \indent \textbf{b.}\\
@@ -22,15 +22,110 @@
     Power_{dynamic}&=\text{number of cores}\times \text{full power}\\
     &=4\times \text{0.5 W}\\
     &=\text{2 W}\\
-    Energy_{dynamic}&=Power_{dynamic}\times t\\
-    &=2t
+    Energy_{dynamic}&=Power_{dynamic}\times T\\
+    &=2T
 \end{align*}
+Where T is the time required for the phone to finish the task when running at full power.\\
 \indent For core running 1/8 of the time:
+\indent The workload, capacity and voltage are not changed, so the required dynamic energy remains the same as running at full power, i.e., 
+\begin{equation*}
+    Energy_{dynamic}=2T
+\end{equation*}
+\indent The average dynamic power would reduced to 1/8
 \begin{align*}
-    Energy_{dynamic}&=\text{number of cores}\times \text{full power}\times t\times 1/8\\
-    &=0.25t\\
-    Power_{dynamic}&=Energy_{dynamic}/t\\
+    Power_{dynamic}&=2/8\\
     &=\text{0.25 W}
 \end{align*}
+
 \indent \textbf{b.}\\
+\indent Since the frequency and the voltage are both reduced to 1/8 the entire time, $Energy_{dynamic}\propto\text{Capacitive load}\times\text{Voltage}^2$ and $Power_{dynamic}\propto\text{Capacitive load}\times\text{Voltage}^2\times\text{Frequency}$\\
+\begin{align*}
+    Energy_{dynamic}&=\left(\frac{1}{8}\right)^2\times 2T\\
+    &=\frac{1}{64}\times 2T\\
+    &=\frac{1}{32}T\\
+    Power_{dynamic}&=\left(\frac{1}{8}\right)^2\times\frac{1}{8}\times \text{2 W}\\
+    &=\frac{1}{512}\times\text{2 W}\\
+    &=\frac{1}{256}\text{W}
+\end{align*}
+\indent \textbf{c.}\\
+\indent If voltage reduced to 1/2 and frequency reduced to 1/8:
+\begin{align*}
+    Energy_{dynamic}&=\left(\frac{1}{2}\right)^2\times 2T\\
+    &=\frac{1}{4}\times 2T\\
+    &=\frac{1}{2}T\\
+    Power_{dynamic}&=\left(\frac{1}{2}\right)^2\times\frac{1}{8}\times \text{2 W}\\
+    &=\frac{1}{32}\times\text{2 W}\\
+    &=\frac{1}{16}\text{W}
+\end{align*}
+\indent \textbf{d.}\\
+No idea...\\
+
+\noindent\textbf{1.7}\\
+\indent \textbf{a.} $2^5=32$\\
+\indent \textbf{b.} The clock rate would be $\text{5 MHz}\times 1.4^(2025-1978)\approx\text{37 THz}$\\
+\indent \textbf{c.} In the year of 2017, the chip has the clock rate at 4200 MHz, and the current rate of increase is 2\%, thus the projected performance in 2025 is $\text{4200 MHz}\times 1.02^(2025-2017)\approx\text{4920 MHz}$.\\
+\indent \textbf{d.} The Moore's law has ended, the number of transistors on a chip has reached its limit, also the heat dissipation has also becomes a problem, hampering the further increasing of clock rate.\\
+\indent \textbf{e. } By current DRAM growth rate, the capacity doubles in 4 years, thus the growth rate is $2^{0.25}\approx 1.189$.\\
+
+\noindent \textbf{1.9}\\
+For the following question, I suppose that the server being turned off or put in "barely live" state or reduced voltage and frequency are running at 60\% of capacity and consuming 90\% of the maximum power.\\
+\indent \textbf{a.} The saving would be 0.9$\times$ 0.6$\times$ maximum operate power, that is, 54\% of the maximum operate power.\\
+\indent \textbf{b.}
+The saving would be 0.9$\times$ (0.6-0.2)$\times$ maximum operate power, that is, 36\% of the maximum operate power.\\
+\indent \textbf{c.} The power saving would be $1-{(1-0.2)}^2\times(1-0.4)=0.616$, that's 61.6\% of the current running power, or (0.616$\times$ 0.9) of the maximum power, i.e., 55.44\% of the maximum power.\\
+\indent \textbf{d.}\\
+The saving would be (54\%/2+36\%/2) of the maximum power, i.e., 45\% of the maximum power.\\
+
+\noindent \textbf{1.10.}\\
+\indent \textbf{a.}\\
+\indent That means the MTTF=$\frac{10^9}{100}=10^7$.\\
+\indent \textbf{b.}\\
+\indent availability=$\frac{\text{MTTF}}{(\text{MTTF+MTTR})}=\frac{10^7}{(10^7+24)}\approx$0.999998\\
+\indent \textbf{c.}\\
+\indent Assume that the lifetimes are exponentially distributed and the failures are independent:
+\begin{align*}
+    \text{Failure rate}_{\text{super computer}}&=1000\times \frac{1}{\text{MTTF}_\text{processor}}\\
+    &=\frac{1000}{10^7}\\
+    &=10^{-4}\\
+    \text{MTTF}_\text{super computer}&=\frac{1}{\text{Failure rate}_{\text{super computer}}}\\
+    &=\text{10000 hours}
+\end{align*}
+
+\noindent \textbf{1.16.}\\
+\indent \textbf{a.}\\
+\indent speedup = $\frac{1}{0.2+\frac{0.8}{N}}$\\
+\indent \textbf{b.}\\
+\indent speedup = $\frac{1}{0.2+\frac{0.8}{8}+8\times0.005}$ = 2.941\\
+\indent \textbf{c.}\\
+\indent speedup = $\frac{1}{0.2+\frac{0.8}{8}+3\times0.005}$ = 3.
+175\\
+\indent \textbf{d.}\\
+\indent speedup = $\frac{1}{0.2+\frac{0.8}{N}+log(N)\times0.005}$\\
+\indent \textbf{e.}\\
+speedup function:$f(N) = \frac{1}{1-P+\frac{P}{N}+log(N)\times0.005}$, make $\frac{df(N)}{dN}=0$, i.e.,
+\begin{equation*}
+    \frac{d\left(\frac{1}{1-P+\frac{P}{N}+log(N)\times0.005}\right)}{dN}=0
+\end{equation*}
+
+\noindent\textbf{A3}\\
+Instruction mix for gobmk and mcf:\\
+\textbf{Loads:} 28\%\\
+\textbf{Stores:} 11.5\%\\
+\textbf{Branches:} 19\%\\
+\textbf{Jumps:} 1.5\%\\
+\textbf{ALU operations:} 39.5\%\\
+\textbf{others:} 0.5\%\\
+\begin{align*}
+    \text{effective CPI}&=\sum{\text{Instruction category frequency}\times\text{Clock cycles for category}}\\
+    &=0.28\times 3.5+0.115\times 2.8+0.19\times (0.6\times 4+(1-0.6)\times 2)\\
+    &\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +0.015\times 2.4+0.395\times 1 + 0.005\times 3\\
+    &=2.356
+\end{align*}
+
+\noindent\textbf{A9}\\
+\indent \textbf{a.}\\
+\indent Yes. For 3 two-address instructions, we can use (00, 01, 10) of the first two bits to represent the 3 instructions and the remaining 12 bits to hold the two addresses. Then the first two bits of all other instructions must be (11). For the 63 one-address instructions, we start it with (11) and use the following 6 bits to present the 63 instructions excluding (11000000), and the last 6 bits to hold the address. And then we start the 45 zero-address instructions with (11000000) and use the remaining 6 bits to represent the 45 instructions.\\
+\indent \textbf{b.}\\
+\indent Impossible.
 \end{document}
+
