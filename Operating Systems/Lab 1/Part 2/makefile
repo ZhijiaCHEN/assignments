@@ -5,11 +5,11 @@ OBJ = main.o
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-os_lab1_part1.out: $(OBJ)
+os_lab1_part2.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 debug: CFLAGS += -g
-debug: os_lab1_part1.out
+debug: os_lab1_part2.out
 
 .PHONY: clean
 

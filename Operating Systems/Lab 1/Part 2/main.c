@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <string.h>
 
-const unsigned int N = 100;
+const unsigned int N = 10000;
 
 void insert_sort(int array[], size_t size);
 
