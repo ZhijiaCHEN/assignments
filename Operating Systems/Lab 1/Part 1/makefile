@@ -6,11 +6,11 @@ OBJ = main.o matrix0.o matrix1.o matrix2.o matrix3.o matrix4.o matrix5.o
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-oslab1.out: $(OBJ)
+os_lab1_part1.out: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 debug: CFLAGS += -g
-debug: oslab1.out
+debug: os_lab1_part1.out
 
 .PHONY: clean
 
