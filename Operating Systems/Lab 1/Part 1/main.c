@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <pwd.h>
 #include <time.h>
 #include <assert.h>
 #include <string.h>
@@ -18,6 +20,8 @@ int main(int argc, char const *argv[])
     char *hostname = calloc(100, sizeof(char));
     gethostname(hostname, 100);
     uid = geteuid();
+    struct passwd *pw;
+    pw = getpwuid(getuid());
     char order[6][3] = {{'i', 'j', 'k'}, {'i', 'k', 'j'}, {'j', 'i', 'k'}, {'j', 'k', 'i'}, {'k', 'i', 'j'}, {'k', 'j', 'i'}};
     char timeBuff[100];
     void (*funArray[6])(double[N][N], double[N][N], double[N][N]) = {matrix_multiplication0, matrix_multiplication1, matrix_multiplication2, matrix_multiplication3, matrix_multiplication4, matrix_multiplication5};
@@ -63,7 +67,7 @@ int main(int argc, char const *argv[])
             timeinfo = localtime(&rawtime);
             strftime(timeBuff, 100, "%I:%M", timeinfo);
             fputs(timeBuff, fp);
-            fprintf(fp, " %d %c,%c,%c %f %s %d\n", N, order[i][0], order[i][1], order[i][2], cpu_time_used, hostname, uid);
+            fprintf(fp, " %d %c,%c,%c %f %s %s\n", N, order[i][0], order[i][1], order[i][2], cpu_time_used, hostname, pw->pw_name);
             memset(*C, 0, sizeof(double[N][N]));
         }
         fclose(fp);
