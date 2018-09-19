@@ -36,9 +36,4 @@ set xlabel 'N'
 set key top left
 set output '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_scaling.pdf'
 set title 'scaling plot'
-plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_line.log' using 1:2 title 'i,j,k' pointsize 0.5, \
-'' using 1:3 title 'i,k,j' pointsize 0.5, \
-'' using 1:4 title 'j,i,k' pointsize 0.5, \
-'' using 1:5 title 'j,k,i' pointsize 0.5, \
-'' using 1:6 title 'k,i,j' pointsize 0.5, \
-'' using 1:7 title 'k,j,i' pointsize 0.5
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_line.log' using 1:2 title 'i,j,k' pointsize 0.5
