@@ -2,28 +2,31 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{cleveref}
+\usepackage{geometry}
+\geometry{legalpaper, margin=1in}
+
 \begin{document}
-\textbf{1.} Compose a program to multiply two NxN matrices in C.\\
+\noindent\textbf{1.} Compose a program to multiply two NxN matrices in C.\\
 \indent See "matrixTemplate.c" and "matrixTemplate.h".\\
 
-\textbf{2.} Create a script to generate six programs that will multiple the same matrices with identical data in six different (i,j,k) orders.\\
+\noindent\textbf{2.} Create a script to generate six programs that will multiple the same matrices with identical data in six different (i,j,k) orders.\\
 \indent See "program\_generator.py". I wrote a Python script to generate the six function of different (i,j,k) orders.\\
 
-\textbf{2.} Verify that the outputs of six different matrix programs are identical.\\
+\noindent\textbf{3.} Verify that the outputs of six different matrix programs are identical.\\
 \indent There is an int type varibale \texttt{check} in the "main.c". The program will compare the result of the six functions if \texttt{check} is set to 1.\\
 
-\textbf{3.} Compose a script to harvest the running times of N=100, 500, 1000 for the six different programs.\\
+\noindent\textbf{4.} Compose a script to harvest the running times of N=100, 500, 1000 for the six different programs.\\
 \indent There is a const int type varibale \texttt{N} defines the size of the matrix in the "main.c". The main function will run the six matrix multiplication functions. I simply change the varibale and ran the program for the three N values.\\
 
-\textbf{5.} Plot your results with explanations. There are two investigations: a) performance behavior for six orders, and b) performance behavior for different N.\\
+\noindent\textbf{5.} Plot your results with explanations. There are two investigations: a) performance behavior for six orders, and b) performance behavior for different N.\\
     \begin{figure}[h!]
         \centering
-        \begin{subfigure}[b]{0.4\linewidth}
+        \begin{subfigure}[b]{0.3\linewidth}
           \includegraphics[width=\linewidth]{matrix_ijk.pdf}
           \caption{different i-j-k order}
           \label{fig:ijk}
         \end{subfigure}
-        \begin{subfigure}[b]{0.4\linewidth}
+        \begin{subfigure}[b]{0.3\linewidth}
           \includegraphics[width=\linewidth]{matrix_scaling.pdf}
           \caption{scaling}
           \label{fig:scaling}
