@@ -34,9 +34,9 @@
         \caption{\label{fig:part1}}
     \end{figure}
 
-\indent Figure. \ref{fig:part1} \subref{fig:ijk} shows the results for the six orders and Figure. \ref{fig:part1} \subref{fig:scaling} shows the result for the different N values. \\
+\indent Figure. \ref{fig:part1} \subref{fig:ijk} shows the delay to do the  matrix multiplication for the six i-j-k orders and Figure. \ref{fig:part1} \subref{fig:scaling} shows the delay for the different N values. \\
 \indent We can see that the order (i,k,j) and (j,k,i) have the best performance while the order (k,i,j) and (k,j,i) are worst. The difference is due to the special locality. When the matrix multiplication is calculated by the order (i,k,j) or (j,k,i), the program calculates the elements in the results one by one, without running back and forth, so the memory block holding the row or the column would not be loaded into CPU cache repeatedly. As for the order (k,i,j) and (k,j,i), they calculate all the elements of the result matrix at the same time, i.e., they loop over the memory blocks of the result matrix again and again until the calculation for all the elements has been calculated. And thus the memory block holding the row or column are loaded in to cache repeatedly. To sum up, each element in the result matrix requires \textbf{N multiplication operations}, and the order (i,k,j) and (j,k,i) will run the \textbf{N multiplication in a row}, while the the order (k,i,j) and (k,j,i) run \textbf{one multiplication each time for each element}, incurring overhead in reloading memory blocks holding the row and columns of the two multiplying matrices.\\
-\indent As for the scaling, the order (i,k,j) is chose to run the program. As the N grows, the running times grows by the squere of N.
+\indent As for the scaling, the order (i,k,j) is chose to run the program. As the N grows, the running times grows by the squere of N. And we can see that the computing power remains quite stable except for the first point where N = 100, which probably because the matrix is too small and thus the program's process is ended before it is elevated to higher priority.
 \end{document}
 \Cref{fig:part1}
 \Cref{fig:ijk}
