@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\begin{document}
+\section{B.2}
+\begin{table}[h!]
+  \begin{center}
+    \caption{fully-associative cache}
+    \label{tab:table1}
+    \begin{tabular}{c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \toprule
+      \textbf{Cache block} & \textbf{Set} & \textbf{Way} & \textbf{Possible memory blocks}\\
+      \hline
+      0 & 0 & 0 & M0, M1, ..., M31\\
+      \hline
+      1 & 0 & 1 & M0, M1, ..., M31\\
+      \hline
+      2 & 0 & 2 & M0, M1, ..., M31\\
+      \hline
+      3 & 0 & 3 & M0, M1, ..., M31\\
+      \hline
+      4 & 0 & 4 & M0, M1, ..., M31\\
+      \hline
+      5 & 0 & 5 & M0, M1, ..., M31\\
+      \hline
+      6 & 0 & 6 & M0, M1, ..., M31\\
+      \hline
+      7 & 0 & 7 & M0, M1, ..., M31\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+\begin{table}[h!]
+  \begin{center}
+    \caption{four-way set associative cache}
+    \label{tab:table2}
+    \begin{tabular}{c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \toprule
+      \textbf{Cache block} & \textbf{Set} & \textbf{Way} & \textbf{Possible memory blocks}\\
+      \hline
+      0 & 0 & 0 & M0, M2, ..., M28, M30\\
+      \hline
+      1 & 0 & 1 & M0, M2, ..., M28, M30\\
+      \hline
+      2 & 0 & 2 & M0, M2, ..., M28, M30\\
+      \hline
+      3 & 0 & 3 & M0, M2, ..., M28, M30\\
+      \hline
+      4 & 1 & 0 & M1, M3, ..., M29, M31\\
+      \hline
+      5 & 1 & 1 & M1, M3, ..., M29, M31\\
+      \hline
+      6 & 1 & 2 & M1, M3, ..., M29, M31\\
+      \hline
+      7 & 1 & 3 & M1, M3, ..., M29, M31\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+\section{B.3}
+
+\indent \textbf{a.}\\
+\indent For the LRU replacement policy, a read hit will access the data subarray, tag, bsubarray and the replacement subarray of the 4 way simultaneously, thus the power consumption is $4\times(20+5+1)=104$ power units.\\
+
+For the FIFO replacement policy, a read hit will access the data subarray and tag subarray of the 4 way simultaneously, thus the power consumption is $4\times(20+5)=100$ power units.\\
+
+For the random replacement policy, a read hit will access the data subarray and tag subarray of the 4 way simultaneously, thus the power consumption is $4\times(20+5)=100$ power units.\\
+
+\textbf{b.}\\
+\indent For the LRU replacement policy, a read miss needs an extra memory access compared to the read hit case, thus the power consumption is $104+200=304$ power units.\\
+
+For the FIFO replacement policy, it needs to access the memory as well, plus one acess to the replacement subarray, so the power consumption is: $100+200+1=301$ power units.\\
+
+For the random replacement policy, it is also a memory access plus one read hit: $100+200=300$ power units.\\
+
+\textbf{c.}\\
+\indent For the LRU replacement policy, a read hit will access the tag subarray and the replacement subarray of the 4 way in the first cycle, and then access the matched data subarray in the second cycle. Thus the power consumption is $4\times(5+1)+20=44$ power units.\\
+
+For the FIFO replacement policy, a read hit will access the tag subarray of the 4 way in the first cycle, and then access the matched data subarray in the second cycle. Thus the power consumption is $4\times5+20=40$ power units.\\
+
+For the random replacement policy, a read hit will access the tag subarray of the 4 way in the first cycle, and then access the matched data subarray in the second cycle. Thus the power consumption is $4\times5+20=40$ power units.\\
+
+\textbf{d.}\\
+\indent For the LRU replacement policy, it will access the tag subarray and the replacement subarray of the 4 way in the first cycle, and then access the memory. Thus the power consumption is $4\times(5+1)+200=224$ power units.\\
+
+For the FIFO replacement policy, it will access the tag subarray of the 4 way in the first cycle, and then one access to memory and one access to the replacement subarray. Thus the power consumption is $4\times5+200+1=221$ power units.\\
+
+For the random replacement policy, it will access the tag subarray of the 4 way in the first cycle, and then one access to memory. Thus the power consumption is $4\times5+200=220$ power units.\\
+
+\textbf{e.}\\
+\indent For the LRU replacement policy, if the way predictor hits, it access the tag subarray, replacement subarray and data subarray for only the predicated way, thus the power consumption is $5+1+20=26$ power units.\\
+
+For the FIFO replacement policy, it's one access to the tag subarray and the data subarray for only the predicated way, thus the power consumption is $5+20=25$ power units.\\
+
+For the random replacement policy, it the same as the FIFO, thus 25 power units.\\
+
+\textbf{f.}\\
+Way predictor miss followed by a two-cycle cache read (the cache read split across two cycles) hit is equivalent to a normal read hit plus one extra access to tag subarray.
+
+\indent For the LRU replacement policy, it's $44+5+1=50$ power units.\\
+
+\indent For the FIFO replacement policy, it's $40+5=45$ power units.\\
+
+\indent For the random replacement policy, it's $40+5=45$ power units.\\
+
+\textbf{g.}\\
+\indent Way predictor miss followed by a two-cycle cache read (the cache read split across two cycles) miss is equivalent to a normal read miss plus one extra cycle 1.
+
+\indent For the LRU replacement policy, it's $224+5+1=230$ power units.\\
+
+\indent For the FIFO replacement policy, it's $221+5=226$ power units.\\
+
+\indent For the random replacement policy, it's $220+5=225$ power units.\\
+
+\textbf{h.}\\
+\begin{align*}
+  P(\text{case e}) &= P(\text{cache hit})\times P(\text{way hit})=0.97*0.95=0.9215\\
+  P(\text{case f}) &= P(\text{cache hit})\times P(\text{way miss})=0.97*0.05=0.0485\\
+  P(\text{case g}) &= P(\text{cache miss})=0.03
+\end{align*}
+In the above equation, $P(case g) = P(cache miss)$ because a cache miss implies a way miss.\\
+\indent For the LRU replacement policy: $26\times 0.9215+50\times 0.0485+230\times 0.03=33.05$ power units.\\
+
+\indent For the FIFO replacement policy, it's $25\times 0.9215+45\times 0.0485+226\times 0.03=31.775$ power units.\\
+
+\indent For the random replacement policy, it's $25\times 0.9215+45\times 0.0485+225\times 0.03=31.745$ power units.\\
+\end{document}
