@@ -13,7 +13,7 @@ set key top left
 set style fill solid border rgb "black"
 set auto x
 set yrange [0:*]
-set multiplot layout 3, 1
+set multiplot layout 2, 1
 set style data histogram
 set ylabel "delay(ms)"
 set style fill solid border rgb "black"
@@ -30,10 +30,17 @@ set title 'N = 1000'
 plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 4:xtic(1)
 unset multiplot
 
-set terminal pdfcairo size 2,1.5
+set terminal pdfcairo size 2,3
 set style data linespoints
 set xlabel 'N'
 set key top left
 set output '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_scaling.pdf'
 set title 'scaling plot'
-plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_line.log' using 1:2 title 'i,j,k' pointsize 0.5
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 1:2 title 'i,j,k' pointsize 0.5
+
+set style data linespoints
+set xlabel 'N'
+set ylabel "MFLOPS"
+set key top left
+set title 'power plot'
+plot '/Users/zhijia/git/assignments/Operating Systems/Lab 1/Part 1/matrix_histogram.log' using 1:($1)**3/($2)pointsize 0.5
