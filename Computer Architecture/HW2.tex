@@ -124,4 +124,28 @@ In the above equation, $P(case g) = P(cache miss)$ because a cache miss implies 
 \indent For the FIFO replacement policy, it's $25\times 0.9215+45\times 0.0485+226\times 0.03=31.775$ power units.\\
 
 \indent For the random replacement policy, it's $25\times 0.9215+45\times 0.0485+225\times 0.03=31.745$ power units.\\
+
+\section{B.2}
+
+\indent \textbf{a.}\\
+Average memory access time for instrution access = (L1 I-cache miss rate) $\times$ (average access time from L1 I-cache to L2 cache) + (L1 I-cache miss rate) $\times$ (L2 cache miss rate) $\times$ (average access time from L2 cache to the main memory + average L2 cache dirty block write back time)\\
+Average access time from L1 I-cache to L2 cache = $15\text{ns}+\frac{32\text{ bytes}}{128\text{ bits}}\times\frac{1\times 10^9}{266 \text{MHz}}\text{ns}=22.519\text{ ns}$\\
+Average access time from L2 cache to main memory = $60\text{ns}+\frac{64\text{ bytes}}{128\text{ bits}}\times\frac{1\times 10^9}{133 \text{MHz}}\text{ns}=90.075\text{ ns}$\\
+Average L2 cache dirty block write back time = $0.5\times 60\text{ns}+\frac{64\text{ bytes}}{128\text{ bits}}\times\frac{1\times 10^9}{133 \text{MHz}}\text{ns}=45.038\text{ ns}$\\
+Thus, the average memory access time for instrution access = $0.02\times 22.519+0.02\times (1-0.8)\times (90.075+45.038)=0.991\text{ns}$.\\
+
+\indent \textbf{b.}\\
+Average memory access time for data read = (L1 D-cache miss rate) $\times$ (average access time from L1 D-cache to L2 cache) + (L1 D-cache miss rate) $\times$ (L2 cache miss rate) $\times$ (average access time from L2 cache to the main memory + average L2 cache dirty block write back time)\\
+Average access time from L1 D-cache to L2 cache = $15\text{ns}+\frac{16\text{ bytes}}{128\text{ bits}}\times\frac{1\times 10^9}{266 \text{MHz}}\text{ns}=18.759\text{ ns}$\\
+Average access time from L2 cache to main memory = 90.075ns\\
+Average L2 cache dirty block write back time = 45.038ns\\
+Thus, the average memory access time for data read = $0.05\times 18.759+0.05\times (1-0.8)\times (90.075+45.038)=2.289\text{ns}$.\\
+
+\indent \textbf{c.}\\
+Since the write policy for the L1 D-cache is write through, and the write policy for the L2 cache is write back, we suppose that a write to L1 D-cache will also write to L2 cache, and a write to L2 cache will only write to main memory if the we miss the block in L2 cache. We also suppose that if we miss a block when we write to cache (both L1 and L2), we will load that block into cache.
+Average memory access time for data write = (L1 D-cache miss rate) $\times$ (average access time from L1 D-cache to L2 cache) + (L1 D-cache miss rate) $\times$ (L2 cache miss rate) $\times$ (average access time from L2 cache to the main memory + average L2 cache dirty block write back time)\\
+Average access time from L1 D-cache to L2 cache = $15\text{ns}+\frac{16\text{ bytes}}{128\text{ bits}}\times\frac{1\times 10^9}{266 \text{MHz}}\text{ns}=18.759\text{ ns}$\\
+Average access time from L2 cache to main memory = 90.075ns\\
+Average L2 cache dirty block write back time = 45.038ns\\
+Thus, the average memory access time for data read = $0.05\times 18.759+0.05\times (1-0.8)\times (90.075+45.038)=2.289\text{ns}$.\\
 \end{document}
