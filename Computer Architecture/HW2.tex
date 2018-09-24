@@ -195,7 +195,7 @@ Thus, the average memory access time for data read = $0.05\times 18.759+0.05\tim
 \indent 1 64-byte cache line could hold 16 array elements, and the cache is big enough to hold all the 4 arrays, so we will have 3 read miss and 1 write miss in every 16 iterations, and we don't need to consider evicting blocks in the cache to hold new blocks. The average iteration cost = $\frac{1}{16}\times$504 + $\frac{15}{16}\times$4 = 35.25 cycles.\\
 
 \noindent\textbf{d.}\\
-\indent Suppose the cache line in this case is 16 bytes, thus cache line can hold 4 array elements. With 16-byte cache line, there will be 2$\times$1024/16=128 sets(blocks). And the total size of the 4 arrays is 512 blocks. All the 4 arrays could be loaded into the cache with $\left(\frac{512}{128}-1\right)\times$128=384 replacements. Each replacement need to write the dirty block back to memory, incurring a write cost. Thus the average number of cycle for each iteration = $\frac{1}{128}\times$504 + $\frac{127}{128}\times$4 + $\frac{384\times 100}{512}$ = 82.906 cycles.\\
+\indent Suppose the cache line in this case is 16 bytes, thus cache line can hold 4 array elements. With 16-byte cache line, there will be 2$\times$1024/16=128 sets(blocks). And the total size of the 4 arrays is 512 blocks. All the 4 arrays could be loaded into the cache with $\left(\frac{512}{128}-1\right)\times$128=384 replacements. Each replacement need to write the dirty block back to memory, incurring a write cost. Thus the average number of cycle for each iteration = $\frac{1}{4}\times$504 + $\frac{3}{4}\times$4 + $\frac{384\times 100}{512}$ = 204 cycles.\\
 
 \section{B.10}
 \noindent \textbf{a.}\\
