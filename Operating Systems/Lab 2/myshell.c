@@ -206,6 +206,46 @@ char **split_line(char *line)
   return tokens;
 }
 
+#define CMD_ANCHORBUF 8
+#define CMD_DELIM "|"
+#define ARG_ANCHORBUF 64
+#define ARG_DELIM " \t\r\n\a"
+/**
+   @brief Split a line into tokens (very naively).
+   @param line The line.
+   @return Null-terminated array of tokens.
+ */
+char **split_line(char *line)
+{
+  int bufsize = TOK_BUFSIZE, position = 0;
+  char **tokens = malloc(bufsize * sizeof(char*));
+  char *token;
+
+  if (!tokens) {
+    fprintf(stderr, "myshell: allocation error\n");
+    exit(EXIT_FAILURE);
+  }
+
+  token = strtok(line, TOK_DELIM);
+  while (token != NULL) {
+    tokens[position] = token;
+    position++;
+
+    if (position >= bufsize) {
+      bufsize += TOK_BUFSIZE;
+      tokens = realloc(tokens, bufsize * sizeof(char*));
+      if (!tokens) {
+        fprintf(stderr, "myshell: allocation error\n");
+        exit(EXIT_FAILURE);
+      }
+    }
+
+    token = strtok(NULL, TOK_DELIM);
+  }
+  tokens[position] = NULL;
+  return tokens;
+}
+
 /**
    @brief Loop getting input and executing it.
  */
