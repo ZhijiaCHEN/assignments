@@ -113,15 +113,15 @@ int pipe_launch(char ***cmds)
     pid_t pid, wpid;
     int status, cmdCnt = 0, *pipeFds;
 
-    while (cmds[i]) ++cmdCnt;
+    while (cmds[cmdCnt]) ++cmdCnt;
     if (cmdCnt == 0) return 1;
     else
     {
         if (cmdCnt == 1) return launch(cmds[0]);
     }
 
-    *pipeFds = malloc(cmdCnt*2*sizeof(int));
-    for (int i = 0; i < cmdCnt; ++i)
+    *pipeFds = malloc((cmdCnt-1)*2*sizeof(int));
+    for (int i = 0; i < cmdCnt-1; ++i)
     {
         if (pipe(&pipeFds[2*i]) < 0) 
         { 
@@ -143,23 +143,38 @@ int pipe_launch(char ***cmds)
         {
             if (i != 0)
             {
-                close(pipefd[2*(i-1)+1]); 
-                dup2(pipefd[2*(i-1)], STDIN_FILENO); 
-                close(pipefd[2*(i-1)]);
+                dup2(pipeFds[2*(i-1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
             }
 
             if (i != cmdCnt - 1)
             {
-                close(pipeFds[2*i]); 
                 dup2(pipeFds[2*i+1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
-                close(pipeFds[2*i+1]); 
             }
-
-            if (execvp(parsed[0], parsed) < 0) 
+/*
+            if (execvp(cmds[i][0], cmds[i]) < 0) 
             { 
                 printf("Failed to execute command \"%s\"...", cmds[i][0]); 
                 exit(EXIT_FAILURE);
             }
+*/
+            char* buf; 
+
+            buf = readline("\n>>> ");
+            printf(" . %s", buf); 
+
+            for (int j = 0; j < cmdCnt - 1; ++j)
+            {
+              close(pipeFds[2*j]);
+              close(pipeFds[2*j + 1]);
+            }
+
+            for (int j = 0; j < cmdCnt - 1; ++j)
+            {
+                close(pipeFds[2*j]);
+                close(pipeFds[2*j + 1]);
+            }
+
+            exit(0);
         }
         else if (pid < 0)
         {
@@ -167,21 +182,15 @@ int pipe_launch(char ***cmds)
             exit(EXIT_FAILURE);
         }
     }
-    pid = fork();
-    if (pid == 0) {
-        // Child process
-        if (execvp(args[0], args) == -1) {
-            perror("myshell");
-        }
-        exit(EXIT_FAILURE);
-    } else if (pid < 0) {
-        // Error forking
-        perror("myshell");
-    } else {
-        // Parent process
-        do {
+
+    do {
             wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
         } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+
+    for (int j = 0; j < cmdCnt - 1; ++j)
+    {
+        close(pipeFds[2*j]);
+        close(pipeFds[2*j + 1]);
     }
 
     return 1;
@@ -206,7 +215,7 @@ int execute(char ***cmds)
     {
         for (j = 0; j < num_builtins(); ++j) 
         {
-            if (strcmp(args[0], builtin_str[j]) == 0) 
+            if (strcmp(cmds[i][0], builtin_str[j]) == 0) 
             {
                 if(i > 0 || cmds[i+1] != NULL)
                 {
@@ -215,7 +224,7 @@ int execute(char ***cmds)
                 }
                 else
                 {
-                    return (*builtin_func[j])(args);
+                    return (*builtin_func[j])(cmds[i]);
                 }
             }
         }
@@ -346,46 +355,6 @@ char ***split_cmds(char *line)
 
     cmds[position] = NULL;
     return cmds;
-}
-
-#define CMD_ANCHORBUF 8
-#define CMD_DELIM "|"
-#define ARG_ANCHORBUF 64
-#define ARG_DELIM " \t\r\n\a"
-/**
-   @brief Split a line into tokens (very naively).
-   @param line The line.
-   @return Null-terminated array of tokens.
- */
-char **split_line(char *line)
-{
-  int bufsize = TOK_BUFSIZE, position = 0;
-  char **tokens = malloc(bufsize * sizeof(char*));
-  char *token;
-
-  if (!tokens) {
-    fprintf(stderr, "myshell: allocation error\n");
-    exit(EXIT_FAILURE);
-  }
-
-  token = strtok(line, TOK_DELIM);
-  while (token != NULL) {
-    tokens[position] = token;
-    position++;
-
-    if (position >= bufsize) {
-      bufsize += TOK_BUFSIZE;
-      tokens = realloc(tokens, bufsize * sizeof(char*));
-      if (!tokens) {
-        fprintf(stderr, "myshell: allocation error\n");
-        exit(EXIT_FAILURE);
-      }
-    }
-
-    token = strtok(NULL, TOK_DELIM);
-  }
-  tokens[position] = NULL;
-  return tokens;
 }
 
 /**
