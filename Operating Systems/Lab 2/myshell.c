@@ -104,26 +104,125 @@ int launch(char **args)
 }
 
 /**
+    @brief Launch one or multiple piped programs and wait for it/them to terminate.
+    @param cmds Null terminated list of commands.
+    @return Always returns 1, to continue execution.
+ */
+int pipe_launch(char ***cmds)
+{
+    pid_t pid, wpid;
+    int status, cmdCnt = 0, *pipeFds;
+
+    while (cmds[i]) ++cmdCnt;
+    if (cmdCnt == 0) return 1;
+    else
+    {
+        if (cmdCnt == 1) return launch(cmds[0]);
+    }
+
+    *pipeFds = malloc(cmdCnt*2*sizeof(int));
+    for (int i = 0; i < cmdCnt; ++i)
+    {
+        if (pipe(&pipeFds[2*i]) < 0) 
+        { 
+            printf("Pipe could not be initialized\n");
+            for (int j = 0; j < i; ++j)
+            {
+                close(pipeFds[2*j]);
+                close(pipeFds[2*j+1]);
+            }
+            free(pipeFds);
+            return 1;
+        }
+    }
+
+    for (int i = 0; i < cmdCnt; ++i)
+    {
+        pid = fork();
+        if (pid == 0)
+        {
+            if (i != 0)
+            {
+                close(pipefd[2*(i-1)+1]); 
+                dup2(pipefd[2*(i-1)], STDIN_FILENO); 
+                close(pipefd[2*(i-1)]);
+            }
+
+            if (i != cmdCnt - 1)
+            {
+                close(pipeFds[2*i]); 
+                dup2(pipeFds[2*i+1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                close(pipeFds[2*i+1]); 
+            }
+
+            if (execvp(parsed[0], parsed) < 0) 
+            { 
+                printf("Failed to execute command \"%s\"...", cmds[i][0]); 
+                exit(EXIT_FAILURE);
+            }
+        }
+        else if (pid < 0)
+        {
+            printf("Could not fork\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    pid = fork();
+    if (pid == 0) {
+        // Child process
+        if (execvp(args[0], args) == -1) {
+            perror("myshell");
+        }
+        exit(EXIT_FAILURE);
+    } else if (pid < 0) {
+        // Error forking
+        perror("myshell");
+    } else {
+        // Parent process
+        do {
+            wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+
+    return 1;
+}
+
+/**
      @brief Execute shell built-in or launch program.
      @param cmds Null terminated array of commands, each command is a Null terminated array of arguments.
      @return 1 if the shell should continue running, 0 if it should terminate
  */
 int execute(char ***cmds)
 {
-    int i;
+    int i, j;
 
     if (cmds[0] == NULL) {
         // An empty command was entered.
         return 1;
     }
 
-    for (i = 0; i < num_builtins(); i++) {
-        if (strcmp(args[0], builtin_str[i]) == 0) {
-            return (*builtin_func[i])(args);
+    i = 0;
+    while (cmds[i] != NULL)
+    {
+        for (j = 0; j < num_builtins(); ++j) 
+        {
+            if (strcmp(args[0], builtin_str[j]) == 0) 
+            {
+                if(i > 0 || cmds[i+1] != NULL)
+                {
+                    print("I do not handle pipes with build-in functions...");
+                    return 1;
+                }
+                else
+                {
+                    return (*builtin_func[j])(args);
+                }
+            }
         }
+        ++i;
     }
 
-    return launch(args);
+    return launch(cmds);
 }
 
 #define INPUT_BUFSIZE 1024
