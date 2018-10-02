@@ -6,6 +6,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+char *read_line();
 /*
     List of builtin commands, followed by their corresponding functions.
  */
@@ -125,6 +126,7 @@ int pipe_launch(char ***cmds)
 {
     pid_t pid, wpid;
     int status, cmdCnt = 0, *pipeFds;
+    char *buf;
 
     while (cmds[cmdCnt])
         ++cmdCnt;
@@ -151,20 +153,52 @@ int pipe_launch(char ***cmds)
             return 1;
         }
     }
+    /*
+    buf = readline(">>>");
+    write(pipeFds[1], buf, strlen(buf)+1);
+    for (int i = 1; i < cmdCnt - 1; ++i)
+    {
+        char tmp[100];
+        read(pipeFds[2*(i-1)], tmp, 100);
+        write(pipeFds[2*i+1], "hello ", 6);
+        write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
+        
+    }
+    char tmp[100];
+    read(pipeFds[2*(cmdCnt - 1 -1)], tmp, 100);
+    */
 
     for (int i = 0; i < cmdCnt; ++i)
     {
+        char *tmp;
         pid = fork();
         if (pid == 0)
         {
+            if (i == 0)
+            {
+                
+                //printf("input for pipe:\n", i);
+                tmp = readline("\n>>> ");
+            }
+            else
+            {
+                tmp = malloc(100*sizeof(char));
+            }
             if (i != 0)
             {
-                dup2(pipeFds[2 * (i - 1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
+                printf("I am child %d, I am going to read from fds[%d]\n", i, 2 * (i - 1));
+                
+                read(pipeFds[2*(i-1)], tmp, 100);
+                printf("child %d get the line: %s\n", i, tmp);
+                //dup2(pipeFds[2 * (i - 1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
             }
 
             if (i != cmdCnt - 1)
             {
-                dup2(pipeFds[2 * i + 1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                printf("I am child %d, I am going to write to fds[%d]\n", i, 2 * i + 1);
+                write(pipeFds[2*i+1], "hello ", 6);
+                write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
+                //dup2(pipeFds[2 * i + 1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
             }
             /*
             if (execvp(cmds[i][0], cmds[i]) < 0) 
@@ -172,11 +206,7 @@ int pipe_launch(char ***cmds)
                 printf("Failed to execute command \"%s\"...", cmds[i][0]); 
                 exit(EXIT_FAILURE);
             }
-*/
-            char *buf;
-
-            buf = readline("\n>>> ");
-            printf(" . %s", buf);
+            */            
 
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
@@ -184,12 +214,7 @@ int pipe_launch(char ***cmds)
                 close(pipeFds[2 * j + 1]);
             }
 
-            for (int j = 0; j < cmdCnt - 1; ++j)
-            {
-                close(pipeFds[2 * j]);
-                close(pipeFds[2 * j + 1]);
-            }
-
+            
             exit(0);
         }
         else if (pid < 0)
@@ -197,12 +222,17 @@ int pipe_launch(char ***cmds)
             printf("Could not fork\n");
             exit(EXIT_FAILURE);
         }
+        else
+        {
+            printf("child %d has pid: %d\n", i, pid);
+        }
     }
-
-    do
+    
+    for (int i = 0; i < cmdCnt; ++ i)
     {
-        wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
-    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+        pid =  wait(&status);
+        printf("child process %d exit with status %d\n", pid, status);
+    } 
 
     for (int j = 0; j < cmdCnt - 1; ++j)
     {
@@ -353,7 +383,7 @@ char **split_arg(char *cmd)
 char ***split_cmds(char *line)
 {
     int bufsize = CMD_BUFSIZE, position = 0;
-    char ***cmds = malloc(CMD_BUFSIZE * sizeof(char *));
+    char ***cmds = malloc(CMD_BUFSIZE * sizeof(void *));
     char *cmdToken;
 
     if (!cmds)
@@ -365,7 +395,7 @@ char ***split_cmds(char *line)
     cmdToken = strtok(line, CMD_DELIM);
     while (cmdToken != NULL)
     {
-        cmds[position] = split_arg(cmdToken);
+        cmds[position] = (void *)cmdToken;
         position++;
 
         if (position >= bufsize)
@@ -381,8 +411,12 @@ char ***split_cmds(char *line)
 
         cmdToken = strtok(NULL, CMD_DELIM);
     }
-
     cmds[position] = NULL;
+    for (int i = 0; i < position; ++i)
+    {
+        cmds[i] = split_arg((void *)cmds[i]);
+    }
+
     return cmds;
 }
 
