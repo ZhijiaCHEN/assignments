@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 /*
     List of builtin commands, followed by their corresponding functions.
@@ -10,10 +12,10 @@
 char *builtin_str[] = {
     "cd",
     "help",
-    "exit"
-};
+    "exit"};
 
-int num_builtins() {
+int num_builtins()
+{
     return sizeof(builtin_str) / sizeof(char *);
 }
 
@@ -28,10 +30,14 @@ int num_builtins() {
  */
 int sh_cd(char **args)
 {
-    if (args[1] == NULL) {
+    if (args[1] == NULL)
+    {
         fprintf(stderr, "myshell: expected argument to \"cd\"\n");
-    } else {
-        if (chdir(args[1]) != 0) {
+    }
+    else
+    {
+        if (chdir(args[1]) != 0)
+        {
             perror("myshell");
         }
     }
@@ -49,7 +55,8 @@ int sh_help(char **args)
     printf("Type program names and arguments, and hit enter.\n");
     printf("The following are built in:\n");
 
-    for (i = 0; i < num_builtins(); i++) {
+    for (i = 0; i < num_builtins(); i++)
+    {
         printf("    %s\n", builtin_str[i]);
     }
 
@@ -67,11 +74,10 @@ int sh_exit(char **args)
     return 0;
 }
 
-int (*builtin_func[]) (char **) = {
+int (*builtin_func[])(char **) = {
     &sh_cd,
     &sh_help,
-    &sh_exit
-};
+    &sh_exit};
 
 /**
     @brief Launch a program and wait for it to terminate.
@@ -84,18 +90,25 @@ int launch(char **args)
     int status;
 
     pid = fork();
-    if (pid == 0) {
+    if (pid == 0)
+    {
         // Child process
-        if (execvp(args[0], args) == -1) {
+        if (execvp(args[0], args) == -1)
+        {
             perror("myshell");
         }
         exit(EXIT_FAILURE);
-    } else if (pid < 0) {
+    }
+    else if (pid < 0)
+    {
         // Error forking
         perror("myshell");
-    } else {
+    }
+    else
+    {
         // Parent process
-        do {
+        do
+        {
             wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
         } while (!WIFEXITED(status) && !WIFSIGNALED(status));
     }
@@ -113,23 +126,26 @@ int pipe_launch(char ***cmds)
     pid_t pid, wpid;
     int status, cmdCnt = 0, *pipeFds;
 
-    while (cmds[cmdCnt]) ++cmdCnt;
-    if (cmdCnt == 0) return 1;
+    while (cmds[cmdCnt])
+        ++cmdCnt;
+    if (cmdCnt == 0)
+        return 1;
     else
     {
-        if (cmdCnt == 1) return launch(cmds[0]);
+        if (cmdCnt == 1)
+            return launch(cmds[0]);
     }
 
-    *pipeFds = malloc((cmdCnt-1)*2*sizeof(int));
-    for (int i = 0; i < cmdCnt-1; ++i)
+    pipeFds = malloc((cmdCnt - 1) * 2 * sizeof(int));
+    for (int i = 0; i < cmdCnt - 1; ++i)
     {
-        if (pipe(&pipeFds[2*i]) < 0) 
-        { 
+        if (pipe(&pipeFds[2 * i]) < 0)
+        {
             printf("Pipe could not be initialized\n");
             for (int j = 0; j < i; ++j)
             {
-                close(pipeFds[2*j]);
-                close(pipeFds[2*j+1]);
+                close(pipeFds[2 * j]);
+                close(pipeFds[2 * j + 1]);
             }
             free(pipeFds);
             return 1;
@@ -143,35 +159,35 @@ int pipe_launch(char ***cmds)
         {
             if (i != 0)
             {
-                dup2(pipeFds[2*(i-1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
+                dup2(pipeFds[2 * (i - 1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
             }
 
             if (i != cmdCnt - 1)
             {
-                dup2(pipeFds[2*i+1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                dup2(pipeFds[2 * i + 1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
             }
-/*
+            /*
             if (execvp(cmds[i][0], cmds[i]) < 0) 
             { 
                 printf("Failed to execute command \"%s\"...", cmds[i][0]); 
                 exit(EXIT_FAILURE);
             }
 */
-            char* buf; 
+            char *buf;
 
             buf = readline("\n>>> ");
-            printf(" . %s", buf); 
+            printf(" . %s", buf);
 
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
-              close(pipeFds[2*j]);
-              close(pipeFds[2*j + 1]);
+                close(pipeFds[2 * j]);
+                close(pipeFds[2 * j + 1]);
             }
 
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
-                close(pipeFds[2*j]);
-                close(pipeFds[2*j + 1]);
+                close(pipeFds[2 * j]);
+                close(pipeFds[2 * j + 1]);
             }
 
             exit(0);
@@ -183,14 +199,15 @@ int pipe_launch(char ***cmds)
         }
     }
 
-    do {
-            wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    do
+    {
+        wpid = waitpid(pid, &status, WUNTRACED); // waitpid can wait multiple process, wpid returns the pid of the signaled process
+    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
 
     for (int j = 0; j < cmdCnt - 1; ++j)
     {
-        close(pipeFds[2*j]);
-        close(pipeFds[2*j + 1]);
+        close(pipeFds[2 * j]);
+        close(pipeFds[2 * j + 1]);
     }
 
     return 1;
@@ -205,7 +222,8 @@ int execute(char ***cmds)
 {
     int i, j;
 
-    if (cmds[0] == NULL) {
+    if (cmds[0] == NULL)
+    {
         // An empty command was entered.
         return 1;
     }
@@ -213,13 +231,13 @@ int execute(char ***cmds)
     i = 0;
     while (cmds[i] != NULL)
     {
-        for (j = 0; j < num_builtins(); ++j) 
+        for (j = 0; j < num_builtins(); ++j)
         {
-            if (strcmp(cmds[i][0], builtin_str[j]) == 0) 
+            if (strcmp(cmds[i][0], builtin_str[j]) == 0)
             {
-                if(i > 0 || cmds[i+1] != NULL)
+                if (i > 0 || cmds[i + 1] != NULL)
                 {
-                    print("I do not handle pipes with build-in functions...");
+                    printf("I do not handle pipes with build-in functions...");
                     return 1;
                 }
                 else
@@ -231,7 +249,7 @@ int execute(char ***cmds)
         ++i;
     }
 
-    return launch(cmds);
+    return pipe_launch(cmds);
 }
 
 #define INPUT_BUFSIZE 1024
@@ -246,29 +264,36 @@ char *read_line(void)
     char *buffer = malloc(sizeof(char) * bufsize);
     int c;
 
-    if (!buffer) {
+    if (!buffer)
+    {
         fprintf(stderr, "myshell: allocation error\n");
         exit(EXIT_FAILURE);
     }
 
-    while (1) {
+    while (1)
+    {
         // Read a character
         c = getchar();
 
         // If we hit EOF, replace it with a null character and return.
-        if (c == EOF || c == '\n') {
+        if (c == EOF || c == '\n')
+        {
             buffer[position] = '\0';
             return buffer;
-        } else {
+        }
+        else
+        {
             buffer[position] = c;
         }
         position++;
 
         // If we have exceeded the buffer, reallocate.
-        if (position >= bufsize) {
+        if (position >= bufsize)
+        {
             bufsize += INPUT_BUFSIZE;
             buffer = realloc(buffer, bufsize);
-            if (!buffer) {
+            if (!buffer)
+            {
                 fprintf(stderr, "myshell: allocation error\n");
                 exit(EXIT_FAILURE);
             }
@@ -286,24 +311,27 @@ char *read_line(void)
 char **split_arg(char *cmd)
 {
     int bufsize = ARG_BUFSIZE, position = 0;
-    char **args = malloc(bufsize * sizeof(char*));
+    char **args = malloc(bufsize * sizeof(char *));
     char *argToken;
 
-    if (!args) {
+    if (!args)
+    {
         fprintf(stderr, "myshell: allocation error\n");
         exit(EXIT_FAILURE);
     }
 
     argToken = strtok(cmd, ARG_DELIM);
-    while (argToken != NULL) 
+    while (argToken != NULL)
     {
         args[position] = argToken;
         position++;
 
-        if (position >= bufsize) {
+        if (position >= bufsize)
+        {
             bufsize += ARG_BUFSIZE;
-            args = realloc(args, bufsize * sizeof(char*));
-            if (!args) {
+            args = realloc(args, bufsize * sizeof(char *));
+            if (!args)
+            {
                 fprintf(stderr, "myshell: allocation error\n");
                 exit(EXIT_FAILURE);
             }
@@ -325,26 +353,27 @@ char **split_arg(char *cmd)
 char ***split_cmds(char *line)
 {
     int bufsize = CMD_BUFSIZE, position = 0;
-    char ***cmds = malloc(CMD_BUFSIZE * sizeof(char*));
+    char ***cmds = malloc(CMD_BUFSIZE * sizeof(char *));
     char *cmdToken;
 
-    if (!cmds) 
+    if (!cmds)
     {
         fprintf(stderr, "myshell: allocation error\n");
         exit(EXIT_FAILURE);
     }
 
     cmdToken = strtok(line, CMD_DELIM);
-    while (cmdToken != NULL) 
+    while (cmdToken != NULL)
     {
         cmds[position] = split_arg(cmdToken);
         position++;
 
-        if (position >= bufsize) 
+        if (position >= bufsize)
         {
             bufsize += CMD_BUFSIZE;
-            cmds = realloc(cmds, bufsize * sizeof(char**));
-            if (!cmds) {
+            cmds = realloc(cmds, bufsize * sizeof(char **));
+            if (!cmds)
+            {
                 fprintf(stderr, "myshell: allocation error\n");
                 exit(EXIT_FAILURE);
             }
@@ -366,7 +395,8 @@ void loop(void)
     char ***cmds;
     int status, cmdIdx;
 
-    do {
+    do
+    {
         printf("> ");
         line = read_line();
         cmds = split_cmds(line);
@@ -401,4 +431,3 @@ int main(int argc, char **argv)
 
     return EXIT_SUCCESS;
 }
-
