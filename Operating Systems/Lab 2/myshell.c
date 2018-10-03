@@ -189,13 +189,17 @@ int pipe_launch(char ***cmds)
             tmp = malloc(100 * sizeof(char));
             if (i != 0)
             {
-                //printf("I am child %d, I am going to read from fds[%d]\n", i, 2 * (i - 1));
+                printf("I am child %d, I am going to dup fds[%d]: %d as stdin\n", i, pipeFds[2 * (i - 1)], 2 * (i - 1));
                 if (dup2(pipeFds[2 * (i - 1)], STDIN_FILENO) < 0) //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
                 {
+                    printf("I am child %d, something went wrong with fds[%d]\n", i, 2 * (i - 1));
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
                 close(pipeFds[2 * (i - 1)]);
+                pipeFds[2 * (i - 1)] = -1;
+                close(pipeFds[2 * (i - 1) + 1]);
+                pipeFds[2 * (i - 1) + 1] = -1;
                 //read(pipeFds[2*(i-1)], tmp, 100);
                 //read(STDIN_FILENO, tmp, 100);
                 //printf("child %d get the line: %s\n", i, tmp);
@@ -210,6 +214,10 @@ int pipe_launch(char ***cmds)
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
+                close(pipeFds[2 * i]);
+                pipeFds[2 * i] = -1;
+                close(pipeFds[2 * i + 1]);
+                pipeFds[2 * i + 1] = -1;
                 //write(pipeFds[2*i+1], "hello ", 6);
                 //write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
                 //write(STDOUT_FILENO, "hello ", 6);
@@ -224,13 +232,13 @@ int pipe_launch(char ***cmds)
             */
             if (i == 0)
             {
-                write(STDOUT_FILENO, "header 1", strlen("header 1"));
+                write(STDOUT_FILENO, "header 1 ", strlen("header 1 "));
                 write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
             }
             else
             {
                 read(STDIN_FILENO, tmp, 100);
-                write(STDOUT_FILENO, "header 2", strlen("header 1"));
+                write(STDOUT_FILENO, "header 2 ", strlen("header 1 "));
                 write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
                 if (execvp(cmds[i][0], cmds[i]) < 0)
                 {
@@ -241,8 +249,14 @@ int pipe_launch(char ***cmds)
 
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
-                close(pipeFds[2 * j]);
-                close(pipeFds[2 * j + 1]);
+                if (pipeFds[2 * j] != -1)
+                {
+                    close(pipeFds[2 * j]);
+                }
+                if (pipeFds[2 * j + 1] != -1)
+                {
+                    close(pipeFds[2 * j + 1]);
+                }
             }
 
             exit(0);
@@ -255,12 +269,13 @@ int pipe_launch(char ***cmds)
         else
         {
             printf("child %d has pid: %d\n", i, pid);
-            for (int j = 0; j < cmdCnt - 1; ++j)
-            {
-                close(pipeFds[2 * j]);
-                close(pipeFds[2 * j + 1]);
-            }
         }
+    }
+
+    for (int j = 0; j < cmdCnt - 1; ++j)
+    {
+        close(pipeFds[2 * j]);
+        close(pipeFds[2 * j + 1]);
     }
 
     for (int i = 0; i < cmdCnt; ++i)
@@ -272,12 +287,6 @@ int pipe_launch(char ***cmds)
             exit(EXIT_FAILURE);
         }
         printf("child process %d exit with status %d\n", pid, status);
-    }
-
-    for (int j = 0; j < cmdCnt - 1; ++j)
-    {
-        close(pipeFds[2 * j]);
-        close(pipeFds[2 * j + 1]);
     }
 
     return 1;
