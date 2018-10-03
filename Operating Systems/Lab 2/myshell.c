@@ -233,22 +233,39 @@ int pipe_launch(char ***cmds)
                 */
                 int argCnt = 0;
                 char redirect = '>';
-                char *result;
+                char *pos;
 
                 while (cmds[i][argCnt])
                     ++argCnt;
                 for (int j = 0; j < argCnt; ++j)
                 {
-                    result = strchr(cmds[i][j], redirect);
-                    if (result != NULL) //we get '>', need to further check if there is '>>'
+                    pos = strchr(cmds[i][j], redirect);
+                    if (pos != NULL) //we get '>', need to further check if there is '>>'
                     {
-                        if (result[1] == '>') //we get '>>'. note that we assume that there is at least one character following the '>'.
+                        if (pos[1] != '\0') 
                         {
+                            if (pos[1] != '>')
+                            {
+                                redirectFd = open(pos+1, O_WRONLY, O_CREAT);
+                                pos[0] = '\0';
+                            }
+                            else // we get a '>>'
+                            {
+                                if(pos[2] != '\0')
+                                {
+                                    redirectFd = open(pos+2, O_WRONLY, O_CREAT|O_APPEND);
+                                    pos[0] = '\0';
+                                }
+                                else
+                                {
+                                    redirectFd = open(cmds[i][j+1], O_WRONLY, O_CREAT|O_APPEND);
+                                }
+                            }
                             redirectFd = open(result + 2, O_WRONLY, O_APPEND); // we also asume there is at least one character following '>>'
                         }
                         else
                         {
-                            redirectFd = open(result + 1, O_WRONLY, O_CREAT);
+                            redirectFd = open(cmds[i][j+1], O_WRONLY, O_CREAT);
                         }
                         if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
                         {
