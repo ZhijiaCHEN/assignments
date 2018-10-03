@@ -186,19 +186,29 @@ int pipe_launch(char ***cmds)
             }
             if (i != 0)
             {
-                printf("I am child %d, I am going to read from fds[%d]\n", i, 2 * (i - 1));
-                
-                read(pipeFds[2*(i-1)], tmp, 100);
-                printf("child %d get the line: %s\n", i, tmp);
-                //dup2(pipeFds[2 * (i - 1)], STDIN_FILENO); //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
+                //printf("I am child %d, I am going to read from fds[%d]\n", i, 2 * (i - 1));
+                if (dup2(pipeFds[2 * (i - 1)], STDIN_FILENO) < 0) //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
+                {
+                    perror("dup2");
+                    exit(EXIT_FAILURE);
+                }
+                //read(pipeFds[2*(i-1)], tmp, 100);
+                read(STDIN_FILENO, tmp, 100);
+                //printf("child %d get the line: %s\n", i, tmp);
             }
 
             if (i != cmdCnt - 1)
             {
-                printf("I am child %d, I am going to write to fds[%d]\n", i, 2 * i + 1);
-                write(pipeFds[2*i+1], "hello ", 6);
-                write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
-                //dup2(pipeFds[2 * i + 1], STDOUT_FILENO); //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                //printf("I am child %d, I am going to write to fds[%d]\n", i, 2 * i + 1);
+                if(dup2(pipeFds[2 * i + 1], STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                {
+                    perror("dup2");
+                    exit(EXIT_FAILURE);
+                }
+                //write(pipeFds[2*i+1], "hello ", 6);
+                //write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
+                write(STDOUT_FILENO, "hello ", 6);
+                write(STDOUT_FILENO, tmp, strlen(tmp)+1);
             }
             /*
             if (execvp(cmds[i][0], cmds[i]) < 0) 
@@ -207,7 +217,11 @@ int pipe_launch(char ***cmds)
                 exit(EXIT_FAILURE);
             }
             */            
-
+            if (i == cmdCnt - 1)
+            {
+                write(STDOUT_FILENO, "hello ", 6);
+                write(STDOUT_FILENO, tmp, strlen(tmp)+1);
+            }
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
                 close(pipeFds[2 * j]);
