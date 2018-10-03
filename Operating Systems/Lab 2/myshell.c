@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <libexplain/wait.h>
@@ -126,7 +129,7 @@ int launch(char **args)
 int pipe_launch(char ***cmds)
 {
     pid_t pid, wpid;
-    int status, cmdCnt = 0, *pipeFds;
+    int status, cmdCnt = 0, *pipeFds, redirectFd = -1;
     char *buf;
 
     while (cmds[cmdCnt])
@@ -171,92 +174,106 @@ int pipe_launch(char ***cmds)
 
     for (int i = 0; i < cmdCnt; ++i)
     {
-        char *tmp;
         pid = fork();
         if (pid == 0)
         {
-            /*
-            if (i == 0)
-            {
-
-                //printf("input for pipe:\n", i);
-                tmp = readline("\n>>> ");
-            }
-            else
-            {
-                tmp = malloc(100 * sizeof(char));
-            }*/
-            tmp = malloc(100 * sizeof(char));
             if (i != 0)
             {
-                printf("I am child %d, I am going to dup fds[%d]: %d as stdin\n", i, pipeFds[2 * (i - 1)], 2 * (i - 1));
                 if (dup2(pipeFds[2 * (i - 1)], STDIN_FILENO) < 0) //duplicate the file descriptor for the read end of the pipe to file descriptor STDIN_FILENO
                 {
-                    printf("I am child %d, something went wrong with fds[%d]\n", i, 2 * (i - 1));
+                    //printf("I am child %d, something went wrong with fds[%d]\n", i, 2 * (i - 1));
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
-                close(pipeFds[2 * (i - 1)]);
-                pipeFds[2 * (i - 1)] = -1;
-                close(pipeFds[2 * (i - 1) + 1]);
-                pipeFds[2 * (i - 1) + 1] = -1;
-                //read(pipeFds[2*(i-1)], tmp, 100);
-                //read(STDIN_FILENO, tmp, 100);
-                //printf("child %d get the line: %s\n", i, tmp);
             }
-            if (i == 0)
-                read(STDIN_FILENO, tmp, 100);
+            else
+            {
+                /*Checkt redirection for input. 
+                We assume that input rediection can only appreas in the first command, otherwise it's a syntax error.
+                The shell do not handle syntax error, nor do it check syntax error
+                */
+                int argCnt = 0;
+                char redirect = '<';
+                char *result;
+
+                while (cmds[i][argCnt])
+                    ++argCnt;
+                for (int j = 0; j < argCnt; ++j)
+                {
+                    result = strchr(cmds[i][j], redirect);
+                    if (result != NULL) //we get '<'
+                    {
+                        redirectFd = open(result + 1, O_RDONLY);
+                        if (dup2(redirectFd, STDIN_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDIN_FILENO
+                        {
+                            perror("dup2");
+                            exit(EXIT_FAILURE);
+                        }
+                        close(redirectFd);
+                        redirectFd = -1;
+                        result[0] = '\0';
+                        break;
+                    }
+                }
+            }
+
             if (i != cmdCnt - 1)
             {
-                //printf("I am child %d, I am going to write to fds[%d]\n", i, 2 * i + 1);
                 if (dup2(pipeFds[2 * i + 1], STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
                 {
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
-                close(pipeFds[2 * i]);
-                pipeFds[2 * i] = -1;
-                close(pipeFds[2 * i + 1]);
-                pipeFds[2 * i + 1] = -1;
-                //write(pipeFds[2*i+1], "hello ", 6);
-                //write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
-                //write(STDOUT_FILENO, "hello ", 6);
-                //write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
-            }
-            /*
-            if (execvp(cmds[i][0], cmds[i]) < 0) 
-            { 
-                printf("Failed to execute command \"%s\"...", cmds[i][0]); 
-                exit(EXIT_FAILURE);
-            }
-            */
-            if (i == 0)
-            {
-                write(STDOUT_FILENO, "header 1 ", strlen("header 1 "));
-                write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
             }
             else
             {
-                read(STDIN_FILENO, tmp, 100);
-                write(STDOUT_FILENO, "header 2 ", strlen("header 1 "));
-                write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
-                if (execvp(cmds[i][0], cmds[i]) < 0)
+                /*Checkt redirection for output. 
+                We assume that ouput rediection can only appreas in the last command, otherwise it's a syntax error.
+                The shell do not handle syntax error, nor do it check syntax error
+                */
+                int argCnt = 0;
+                char redirect = '>';
+                char *result;
+
+                while (cmds[i][argCnt])
+                    ++argCnt;
+                for (int j = 0; j < argCnt; ++j)
                 {
-                    printf("Failed to execute command \"%s\"...", cmds[i][0]);
-                    exit(EXIT_FAILURE);
+                    result = strchr(cmds[i][j], redirect);
+                    if (result != NULL) //we get '>', need to further check if there is '>>'
+                    {
+                        if (result[1] == '>') //we get '>>'. note that we assume that there is at least one character following the '>'.
+                        {
+                            redirectFd = open(result + 2, O_WRONLY, O_APPEND); // we also asume there is at least one character following '>>'
+                        }
+                        else
+                        {
+                            redirectFd = open(result + 1, O_WRONLY, O_CREAT);
+                        }
+                        if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                        {
+                            perror("dup2");
+                            exit(EXIT_FAILURE);
+                        }
+                        close(redirectFd);
+                        redirectFd = -1;
+                        result[0] = '\0';
+                        break;
+                    }
                 }
             }
 
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
-                if (pipeFds[2 * j] != -1)
-                {
-                    close(pipeFds[2 * j]);
-                }
-                if (pipeFds[2 * j + 1] != -1)
-                {
-                    close(pipeFds[2 * j + 1]);
-                }
+
+                close(pipeFds[2 * j]);
+                close(pipeFds[2 * j + 1]);
+            }
+
+            if (execvp(cmds[i][0], cmds[i]) < 0)
+            {
+                printf("Failed to execute command \"%s\"...", cmds[i][0]);
+                exit(EXIT_FAILURE);
             }
 
             exit(0);
@@ -268,7 +285,7 @@ int pipe_launch(char ***cmds)
         }
         else
         {
-            printf("child %d has pid: %d\n", i, pid);
+            //printf("child %d has pid: %d\n", i, pid);
         }
     }
 
@@ -286,7 +303,7 @@ int pipe_launch(char ***cmds)
             fprintf(stderr, "one child exits with error: %s\n", explain_wait(&status));
             exit(EXIT_FAILURE);
         }
-        printf("child process %d exit with status %d\n", pid, status);
+        //printf("child process %d exit with status %d\n", pid, status);
     }
 
     return 1;
