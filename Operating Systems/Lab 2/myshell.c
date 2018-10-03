@@ -5,6 +5,7 @@
 #include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <libexplain/wait.h>
 
 char *read_line();
 /*
@@ -174,16 +175,18 @@ int pipe_launch(char ***cmds)
         pid = fork();
         if (pid == 0)
         {
+            /*
             if (i == 0)
             {
-                
+
                 //printf("input for pipe:\n", i);
                 tmp = readline("\n>>> ");
             }
             else
             {
-                tmp = malloc(100*sizeof(char));
-            }
+                tmp = malloc(100 * sizeof(char));
+            }*/
+            tmp = malloc(100 * sizeof(char));
             if (i != 0)
             {
                 //printf("I am child %d, I am going to read from fds[%d]\n", i, 2 * (i - 1));
@@ -192,23 +195,25 @@ int pipe_launch(char ***cmds)
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
+                close(pipeFds[2 * (i - 1)]);
                 //read(pipeFds[2*(i-1)], tmp, 100);
-                read(STDIN_FILENO, tmp, 100);
+                //read(STDIN_FILENO, tmp, 100);
                 //printf("child %d get the line: %s\n", i, tmp);
             }
-
+            if (i == 0)
+                read(STDIN_FILENO, tmp, 100);
             if (i != cmdCnt - 1)
             {
                 //printf("I am child %d, I am going to write to fds[%d]\n", i, 2 * i + 1);
-                if(dup2(pipeFds[2 * i + 1], STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                if (dup2(pipeFds[2 * i + 1], STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
                 {
                     perror("dup2");
                     exit(EXIT_FAILURE);
                 }
                 //write(pipeFds[2*i+1], "hello ", 6);
                 //write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
-                write(STDOUT_FILENO, "hello ", 6);
-                write(STDOUT_FILENO, tmp, strlen(tmp)+1);
+                //write(STDOUT_FILENO, "hello ", 6);
+                //write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
             }
             /*
             if (execvp(cmds[i][0], cmds[i]) < 0) 
@@ -216,19 +221,30 @@ int pipe_launch(char ***cmds)
                 printf("Failed to execute command \"%s\"...", cmds[i][0]); 
                 exit(EXIT_FAILURE);
             }
-            */            
-            if (i == cmdCnt - 1)
+            */
+            if (i == 0)
             {
-                write(STDOUT_FILENO, "hello ", 6);
-                write(STDOUT_FILENO, tmp, strlen(tmp)+1);
+                write(STDOUT_FILENO, "header 1", strlen("header 1"));
+                write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
             }
+            else
+            {
+                read(STDIN_FILENO, tmp, 100);
+                write(STDOUT_FILENO, "header 2", strlen("header 1"));
+                write(STDOUT_FILENO, tmp, strlen(tmp) + 1);
+                if (execvp(cmds[i][0], cmds[i]) < 0)
+                {
+                    printf("Failed to execute command \"%s\"...", cmds[i][0]);
+                    exit(EXIT_FAILURE);
+                }
+            }
+
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
                 close(pipeFds[2 * j]);
                 close(pipeFds[2 * j + 1]);
             }
 
-            
             exit(0);
         }
         else if (pid < 0)
@@ -239,14 +255,24 @@ int pipe_launch(char ***cmds)
         else
         {
             printf("child %d has pid: %d\n", i, pid);
+            for (int j = 0; j < cmdCnt - 1; ++j)
+            {
+                close(pipeFds[2 * j]);
+                close(pipeFds[2 * j + 1]);
+            }
         }
     }
-    
-    for (int i = 0; i < cmdCnt; ++ i)
+
+    for (int i = 0; i < cmdCnt; ++i)
     {
-        pid =  wait(&status);
+        pid = wait(&status);
+        if (pid < 0)
+        {
+            fprintf(stderr, "one child exits with error: %s\n", explain_wait(&status));
+            exit(EXIT_FAILURE);
+        }
         printf("child process %d exit with status %d\n", pid, status);
-    } 
+    }
 
     for (int j = 0; j < cmdCnt - 1; ++j)
     {

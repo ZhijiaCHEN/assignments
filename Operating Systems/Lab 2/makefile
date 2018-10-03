@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I. -lreadline
+CFLAGS=-I. -lreadline -lexplain
 DEPS = myshell.h
 OBJ = myshell.o
 
