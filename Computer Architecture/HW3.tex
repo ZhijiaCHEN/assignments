@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\title{HW2}
+\author{Zhijiia Chen}
+\begin{document}
+\maketitle
+
+\paragraph{2.18} [12/15/15/10] <2.3> You are investigating the possible benefits of a way-predicting L1 cache. Assume that a 64 KB four-way set associative single-banked L1 data cache is the cycle time limiter in a system. For an alternative cache organization, you are considering a way-predicted cache modeled as a 64 KB directmapped cache with 80\% prediction accuracy. Unless stated otherwise, assume that a mispredicted way access that hits in the cache takes one more cycle. Assume the miss rates and the miss penalties in question 2.8 part (c).
+
+a. [12] <2.3> What is the average memory access time of the current cache (in cycles) versus the way-predicted cache?
+
+b. [15]<2.3>If all other components could operate with the faster way-predicted cache cycle time (including the main memory), what would be the impact on performance from using the way-predicted cache?
+
+c. [15] <2.3> Way-predicted caches have usually been used only for instruction caches that feed an instruction queue or buffer. Imagine that you want to try out way prediction on a data cache. Assume that you have 80\% prediction accuracy and that subsequent operations (e.g., data cache access of other instructions, dependent operations) are issued assuming a correct way prediction. Thus a way misprediction necessitates a pipe flush and replay trap, which requires 15 cycles. Is the change in average memory access time per load instruction with data cache way prediction positive or negative, and how much is it?
+
+d. [10] <2.3> As an alternative to way prediction, many large associative L2 caches serialize tag and data access so that only the required dataset array needs to be activated. This saves power but increases the access time. Use CACTI’s detailed web interface for a 0.065 m process 1 MB four-way set associative cache with 64-byte blocks, 144 bits read out, 1 bank, only 1 read/write port, 30 bit tags, and ITRS-HP technology with global wires. What is the ratio of the access times for serializing tag and data access compared to parallel access?
+
+\paragraph{2.20} [12/15] <2.3> Consider the usage of critical word first and early restart on L2 cache misses. Assume a 1 MB L2 cache with 64-byte blocks and a refill path that is 16 bytes wide. Assume that the L2 can be written with 16 bytes every 4 processor cycles, the time to receive the first 16 byte block from the memory con- troller is 120 cycles, each additional 16 byte block from main memory requires 16 cycles, and data can be bypassed directly into the read port of the L2 cache. Ignore any cycles to transfer the miss request to the L2 cache and the requested data to the L1 cache.
+
+a. [12] <2.3> How many cycles would it take to service an L2 cache miss with and without critical word first and early restart?
+
+b. [15] <2.3> Do you think critical word first and early restart would be more important for L1 caches or L2 caches, and what factors would contribute to their relative importance?
+
+\paragraph{2.21} [12/12] <2.3> You are designing a write buffer between a write-through L1 cache and a write-back L2 cache. The L2 cache write data bus is 16 B wide and can per- form a write to an independent cache address every four processor cycles.
+
+a. [12] <2.3> How many bytes wide should each write buffer entry be?
+
+b. [15] <2.3> What speedup could be expected in the steady state by using a merging write buffer instead of a nonmerging buffer when zeroing memory by the execution of 64-bit stores if all other instructions could be issued in parallel with the stores and the blocks are present in the L2 cache?
+
+c. [15] <2.3> What would the effect of possible L1 misses be on the number of required write buffer entries for systems with blocking and nonblocking caches?
+
+\paragraph{2.33} Consider a desktop system with a processor connected to a 2 GB DRAM with error-correcting code (ECC). Assume that there is only one memory channel of width 72 bits (64 bits for data and 8 bits for ECC).
+
+\textbf{a.} How many DRAM chips are on the DIMM if 1 Gb DRAM chips are used, and how many data I/Os must each DRAM have if only one DRAM connects to each DIMM data pin?
+
+With 8 bits ECC for 68 bits data, it means there is one bit overhead for every byte transmitted. 2 GB = 16 Gb, and with another 2 Gb overhead, there should be 18 1 Gb DRAM chips on the DIMM.
+
+To achieve 72 bits output bandwidth, $\frac{72}{18}=4$ I/Os are needed.
+
+
+
+\textbf{b.} What burst length is required to support 32 B L2 cache blocks?
+
+\textbf{c.} Calculate the peak bandwidth for DDR2-667 and DDR2-533 DIMMs for reads from an active page excluding the ECC overhead.
+
+\paragraph{2.37} [15] <2.2> Consider a processor that has four memory channels. Should consecutive memory blocks be placed in the same bank, or should they be placed in dif- ferent banks on different channels?
+
+\paragraph{2.41} [10/10/10/10/10] <2.4> Virtual machines (VMs) have the potential for adding many beneficial capabilities to computer systems, such as improved total cost of ownership (TCO) or availability. Could VMs be used to provide the following capabilities? If so, how could they facilitate this?
+
+a. [10] <2.4> Test applications in production environments using development machines?
+
+b. [10] <2.4> Quick redeployment of applications in case of disaster or failure?
+
+c. [10] <2.4> Higher performance in I/O-intensive applications?
+
+d. [10] <2.4> Fault isolation between different applications, resulting in higher availability for services?
+
+e. [10] <2.4> Performing software maintenance on systems while applications are running without significant interruption?
+
+\end{document}
