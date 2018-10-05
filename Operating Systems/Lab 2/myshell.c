@@ -144,7 +144,7 @@ int pipe_launch(char ***cmds)
 
     int argCnt = 0;
     char redirect = '>';
-    char *pos;
+    char *sPos, *ePos;
 
     for (int i = 0; i < cmdCnt; ++i)
     {
@@ -152,13 +152,29 @@ int pipe_launch(char ***cmds)
             ++argCnt;
         for (int j = 0; j < argCnt; ++j)
         {
-            pos = strchr(cmds[i][j], redirect);
-            if (pos != NULL) //we get '>', need to further check if there is '>>'
+            sPos = strchr(cmds[i][j], redirect);
+            if (sPos != NULL) //we get '>', need to further check if there is '>>'
             {
-                if (pos[1] == '\0') // cmds[i][j] is '?>'
+                if (sPos[1] == '>') //we get >>
                 {
-                    redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT, S_IRWXU);
-                    if (pos == cmds[i][j]) // cmds[i][j] is '>'
+                    ePos = sPos+1;
+                }
+                else
+                {
+                    ePos = sPos
+                }
+                if (ePos[1] == '\0') // cmds[i][j] is '?>'
+                {
+                    if (sPos == ePos) // >
+                    {
+                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT, S_IRWXU);
+                    }
+                    else // >>
+                    {
+                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
+                    }
+
+                    if (sPos == cmds[i][j]) // cmds[i][j] is '>'
                     {
 
                         for (int k = j+2; ;++k)
@@ -169,7 +185,7 @@ int pipe_launch(char ***cmds)
                     }
                     else // cmds[i][j] is '*>'
                     {
-                        pos[0] = '\0';
+                        sPos[0] = '\0';
                         for (int k = j+2; ; ++k)
                         {
                             cmds[i][k-1] = cmds[i][k];
@@ -177,17 +193,18 @@ int pipe_launch(char ***cmds)
                         }
                     }
                 }
-                else // cmds[i][j] is '?>*', need to further check if it is a '>>'
+                else // cmds[i][j] is '?>*'
                 {
-                    if (pos[1] == '>') // cmds[i][j] is '?>>*'
+                    if (sPos == ePos) // >
                     {
-                        redirectFd = open(pos+1, O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
+                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT, S_IRWXU);
                     }
-                    else
+                    else // >>
                     {
-                        redirectFd = open(pos+1, O_WRONLY|O_CREAT, S_IRWXU);
+                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
                     }
-                    if (pos == cmds[i][j]) // cmds[i][j] is '>*'
+                    
+                    if (sPos == cmds[i][j]) // cmds[i][j] is '>*'
                     {
                         for (int k = j+1; ; ++k)
                         {
@@ -197,7 +214,7 @@ int pipe_launch(char ***cmds)
                     }
                     else // cmds[i][j] is '*>*'
                     {
-                        pos[0] = '\0';
+                        sPos[0] = '\0';
                     }
                 }
                 if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
@@ -226,20 +243,6 @@ int pipe_launch(char ***cmds)
             return 1;
         }
     }
-    /*
-    buf = readline(">>>");
-    write(pipeFds[1], buf, strlen(buf)+1);
-    for (int i = 1; i < cmdCnt - 1; ++i)
-    {
-        char tmp[100];
-        read(pipeFds[2*(i-1)], tmp, 100);
-        write(pipeFds[2*i+1], "hello ", 6);
-        write(pipeFds[2*i+1], tmp, strlen(tmp)+1);
-        
-    }
-    char tmp[100];
-    read(pipeFds[2*(cmdCnt - 1 -1)], tmp, 100);
-    */
 
     for (int i = 0; i < cmdCnt; ++i)
     {
@@ -259,20 +262,54 @@ int pipe_launch(char ***cmds)
             {
                 /*Checkt redirection for input. 
                 We assume that input rediection can only appreas in the first command, otherwise it's a syntax error.
-                The shell do not handle syntax error, nor do it check syntax error
+                The shell does not handle syntax error, nor does it check syntax error
                 */
-                int argCnt = 0;
-                char redirect = '<';
-                char *result;
-
+                argCnt = 0;
+                redirect = '<'
                 while (cmds[i][argCnt])
                     ++argCnt;
                 for (int j = 0; j < argCnt; ++j)
                 {
-                    result = strchr(cmds[i][j], redirect);
-                    if (result != NULL) //we get '<'
+                    sPos = strchr(cmds[i][j], redirect);
+                    if (sPos != NULL) //we get '<'
                     {
-                        redirectFd = open(result + 1, O_RDONLY);
+                        if (sPos[1] == '\0') // cmds[i][j] is '?<'
+                        {
+                            redirectFd = open(cmds[i][j+1], O_RDONLY|O_CREAT, S_IRWXU);
+                            if (sPos == cmds[i][j]) // cmds[i][j] is '<'
+                            {
+                                for (int k = j+2; ;++k)
+                                {
+                                    cmds[i][k-2] = cmds[i][k];
+                                    if (cmds[i][k]==NULL) break;
+                                }
+                            }
+                            else // cmds[i][j] is '*<'
+                            {
+                                sPos[0] = '\0';
+                                for (int k = j+2; ; ++k)
+                                {
+                                    cmds[i][k-1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL) break;
+                                }
+                            }
+                        }
+                        else // cmds[i][j] is '?<*'
+                        {
+                            redirectFd = open(sPos+1, O_RDONLY|O_CREAT, S_IRWXU);
+                            if (sPos == cmds[i][j]) // cmds[i][j] is '<*'
+                            {
+                                for (int k = j+1; ; ++k)
+                                {
+                                    cmds[i][k-1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL) break;
+                                }
+                            }
+                            else // cmds[i][j] is '*<*'
+                            {
+                                sPos[0] = '\0';
+                            }
+                        }
                         if (dup2(redirectFd, STDIN_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDIN_FILENO
                         {
                             perror("dup2");
@@ -280,7 +317,6 @@ int pipe_launch(char ***cmds)
                         }
                         close(redirectFd);
                         redirectFd = -1;
-                        result[0] = '\0';
                         break;
                     }
                 }
@@ -300,69 +336,85 @@ int pipe_launch(char ***cmds)
                 We assume that ouput redirection can only appears in the last command, otherwise it's a syntax error.
                 The shell do not handle syntax error, nor do it check syntax error
                 */
-                int argCnt = 0;
-                char redirect = '>';
-                char *pos;
-
                 while (cmds[i][argCnt])
-                    ++argCnt;
-                for (int j = 0; j < argCnt; ++j)
+            ++argCnt;
+        for (int j = 0; j < argCnt; ++j)
+        {
+            sPos = strchr(cmds[i][j], redirect);
+            if (sPos != NULL) //we get '>', need to further check if there is '>>'
+            {
+                if (sPos[1] == '>') //we get >>
                 {
-                    pos = strchr(cmds[i][j], redirect);
-                    if (pos != NULL) //we get '>', need to further check if there is '>>'
+                    ePos = sPos+1;
+                }
+                else
+                {
+                    ePos = sPos
+                }
+                if (ePos[1] == '\0') // cmds[i][j] is '?>'
+                {
+                    if (sPos == ePos) // >
                     {
-                        if (pos[1] == '\0') // cmds[i][j] is '?>'
+                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT, S_IRWXU);
+                    }
+                    else // >>
+                    {
+                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
+                    }
+
+                    if (sPos == cmds[i][j]) // cmds[i][j] is '>'
+                    {
+
+                        for (int k = j+2; ;++k)
                         {
-                            redirectFd = open(cmds[i][j+1], O_WRONLY, O_CREAT);
-                            if (pos == cmds[i][j]) // cmds[i][j] is '>'
-                            {
-                                for (int k = j+2; cmds[i][k]!=NULL;++k)
-                                {
-                                    cmds[i][k-2] = cmds[i][k];
-                                }
-                            }
-                            else // cmds[i][j] is '*>'
-                            {
-                                pos[0] = '\0';
-                                for (int k = j+2; cmds[i][k] != NULL; ++k)
-                                {
-                                    cmds[i][k-1] = cmds[i][k];
-                                }
-                            }
+                            cmds[i][k-2] = cmds[i][k];
+                            if (cmds[i][k]==NULL) break;
                         }
-                        else // cmds[i][j] is '?>*', need to further check if it is a '>>'
+                    }
+                    else // cmds[i][j] is '*>'
+                    {
+                        sPos[0] = '\0';
+                        for (int k = j+2; ; ++k)
                         {
-                            if (pos[1] == '>') // cmds[i][j] is '?>>*'
-                            {
-                                redirectFd = open(pos+1, O_WRONLY, O_CREAT|O_APPEND);
-                            }
-                            else
-                            {
-                                redirectFd = open(pos+1, O_WRONLY, O_CREAT);
-                            }
-                            if (pos == cmds[i][j]) // cmds[i][j] is '>*'
-                            {
-                                for (int k = j+1; cmds[i][k] != NULL; ++k)
-                                {
-                                    cmds[i][k-1] = cmds[i][k];
-                                }
-                            }
-                            else // cmds[i][j] is '*>*'
-                            {
-                                pos[0] = '\0';
-                            }
+                            cmds[i][k-1] = cmds[i][k];
+                            if (cmds[i][k] == NULL) break;
                         }
-                        if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
-                        {
-                            perror("dup2");
-                            exit(EXIT_FAILURE);
-                        }
-                        close(redirectFd);
-                        redirectFd = -1;
-                        pos[0] = '\0';
-                        break;
                     }
                 }
+                else // cmds[i][j] is '?>*'
+                {
+                    if (sPos == ePos) // >
+                    {
+                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT, S_IRWXU);
+                    }
+                    else // >>
+                    {
+                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
+                    }
+                    
+                    if (sPos == cmds[i][j]) // cmds[i][j] is '>*'
+                    {
+                        for (int k = j+1; ; ++k)
+                        {
+                            cmds[i][k-1] = cmds[i][k];
+                            if (cmds[i][k] == NULL) break;
+                        }
+                    }
+                    else // cmds[i][j] is '*>*'
+                    {
+                        sPos[0] = '\0';
+                    }
+                }
+                if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                {
+                    perror("dup2");
+                    exit(EXIT_FAILURE);
+                }
+                close(redirectFd);
+                redirectFd = -1;
+                break;
+            }
+        }
             }
 
             for (int j = 0; j < cmdCnt - 1; ++j)
