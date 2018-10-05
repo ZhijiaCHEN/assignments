@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-//#include <libexplain/wait.h>
+#include <libexplain/wait.h>
 
 char *read_line();
 /*
@@ -121,6 +121,22 @@ int launch(char **args)
     return 1;
 }
 
+void print_cmds(char ***cmds)
+{
+    int i = 0, j = 0;
+    while (cmds[i])
+    {
+        j = 0;
+        while (cmds[i][j])
+        {
+            printf("%s ", cmds[i][j]);
+            ++j;
+        }
+        printf("\n");
+        ++i;
+    }
+}
+
 /**
     @brief Launch one or multiple piped programs and wait for it/them to terminate.
     @param cmds Null terminated list of commands.
@@ -129,105 +145,14 @@ int launch(char **args)
 int pipe_launch(char ***cmds)
 {
     pid_t pid, wpid;
-    int status, cmdCnt = 0, *pipeFds, redirectFd = -1;
-    char *buf;
+    int status, cmdCnt = 0, *pipeFds, redirectFd = -1, argCnt;
+    char *buf, *sPos, *ePos, redirect;
 
     while (cmds[cmdCnt])
         ++cmdCnt;
     if (cmdCnt == 0)
         return 1;
-    else
-    {
-        if (cmdCnt == 1)
-            return launch(cmds[0]);
-    }
 
-    int argCnt = 0;
-    char redirect = '>';
-    char *sPos, *ePos;
-
-    for (int i = 0; i < cmdCnt; ++i)
-    {
-        while (cmds[i][argCnt])
-            ++argCnt;
-        for (int j = 0; j < argCnt; ++j)
-        {
-            sPos = strchr(cmds[i][j], redirect);
-            if (sPos != NULL) //we get '>', need to further check if there is '>>'
-            {
-                if (sPos[1] == '>') //we get >>
-                {
-                    ePos = sPos+1;
-                }
-                else
-                {
-                    ePos = sPos
-                }
-                if (ePos[1] == '\0') // cmds[i][j] is '?>'
-                {
-                    if (sPos == ePos) // >
-                    {
-                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT, S_IRWXU);
-                    }
-                    else // >>
-                    {
-                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
-                    }
-
-                    if (sPos == cmds[i][j]) // cmds[i][j] is '>'
-                    {
-
-                        for (int k = j+2; ;++k)
-                        {
-                            cmds[i][k-2] = cmds[i][k];
-                            if (cmds[i][k]==NULL) break;
-                        }
-                    }
-                    else // cmds[i][j] is '*>'
-                    {
-                        sPos[0] = '\0';
-                        for (int k = j+2; ; ++k)
-                        {
-                            cmds[i][k-1] = cmds[i][k];
-                            if (cmds[i][k] == NULL) break;
-                        }
-                    }
-                }
-                else // cmds[i][j] is '?>*'
-                {
-                    if (sPos == ePos) // >
-                    {
-                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT, S_IRWXU);
-                    }
-                    else // >>
-                    {
-                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
-                    }
-                    
-                    if (sPos == cmds[i][j]) // cmds[i][j] is '>*'
-                    {
-                        for (int k = j+1; ; ++k)
-                        {
-                            cmds[i][k-1] = cmds[i][k];
-                            if (cmds[i][k] == NULL) break;
-                        }
-                    }
-                    else // cmds[i][j] is '*>*'
-                    {
-                        sPos[0] = '\0';
-                    }
-                }
-                if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
-                {
-                    perror("dup2");
-                    exit(EXIT_FAILURE);
-                }
-                close(redirectFd);
-                redirectFd = -1;
-                break;
-            }
-        }
-    }
     pipeFds = malloc((cmdCnt - 1) * 2 * sizeof(int));
     for (int i = 0; i < cmdCnt - 1; ++i)
     {
@@ -265,7 +190,7 @@ int pipe_launch(char ***cmds)
                 The shell does not handle syntax error, nor does it check syntax error
                 */
                 argCnt = 0;
-                redirect = '<'
+                redirect = '<';
                 while (cmds[i][argCnt])
                     ++argCnt;
                 for (int j = 0; j < argCnt; ++j)
@@ -275,34 +200,47 @@ int pipe_launch(char ***cmds)
                     {
                         if (sPos[1] == '\0') // cmds[i][j] is '?<'
                         {
-                            redirectFd = open(cmds[i][j+1], O_RDONLY|O_CREAT, S_IRWXU);
+                            redirectFd = open(cmds[i][j + 1], O_RDONLY | O_CREAT, S_IRWXU);
+                            if (redirectFd < 0)
+                            {
+                                printf("unable to open file: %s", cmds[i][j + 1]);
+                                exit(EXIT_FAILURE);
+                            }
                             if (sPos == cmds[i][j]) // cmds[i][j] is '<'
                             {
-                                for (int k = j+2; ;++k)
+                                for (int k = j + 2;; ++k)
                                 {
-                                    cmds[i][k-2] = cmds[i][k];
-                                    if (cmds[i][k]==NULL) break;
+                                    cmds[i][k - 2] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
                                 }
                             }
                             else // cmds[i][j] is '*<'
                             {
                                 sPos[0] = '\0';
-                                for (int k = j+2; ; ++k)
+                                for (int k = j + 2;; ++k)
                                 {
-                                    cmds[i][k-1] = cmds[i][k];
-                                    if (cmds[i][k] == NULL) break;
+                                    cmds[i][k - 1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
                                 }
                             }
                         }
                         else // cmds[i][j] is '?<*'
                         {
-                            redirectFd = open(sPos+1, O_RDONLY|O_CREAT, S_IRWXU);
+                            redirectFd = open(sPos + 1, O_RDONLY | O_CREAT, S_IRWXU);
+                            if (redirectFd < 0)
+                            {
+                                printf("unable to open file: %s", sPos + 1);
+                                exit(EXIT_FAILURE);
+                            }
                             if (sPos == cmds[i][j]) // cmds[i][j] is '<*'
                             {
-                                for (int k = j+1; ; ++k)
+                                for (int k = j + 1;; ++k)
                                 {
-                                    cmds[i][k-1] = cmds[i][k];
-                                    if (cmds[i][k] == NULL) break;
+                                    cmds[i][k - 1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
                                 }
                             }
                             else // cmds[i][j] is '*<*'
@@ -336,87 +274,100 @@ int pipe_launch(char ***cmds)
                 We assume that ouput redirection can only appears in the last command, otherwise it's a syntax error.
                 The shell do not handle syntax error, nor do it check syntax error
                 */
+                argCnt = 0;
+                redirect = '>';
                 while (cmds[i][argCnt])
-            ++argCnt;
-        for (int j = 0; j < argCnt; ++j)
-        {
-            sPos = strchr(cmds[i][j], redirect);
-            if (sPos != NULL) //we get '>', need to further check if there is '>>'
-            {
-                if (sPos[1] == '>') //we get >>
+                    ++argCnt;
+                for (int j = 0; j < argCnt; ++j)
                 {
-                    ePos = sPos+1;
-                }
-                else
-                {
-                    ePos = sPos
-                }
-                if (ePos[1] == '\0') // cmds[i][j] is '?>'
-                {
-                    if (sPos == ePos) // >
+                    sPos = strchr(cmds[i][j], redirect);
+                    if (sPos != NULL) //we get '>', need to further check if there is '>>'
                     {
-                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT, S_IRWXU);
-                    }
-                    else // >>
-                    {
-                        redirectFd = open(cmds[i][j+1], O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
-                    }
+                        if (sPos[1] == '>') //we get >>
+                        {
+                            ePos = sPos + 1;
+                        }
+                        else
+                        {
+                            ePos = sPos;
+                        }
+                        if (ePos[1] == '\0') // cmds[i][j] is '?>'
+                        {
+                            if (sPos == ePos) // >
+                            {
+                                redirectFd = open(cmds[i][j + 1], O_WRONLY | O_CREAT, S_IRWXU);
+                            }
+                            else // >>
+                            {
+                                redirectFd = open(cmds[i][j + 1], O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
+                            }
+                            if (redirectFd < 0)
+                            {
+                                printf("unable to open file: %s", cmds[i][j + 1]);
+                                exit(EXIT_FAILURE);
+                            }
+                            if (sPos == cmds[i][j]) // cmds[i][j] is '>'
+                            {
 
-                    if (sPos == cmds[i][j]) // cmds[i][j] is '>'
-                    {
+                                for (int k = j + 2;; ++k)
+                                {
+                                    cmds[i][k - 2] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
+                                }
+                            }
+                            else // cmds[i][j] is '*>'
+                            {
+                                sPos[0] = '\0';
+                                for (int k = j + 2;; ++k)
+                                {
+                                    cmds[i][k - 1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
+                                }
+                            }
+                        }
+                        else // cmds[i][j] is '?>*'
+                        {
+                            if (sPos == ePos) // >
+                            {
+                                redirectFd = open(ePos + 1, O_WRONLY | O_CREAT, S_IRWXU);
+                            }
+                            else // >>
+                            {
+                                redirectFd = open(ePos + 1, O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
+                            }
+                            if (redirectFd < 0)
+                            {
+                                printf("unable to open file: %s", ePos + 1);
+                                exit(EXIT_FAILURE);
+                            }
+                            if (sPos == cmds[i][j]) // cmds[i][j] is '>*'
+                            {
+                                for (int k = j + 1;; ++k)
+                                {
+                                    cmds[i][k - 1] = cmds[i][k];
+                                    if (cmds[i][k] == NULL)
+                                        break;
+                                }
+                            }
+                            else // cmds[i][j] is '*>*'
+                            {
+                                sPos[0] = '\0';
+                            }
+                        }
+                        if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
+                        {
+                            perror("dup2");
+                            exit(EXIT_FAILURE);
+                        }
 
-                        for (int k = j+2; ;++k)
-                        {
-                            cmds[i][k-2] = cmds[i][k];
-                            if (cmds[i][k]==NULL) break;
-                        }
-                    }
-                    else // cmds[i][j] is '*>'
-                    {
-                        sPos[0] = '\0';
-                        for (int k = j+2; ; ++k)
-                        {
-                            cmds[i][k-1] = cmds[i][k];
-                            if (cmds[i][k] == NULL) break;
-                        }
+                        close(redirectFd);
+                        redirectFd = -1;
+                        break;
                     }
                 }
-                else // cmds[i][j] is '?>*'
-                {
-                    if (sPos == ePos) // >
-                    {
-                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT, S_IRWXU);
-                    }
-                    else // >>
-                    {
-                        redirectFd = open(ePos+1, O_WRONLY|O_CREAT|O_APPEND, S_IRWXU);
-                    }
-                    
-                    if (sPos == cmds[i][j]) // cmds[i][j] is '>*'
-                    {
-                        for (int k = j+1; ; ++k)
-                        {
-                            cmds[i][k-1] = cmds[i][k];
-                            if (cmds[i][k] == NULL) break;
-                        }
-                    }
-                    else // cmds[i][j] is '*>*'
-                    {
-                        sPos[0] = '\0';
-                    }
-                }
-                if (dup2(redirectFd, STDOUT_FILENO) < 0) //duplicate the file descriptor for the write end of the pipe to file descriptor STDOUT_FILENO
-                {
-                    perror("dup2");
-                    exit(EXIT_FAILURE);
-                }
-                close(redirectFd);
-                redirectFd = -1;
-                break;
             }
-        }
-            }
-
             for (int j = 0; j < cmdCnt - 1; ++j)
             {
 
@@ -454,7 +405,7 @@ int pipe_launch(char ***cmds)
         pid = wait(&status);
         if (pid < 0)
         {
-            //fprintf(stderr, "one child exits with error: %s\n", explain_wait(&status));
+            fprintf(stderr, "one child exits with error: %s\n", explain_wait(&status));
             exit(EXIT_FAILURE);
         }
         //printf("child process %d exit with status %d\n", pid, status);
@@ -677,7 +628,19 @@ void loop(void)
 int main(int argc, char **argv)
 {
     // Load config files, if any.
+    char *note = "\
+####################################################################################################################################################\n\
+#   This shell is modified from the shell implementation tutorial written by Stephen Brennan: https://brennan.io/2015/01/16/write-a-shell-in-c/    #\n\
+#   The piping and redirection functionalities are added to the shell.                                                                             #\n\
+#   This shell has the following limitations:                                                                                                      #\n\
+#   * Commands must be on a single line.                                                                                                           #\n\
+#   * Arguments must be separated by whitespace.                                                                                                   #\n\
+#   * No quoting arguments or escaping whitespace.                                                                                                 #\n\
+#   * Only builtins are: cd, help, exit.                                                                                                           #\n\
+#   * No syntax error checking.                                                                                                                    #\n\
+####################################################################################################################################################\n";
 
+    printf("%s", note);
     // Run command loop.
     loop();
 
