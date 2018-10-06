@@ -34,15 +34,22 @@ c. [15] <2.3> What would the effect of possible L1 misses be on the number of re
 
 \textbf{a.} How many DRAM chips are on the DIMM if 1 Gb DRAM chips are used, and how many data I/Os must each DRAM have if only one DRAM connects to each DIMM data pin?
 
-With 8 bits ECC for 68 bits data, it means there is one bit overhead for every byte transmitted. 2 GB = 16 Gb, and with another 2 Gb overhead, there should be 18 1 Gb DRAM chips on the DIMM.
+With 8 bits ECC for 64 bits data, it means there is one bit overhead for every byte transmitted. 2 GB = 16 Gb, and with another 2 Gb overhead, there should be 18 1 Gb DRAM chips on the DIMM.
 
 To achieve 72 bits output bandwidth, $\frac{72}{18}=4$ I/Os are needed.
 
-
-
 \textbf{b.} What burst length is required to support 32 B L2 cache blocks?
 
+The effective channel width is 64 bits = 8 B, so a burst length of 4 is required.
+
 \textbf{c.} Calculate the peak bandwidth for DDR2-667 and DDR2-533 DIMMs for reads from an active page excluding the ECC overhead.
+
+Peak bandwidth for DDR2-667 = 8$\times$667 = 5336 MB/s.
+
+Peak bandwidth for DDR2-533 = 8$\times$533 = 4264 MB/s.
+
+
+
 
 \paragraph{2.37} [15] <2.2> Consider a processor that has four memory channels. Should consecutive memory blocks be placed in the same bank, or should they be placed in dif- ferent banks on different channels?
 
