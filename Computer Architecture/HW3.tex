@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{caption}
 \title{HW2}
 \author{Zhijiia Chen}
 \begin{document}
@@ -64,9 +66,20 @@ Average memroy access time for way-predicated cache: $0.97\times(0.8\times1+0.2\
 
 So the change is negative, the average memroy access time would be increased by 2.358 cycles.
 
+\begin{figure}[!htb]
+\begin{center}
+\begin{minipage}{.7\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{./1.png}
+    \captionof{figure}{\small CACTI time components results}
+    \label{fig:CACTI} 
+\end{minipage}
+\end{center}
+\end{figure}
+
 \subparagraph{d.} As an alternative to way prediction, many large associative L2 caches serialize tag and data access so that only the required dataset array needs to be activated. This saves power but increases the access time. Use CACTI’s detailed web interface for a 0.065 m process 1 MB four-way set associative cache with 64-byte blocks, 144 bits read out, 1 bank, only 1 read/write port, 30 bit tags, and ITRS-HP technology with global wires. What is the ratio of the access times for serializing tag and data access compared to parallel access?
 
-For parallel access, the access time is the time to read out a block, while for serialized access, the access time is the time to access all the tags plus the time to read out a block, thus the ratio is: $\frac{30\times4+64\times8}{64\times8}=1.234$.
+Figure~\ref{fig:CACTI} shows the time components of CACTI simulation results. The data side takes 2.734ns and the tag side takes 0.811ns. For parallel access, the access time is the dominant part between tag access time and data access time, while for serialized access, the access time is the time to access the tags plus the time to access the data, thus the ratio is: $\frac{0.811+2.734}{2.734}=1.297$.
 
 \paragraph{2.20} Consider the usage of critical word first and early restart on L2 cache misses. Assume a 1 MB L2 cache with 64-byte blocks and a refill path that is 16 bytes wide. Assume that the L2 can be written with 16 bytes every 4 processor cycles, the time to receive the first 16 byte block from the memory controller is 120 cycles, each additional 16 byte block from main memory requires 16 cycles, and data can be bypassed directly into the read port of the L2 cache. Ignore any cycles to transfer the miss request to the L2 cache and the requested data to the L1 cache.
 
@@ -78,7 +91,7 @@ Without critical word first and early restart, it requires 120 cycles for the fi
 
 With critical word first, it requires 120 cycles for the expected word.
 
-With early restart, it requires 120 cycles for the first word, and the expected cycles to wait for the remaining ones. So the expected cycles = $120 + 0.25\times(0 + 16 + 32 + 48) = 148 cycles$.
+With early restart, it requires 120 cycles for the first word, and the expected cycles to wait for the remaining ones. So the expected cycles = $120 + 0.25\times(0 + 16 + 32 + 48) = 148$ cycles.
 
 \subparagraph{b.} Do you think critical word first and early restart would be more important for L1 caches or L2 caches, and what factors would contribute to their relative importance?
 
@@ -94,7 +107,7 @@ The write buffer entry should match the write data bus, i.e., 16 B.
 
 Each store writes 8 B. Suppose each entry of the write buffer is 16 B.
 
-With merging write buffer, it takes 2 processor cycles to fill one write buffer entry. With non-merging write buffer, each write takes 4 processor cycles, so it takes 8 process cycles to fill one write buffer entry. So the merging write buffer is 4 times faster.
+With merging write buffer, each write cycle can write 16 B, while with non-merging write buffer, each write can only write 8 B. So the merging write buffer is 100 \% faster.
 
 \subparagraph{c.} What would the effect of possible L1 misses be on the number of required write buffer entries for systems with blocking and non-blocking caches?
 
