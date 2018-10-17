@@ -44,4 +44,28 @@ Suppose we are using the TCP reno implementation.
 \textbf{Phase 2}: congestion avoidance. Increase windwo size by one after each successful transmission. Window size of 8th transmission: 5 MSS.
 
 So by the end of 8th transmission, the congestion windows size is 5 MSS.
+
+\paragraph{3.} UDP: Look into the following IP packet enclosing a UDP datagram. UDP checksum includes three sections: a pseudoheader, the UDP header, and payload – the data coming from the application layer.   Pseudoheader and padding are only used to calculate checksum. After checksum is calculated, they are dropped. The figure. 1 is not a complete IP packet. It has the major info of the IP packet that has the UDP datagram and these info are what UDP checksum need to calculate. Now, assume we have
+Source IP field: 10011001 00010010 00001000 01101001
+
+The sum of the first 16 bits and the last 16 bits of the source IP: 10100001 01111011
+
+Destination IP field: 1010 1011 0000 0010 0000 1110 0000 1010
+
+Protocol field: 0001 0001
+
+The length of the pseudoheader is 12 bytes.
+
+The length of the head is 8 bytes.
+
+The length of the payload after padding is 8 bytes.
+
+UDP total length (28 bytes) field: 0000 0000 0001 1100
+
+Source port field: 0000 0100 0011 1111
+
+Destination port field: 0000 0000 0000 1101
+
+Data field: 01010100 01000101 01010011 01010100 01001001 01001110 01000111 00000000
+
 \end{document}
