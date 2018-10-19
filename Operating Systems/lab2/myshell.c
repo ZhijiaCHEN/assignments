@@ -56,11 +56,10 @@ int sh_cd(char **args)
  */
 int sh_help(char **args)
 {
-    int i;
     printf("Type program names and arguments, and hit enter.\n");
     printf("The following are built in:\n");
 
-    for (i = 0; i < num_builtins(); i++)
+    for (int i = 0; i < num_builtins(); i++)
     {
         printf("    %s\n", builtin_str[i]);
     }
