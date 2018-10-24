@@ -3,11 +3,19 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pxfonts}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  breaklines=true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\color{red}$\hookrightarrow$\space}
+}
 \title{Homework}
 \author{Zhijiia Chen}
 \begin{document}
 \maketitle
-
 \section{HW1}
 \paragraph{5.} Hash table:
 
@@ -31,11 +39,13 @@ How to deal with an shared hash table being used on the web server?
 
 \section{HW2}
 
-\paragraph{1.} What are the transport layer protocols used for live video, ﬁle transfer, DNS and email, respectively?
+\paragraph{1.} What are the transport layer protocols used for live video, file transfer, DNS and email, respectively?
 
-UDP, TCP, UDP, TCP
+\textbf{answer}: UDP, TCP, UDP, TCP
 
-\paragraph{2.} Consider a TCP implementation with the Additive Increase (linear) and Multiplicative Decrease (AIMD) algorithm, ignoring the ﬁrst phase where the ssthreshold is detected, assume the window size at the start of the slow start phase is 1 MSS and the ssthreshold at the start of the ﬁrst transmission is 8 MSS. Assume that a timeout occurs during the 4th transmission. Find the congestion window size at the end of the 8th transmission.
+\paragraph{2.} Consider a TCP implementation with the Additive Increase (linear) and Multiplicative Decrease (AIMD) algorithm, ignoring the first phase where the ssthreshold is detected, assume the window size at the start of the slow start phase is 1 MSS and the ssthreshold at the start of the first transmission is 8 MSS. Assume that a timeout occurs during the 4th transmission. Find the congestion window size at the end of the 8th transmission.
+
+\textbf{answer}: 
 
 Suppose we are using the TCP reno implementation.
 
@@ -46,13 +56,23 @@ Suppose we are using the TCP reno implementation.
 So by the end of 8th transmission, the congestion windows size is 5 MSS.
 
 \paragraph{3.} UDP: Look into the following IP packet enclosing a UDP datagram. UDP checksum includes three sections: a pseudoheader, the UDP header, and payload – the data coming from the application layer.   Pseudoheader and padding are only used to calculate checksum. After checksum is calculated, they are dropped. The figure. 1 is not a complete IP packet. It has the major info of the IP packet that has the UDP datagram and these info are what UDP checksum need to calculate. Now, assume we have
-Source IP field: 10011001 00010010 00001000 01101001
 
-The sum of the first 16 bits and the last 16 bits of the source IP: 10100001 01111011
+\begin{itemize}
+    \item Source IP: 153.18.8.105
+    \item Destination IP: 171.2.14.10
+    \item The protocol is ”UDP” (value is 17)
+    \item Source port: 1087
+    \item Destination port: 13
+    \item Payload: ”TESTING”.
+\end{itemize}
 
-Destination IP field: 1010 1011 0000 0010 0000 1110 0000 1010
+\textbf{answer}: 
 
-Protocol field: 0001 0001
+Source IP field: 1001100100010010 0000100001101001
+
+Destination IP field: 1010101100000010 0000111000001010
+
+Protocol field: 00010001
 
 The length of the pseudoheader is 12 bytes.
 
@@ -60,12 +80,95 @@ The length of the head is 8 bytes.
 
 The length of the payload after padding is 8 bytes.
 
-UDP total length (28 bytes) field: 0000 0000 0001 1100
+UDP total length (28 bytes) field: 0000000000011100
 
-Source port field: 0000 0100 0011 1111
+Source port field: 0000010000111111
 
-Destination port field: 0000 0000 0000 1101
+Destination port field: 0000000000001101
 
-Data field: 01010100 01000101 01010011 01010100 01001001 01001110 01000111 00000000
+Data field: 0101010001000101 0101001101010100 0100100101001110 0100011100000000
+
+Add up every 16 bits of the above fields (pad zeros if the length of a field is not the multiple of 16) with overflow bit wrapped around, we get 1001011011101001. Then we take the 1's complement of the sum to get the checksum 0110100100010110.
+
+\paragraph{4.} I run the nmap command "nmap -sP 192.168.56.1-128" in my linux virtual machine and got the following output:
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-10-24 12:01 EDT
+
+Nmap scan report for 192.168.56.1
+
+Host is up (0.00051s latency).
+
+Nmap scan report for zhijia-VirtualBox (192.168.56.101)
+
+Host is up (0.000086s latency).
+
+Nmap scan report for 192.168.56.102
+
+Host is up (0.00077s latency).
+
+Nmap done: 128 IP addresses (3 hosts up) scanned in 17.16 seconds
+
+I have two linux VMs running on my Mac and they are attached to a virtual subnet. So the command probes the available hosts in the network. In the above output, host 192.168.56.1 is my Mac, and host 192.168.56.101 and host 192.168.56.102 are the VMs.
+
+\section{HW3}
+
+\paragraph{1.} Use Link-State and distance vector algorithms to find the short paths from the ”source” node to other nodes in fig. 2. Describe each of your steps of the algorithms. Coding is not required.
+
+Define the following notation:
+
+\begin{itemize}
+    \item $d(v)$: cost of the least-cost path from the source node to destination $v$ as of this iteration of the algorithm.
+    \item $d_x(y)$ current minimum cost from node x to node y.
+    \item $c(x, y)$ cost from x to directly attached neighbor y.
+    \item $p(v)$: previous node (neighbor of $v$) along the current least-cost path from the source to $v$.
+    \item $N$: all the nodes.
+    \item $N'$: subset of nodes; $v$ is in $N'$ if the least-cost path from the source to $v$ is definitively known.
+\end{itemize}
+
+\textbf{Link-State}: 
+
+\begin{lstlisting}[mathescape=true]
+    N' = {u}
+    for all nodes v
+        if v is a neighbor of u then
+            d(v) = c(u, v)
+        else 
+            d(v) = $\infty$
+    loop
+        find w not in N' such that d(w) is a minimum
+        add w to N'
+        update d(V) for each neighbor v of w and not in N':
+            d(v) = min(d(v), d(w) + c(w, v))
+    until N' = N
+\end{lstlisting}
+
+\textbf{Distance-Vector}:
+
+At each node x:
+\begin{lstlisting}[mathescape=true]
+    for all destinations y in N:
+        $d_x$(y) = c(x, y) /* if y is not a neighbor, then c(x, y) = $\infty$ */
+    for each neighbor w
+        $d_w$(y) = $\infty$ for all destinations y in N
+    for each neighbor w
+        send distance vector $D_x$ = [$d_x$(y): y in N] to w
+    loop
+        wait (until sense a link cost change to some neighbor w or until receive a a distance vector from some neighbor w)
+        for each y in N:
+            $d_x$(y) = $min_v${c(x, v) + d_v(y)}
+        if $d_x$(y) changed for any destination y
+            send distance vector $D_x$ = [$d_x$(y): y in N] to all neighbors
+    forever
+\end{lstlisting}
+
+\paragraph{2.} Assume if you are a user connecting to the node ”source”, and you want to browse a web page of a server connecting to one node in this network fig. 2. Describe each step with what protocols you use and what those protocols are doing for your browsing, like we did in class.
+
+\begin{enumerate}
+    \item DNS lookup using UDP.
+    \item Initiate a TCP connection with the server.
+    \item Request the webpage using HTTP/HTTTPS protocol.
+\end{enumerate}
+
+\paragraph{3.} Assume you would like to set a VPN to connect to another node in this network fig. 2, how do you do it? Again describe each step.
 
 \end{document}

@@ -120,6 +120,9 @@ int launch(char **args)
     return 1;
 }
 
+/**
+    @print out the parsed commands
+ */
 void print_cmds(char ***cmds)
 {
     int i = 0, j = 0;
@@ -184,8 +187,8 @@ int pipe_launch(char ***cmds)
             }
             else
             {
-                /*Checkt redirection for input. 
-                We assume that input rediection can only appreas in the first command, otherwise it's a syntax error.
+                /*Check redirection for input. 
+                We assume that input redirection can only appear in the first command, otherwise it's a syntax error.
                 The shell does not handle syntax error, nor does it check syntax error
                 */
                 argCnt = 0;
