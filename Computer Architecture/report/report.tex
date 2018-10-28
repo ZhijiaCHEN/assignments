@@ -61,18 +61,18 @@ Both open addressing and closed addressing, however, will suffer from great late
 
 However, cuckoo hashing suffers from substantial performance penalty during insertion when the recursively kicking out operation turn out be an endless loop. The endless loop indicates a failure for insertion and need to perform a rehashing in order to accommodate all items. The endless loop itself, while useless for the result, consumes lots of time and resources, and it's only after exhaustive attempts the cuckoo hashing could realize that it's endless and perform rehashing, which leads to non-deterministic performance and is not desirable for cloud storage systems that are supposed to handle queries in real-time manner. 
 
-This paper presents the basic cuckoo hashing and some of its state-of-the-art variants that addressed on its non-deterministic performance issue during insertion. The rest of the paper is organized as follows. In section ~\ref{sec:cuckoo}, we present the basic cuckoo hashing and illustrate its operations with some examples. We describe three cuckoo hashing variants---cuckoo hashing with a stash (CHS), SmartCuckoo and horton tables---in the following three sections, and then we compare the three variants and conclude in section 6.
+This paper presents the basic cuckoo hashing and some of its state-of-the-art variants that addressed on its non-deterministic performance issue during insertion. The rest of the paper is organized as follows. In section~\ref{sec:cuckoo}, we present the basic cuckoo hashing and illustrate its operations with some examples. We describe three cuckoo hashing variants---cuckoo hashing with a stash (CHS), SmartCuckoo and horton tables---in the following three sections, and then we compare the three variants and conclude in section 6.
 
 \section{Standard Cuckoo Hashing}
 \label{sec:cuckoo}
 The standard cuckoo hashing scheme was proposed by Pagh and Rodler in [cuckoo hashing]. Suppose we attempt to accommodate $n$ items with two tables, $T_1$ and $T_2$, each has $\frac{n}{2}$ buckets and one hash function ($h_1$ for $T_1$ and $h_2$ for $T_2$). Each bucket can store at most one item. To insert an item $x$, we place it in $T_1[h_1(x)]$ if that bucket is empty. Otherwise (suppose it is taken by item $a$), we kick out $a$ in $T_1[h_1(x)]$ and replace it with $x$, then we try to insert $a$ into $T_2[h_2(a)]$. If $T_2[h_2(a)]$ is empty, then we are done, and if it is not (suppose it is taken by item $b$), then we further replace $b$ with $a$ and turn $b$ to bucket $T_1[h_1(b)]$ and so on, bouncing between $T_1$ and $T_2$ until all items stablize.
 
-Inserting item $x$ will end up in one of the following three cases, as illustrated in Fig. ~\ref{fig:cuckoo-example}. The directed edges beween the two tables gives the potential postions of the items. Each edges points from one item's actually storage location to its alternative location.
+Inserting item $x$ will end up in one of the following three cases, as illustrated in Fig.~\ref{fig:cuckoo-example}. The directed edges beween the two tables gives the potential postions of the items. Each edges points from one item's actually storage location to its alternative location.
 
 \begin{itemize}
-    \item Item $x$ is inserted without any kick-out operation. As shown in Fig. ~\ref{fig:cuckoo-example}(a), two items ($a$ and $b$) are initially stored in $T_1$ and $T_2$. When inserting $x$, its twp candidate buckets are $T_1[0]$ and $T_2[5]$. $T_1[0]$ is occupied by item $a$ while $T_2[5]$ is empty, so we place $x$ in $T_2[5]$ and add an edge directed from $T_2[5]$ to $T_1[0]$.
-    \item Item $x$ is inserted with finite kick-out operations. As shown in Fig. ~\ref{fig:cuckoo-example}(b), items $c$ and $d$ are inserted into the hash tables before $x$. The two candidate bucket of $x$ are occupied by $a$ and $d$ respectively. To accommodate $x$, we kick out $a$ and move it to $T_2[1]$, which further moves $b$ to $T_1[2]$. This procedure is repeated until en empty bucket is found at $T_2[3]$. The kick-out path is $x\rightarrow a\rightarrow b\rightarrow c$.
-    \item Inserting item $x$ runs into infinite kick-out operations. As shown in Fig. ~\ref{fig:cuckoo-example}(b), items $e$ is inserted into the hash tables before $x$. There is no vacant bucket to accommodate $x$ even after substantial kick-out operations, which results in an endless loop. The cuckoo hashing has to carry out a rehashing operation[43].
+    \item Item $x$ is inserted without any kick-out operation. As shown in Fig.~\ref{fig:cuckoo-example}(a), two items ($a$ and $b$) are initially stored in $T_1$ and $T_2$. When inserting $x$, its twp candidate buckets are $T_1[0]$ and $T_2[5]$. $T_1[0]$ is occupied by item $a$ while $T_2[5]$ is empty, so we place $x$ in $T_2[5]$ and add an edge directed from $T_2[5]$ to $T_1[0]$.
+    \item Item $x$ is inserted with finite kick-out operations. As shown in Fig.~\ref{fig:cuckoo-example}(b), items $c$ and $d$ are inserted into the hash tables before $x$. The two candidate bucket of $x$ are occupied by $a$ and $d$ respectively. To accommodate $x$, we kick out $a$ and move it to $T_2[1]$, which further moves $b$ to $T_1[2]$. This procedure is repeated until en empty bucket is found at $T_2[3]$. The kick-out path is $x\rightarrow a\rightarrow b\rightarrow c$.
+    \item Inserting item $x$ runs into infinite kick-out operations. As shown in Fig.~\ref{fig:cuckoo-example}(b), items $e$ is inserted into the hash tables before $x$. There is no vacant bucket to accommodate $x$ even after substantial kick-out operations, which results in an endless loop. The cuckoo hashing has to carry out a rehashing operation[43].
 \end{itemize}
 
 \begin{figure}
@@ -82,7 +82,7 @@ Inserting item $x$ will end up in one of the following three cases, as illustrat
     } \label{fig:cuckoo-example}
 \end{figure}
 
-A lookup or delete operation only needs to probes the two candidate buckets of an item, which requires a constant time. For example, to query $x$, we only need to check $T_1[0]$ and $T_2[5]$ as shown in Fig. ~\ref{fig:cuckoo}.
+A lookup or delete operation only needs to probes the two candidate buckets of an item, which requires a constant time. For example, to query $x$, we only need to check $T_1[0]$ and $T_2[5]$ as shown in Fig.~\ref{fig:cuckoo-example}.
 
 If the two hash functions are chosen independently from an appropriate universal hash family, then we can expect to insert all $n$ items successfully with at most $\alpha logn$ kick-out operations for any particluar item with probability $1-O(1/n)$[cuckoo hashing], and $\alpha$ is a sufficiently large constant. Further more, if we limit the number of kick-out operation to $\alpha logn$ before rehashing, then the expected time to insert all $n$ items successfully into the table is $O(n)$, which means the expected insert complexity of the standard cuckoo hashing is also a constant.[cuckoo]
 
@@ -90,38 +90,56 @@ If the two hash functions are chosen independently from an appropriate universal
 \label{sec:chs}
 Cuckoo hashing supports simple worst-case $O(1)$ lookups, however, collisions are still troublesome for insertion. Though rare, there is always a chance that on the insertion of a new item, we could not find a place to hold the item even after substantial attempts, causing a failure. In such case, a full rehash is required to find new hash functions to accommodate all items appropriately. Theoretically speaking, the insertion failure of cuckoo hashing happens with a low probability ($O(n^-c)$ for some constant $c\geq 1$). The rehashing has very limited impact on the average query performance, but the very existence of those unfortunate chances make it hard to guarantee the performance. Moreover, the constant $c$ in $O(n^-c)$ failure probability bound is hard to be measured thus difficult to guarantee that $c$ is above the desirable level in practice. For example, values of $c\leq3$ may lead too much failure of commercial applications.
 
-Cuckoo hashing with a stash (CHS) is a variant of cuckoo hashing that utilizes a small amount of memory to construct a small stash out side the main hash tables. Specifically, by storing a constant number of items outside the table in an area that called stash, we can dramatically reduce the probability of insertion failure where a rehash operation is necessary. The intuition behind the approach is that, if items cause insertion failure independently, then we can expect the number of items that cause insertion failure to be $P_r(S\geq s)=O(n^{-cs})$ for some constant $c>0$ and every constant $s\geq 1$. And we can identify those problematic items during insertion and store them in the stash, dramatically reducing the failure probability bound[CHS].
+Cuckoo hashing with a stash (CHS) is a variant of cuckoo hashing that utilizes a small amount of memory to construct a small stash out side the main hash tables. Specifically, by storing a constant number of items outside the table in an area that called stash, we can dramatically reduce the probability of insertion failure where a rehash operation is necessary. The intuition behind the approach is that, if items cause insertion failure independently, then we can expect the number of items that cause insertion failure to be \textbf{$P_r$}$(S\geq s)=O(n^{-cs})$ for some constant $c>0$ and every constant $s\geq 1$. And we can identify those problematic items during insertion and store them in the stash, dramatically reducing the failure probability bound[CHS].
 
 \begin{figure}
     \centering
     \includegraphics[width=0.65\textwidth]{cuckoo-graph.png}
-    \caption{The corresponding cuckoo graph of Fig. ~\ref{fig:cuckoo-example}
+    \caption{The corresponding cuckoo graph of Fig.~\ref{fig:cuckoo-example}
     } \label{fig:cuckoo-graph}
 \end{figure}
 
-To detect the problematic item, CHS relies on \textit{cuckoo graph} which is a multi-graph that derived from the two hash tables of cuckoo hashing. The graph corresponding to the Fig. ~\ref{fig:cuckoo-example} is shown in Fig. ~\ref{fig:cuckoo-graph}. In a cuckoo graph, each vertex represents an alternative bucket of some items (no matter the bucket is actually occupied or not), and each directed edge corresponds to an item and is directed from its actual stored bucket to its alternative bucket. Note that the cuckoo graph can only represent cuckoo hashing that has two hash functions. We can easily determine if an insertion would fail or not with the help of cuckoo graph. Since each vertex has at most one outgoing edge, each component in a cuckoo graph has at most one cycle. Inserting a new element will add a new edge in the graph, and if the target vertex is connected to a cycle, then the insertion is doomed to fail[Cuckoo Hashing: Further Analysis. Information Processing Letters]. During insertion, the CHS will put an item in the stash whose corresponding edge belongs to a cycle, thus avoids insertion failure. And the items in the stash will be inserted into the hash tables late whenever there are available buckets. So a rehash is only needed when the stash is full and none of the items in the stash could be successfully inserted into the tables without rehashing.
+To detect the problematic item, CHS relies on \textit{cuckoo graph} which is a multi-graph that derived from the two hash tables of cuckoo hashing. The graph corresponding to the Fig.~\ref{fig:cuckoo-example} is shown in Fig.~\ref{fig:cuckoo-graph}. In a cuckoo graph, each vertex represents an alternative bucket of some items (no matter the bucket is actually occupied or not), and each directed edge corresponds to an item and is directed from its actual stored bucket to its alternative bucket. Note that the cuckoo graph can only represent cuckoo hashing that has two hash functions. We can easily determine if an insertion would fail or not with the help of cuckoo graph. Since each vertex has at most one outgoing edge, each component in a cuckoo graph has at most one cycle. Inserting a new element will add a new edge in the graph, and if the target vertex is connected to a cycle, then the insertion is doomed to fail[Cuckoo Hashing: Further Analysis. Information Processing Letters]. During insertion, the CHS will put an item in the stash whose corresponding edge belongs to a cycle, thus avoids insertion failure. And the items in the stash will be inserted into the hash tables late whenever there are available buckets. So a rehash is only needed when the stash is full and none of the items in the stash could be successfully inserted into the tables without rehashing.
 
 There are many ways to implement the insertion algorithm for CHS. One way is to track the bucket that has been visited during insertion. During a successful insertion, at most one vertex of the cuckoo graph is visited (kicking out the item in the corresponding bucket) more than once, and no vertex is visited more than twice. Thus we can remember the slots that has been visited during the insertion, and when a bucket has been visited more than twice, put the item into the stash. However, logging the buckets that has been visited could be expensive, thus the author suggests that we set a limit of $\alpha logn$ on the number of possible kick-out operations. And if $\alpha logn$ evictions do not suffice to settle down, then we 'roll back' to the original configuration and try to insert the new coming item second time with the 'cycle detection' mechanism[CHS].
+
+[CHS] has proved that for every constant integer $s\geq 1$, for a sufficiently large constant $\alpha$, the size $S$ of the stash after all items have been inserted satisfies \textbf{$P_r$}$(S\geq s)=O(n^{-s})$.
 
 
 \section{SmartCuckoo}
 \label{sec:smart}
-TBD.
+Many cuckoo hashing variants have addressed the problem of endless kickout operations when countering an insertion failure. The common feature of them is to set an upbound on the number of evict operations before performing rehashing. However, those kick-out loops executed in failure insertion consume substantial rescources and they are just fruitless efforts. The insertion performance of cuckoo hashing will be much better if we can identify the endless loops and avoid wasting time and resources on them. With such motivation, \textit{SmartCuckoo} is designed to predetermine and identify endless loops during insertion. Like \textit{CHS}, \textit{SmartCuckoo} also leverages on the cuckoo graph to identify the cycles. However, instead of remembering visited buckets to track the component of cuckoo graph that involved in current execution, \textit{SmnartCuckoo} builds an extra directed pseudoforest graph structure to present the entire cuckoo graph. Then for each insertion, \textit{SmartCuckoo} checks if the new item will add an edge to an existing cycle, and thus predetermine if the insertion can succeed or not.
+
+In [SmartCuckoo], a directed graph in which each vertex has an outdegree of exactly one is defined as a \textbf{maximal directed pseudoforest}, and a subgraph of the pseudoforest that has the same number of vertices and edges are named \textbf{maximal subgraph}. A maximal subgraph contains a cycle, as the outdegree of each vertex is at most one. Fig.~\ref{fig:maximal-graph}(a) shows an example of a maximal directed pseudoforest, and there are three maximal subgraphs in the pseudoforest, while Fig.~\ref{fig:maximal-graph}(b) shows an example of non-maximal directed pseudoforest which contains two non-maximal subgraphs. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{maximal-graph.png}
+    \caption{The directed pseudoforest.} \label{fig:maximal-graph}
+\end{figure}
+
+In a directed pseudoforest, each vertex corresponds to a bucket, and each edge corresponds to an item and is directed from the its actual store bucket to its alternative bucket. Thus each insertion will add a new edge to the pseudoforest, and add zero, one or two vertices, depending on the two buckets are taken or not.  \textit{SmartCuckoo} classifies items insertions into the following three cases based on the number of additional vertices added to the directed pseudoforest, and with help of the directed pseudoforest which tracks the item placements, it can accurately predict the occurrence of endless loops.
+
+\begin{itemize}
+    \item \textbf{The Case of $v+0$}: When inserting item $x$, if the two buckets given by $h_1(x)$ and $h_2(x)$ are both occupied, then the insertion will not add new vertex to the pseudoforest. And this case have five possible scenarios, as illustrated by Fig.~\ref{fig:v+0}.
+    \begin{itemize}
+        \item The two vertices corresponding to the two candidate buckets of item $x_1$, showns as blue buckets in Fig.~\ref{fig:v+0}(a), already exist in the same non-maximal subgraph $A$. Either bucket can be used to place $x_1$, as the kick-out operation will finally find an empty bucket in the subgraph.
+        \item The two vertices corresponding to the two candidate buckets of item $x_2$ already exist in two non-maximal subgraph $B$ and $C$ respectively, as shown in Fig.~\ref{fig:v+0}(b). The insertion will success as both $B$ and $C$ have vacant bucket.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{v+0.png}
+    \caption{Five scenarios for Case $v+0$.} \label{fig:v+0}
+\end{figure}
+
 \section{Horton Tables}
 \label{sec:horton}
 TBD.
 \section{Conclusion}
 \label{sec:conclude}
 TBD.
-
-\subsubsection{Sample Heading (Third Level)} Only two levels of
-headings should be numbered. Lower level headings remain unnumbered;
-they are formatted as run-in headings.
-
-\paragraph{Sample Heading (Fourth Level)}
-The contribution should contain no more than four levels of
-headings. Table~\ref{tab1} gives a summary of all heading levels.
-
 \begin{table}
 \caption{Table captions should be placed above the
 tables.}\label{tab1}
@@ -137,51 +155,6 @@ Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
 \hline
 \end{tabular}
 \end{table}
-
-
-\noindent Displayed equations are centered and set on a separate
-line.
-\begin{equation}
-x + y = z
-\end{equation}
-Please try to avoid rasterized images for line-art diagrams and
-schemas. Whenever possible, use vector graphics instead (see
-Fig.~\ref{fig1}).
-
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{fig1.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig1}
-\end{figure}
-
-\begin{theorem}
-This is a sample theorem. The run-in heading is set in bold, while
-the following text appears in italics. Definitions, lemmas,
-propositions, and corollaries are styled the same way.
-\end{theorem}
-%
-% the environments 'definition', 'lemma', 'proposition', 'corollary',
-% 'remark', and 'example' are defined in the LLNCS documentclass as well.
-%
-\begin{proof}
-Proofs, examples, and remarks have the initial word in italics,
-while the following text appears in normal font.
-\end{proof}
-For citations of references, we prefer the use of square brackets
-and consecutive numbers. Citations using labels or the author/year
-convention are also acceptable. The following bibliography provides
-a sample reference list with entries for journal
-articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-and a homepage~\cite{ref_url1}. Multiple citations are grouped
-\cite{ref_article1,ref_lncs1,ref_book1},
-\cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
-
-\section{SmartCuckoo}
-\section{Cuckoo Hashing with a Stash}
-\section{Horton Table}
-\section{Conclusion}
 %
 % ---- Bibliography ----
 %
