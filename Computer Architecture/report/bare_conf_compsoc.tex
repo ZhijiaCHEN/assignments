@@ -50,7 +50,7 @@
 
 
 
-\documentclass[conference,compsoc]{IEEEtran}
+\documentclass[12pt,conference,compsoc]{IEEEtran}
 % Some/most Computer Society conferences require the compsoc mode option,
 % but others may want the standard conference format.
 %
@@ -541,12 +541,55 @@ In the existing bandwidth-optimized BCHT implementations, the load-balancing pol
 
 \section{Horton Tables}
 \label{sec:horton}
+Horton tables is a cuckoo hashing variant derived from BCHT, which trades a small amount of space for achieving positive and negative lookups that expected to check close to 1 bucket[horton]. Horton tables construct two type of buckets (as illustrated in Fig.~\ref{fig:bucket-type}). The first type is the standard BCHT bucket (\textbf{type A})and the second (\textbf{type B}) contains auxiliary metadata that tracks the items that are primarily hashed to the bucket but have to be remapped to other buckets due to insuffcient capability of cells. In the initial state, all the buckets are type A buckets, and they will be transformed to type B buckets once they are overflow. Such design enabels Horton tables to track remapped items at a very low costs, both in terms of time and space.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{2-type-buckets.png}
+    \caption{Horton tables use 2 bucket variants: Type A (an unmodified BCHT bucket) and Type B (converts final slot into remap entries).} \label{fig:bucket-type}
+\end{figure}
+
+In Horton tables, there is a \textbf{primary hash function} $H_primary$ which is used to hash the vast majority of items and thus most of the lookups only need to access one bucket. When inserting an item $KV=(K,V)$, Horton tables always hash the item with $H_primary$ first, and if the bucket given by $H_primary(K)$ can not hold the item directly, then several \textbf{secondary hash functions} are used to remap the item to other bucket. Denote the bucket given by the $H_primary(K)$ as $primary bucket$ and the buckets given by secondary hash functions as $secondary buckets$. Also, an item is called $primary items$ if it is stored in its primary buckets, and $secondary item$ if it is remapped to its secondary buckets. Note that there is no correlation between a bucket's type and its primacy. Both type A and type B buckets can simutaneously accommodate both primary and secondary items.
+
+When overflow happens to a type A bucket, it is converted into type B bucket by converting the last slot into a $remap entry array$ which holds $remap entries$. Each remap entry is a vector of $k$-bit vector that encodes the ID of the secondary function used to hash the secondary item that can not be stored in its primary bucket. Each remap entry can take one of $2^k$ different values. 0 is used for encoding an unused remap entry, and 1 to $2^k-1$ are used to encode which of the secondary functions $R_1$ to $R_{2^k-1}$ was used to hash the remapped item. A tag function $H_{tag}$ is also used to determine which remap entry should be used for an remapped entry.
+
+Remap entries track all secondary items so that for each lookup, no matter the the lookup is positive or negative, and no matter how many secondary hash functions are used to rehash secondary items, at most one primary and sometimes a secondary hash function need to be evaluated. At the same time, space for remap entries are only allocated when they are needed after overflow occurs in the bucket.
+
+Figure~\ref{fig:bucket-type} shows the Type A and Type B bucket design where both key and value are of 4 bytes and each bucket has 8 slots. The bucket type is encoded using one bit of each bucket. So for type A bucket, there is a slot only has 31 bits. And for type B bucket, sicne 21 3-bits remap entries are endcoded into a 64-bit slot, there is an extra bit for bucket type encoding. If there is a value mapped to the 31-bit slot in type A bucket requires all the 32 bits, we can move the item to other slots in the bucket, or remap it to other buckets, making it a secondary item. For convenience, we use the last bit of the last slot in a bucket to encode bucket type, regardless of the bucket type.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{BCHT-Horton.png}
+    \caption{Comparison of a bucketized cuckoo hash ta- ble (L) and a Horton table (R). E = empty remapy entry.} \label{fig:BCHT-Horton}
+\end{figure}
+
+Since a type B bucket can hold fewer items than a type A bucket, Horton tables uese as much type A bucket as possible, and a type A bucket is only transformed to type B bucket when there is no sufficient slots to accommodate new comming items, and such process is called $promotion$. And to make sure an item can be found as quick as possible, Horton tables enforce an insertion poliyc that whenever possible, a primary item should not be replaced by a secondary item. With this policy, Horton tables can retain more type A buckets and more primary items. 
+
+Figure~\ref{fig:BCHT-Horton} illustrates the difference between BCHT and Horton tables with $f=2$. Each row corresponds to a bucket and each cell to a slot. In the Horton tables (right one), the third bucket has been promtoed to type B bucket because 4 slots could not hold 6 items (35, 18, 22, 7, 4, 23). Items 35, 18 and 22 are primary items that directly mapped while items 7, 4 and 23 are secondary items and are remapped by hash functions $R_7$, $R_5$ and $R_2$ respectively. If we calculate the lookup costs of two hasing schems, we find that, of the shown buckets, the Horton table has a lookup cost of 1 for elements 8, 5, 33, 15, 2, 35, 18, 22, and 37 and a lookup cost of 2 for 7, 23, and 4, which averages out to 1.25. By contrast the bucketized cuckoo hash table has an expected lookup cost of 1.5 or 2.0, depending on the implementation.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Horton-lookup.png}
+    \caption{Horton table lookups. KNF and REA are ab- breviations for key not found and remap entry array.} \label{fig:Horton-lookup}
+\end{figure}
+
+Figure.~\ref{fig:Horton-lookup} shows the lookup algorithm of Horton table. The basic idea is that we first check the first $S$ or $S-1$ slot of the primary bucket of the expected item, depending on whether this bucket is type A or Type B. If we found it, then we are done. In the case that we do not find the item in the primary bucket, if this bucket is type A, then we return the result of negative look up. Othewise, the item may be mapped to othe bucket. We use the $H_tag$ function to locate the remap entry of the item, if the entry is empty, then we return the result of negative lookup. Otherwise, we use the hash function wiht the ID given by the remap entry to locate the secondary bucket of the item, and check its existence there.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\textwidth]{Horton-insert.png}
+    \caption{Common execution path for secondary inserts. REA is an abbreviation of remap entry array.} \label{fig:Horton-insert}
+\end{figure*}
+
+The insertion in Horton tables can be classified into two classes: primary insert and secondary insert. The primary insert happens when the primary bucket has an empty slot to hold the item. And if we are not able to place the item into its primary bucket, then a secondary insert is involved. To perform the secondary insert, we first locate the primary bucket using $H_primary$. If the primary bucket is not yet a type B bucket, we convert it to a type B bucket. Then we use the $H_tag$ to locate the index of remap entry, and then we try out the secondary functions one by one until we find a secondary bucket that can accommodate the item. Finally, we place the item in this secondary bucket and write the ID of the secondary hash function to the remap entry. An table expansion or rehasing is needed if we could not find a slot to accommodate data the item. Fig.~\ref{fig:Horton-insert} shows the algorithm of secondary insert.
 
 \section{Conclusion}
 \label{sec:conclude}
-Cuckoo hashing introduces a simple hashing scheme that achieves worst-case constant lookup time, which helps storages systems to response to data queries in a real-time manner. However, the kick-out operations of insertion could run into endless loops under unfortunate cases, which makes the insertion performance of cuckoo hashing unpredictable. Many cuckoo hashing variants deal with the endless loops problem by setting an up bound on the number of possible evictions, and perform rehashing if insertion fails. Performing rehashing is expensive, and expected rehashing frequency, although small, may still be unbearable for commercial applications. To address the problem, \textit{CHS} introduces a extra stash to place those problematic items that causing the endless loops, and dramatically reduces the probability that a rehashing is required with the cost of a small memory space for stash. \textit{SmartCuckoo}, on the other hand, points out that the loops of kick-out operations during insertion failures are fruitless efforts and waste substantial resources and time, and it is designed to avoid such useless loops completely.
+Cuckoo hashing introduces a simple hashing scheme that achieves worst-case constant lookup time, which helps storages systems to response to data queries in a real-time manner. However, the kick-out operations of insertion could run into endless loops under unfortunate cases, which makes the insertion performance of cuckoo hashing unpredictable. Many cuckoo hashing variants deal with the endless loops problem by setting an up bound on the number of possible evictions, and perform rehashing if insertion fails. Performing rehashing is expensive, and expected rehashing frequency, although small, may still be unbearable for commercial applications. 
 
-Both \textit{CHS} and \textit{SmartCuckoo} relies on the properties of cuckoo graph to identify endless loops. While \textit{CHS} only tracks a small portion of the graph that involved with new item during insertion, \textit{SmartCuckoo} tracks the entire cuckoo graph and present it using a pseudoforest. The insertion throughput performance of \textit{SmartCuckoo} is much better than \textit{CHS}, however, that performance advantage is traded by a huge memory space cost---extra $O(n)$ memory is required to keep the pseudoforest. And the difference makes \textit{CHS} and \textit{SmartCuckoo} have different application scenarios: \textit{CHS} is more suitable for system designs where memory space is valuable such as cache designs, while \textit{SmartCuckoo} is better to be applied in the systems where memory is usually sufficient and the performance is a much important issue.
+To address the problem, \textit{CHS} introduces a extra stash to place those problematic items that causing the endless loops, and dramatically reduces the probability that a rehashing is required with the cost of a small memory space for stash. \textit{SmartCuckoo}, on the other hand, points out that the loops of kick-out operations during insertion failures are fruitless efforts and waste substantial resources and time, and it is designed to avoid such useless loops completely. Both \textit{CHS} and \textit{SmartCuckoo} relies on the properties of cuckoo graph to identify endless loops. While \textit{CHS} only tracks a small portion of the graph that involved with new item during insertion, \textit{SmartCuckoo} tracks the entire cuckoo graph and present it using a pseudoforest. The insertion throughput performance of \textit{SmartCuckoo} is much better than \textit{CHS}, however, that performance advantage is traded by a huge memory space cost---extra $O(n)$ memory is required to keep the pseudoforest. And the difference makes \textit{CHS} and \textit{SmartCuckoo} have different application scenarios: \textit{CHS} is more suitable for system designs where memory space is valuable such as cache designs, while \textit{SmartCuckoo} is better to be applied in the systems where memory is usually sufficient and the performance is a much important issue.
+
+BCHT is a varinat of cuckoo hahsing that exploids higher load factor at the cost of a small lookup overhead. And to improve the lookup performance of BCHT, Horton tables constructs two type of buckets and leverages on an auxiliary remap entries that remap the items that could not be placed in the primary buckets to secondary buckets. Since the space for the remap entries is allocated only when needed, Horton tables achieve a better lookup performce while keeping the space cost at a low level.
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
 % For figures, \caption should occur after the \includegraphics.

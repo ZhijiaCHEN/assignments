@@ -120,41 +120,45 @@ In [SmartCuckoo], a directed graph in which each vertex has an outdegree of exac
 
 In a directed pseudoforest, each vertex corresponds to a bucket, and each edge corresponds to an item and is directed from the its actual store bucket to its alternative bucket. Thus each insertion will add a new edge to the pseudoforest, and add zero, one or two vertices, depending on the two buckets are taken or not.  \textit{SmartCuckoo} classifies items insertions into the following three cases based on the number of additional vertices added to the directed pseudoforest, and with help of the directed pseudoforest which tracks the item placements, it can accurately predict the occurrence of endless loops.
 
-\begin{itemize}
-    \item \textbf{The Case of $v+0$}: When inserting item $x$, if the two buckets given by $h_1(x)$ and $h_2(x)$ are both occupied, then the insertion will not add new vertex to the pseudoforest. And this case have five possible scenarios, as illustrated by Fig.~\ref{fig:v+0}.
-    \begin{itemize}
-        \item The two vertices corresponding to the two candidate buckets of item $x_1$, showns as blue buckets in Fig.~\ref{fig:v+0}(a), already exist in the same non-maximal subgraph $A$. Either bucket can be used to place $x_1$, as the kick-out operation will finally find an empty bucket in the subgraph.
-        \item The two vertices corresponding to the two candidate buckets of item $x_2$ already exist in two non-maximal subgraph $B$ and $C$ respectively, as shown in Fig.~\ref{fig:v+0}(b). The insertion will success as both $B$ and $C$ have vacant bucket.
-    \end{itemize}
-\end{itemize}
-
 \begin{figure}
     \centering
     \includegraphics[width=0.65\textwidth]{v+0.png}
     \caption{Five scenarios for Case $v+0$.} \label{fig:v+0}
 \end{figure}
 
-\section{Horton Tables}
-\label{sec:horton}
-TBD.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{v+1-2.png}
+    \caption{Five scenarios for Case $v+1$ and $v+2$.} \label{fig:v+1-2}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{The Case of $v+0$}: When inserting item $x$, if the two buckets given by $h_1(x)$ and $h_2(x)$ are both occupied, then the insertion will not add new vertex to the pseudoforest. And this case have five possible scenarios, as illustrated by Fig.~\ref{fig:v+0}.
+    \begin{itemize}
+        \item The two candidate buckets of item $x_1$, showns as blue buckets in Fig.~\ref{fig:v+0}(a), already exist in the same non-maximal subgraph $A$. Either bucket can be used to place $x_1$, as the kick-out operation will finally find an empty bucket in the subgraph.
+        \item The two candidate buckets of item $x_2$ already exist in two non-maximal subgraph $B$ and $C$ respectively, as shown in Fig.~\ref{fig:v+0}(b). The insertion will success as both $B$ and $C$ have vacant bucket.
+        \item One candidate bucket of item $x_3$ is in the non-maximal subgraph $E$ and the other is in the maximal subgraph $D$, as shown in Fig.~\ref{fig:v+0}(c). $x_3$ should be placed in the bucket in the non-maximal subgraph to avoid endless loops.
+        \item The two candidate buckets of item $x_4$ already exist in two maximal subgraphs $F$ and $G$ as shown in Fig.~\ref{fig:v+0}(d). Inserting into either bucket will lead to endless loops.
+        \item The two candidate buckets of item $x_4$ already exist in one maximal subgraph $H$ as shown in Fig.~\ref{fig:v+0}(e). Inserting into either bucket will lead to endless loops.
+    \end{itemize}
+    \item \textbf{The Case of $v+1$}: If one of the candidate bucket of item $x$ is occupied, i.e., it is in one subgraph, while the other is neither occupied nor a candidate bucket of any other items, inserting $x$ will add a new vertex to the subgraph, as illustrated by Fig.~\ref{fig:v+1-2}(a).
+    \item \textbf{The Case of $v+2$}: If both the two candidate buckets of item $x$ have not been claimed by any other items, inserting $x$ will introduce a new subgraph that formed by the two candidate buckets to the pseudoforest, as illustrated by Fig.~\ref{fig:v+1-2}(b).
+\end{itemize}
+
+[SmartCuckoo] evaluated \textit{SmartCuckoo} and compared it with many other state-of-the-art cuckoo hashing variants---\textit{CHS}, libcuckoo and bucketized cuckoo hash tables---in terms of insertion throughput, lookup throughput, and the throughput of mixed queries. The results showed that \textit{SmartCuckoo}'s insertion performance is significantly better than other variants. Specifically, compared to \textit{CHS}, the insertion of \textit{SmartCuckoo} is 0.5 times to 5 times faster, increasing with table load factor, as shown in Fig.~\ref{fig:performance}. The reason is that, when table is heavier loaded, more insertion will be involved in endless loops, and the advantage of skipping those loops becomes more significant.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{performance.png}
+    \caption{Insertion throughput test.} \label{fig:performance}
+\end{figure}
+
 \section{Conclusion}
 \label{sec:conclude}
-TBD.
-\begin{table}
-\caption{Table captions should be placed above the
-tables.}\label{tab1}
-\begin{tabular}{|l|l|l|}
-\hline
-Heading level &  Example & Font size and style\\
-\hline
-Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-\hline
-\end{tabular}
-\end{table}
+Cuckoo hashing introduces a simple hashing scheme that achieves worst-case constant lookup time, which helps storages systems to response to data queries in a real-time manner. However, the kick-out operations of insertion could run into endless loops under unfortunate cases, which makes the insertion performance of cuckoo hashing unpredictable. Many cuckoo hashing variants deal with the endless loops problem by setting an up bound on the number of possible evictions, and perform rehashing if insertion fails. Performing rehashing is expensive, and expected rehashing frequency, although small, may still be unbearable for commercial applications. To address the problem, \textit{CHS} introduces a extra stash to place those problematic items that causing the endless loops, and dramatically reduces the probability that a rehashing is required with the cost of a small memory space for stash. \textit{SmartCuckoo}, on the other hand, points out that the loops of kick-out operations during insertion failures are fruitless efforts and waste substantial resources and time, and it is designed to avoid such useless loops completely.
+
+Both \textit{CHS} and \textit{SmartCuckoo} relies on the properties of cuckoo graph to identify endless loops. While \textit{CHS} only tracks a small portion of the graph that involved with new item during insertion, \textit{SmartCuckoo} tracks the entire cuckoo graph and present it using a pseudoforest. The insertion throughput performance of \textit{SmartCuckoo} is much better than \textit{CHS}, however, that performance advantage is traded by a huge memory space cost---extra $O(n)$ memory is required to keep the pseudoforest. And the difference makes \textit{CHS} and \textit{SmartCuckoo} have different application scenarios: \textit{CHS} is more suitable for system designs where memory space is valuable such as cache designs, while \textit{SmartCuckoo} is better to be applied in the systems where memory is usually sufficient and the performance is a much important issue.
+
 %
 % ---- Bibliography ----
 %
