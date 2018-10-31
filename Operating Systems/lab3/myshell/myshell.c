@@ -10,6 +10,8 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <unistd.h>
+
 
 char *read_line();
 /*
@@ -663,6 +665,7 @@ int shell_entry(int argc, char **argv, int outFd)
         //printf("child get the line from parent: %s\n", tupleSpace);
         strcpy(outputSpace, tupleSpace);
         strcat(outputSpace, " child touch");
+        sleep(2);
         write(STDOUT_FILENO, "done", strlen("done") + 1);
         //printf("%s", "done");
         read(STDIN_FILENO, l1, 100);

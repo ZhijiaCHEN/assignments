@@ -76,12 +76,12 @@ int main()
         line = readline("test> ");
     }
     
-    //printf("main is acquiring stop lock\n");
+    printf("main is acquiring stop lock\n");
     pthread_mutex_lock(&arg1.s);
-    //printf("main locked stop\n");
+    printf("main locked stop\n");
     arg1.stopFlag = 1;
     pthread_mutex_unlock(&arg1.s);
-    //printf("main unlocked stop\n");
+    printf("main unlocked stop\n");
     pthread_mutex_lock(&arg1.m);
     if (arg1.taskCnt == 0)
     {
@@ -157,22 +157,26 @@ void task_dispatcher(dispatcherArgs *arg)
         //printf("task count address in dispatcher: %p\n", (void *)arg->taskCnt);
         while(1)
         {
-            //printf("dispatcher is acquiring stop lock.\n");
+            printf("dispatcher is acquiring stop lock.\n");
             pthread_mutex_lock(&arg->s);
-            //printf("dispatcher locked stop\n");
-            if ((arg->stopFlag == 1) && (arg->taskCnt == 0))
+            printf("dispatcher locked stop\n");
+            if ((arg->stopFlag == 1) && (arg->taskCnt <= 0))
             {
                 pthread_mutex_unlock(&arg->s);
                 write(taskSigPipe[1], "stop", strlen("stop") + 1);
-                //printf("dispatcher unlocked stop\n");
+                printf("dispatcher unlocked stop and waiting for shell to exit.\n");
 
                 close(taskSigPipe[1]);
                 close(resultSigPipe[0]);
                 waitpid(pid, &status, 0);
                 return;
             }
+            else
+            {
+                printf("stop flag = %d and the counter = %d\n", arg->stopFlag, arg->taskCnt);
+            }
             pthread_mutex_unlock(&arg->s);
-            //printf("dispatcher unlocked stop\n");
+            printf("dispatcher unlocked stop\n");
             pthread_mutex_lock(&arg->m);
             while(arg->taskCnt == 0)
             {
