@@ -31,22 +31,23 @@ int main()
     }
 
     // shmget returns an identifier in shmid
-    //int shmid1 = shmget(key1,1024,0666|IPC_CREAT);
-    //int shmid2 = shmget(key2,1024,0666|IPC_CREAT);
-
-    // shmat to attach to shared memory
-    //char *tupleSpace = (char*) shmat(shmid1,(void*)0,0);
-    //char *outputSpace = (char*) shmat(shmid2,(void*)0,0);
+    int shmid1 = shmget(key1, 1024, 0666 | IPC_CREAT);
+    int shmid2 = shmget(key2, 1024, 0666 | IPC_CREAT);
 
     //start shell process
     pid = fork();
     if (pid == 0)
     {
+        // shmat to attach to shared memory
+        char *tupleSpace = (char *)shmat(shmid1, (void *)0, 0);
+        char *outputSpace = (char *)shmat(shmid2, (void *)0, 0);
+
         close(taskSigPipe[1]);
         close(resultSigPipe[0]);
         printf("child process forked.\n");
         dup2(taskSigPipe[0], STDIN_FILENO);
         close(taskSigPipe[0]);
+
         //dup2(resultSigPipe[1], STDOUT_FILENO);
         //shell_entry(0, NULL, resultSigPipe[1]);
 
@@ -54,15 +55,25 @@ int main()
         read(STDIN_FILENO, l1, 100);
         while (strcmp(l1, "stop") != 0)
         {
-            printf("child get the line from parent: %s\n", l1);
-            write(resultSigPipe[1], l1, strlen(l1) + 1);
+            printf("child get the line from parent: %s\n", tupleSpace);
+            strcpy(outputSpace, tupleSpace);
+            strcat(outputSpace, " child touch");
+            write(resultSigPipe[1], "done", strlen("done") + 1);
             read(STDIN_FILENO, l1, 100);
         }
+
+        //detach from shared memory
+        shmdt(tupleSpace);
+        shmdt(outputSpace);
 
         close(resultSigPipe[1]);
     }
     else
     {
+        // shmat to attach to shared memory
+        char *tupleSpace = (char *)shmat(shmid1, (void *)0, 0);
+        char *outputSpace = (char *)shmat(shmid2, (void *)0, 0);
+
         close(taskSigPipe[0]);
         close(resultSigPipe[1]);
         char *line = readline("test> ");
@@ -80,9 +91,11 @@ int main()
         }*/
         while (strcmp(line, stop) != 0)
         {
-            write(taskSigPipe[1], line, strlen(line) + 1);
-            read(resultSigPipe[0], resultSignal, 100);
-            printf("parent get the line from child: %s\n", resultSignal);
+            strcpy(tupleSpace, line); //put the task in share memory
+            strcat(tupleSpace, " parent touch");
+            write(taskSigPipe[1], line, strlen(line) + 1); //notify the child
+            read(resultSigPipe[0], resultSignal, 100);     //wait for signal from child
+            printf("parent get the line from child: %s\n", outputSpace);
             free(line);
             line = readline("test> ");
         }
@@ -93,14 +106,14 @@ int main()
         close(resultSigPipe[0]);
         free(line);
         //detach from shared memory
-        //shmdt(tupleSpace);
-        //shmdt(outputSpace);
+        shmdt(tupleSpace);
+        shmdt(outputSpace);
 
         //wait for shell to finish
         pid = wait(&status);
         //remove shared memory
-        //shmctl(shmid1, IPC_RMID, NULL);
-        //shmctl(shmid1, IPC_RMID, NULL);
+        shmctl(shmid1, IPC_RMID, NULL);
+        shmctl(shmid1, IPC_RMID, NULL);
     }
 
     return 0;
