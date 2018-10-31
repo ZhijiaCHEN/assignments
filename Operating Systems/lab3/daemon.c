@@ -17,6 +17,19 @@ int main()
     pid_t pid, status;
     int taskSigPipe[2], resultSigPipe[2];
 
+    if (pipe(taskSigPipe) < 0)
+    {
+        printf("Pipe could not be initialized\n");
+        exit(EXIT_FAILURE);
+    }
+    if (pipe(resultSigPipe) < 0)
+    {
+        close(taskSigPipe[0]);
+        close(taskSigPipe[1]);
+        printf("Pipe could not be initialized\n");
+        exit(EXIT_FAILURE);
+    }
+
     // shmget returns an identifier in shmid 
     int shmid1 = shmget(key1,1024,0666|IPC_CREAT); 
     int shmid2 = shmget(key2,1024,0666|IPC_CREAT); 
@@ -29,29 +42,19 @@ int main()
     pid = fork();
     if (pid == 0)
     {
-        printf("child process forked.");
-        if (pipe(taskSigPipe) < 0)
-        {
-            printf("Pipe could not be initialized\n");
-            exit(EXIT_FAILURE);
-        }
-        if (pipe(resultSigPipe) < 0)
-        {
-            close(taskSigPipe[0]);
-            close(taskSigPipe[1]);
-            printf("Pipe could not be initialized\n");
-            exit(EXIT_FAILURE);
-        }
-        dup2(taskSigPipe[0], STDIN_FILENO);
-        //dup2(resultSigPipe[1], STDOUT_FILENO);
-        shell_entry(0, NULL, resultSigPipe[1]);
-        close(taskSigPipe[0]);
         close(taskSigPipe[1]);
         close(resultSigPipe[0]);
+        printf("child process forked.");
+        dup2(taskSigPipe[0], STDIN_FILENO);
+        close(taskSigPipe[0]);
+        //dup2(resultSigPipe[1], STDOUT_FILENO);
+        shell_entry(0, NULL, resultSigPipe[1]);
         close(resultSigPipe[1]);
     }
     else
     {
+        close(taskSigPipe[0]);
+        close(resultSigPipe[1]);
         char *line = readline( "test> " );
         char *goOn = "go on", *stop = "stop";
         char resultSignal[100];
@@ -67,7 +70,8 @@ int main()
         }
         printf("stop command received in parent.");
         write(taskSigPipe[1], stop, strlen(stop)+1);
-        write(taskSigPipe[1], stop, strlen(stop)+1);
+        close(taskSigPipe[1]);
+        close(resultSigPipe[0]);
         free(line);
         //detach from shared memory 
         shmdt(tupleSpace); 
