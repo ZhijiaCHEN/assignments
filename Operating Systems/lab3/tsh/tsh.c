@@ -372,6 +372,89 @@ int consumeTuple(space1_t *s)
 }
 
 /*---------------------------------------------------------------------------
+  Prototype   : int consumeMSHTuple(space1_t *s)
+  Parameters  : s - pointer to tuple that has to be consumed by MyShell
+  Returns     : 1 - tuple consumed (task carried by the tuple executed succesfully)
+                0 - tuple not consumed (failed to execute the task)
+  Called by   : myShellTaskDispatcher
+  Calls       : 
+  Notes       : send a waiting tuple to MyShell and wait reply from MyShell
+  Date        : November '2018
+  Coded by    : Zhijia Chen
+---------------------------------------------------------------------------*/
+
+int consumeMSHTuple(space1_t *s)
+{
+    queue1_t *q;
+    space2_t *p_q;
+    /* check whether request pending */
+    if ((q = findRequest(s->name)) != NULL)
+    {
+        do
+        { /* send tuple to requestor, delete request */
+            if (sendTuple(q, s) > 0)
+                if (q->request == TSH_OP_GET)
+                {
+                    deleteRequest(q);
+                    /* add the tuple into backup queue. FSUN 10/94. */
+                    p_q = tsh.retrieve;
+                    while (p_q != NULL)
+                    {
+                        if (p_q->host == q->host &&
+                            p_q->proc_id == q->proc_id)
+                        {
+                            strcpy(p_q->name, s->name);
+                            p_q->port = q->port;
+                            p_q->cidport = q->cidport;
+                            total_fetched++;
+                            p_q->length = s->length;
+                            p_q->priority = s->priority;
+                            free(p_q->tuple);
+                            p_q->tuple = s->tuple;
+                            return 1;
+                        }
+                        p_q = p_q->next;
+                    }
+
+                    total_fetched++;
+                    p_q = (space2_t *)malloc(sizeof(space2_t));
+                    p_q->host = q->host;
+                    p_q->port = q->port;
+                    p_q->cidport = q->cidport; /* for dspace ys'96 */
+
+                    p_q->proc_id = q->proc_id;
+                    strcpy(p_q->name, s->name);
+                    p_q->length = s->length;
+                    p_q->priority = s->priority;
+                    p_q->fault = 0;
+                    p_q->tuple = s->tuple;
+                    p_q->next = tsh.retrieve;
+                    tsh.retrieve = p_q;
+                    free(s);
+                    return 1; /* tuple consumed */
+                }
+            deleteRequest(q);
+            /* check for another pending request */
+        } while ((q = findRequest(s->name)) != NULL);
+    }
+    return 0; /* tuple not consumed */
+}
+
+/*---------------------------------------------------------------------------
+  Prototype   : void *msh_tuple_dispatcher(void *arg)
+  Parameters  : arg - pointer to a struct of arguments to be passed
+  Returns     : -
+  Called by   : main
+  Calls       : consumeMSHTuple
+  Notes       : this function is to be invoked as a thread that works on sending tuples to MyShell.
+  Date        : November '2018
+  Coded by    : Zhijia Chen
+---------------------------------------------------------------------------*/
+void *msh_tuple_dispatcher(void *arg)
+{
+}
+
+/*---------------------------------------------------------------------------
   Prototype   : space1_t *createTuple(char *name, u_long length, 
                                                            u_short priority)
   Parameters  : name     - tuple name

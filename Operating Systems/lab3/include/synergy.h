@@ -521,6 +521,18 @@ typedef struct {
   int nitems ;
 } fah_fwrite_ot, fah_fread_ot ;
 
+/*
+  MyShell specific data
+*/
+
+#define MSH_OP_MIN                601
+#define MSH_OP_MAX                604
+#define MSH_OP_CNT                4
+
+#define MSH_OP_PUT                601
+#define MSH_OP_GET                602
+#define MSH_OP_READ               603
+#define MSH_OP_EXIT               604
 
 /*
   TSH specific data
