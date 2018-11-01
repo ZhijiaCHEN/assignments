@@ -336,11 +336,7 @@ int consumeTuple(space1_t *s)
                         {
                             strcpy(p_q->name, s->name);
                             p_q->port = q->port;
-                            p_q->cidport = q->cidport; /* for dspace ys'96 */
-                                                       /*
-printf(" TSH captured host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
-            s->name);
-*/
+                            p_q->cidport = q->cidport;
                             total_fetched++;
                             p_q->length = s->length;
                             p_q->priority = s->priority;
@@ -350,22 +346,13 @@ printf(" TSH captured host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
                         }
                         p_q = p_q->next;
                     }
-                    /*
-printf(" TSH captured host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
-            s->name);
-*/
+
                     total_fetched++;
-                    /*
-printf(" TSH. fetched (%d)\n", total_fetched);
-*/
                     p_q = (space2_t *)malloc(sizeof(space2_t));
                     p_q->host = q->host;
                     p_q->port = q->port;
                     p_q->cidport = q->cidport; /* for dspace ys'96 */
-                                               /*
-printf(" TSH captured new host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
-            s->name);
-*/
+
                     p_q->proc_id = q->proc_id;
                     strcpy(p_q->name, s->name);
                     p_q->length = s->length;
