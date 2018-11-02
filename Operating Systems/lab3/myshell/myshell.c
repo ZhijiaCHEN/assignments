@@ -1,5 +1,5 @@
-#include <sys/ipc.h> 
-#include <sys/shm.h> 
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -628,22 +628,22 @@ void loop(void)
      @param argv Argument vector.
      @return status code
  */
-int shell_entry(int argc, char **argv, int outFd)
+int shell_entry(int argc, char **argv, int sigPip)
 {
     //printf("shell launched, shell is going to read first line");
     //char *line = read_line();
     char *goOn = "go on", *stop = "stop";
-    // ftok to generate unique key 
-    key_t key1 = ftok("shared memory for tuple space",65), key2 = ftok("shared memory for output space",65);
+    // ftok to generate unique key
+    key_t key1 = ftok("shared memory for tuple space", 65), key2 = ftok("shared memory for output space", 65);
 
-    // shmget returns an identifier in shmid 
-    int shmid1 = shmget(key1,1024,0666|IPC_CREAT); 
-    int shmid2 = shmget(key2,1024,0666|IPC_CREAT); 
+    // shmget returns an identifier in shmid
+    int shmid1 = shmget(key1, 1024, 0666 | IPC_CREAT);
+    int shmid2 = shmget(key2, 1024, 0666 | IPC_CREAT);
 
-    // shmat to attach to shared memory 
-    char *tupleSpace = (char*) shmat(shmid1,(void*)0,0); 
-    char *outputSpace = (char*) shmat(shmid2,(void*)0,0); 
-    
+    // shmat to attach to shared memory
+    char *tupleSpace = (char *)shmat(shmid1, (void *)0, 0);
+    char *outputSpace = (char *)shmat(shmid2, (void *)0, 0);
+
     /*
     while (strcmp(line, stop) != 0)
     {

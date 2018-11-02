@@ -1,1 +1,1 @@
-int shell_entry(int argc, char **argv, int outFd);
+int shell_entry(int argc, char **argv, int sigPip);
