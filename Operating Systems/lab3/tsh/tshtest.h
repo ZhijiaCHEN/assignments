@@ -4,16 +4,17 @@
 /*.........................................................................*/
 
 #include "synergy.h"
+#include <readline/readline.h>
 
 char login[NAME_LEN];
 
-void OpPut(/*void*/) ;
-void OpGet(/*void*/) ;
-void OpExit(/*void*/) ;
-void OpRetrieve(/*void*/) ;
+void OpPut(/*void*/);
+void OpGet(/*void*/);
+void OpExit(/*void*/);
+void OpRetrieve(/*void*/);
+void MyShellClient();
 
-int tshsock ;
+int tshsock;
 
-int connectTsh(u_short) ;
-u_short drawMenu(/*void*/) ;
-
+int connectTsh(u_short);
+u_short drawMenu(/*void*/);

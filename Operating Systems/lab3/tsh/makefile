@@ -7,7 +7,7 @@ cc = gcc
 all : tsh tshtest 
 
 tsh : tsh.c 
-	$(cc) $(EXTRA) $(INCS) $(FLAGS) -o tsh tsh.c -L$(OBJS) -lsng
+	$(cc) $(EXTRA) $(INCS) $(FLAGS) -o tsh.out tsh.c myshell.c -L$(OBJS) -lsng -lreadline
 
 tshtest : tshtest.c 
-	$(cc) $(EXTRA) $(INCS) $(FLAGS) -o tshtest tshtest.c -L$(OBJS) -lsng
+	$(cc) $(EXTRA) $(INCS) $(FLAGS) -o tshtest.out tshtest.c -L$(OBJS) -lsng -lreadline

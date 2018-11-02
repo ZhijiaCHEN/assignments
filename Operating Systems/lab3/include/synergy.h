@@ -3,7 +3,6 @@
 /*.........................................................................*/
 
 #include "portab.h"
-#include "myshell.h"
 #include <stdio.h>      /* fopen, fclose, fgets, fwrite, printf */
                         /* sprintf*/
 #include <sys/file.h>   /* open, access */
@@ -30,6 +29,8 @@
 #include <ctype.h>        /* isdigit */
 #include <stdlib.h>       /* getenv */
 #include <sys/types.h>
+#include <pthread.h>
+#include <sys/select.h>
 #if (Ultrix || IRIX || Solaris || AIX || EPIX)
 #include <rpc/types.h>
 #endif
@@ -85,10 +86,11 @@ void cnf_term();
 
 /* constants */
 
+#define SHELL_OPCODE 600
 #define SHELL_COMM_END 0
 #define SHELL_COMM_WAIT 1
 #define SHELL_COMM_NEXT 2
-#define SHELL_MESSAHE_BUFF_SIZE 1024
+#define SHELL_MESSAGE_BUFF_SIZE 1024
 
 #define NORMAL_EXIT 179
 #define ABNORMAL_EXIT -179
@@ -572,6 +574,13 @@ typedef struct
 /*
   MyShell specific data
 */
+
+typedef struct
+{
+    int shellHeartBeatFd;
+    int shellStatus;
+    pthread_mutex_t statusMutex;
+} shell_watch;
 
 /*
   TSH specific data

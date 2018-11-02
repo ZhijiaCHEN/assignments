@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "synergy.h"
 
 char *read_line();
 /*
@@ -630,47 +631,34 @@ void loop(void)
  */
 int shell_entry(int argc, char **argv, int sigPip)
 {
-    //printf("shell launched, shell is going to read first line");
-    //char *line = read_line();
-    char *goOn = "go on", *stop = "stop";
-    // ftok to generate unique key
-    key_t key1 = ftok("shared memory for tuple space", 65), key2 = ftok("shared memory for output space", 65);
+    printf("shell launched\n");
 
-    // shmget returns an identifier in shmid
-    int shmid1 = shmget(key1, 1024, 0666 | IPC_CREAT);
-    int shmid2 = shmget(key2, 1024, 0666 | IPC_CREAT);
+    char *line;
+    char ***cmds;
+    int status, cmdIdx;
+    int shellSig = SHELL_COMM_NEXT;
 
-    // shmat to attach to shared memory
-    char *tupleSpace = (char *)shmat(shmid1, (void *)0, 0);
-    char *outputSpace = (char *)shmat(shmid2, (void *)0, 0);
-
-    /*
-    while (strcmp(line, stop) != 0)
+    do
     {
-        strcpy(outputSpace, tupleSpace);
-        write(outFd, goOn, strlen(goOn)+1);
-        printf("task finished, shell is going to read new line");
-        free(line);
+        printf("> ");
+        shellSig = SHELL_COMM_NEXT;
+        write(sigPip, &shellSig, sizeof(int));
+
         line = read_line();
-    }
-    free(line);*/
-    //loop();
+        cmds = split_cmds(line);
+        status = execute(cmds);
 
-    char l1[100];
-    read(STDIN_FILENO, l1, 100);
-    while (strcmp(l1, "stop") != 0)
-    {
-        //printf("child get the line from parent: %s\n", tupleSpace);
-        strcpy(outputSpace, tupleSpace);
-        strcat(outputSpace, " child touch");
-        write(STDOUT_FILENO, "done", strlen("done") + 1);
-        //printf("%s", "done");
-        read(STDIN_FILENO, l1, 100);
-    }
+        free(line);
+        cmdIdx = 0;
+        while (cmds[cmdIdx] != NULL)
+        {
+            free(cmds[cmdIdx]);
+            cmdIdx++;
+        }
+        free(cmds);
 
-    //detach from shared memory
-    shmdt(tupleSpace);
-    shmdt(outputSpace);
-
+    } while (status);
+    shellSig = SHELL_COMM_END;
+    write(sigPip, &shellSig, sizeof(int));
     return EXIT_SUCCESS;
 }
