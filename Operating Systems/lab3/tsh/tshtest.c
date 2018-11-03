@@ -75,6 +75,7 @@ void MyShellClient()
             getchar();
             return;
         }
+        //printf("Clinet get shell status: %d\n", shellStatus);
         /* the received data is in the right format, no idea why*/
         //shellStatus = ntohs(shellStatus);
         if (!readn(tshsock, (char *)&msgLen, sizeof(sng_int32)))
@@ -85,7 +86,7 @@ void MyShellClient()
             return;
         }
         //msgLen = ntohs(msgLen);
-        printf("Message length: %d\n", msgLen);
+        //printf("Client is expected to receive message length: %d\n", msgLen);
         messageBuf = (char *)malloc(msgLen);
         if (!readn(tshsock, messageBuf, msgLen))
         {
@@ -98,15 +99,17 @@ void MyShellClient()
         printf("%s", messageBuf);
         if (shellStatus == SHELL_COMM_NEXT)
         {
+            //printf("client is asked to send command.\n");
             messageBuf = readline(NULL);
             msgLen = strlen(messageBuf) + 1;
+            msgLen = htonl(msgLen);
             if (!writen(tshsock, (char *)&msgLen, sizeof(msgLen)))
             {
                 perror("main::writen\n");
                 free(messageBuf);
                 exit(1);
             }
-            if (!writen(tshsock, messageBuf, msgLen))
+            if (!writen(tshsock, messageBuf, ntohl(msgLen)))
             {
                 perror("main::writen\n");
                 free(messageBuf);
@@ -116,7 +119,7 @@ void MyShellClient()
         }
         else if (shellStatus == SHELL_COMM_WAIT)
         {
-            printf("client is asked to hold.\n");
+            //printf("client is asked to hold.\n");
         }
     } while (shellStatus != SHELL_COMM_END);
 }

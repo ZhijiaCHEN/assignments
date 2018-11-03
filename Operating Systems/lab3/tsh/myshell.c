@@ -641,10 +641,13 @@ int shell_entry(int argc, char **argv, int sigPip)
     do
     {
         printf("> ");
+        fflush(stdout);
         shellSig = SHELL_COMM_NEXT;
         write(sigPip, &shellSig, sizeof(int));
 
+        //printf("shell is going to read line from stdin\n");
         line = read_line();
+        //printf("shell received the line: %s\n", line);
         cmds = split_cmds(line);
         status = execute(cmds);
 
@@ -656,6 +659,7 @@ int shell_entry(int argc, char **argv, int sigPip)
             cmdIdx++;
         }
         free(cmds);
+        fflush(stdout);
 
     } while (status);
     shellSig = SHELL_COMM_END;

@@ -99,4 +99,4 @@ int guardf(u_long, int);
 void myshell_watchdog(void *arg);
 void myshell_worker(void *arg);
 int deliver_client_message(int shellDataInFd);
-int deliver_shell_message(int status, char *message);
+int deliver_shell_message(int status, char *message, int size);

@@ -93,29 +93,36 @@ int deliver_client_message(int shellDataInFd)
     {
         return 0;
     }
+    sng_int32 tmp = ntohl(msgLen);
     msgLen = ntohl(msgLen);
+    //printf("Deamon is expected to receive %d bytes messages. tmp = %d\n", ntohl(msgLen), tmp);
+    printf("Deamon is expected to receive %d bytes messages. tmp = %d\n", msgLen, tmp);
+
     message = (char *)malloc(msgLen);
-    printf("daemon received message: %s\n", message);
-    if (!readn(newsock, message, sizeof(msgLen)))
+    if (!readn(newsock, message, msgLen))
     {
         free(message);
         return 0;
     }
+    printf("daemon received message: %s\n", message);
     if (write(shellDataInFd, message, msgLen) < 0)
     {
         free(message);
         return 0;
     }
+    write(shellDataInFd, "\n", strlen("\n"));
+    //fflush(shellDataInFd);
     free(message);
     return 1;
 }
 
-int deliver_shell_message(int status, char *message)
+int deliver_shell_message(int status, char *message, int size)
 {
-    sng_int32 msgLen = strlen(message);
+    sng_int32 msgLen = size;
+    printf("string length: %d, read size: %d\n", strlen(message), size);
     int r = writen(newsock, (char *)&status, sizeof(int)) +
             writen(newsock, (char *)&msgLen, sizeof(sng_int32)) +
-            writen(newsock, message, msgLen + 1);
+            writen(newsock, message, msgLen);
     if (r != 3)
     {
         r = 0;
@@ -131,17 +138,19 @@ void myshell_worker(void *arg)
 {
     int shellDataOut[2], shellDataIn[2], shellHeartBeat[2], pstatus;
     pid_t pid;
+    char *pipErrMsg = "Pipe could not be initialized\n";
+    char *forkErrMsg = "Could not fork shell process.\n";
 
     if (pipe(shellDataIn) < 0)
     {
-        deliver_shell_message(SHELL_COMM_END, "Pipe could not be initialized\n");
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
         return;
     }
     if (pipe(shellDataOut) < 0)
     {
         close(shellDataIn[0]);
         close(shellDataIn[1]);
-        deliver_shell_message(SHELL_COMM_END, "Pipe could not be initialized\n");
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
         return;
     }
     if (pipe(shellHeartBeat) < 0)
@@ -150,7 +159,7 @@ void myshell_worker(void *arg)
         close(shellDataIn[1]);
         close(shellDataOut[0]);
         close(shellDataOut[1]);
-        deliver_shell_message(SHELL_COMM_END, "Pipe could not be initialized\n");
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
         return;
     }
 
@@ -163,7 +172,7 @@ void myshell_worker(void *arg)
         close(shellDataOut[1]);
         close(shellHeartBeat[0]);
         close(shellHeartBeat[1]);
-        deliver_shell_message(SHELL_COMM_END, "Could not fork shell process.\n");
+        deliver_shell_message(SHELL_COMM_END, forkErrMsg, strlen(forkErrMsg) + 1);
         return;
     }
     if (pid == 0)
@@ -191,11 +200,13 @@ void myshell_worker(void *arg)
 
         size_t msgLen;
         char buf[SHELL_MESSAGE_BUFF_SIZE];
+        //strcpy(buf, "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        //int readCnt = 0;
         while (w.shellStatus != SHELL_COMM_END)
         {
             fd_set rfds;
             struct timeval tv;
-            int retval;
+            int msgSize;
 
             FD_ZERO(&rfds);
             FD_SET(shellDataOut[0], &rfds);
@@ -206,21 +217,40 @@ void myshell_worker(void *arg)
 
             if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
             {
-                read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
-                deliver_shell_message(SHELL_COMM_WAIT, buf);
+                msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
+                //printf("Daemon read %d line from the shell\n", ++readCnt);
+                //printf("deliver %d message to client: %s\n", readCnt, buf);
+                deliver_shell_message(SHELL_COMM_WAIT, buf, msgSize);
+            }
+            else
+            {
+                printf("daemon didn't receive message in current loop for now.\n");
             }
             if (w.shellStatus == SHELL_COMM_NEXT)
             {
+                printf("\nshell asks for next cmd.\n");
                 //check if any data have produce after the last read and before we check status
-                strcpy(buf, "");
+                msgSize = 0;
                 FD_ZERO(&rfds);
                 FD_SET(shellDataOut[0], &rfds);
+                //printf("checking remained shell outputs.\n");
                 if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
                 {
-                    read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
+                    msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
+                    //printf("some shell outputs remained, %d read: %s.\n", ++readCnt, buf);
                 }
-                deliver_shell_message(SHELL_COMM_NEXT, buf);
+                else
+                {
+                    printf("not shell outputs remained.\n");
+                }
+                //printf("deliver %d message to client: %s\n", readCnt, buf);
+                deliver_shell_message(SHELL_COMM_NEXT, buf, msgSize);
+                printf("read message from client.\n");
                 deliver_client_message(shellDataIn[1]);
+                pthread_mutex_lock(&(w.statusMutex));
+                w.shellStatus = SHELL_COMM_WAIT;
+                pthread_mutex_unlock(&(w.statusMutex));
+                //write(shellDataIn[1], "echo test\n", strlen("echo test\n"));
             }
         }
         fclose(dataOut);
@@ -248,13 +278,14 @@ void myshell_watchdog(void *arg)
         {
             pthread_mutex_lock(&(w->statusMutex));
             w->shellStatus = SHELL_COMM_END;
-            pthread_mutex_lock(&(w->statusMutex));
+            pthread_mutex_unlock(&(w->statusMutex));
         }
         else
         {
             pthread_mutex_lock(&(w->statusMutex));
+            printf("watch dog update shell status as: %d\n", statusTmp);
             w->shellStatus = statusTmp;
-            pthread_mutex_lock(&(w->statusMutex));
+            pthread_mutex_unlock(&(w->statusMutex));
         }
     }
 }
