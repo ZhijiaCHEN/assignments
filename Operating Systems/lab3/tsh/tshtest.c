@@ -96,7 +96,8 @@ void MyShellClient()
             getchar();
             return;
         }
-        printf("%s", messageBuf);
+        write(STDOUT_FILENO, messageBuf, msgLen);
+        //printf("%s", messageBuf);
         if (shellStatus == SHELL_COMM_NEXT)
         {
             //printf("client is asked to send command.\n");
