@@ -184,9 +184,9 @@ CPI of 5-stage pipeline: $\frac{796}{99\times 6}=1.34$.
 
 CPI of 10-stage pipeline: $\frac{904}{99\times 6}=1.52$.
 
-Average instruction execution time of 5-stage: $1.34*0.92=1.21$ ns.
+Average instruction execution time of 5-stage: $1.34\times0.92=1.21$ ns.
 
-Average instruction execution time of 10-stage: $1.52*0.92=0.76$ ns.
+Average instruction execution time of 10-stage: $1.52\times0.92=0.76$ ns.
 
 \paragraph{C.2.} Suppose the branch frequencies (as percentages of all instructions) are as follows:
 
@@ -203,7 +203,7 @@ Average instruction execution time of 10-stage: $1.52*0.92=0.76$ ns.
     \end{tabular}
 \end{center}
 \end{table}
-
+\vspace{-1cm}
 \subparagraph{a.} We are examining a four-stage pipeline where the branch is resolved at the end of the second cycle for unconditional branches and at the end of the third cycle for conditional branches. Assuming that only the first pipe stage can always be completed independent of whether the branch is taken and ignoring other pipeline stalls, how much faster would the machine be without any branch hazards? 
 
 \noindent \textbf{answer:}
@@ -212,7 +212,7 @@ Without branch hazard, the speed up is $\frac{4}{1+0}=4$.
 
 Suppose the four pipeline stages are Instruction Fetch (IF), Instruction Decode (ID), Excecution (EX) and Write Back (WB). We need to calculate the CPI for the case of jumps and calls, taken conditional branches and untaken conditional branches respectively.
 
-The following figure show how jumps and calls are handled. The IF in the second cycle of instruction i+2 is because the branch is resolved at the end of second cycle for unconditional branches and we realize that the instruction fetched in the second cycle is incorrect. We can see that jumps and calls instructions introduce one stall in the pipeline.
+The following figure show how jumps and calls are handled. The extra IF stage in the second cycle of instruction i+2 is because the branch is resolved at the end of second cycle for unconditional branches and we realize that the instruction fetched in the second cycle is incorrect. We can see that jumps and calls instructions introduce one stall in the pipeline.
 
 \begin{table}[ht!]
 \begin{center}
