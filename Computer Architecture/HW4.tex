@@ -212,7 +212,7 @@ Without branch hazard, the speed up is $\frac{4}{1+0}=4$.
 
 Suppose the four pipeline stages are Instruction Fetch (IF), Instruction Decode (ID), Excecution (EX) and Write Back (WB). We need to calculate the CPI for the case of jumps and calls, taken conditional branches and untaken conditional branches respectively.
 
-The following figure show how jumps and calls are handled. The extra IF stage in the second cycle of instruction i+2 is because the branch is resolved at the end of second cycle for unconditional branches and we realize that the instruction fetched in the second cycle is incorrect. We can see that jumps and calls instructions introduce one stall in the pipeline.
+The following figure shows how jumps and calls are handled. The extra IF stage in the second cycle of instruction i+2 is because the branch is resolved at the end of second cycle for unconditional branches and we realize that the instruction fetched in the second cycle is incorrect. We can see that jumps and calls instructions introduce one stall in the pipeline.
 
 \begin{table}[ht!]
 \begin{center}
@@ -232,7 +232,7 @@ The following figure show how jumps and calls are handled. The extra IF stage in
 \end{center}
 \end{table}
 
-The following figure show how taken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches and then we refetch instruction because the instruction fetched in the second cycle is incorrect. We can see that the taken conditional instructions introduce two stalls in the pipeline.
+The following figure shows how taken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches and then we refetch instruction because the instruction fetched in the second cycle is incorrect. We can see that the taken conditional instructions introduce two stalls in the pipeline.
 
 \begin{table}[ht!]
 \begin{center}
@@ -252,7 +252,7 @@ The following figure show how taken conditional branches are handled. The instru
 \end{center}
 \end{table}
 
-The following figure show how untaken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches. We can see that the untaken conditional instructions introduce one stall in the pipeline.
+The following figure shows how untaken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches. We can see that the untaken conditional instructions introduce one stall in the pipeline.
 
 \begin{table}[ht!]
 \begin{center}
