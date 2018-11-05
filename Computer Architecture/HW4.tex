@@ -187,4 +187,137 @@ CPI of 10-stage pipeline: $\frac{904}{99\times 6}=1.52$.
 Average instruction execution time of 5-stage: $1.34*0.92=1.21$ ns.
 
 Average instruction execution time of 10-stage: $1.52*0.92=0.76$ ns.
+
+\paragraph{C.2.} Suppose the branch frequencies (as percentages of all instructions) are as follows:
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+    \toprule
+    Conditional branches & 15\%\\
+    \hline
+    Jumps and calls & 1\%\\
+    \hline
+    Taken conditional branches &60\% are taken\\
+    \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+\subparagraph{a.} We are examining a four-stage pipeline where the branch is resolved at the end of the second cycle for unconditional branches and at the end of the third cycle for conditional branches. Assuming that only the first pipe stage can always be completed independent of whether the branch is taken and ignoring other pipeline stalls, how much faster would the machine be without any branch hazards? 
+
+\noindent \textbf{answer:}
+
+Without branch hazard, the speed up is $\frac{4}{1+0}=4$.
+
+Suppose the four pipeline stages are Instruction Fetch (IF), Instruction Decode (ID), Excecution (EX) and Write Back (WB). We need to calculate the CPI for the case of jumps and calls, taken conditional branches and untaken conditional branches respectively.
+
+The following figure show how jumps and calls are handled. The IF in the second cycle of instruction i+2 is because the branch is resolved at the end of second cycle for unconditional branches and we realize that the instruction fetched in the second cycle is incorrect. We can see that jumps and calls instructions introduce one stall in the pipeline.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{r|c|c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+    \toprule
+    &\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{6}&\textbf{7}&\textbf{8}\\
+    \hline
+    Jumps and calls&IF&ID&EX&WB&&&\\
+    \hline
+    i+1&&IF&IF&ID&EX&WB&\\
+    \hline
+    i+2&&&Stall&IF&ID&EX&WB&\\
+    \hline
+    i+3&&&&&IF&ID&EX&WB\\
+    \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+The following figure show how taken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches and then we refetch instruction because the instruction fetched in the second cycle is incorrect. We can see that the taken conditional instructions introduce two stalls in the pipeline.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{r|c|c|c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+    \toprule
+    &\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{6}&\textbf{7}&\textbf{8}&\textbf{9}\\
+    \hline
+    Taken branches&IF&ID&EX&WB&&&&\\
+    \hline
+    i+1&&IF&Stall&IF&ID&EX&WB&\\
+    \hline
+    i+2&&&&Stall&IF&ID&EX&WB\\
+    \hline
+    i+3&&&&&&IF&ID&EX&WB\\
+    \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+The following figure show how untaken conditional branches are handled. The instruction i+1 is installed for once cycle because the branch is resolved at the end of third cycle for conditional branches. We can see that the untaken conditional instructions introduce one stall in the pipeline.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{r|c|c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+    \toprule
+    &\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{6}&\textbf{7}&\textbf{8}\\
+    \hline
+    Taken branches&IF&ID&EX&WB&&&&\\
+    \hline
+    i+1&&IF&Stall&ID&EX&WB&\\
+    \hline
+    i+2&&&&IF&ID&EX&WB\\
+    \hline
+    i+3&&&&&IF&ID&EX&WB\\
+    \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+The frequency of unconditional branches = 0.01.
+
+The frequency of taken conditional branches = $0.15\times 0.6=0.9$.
+
+The frequency of taken unconditional branches = $0.15\times 0.4=0.6$.
+
+Overall, the average number of stall cycles = $(1\times 1\%)+(2\times 9\%)+(1\times 6\%)=0.25$, so the speedup with branch hazards = $\frac{1\times 4}{1+0.25}=3.2$, and the machine is $\frac{4}{3.2}-1=25\%$ faster without branch hazards.
+
+\paragraph{C.3} We begin with a computer implemented in single-cycle implementation. When the stages are split by functionality, the stages do not require exactly the same amount of time. The original machine had a clock cycle time of 7 ns. After the stages were split, the measured times were IF, 1 ns; ID, 1.5 ns; EX, 1 ns; MEM, 2 ns; and WB, 1.5 ns.The pipeline register delay is 0.1 ns.
+
+\subparagraph{a.} What is the clock cycle time of the 5-stage pipelined machine? 
+
+\noindent \textbf{answer:} The slowest stage is MEM which needs 2 ns, so the clock cycle time = $2+0.1=2.1$ ns.
+
+\subparagraph{b.} If there is a stall every four instructions, what is the CPI of the new machine? 
+
+\noindent \textbf{answer:} $\frac{5}{4}=1.25$ cycles.
+
+\subparagraph{c.} What is th espeedup of the pipelined machine over the single-cycle machine? 
+
+\noindent \textbf{answer:} $\frac{1+1.5+1+2+1.5}{1.25\times 2.1}=2.67$.
+
+\subparagraph{d.} If the pipelined machine had an infinite number of stages, what would its speedup be over the single-cycle machine?
+
+\noindent \textbf{answer:} The clock cycle time would be the pipeline register delay, so the speedup =  $\frac{1+1.5+1+2+1.5}{0.1}=70$.
+
+\paragraph{C.7} In this problem, we will explore how deepening the pipeline affects performance in two ways: faster clock cycle and increased stalls due to data and control hazards. Assume that the original machine is a 5-stage pipeline with a 1 ns clock cycle. The second machine is a 12-stage pipeline with a 0.6 ns clock cycle. The 5-stage pipeline experiences a stall due to a data hazard every five instructions, whereas the 12-stage pipeline experiences three stalls every eight instructions. In addition, branches constitute 20\% of the instructions, and the misprediction rate for both machines is 5\%. 
+
+\subparagraph{a.} What is the speedup of the 12-stage pipeline over the 5-stage pipeline, taking into account only data hazards?
+
+\noindent \textbf{answer:} 
+
+Average instruction execution time of the 5-staged machine =  $\frac{5+1}{5}\times 1=1.2$.
+
+Average instruction execution time of the 12-staged machine =  $\frac{8+3}{8}\times 0.6=0.825$ ns. 
+
+Speedup = $\frac{1.2}{0.825} = 1.45$.
+
+\subparagraph{b.} If the branch mispredict penalty for the first machine is 2 cycles but the second machine is 5 cycles, what are the CPIs of each, taking into account the stalls due to branch mispredictions? 
+
+\noindent \textbf{answer:} 
+
+Average CPI of the 5-staged machine =  $\frac{5+1}{5}+ 0.2\times0.05\times2=1.22$ cycles.
+
+Average CPI of the 5-staged machine =  $\frac{8+3}{8}+ 0.2\times0.05\times5=1.425$ cycles.
+
+Speedup = $\frac{1.22\times 1}{1.425\times 0.6} = 1.43$.
+
 \end{document}
