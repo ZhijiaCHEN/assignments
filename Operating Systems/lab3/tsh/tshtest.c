@@ -65,9 +65,9 @@ void MyShellClient()
     int shellStatus;
     sng_int32 msgLen;
     char *messageBuf;
-    printf("shell client started...\n");
     do
     {
+        //check shell's status and make sure the shell is asking for input
         if (!readn(tshsock, (char *)&shellStatus, sizeof(int)))
         {
             perror("\nOpExit::readn\n");
@@ -75,9 +75,8 @@ void MyShellClient()
             getchar();
             return;
         }
-        //printf("Clinet get shell status: %d\n", shellStatus);
-        /* the received data is in the right format, no idea why*/
-        //shellStatus = ntohs(shellStatus);
+
+        //get the expected message length.
         if (!readn(tshsock, (char *)&msgLen, sizeof(sng_int32)))
         {
             perror("\nOpExit::readn\n");
@@ -85,8 +84,8 @@ void MyShellClient()
             getchar();
             return;
         }
-        //msgLen = ntohs(msgLen);
-        //printf("Client is expected to receive message length: %d\n", msgLen);
+
+        //read message from the shell
         messageBuf = (char *)malloc(msgLen);
         if (!readn(tshsock, messageBuf, msgLen))
         {
@@ -97,10 +96,10 @@ void MyShellClient()
             return;
         }
         write(STDOUT_FILENO, messageBuf, msgLen);
-        //printf("%s", messageBuf);
+
+        //the shell only asks for user input when the shell status is SHELL_COMM_NEXT
         if (shellStatus == SHELL_COMM_NEXT)
         {
-            //printf("client is asked to send command.\n");
             messageBuf = readline(NULL);
             msgLen = strlen(messageBuf) + 1;
             msgLen = htonl(msgLen);
@@ -118,11 +117,8 @@ void MyShellClient()
             }
             free(messageBuf);
         }
-        else if (shellStatus == SHELL_COMM_WAIT)
-        {
-            //printf("client is asked to hold.\n");
-        }
-    } while (shellStatus != SHELL_COMM_END);
+
+    } while (shellStatus != SHELL_COMM_END); //exit only when shell notifies the client to end the comminication, whether the shell quits by the request of user or due to any error.
 }
 
 void OpPut()

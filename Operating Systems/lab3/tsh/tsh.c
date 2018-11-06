@@ -56,7 +56,6 @@ void start()
 
     while (TRUE)
     {
-        printf("deamon started...\n");
         /* read operation on TSH port */
         if ((newsock = get_connection(oldsock, NULL)) == -1)
         {
@@ -69,7 +68,6 @@ void start()
         }
         /* invoke function for operation */
         //this_op = ntohs(this_op);
-        printf("deamon received opcode:%d\n", this_op);
         if (this_op >= TSH_OP_MIN && this_op <= TSH_OP_MAX)
         {
             (*op_func[this_op - TSH_OP_MIN])();
@@ -85,6 +83,9 @@ void start()
     }
 }
 
+/*---------------------------------------------------------------------------
+This function reads (blocking read) client input from socket and write it to the input pipe of shell
+---------------------------------------------------------------------------*/
 int deliver_client_message(int shellDataInFd)
 {
     sng_int32 msgLen;
@@ -93,10 +94,7 @@ int deliver_client_message(int shellDataInFd)
     {
         return 0;
     }
-    sng_int32 tmp = ntohl(msgLen);
     msgLen = ntohl(msgLen);
-    //printf("Deamon is expected to receive %d bytes messages. tmp = %d\n", ntohl(msgLen), tmp);
-    printf("Deamon is expected to receive %d bytes messages. tmp = %d\n", msgLen, tmp);
 
     message = (char *)malloc(msgLen);
     if (!readn(newsock, message, msgLen))
@@ -104,22 +102,23 @@ int deliver_client_message(int shellDataInFd)
         free(message);
         return 0;
     }
-    printf("daemon received message: %s\n", message);
+
     if (write(shellDataInFd, message, msgLen) < 0)
     {
         free(message);
         return 0;
     }
-    write(shellDataInFd, "\n", strlen("\n"));
-    //fflush(shellDataInFd);
+    write(shellDataInFd, "\n", strlen("\n")); //signal the end of command from client
     free(message);
     return 1;
 }
 
+/*---------------------------------------------------------------------------
+This function sends the output of shell to the client.
+---------------------------------------------------------------------------*/
 int deliver_shell_message(int status, char *message, int size)
 {
     sng_int32 msgLen = size;
-    printf("string length: %d, read size: %d\n", strlen(message), size);
     int r = writen(newsock, (char *)&status, sizeof(int)) +
             writen(newsock, (char *)&msgLen, sizeof(sng_int32)) +
             writen(newsock, message, msgLen);
@@ -134,6 +133,10 @@ int deliver_shell_message(int status, char *message, int size)
     return r;
 }
 
+/*---------------------------------------------------------------------------
+This function forks the shell, and passes the shell input and output between
+the shell and the client.
+---------------------------------------------------------------------------*/
 void myshell_worker(void *arg)
 {
     int shellDataOut[2], shellDataIn[2], shellHeartBeat[2], pstatus;
@@ -184,73 +187,55 @@ void myshell_worker(void *arg)
         close(shellDataOut[0]);
         close(shellDataOut[1]);
         close(shellHeartBeat[0]);
-        //printf("shell process forked.\n");
         shell_entry(0, NULL, shellHeartBeat[1]);
     }
     else
     {
+        shell_watch w = {.shellHeartBeatFd = shellHeartBeat[0], .shellStatus = SHELL_COMM_WAIT, .statusMutex = PTHREAD_MUTEX_INITIALIZER};
+        pthread_t watch_thread; //shell watch dog that monitors shell status
+        FILE *dataOut = fdopen(shellDataOut[0], "r");
+        size_t msgLen;
+        char buf[SHELL_MESSAGE_BUFF_SIZE];
+        pthread_create(&watch_thread, NULL, myshell_watchdog, (void *)(&w));
+        fd_set rfds;
+        struct timeval tv;
+        int msgSize;
         close(shellDataIn[0]);
         close(shellDataOut[1]);
         close(shellHeartBeat[1]);
 
-        shell_watch w = {.shellHeartBeatFd = shellHeartBeat[0], .shellStatus = SHELL_COMM_WAIT, .statusMutex = PTHREAD_MUTEX_INITIALIZER};
-        pthread_t watch_thread;
-        FILE *dataOut = fdopen(shellDataOut[0], "r");
-        pthread_create(&watch_thread, NULL, myshell_watchdog, (void *)(&w));
-
-        size_t msgLen;
-        char buf[SHELL_MESSAGE_BUFF_SIZE];
-        //strcpy(buf, "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-        //int readCnt = 0;
+        /* Wait shell output availability for up to 30 microseconds. */
+        tv.tv_sec = 0;
+        tv.tv_usec = 30;
         while (w.shellStatus != SHELL_COMM_END)
         {
-            fd_set rfds;
-            struct timeval tv;
-            int msgSize;
-
             FD_ZERO(&rfds);
             FD_SET(shellDataOut[0], &rfds);
-
-            /* Wait up to 30 mirco seconds. */
-            tv.tv_sec = 0;
-            tv.tv_usec = 30;
 
             if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
             {
                 msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
-                //printf("Daemon read %d line from the shell\n", ++readCnt);
-                //printf("deliver %d message to client: %s\n", readCnt, buf);
                 deliver_shell_message(SHELL_COMM_WAIT, buf, msgSize);
-            }
-            else
-            {
-                printf("daemon didn't receive message in current loop for now.\n");
             }
             if (w.shellStatus == SHELL_COMM_NEXT)
             {
-                printf("\nshell asks for next cmd.\n");
-                //check if any data have produce after the last read and before we check status
+                //check the shell output once more in case the shell produces right after last select but before we noticed that the status changed.
                 msgSize = 0;
                 FD_ZERO(&rfds);
                 FD_SET(shellDataOut[0], &rfds);
-                //printf("checking remained shell outputs.\n");
                 if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
                 {
                     msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
-                    //printf("some shell outputs remained, %d read: %s.\n", ++readCnt, buf);
                 }
-                else
-                {
-                    printf("not shell outputs remained.\n");
-                }
-                //printf("deliver %d message to client: %s\n", readCnt, buf);
+
+                //send the shell status, and possibly the last output from the shell to the client
                 deliver_shell_message(SHELL_COMM_NEXT, buf, msgSize);
-                printf("read message from client.\n");
+                //forward the client's input to the shell
                 deliver_client_message(shellDataIn[1]);
+
                 pthread_mutex_lock(&(w.statusMutex));
                 w.shellStatus = SHELL_COMM_WAIT;
                 pthread_mutex_unlock(&(w.statusMutex));
-                //write(shellDataIn[1], "echo test\n", strlen("echo test\n"));
             }
         }
         fclose(dataOut);
@@ -259,11 +244,6 @@ void myshell_worker(void *arg)
         close(shellHeartBeat[0]);
         pthread_join(watch_thread, NULL);
         waitpid(pid, &pstatus, 0);
-        //check shell status from shell heartbeat pipe
-        //read data from shell data out pipe
-        //deliver data to client
-        //read cmd from client
-        //send cmd to shell data in pipe
     }
 }
 
@@ -283,7 +263,6 @@ void myshell_watchdog(void *arg)
         else
         {
             pthread_mutex_lock(&(w->statusMutex));
-            printf("watch dog update shell status as: %d\n", statusTmp);
             w->shellStatus = statusTmp;
             pthread_mutex_unlock(&(w->statusMutex));
         }
