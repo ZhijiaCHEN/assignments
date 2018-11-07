@@ -13,8 +13,8 @@
   Calls       : signal, getTshport, mapTshport
   Notes       : This function performs required initializations irrespective
                 of how TSH is started (DAC/user). 
-        'oldsock' is a global variable in which TSH connections are 
-        accepted.
+		'oldsock' is a global variable in which TSH connections are 
+		accepted.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification: October '18 Justin Y. Shi for CIS5512
@@ -43,8 +43,8 @@ int initCommon(u_short port)
   Calls       : get_connection, readn, close, ntohs, appropriate Op-function
   Notes       : This is the controlling function of TSH that invokes
                 appropriate routine based on the operation requested.
-        The same function 'OpGet' is invoked for both TSH_OP_GET 
-        & TSH_OP_READ.
+		The same function 'OpGet' is invoked for both TSH_OP_GET 
+		& TSH_OP_READ.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification:
@@ -55,7 +55,8 @@ void start()
     static void (*op_func[])() = {OpPut, OpGet, OpGet, OpExit};
 
     while (TRUE)
-    { /* read operation on TSH port */
+    {
+        /* read operation on TSH port */
         if ((newsock = get_connection(oldsock, NULL)) == -1)
         {
             exit(1);
@@ -66,12 +67,204 @@ void start()
             continue;
         }
         /* invoke function for operation */
-        this_op = ntohs(this_op);
-
+        //this_op = ntohs(this_op);
         if (this_op >= TSH_OP_MIN && this_op <= TSH_OP_MAX)
+        {
             (*op_func[this_op - TSH_OP_MIN])();
+        }
+        else if (this_op == SHELL_OPCODE)
+        {
+            pthread_t shell_thread;
+            pthread_create(&shell_thread, NULL, myshell_worker, NULL);
+            pthread_join(shell_thread, NULL);
+        }
 
         close(newsock);
+    }
+}
+
+/*---------------------------------------------------------------------------
+This function reads (blocking read) client input from socket and write it to the input pipe of shell
+---------------------------------------------------------------------------*/
+int deliver_client_message(int shellDataInFd)
+{
+    sng_int32 msgLen;
+    char *message;
+    if (!readn(newsock, (char *)&msgLen, sizeof(msgLen)))
+    {
+        return 0;
+    }
+    msgLen = ntohl(msgLen);
+    message = (char *)malloc(msgLen);
+    if (!readn(newsock, message, msgLen))
+    {
+        free(message);
+        return 0;
+    }
+    if (write(shellDataInFd, message, msgLen) < 0)
+    {
+        free(message);
+        return 0;
+    }
+    write(shellDataInFd, "\n", strlen("\n")); //signal the end of command from client
+    free(message);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------
+This function sends the output of shell to the client.
+---------------------------------------------------------------------------*/
+int deliver_shell_message(int status, char *message, int size)
+{
+    sng_int32 msgLen = size;
+    int r = writen(newsock, (char *)&status, sizeof(int)) +
+            writen(newsock, (char *)&msgLen, sizeof(sng_int32)) +
+            writen(newsock, message, msgLen);
+    if (r != 3)
+    {
+        r = 0;
+    }
+    else
+    {
+        r = 1;
+    }
+    return r;
+}
+
+/*---------------------------------------------------------------------------
+This function forks the shell, and passes the shell input and output between
+the shell and the client.
+---------------------------------------------------------------------------*/
+void myshell_worker(void *arg)
+{
+    int shellDataOut[2], shellDataIn[2], shellHeartBeat[2], pstatus;
+    pid_t pid;
+    char *pipErrMsg = "Pipe could not be initialized\n";
+    char *forkErrMsg = "Could not fork shell process.\n";
+
+    if (pipe(shellDataIn) < 0)
+    {
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
+        return;
+    }
+    if (pipe(shellDataOut) < 0)
+    {
+        close(shellDataIn[0]);
+        close(shellDataIn[1]);
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
+        return;
+    }
+    if (pipe(shellHeartBeat) < 0)
+    {
+        close(shellDataIn[0]);
+        close(shellDataIn[1]);
+        close(shellDataOut[0]);
+        close(shellDataOut[1]);
+        deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
+        return;
+    }
+
+    pid = fork();
+    if (pid < 0)
+    {
+        close(shellDataIn[1]);
+        close(shellDataIn[0]);
+        close(shellDataOut[0]);
+        close(shellDataOut[1]);
+        close(shellHeartBeat[0]);
+        close(shellHeartBeat[1]);
+        deliver_shell_message(SHELL_COMM_END, forkErrMsg, strlen(forkErrMsg) + 1);
+        return;
+    }
+    if (pid == 0)
+    {
+        dup2(shellDataIn[0], STDIN_FILENO);
+        dup2(shellDataOut[1], STDOUT_FILENO);
+        close(shellDataIn[1]);
+        close(shellDataIn[0]);
+        close(shellDataOut[0]);
+        close(shellDataOut[1]);
+        close(shellHeartBeat[0]);
+        shell_entry(0, NULL, shellHeartBeat[1]);
+    }
+    else
+    {
+        shell_watch w = {.shellHeartBeatFd = shellHeartBeat[0], .shellStatus = SHELL_COMM_WAIT, .statusMutex = PTHREAD_MUTEX_INITIALIZER};
+        pthread_t watch_thread; //shell watch dog that monitors shell status
+        FILE *dataOut = fdopen(shellDataOut[0], "r");
+        size_t msgLen;
+        char buf[SHELL_MESSAGE_BUFF_SIZE];
+        pthread_create(&watch_thread, NULL, myshell_watchdog, (void *)(&w));
+        fd_set rfds;
+        struct timeval tv;
+        int msgSize;
+        close(shellDataIn[0]);
+        close(shellDataOut[1]);
+        close(shellHeartBeat[1]);
+
+        /* Wait shell output availability for up to 30 microseconds. */
+        tv.tv_sec = 0;
+        tv.tv_usec = 30;
+        while (w.shellStatus != SHELL_COMM_END)
+        {
+            FD_ZERO(&rfds);
+            FD_SET(shellDataOut[0], &rfds);
+
+            if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
+            {
+                msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
+                deliver_shell_message(SHELL_COMM_WAIT, buf, msgSize);
+            }
+            if (w.shellStatus == SHELL_COMM_NEXT)
+            {
+                //check the shell output once more in case the shell produces right after last select but before we noticed that the status changed.
+                msgSize = 0;
+                FD_ZERO(&rfds);
+                FD_SET(shellDataOut[0], &rfds);
+                if (select(shellDataOut[0] + 1, &rfds, NULL, NULL, &tv))
+                {
+                    msgSize = read(shellDataOut[0], buf, SHELL_MESSAGE_BUFF_SIZE);
+                }
+
+                //send the shell status, and possibly the last output from the shell to the client
+                deliver_shell_message(SHELL_COMM_NEXT, buf, msgSize);
+                //forward the client's input to the shell
+                deliver_client_message(shellDataIn[1]);
+
+                pthread_mutex_lock(&(w.statusMutex));
+                w.shellStatus = SHELL_COMM_WAIT;
+                pthread_mutex_unlock(&(w.statusMutex));
+            }
+        }
+        deliver_shell_message(SHELL_COMM_END, buf, 0); //notify the client to end comminication with the shell
+        fclose(dataOut);
+        close(shellDataIn[1]);
+        close(shellDataOut[0]);
+        close(shellHeartBeat[0]);
+        pthread_join(watch_thread, NULL);
+        waitpid(pid, &pstatus, 0);
+    }
+}
+
+/*  This function waits for shell to change status and send out its status signal via the hear beat pipe. The status signal could be either SHELL_COMM_END or SHELL_COMM_NEXT. If the watch dog fails to read status signal from the shell, it changes status to SHELL_COMM_END */
+void myshell_watchdog(void *arg)
+{
+    shell_watch *w = (shell_watch *)arg;
+    int statusTmp;
+    while (w->shellStatus != SHELL_COMM_END)
+    {
+        if (read(w->shellHeartBeatFd, &statusTmp, sizeof(int)) < 0)
+        {
+            pthread_mutex_lock(&(w->statusMutex));
+            w->shellStatus = SHELL_COMM_END;
+            pthread_mutex_unlock(&(w->statusMutex));
+        }
+        else
+        {
+            pthread_mutex_lock(&(w->statusMutex));
+            w->shellStatus = statusTmp;
+            pthread_mutex_unlock(&(w->statusMutex));
+        }
     }
 }
 
@@ -84,8 +277,8 @@ void start()
                 ntohs, ntohl, malloc, free
   Notes       : A tuple is created based on the data received. If there are
                 pending requests for this tuple they are processed. If the
-        tuple is not consumed by them (i.e. no GET) the tuple is
-        stored in the tuple space.
+		tuple is not consumed by them (i.e. no GET) the tuple is
+		stored in the tuple space.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification:
@@ -152,7 +345,7 @@ void OpPut()
                 strcpy, htons
   Notes       : This function is called for both TSH_OP_READ and TSH_OP_GET.
                 If the tuple is present in the tuple space it is returned,
-        or else the request is queued.
+		or else the request is queued.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification:
@@ -305,13 +498,13 @@ void deleteQueue()
   Calls       : findRequest, sendTuple, deleteRequest
   Notes       : If there is a pending request that matches this tuple, it
                 is sent to the requestor (served FIFO). If there were only
-        pending TSH_OP_READs (or no pending requests) then the tuple 
-        is considered not consumed. If a TSH_OP_GET was encountered
-        then the tuple is considered consumed.
+		pending TSH_OP_READs (or no pending requests) then the tuple 
+		is considered not consumed. If a TSH_OP_GET was encountered
+		then the tuple is considered consumed.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification: FSUN 10/94. Move the tuple consumed by a request to retrieve 
-        list, For FDD.
+		list, For FDD.
 ---------------------------------------------------------------------------*/
 
 int consumeTuple(space1_t *s)
@@ -336,7 +529,11 @@ int consumeTuple(space1_t *s)
                         {
                             strcpy(p_q->name, s->name);
                             p_q->port = q->port;
-                            p_q->cidport = q->cidport;
+                            p_q->cidport = q->cidport; /* for dspace ys'96 */
+                                                       /*
+printf(" TSH captured host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
+			s->name);
+*/
                             total_fetched++;
                             p_q->length = s->length;
                             p_q->priority = s->priority;
@@ -346,13 +543,22 @@ int consumeTuple(space1_t *s)
                         }
                         p_q = p_q->next;
                     }
-
+                    /*
+printf(" TSH captured host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
+			s->name);
+*/
                     total_fetched++;
+                    /*
+printf(" TSH. fetched (%d)\n", total_fetched);
+*/
                     p_q = (space2_t *)malloc(sizeof(space2_t));
                     p_q->host = q->host;
                     p_q->port = q->port;
                     p_q->cidport = q->cidport; /* for dspace ys'96 */
-
+                                               /*
+printf(" TSH captured new host(%ul) port(%d) tpname(%s)\n", q->host, q->cidport,
+			s->name);
+*/
                     p_q->proc_id = q->proc_id;
                     strcpy(p_q->name, s->name);
                     p_q->length = s->length;
@@ -376,7 +582,7 @@ int consumeTuple(space1_t *s)
                                                            u_short priority)
   Parameters  : name     - tuple name
                 length   - length of tuple
-        priority - priority of the tuple
+		priority - priority of the tuple
   Returns     : pointer to a tuple made of the input [or] NULL if no memory
   Called by   : OpPut
   Calls       : malloc, strcpy
@@ -458,7 +664,7 @@ short int storeTuple(space1_t *s, int f)
   Calls       : match
   Notes       : The tuple matching the wildcard expression & with the 
                 highest priority of all the matches is determined and 
-        returned.
+		returned.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification:
@@ -513,7 +719,7 @@ void deleteTuple(space1_t *s, tsh_get_it *r)
             p_q->cidport = r->cidport; /* for dspace. ys'96 */
                                        /*
 printf(" TSH: Captured host(%ul) port(%d) tpname(%s)\n", p_q->host,
-            p_q->cidport, p_q->name);
+			p_q->cidport, p_q->name);
 */
             p_q->length = s->length;
             p_q->priority = s->priority;
@@ -531,7 +737,7 @@ printf(" TSH: Captured host(%ul) port(%d) tpname(%s)\n", p_q->host,
     strcpy(p_q->name, s->name);
     /*
 printf(" TSH: Captured new host(%ul) port(%d) tpname(%s)\n", p_q->host,
-            p_q->cidport, p_q->name);
+			p_q->cidport, p_q->name);
 */
     p_q->length = s->length;
     p_q->priority = s->priority;
@@ -651,8 +857,8 @@ void deleteRequest(queue1_t *q)
   Prototype   : int storeRequest(tsh_get_it in)
   Parameters  : expr - name (wildcard expression) of the requested tuple
                 host - address of the reque*stor
-        port - port at which the tuple has to be delivered
-        cidport - the cid of the requester's host 
+		port - port at which the tuple has to be delivered
+		cidport - the cid of the requester's host 
   Returns     : 1 - request stored
                 0 - no space to store request
   Called by   : OpGet
@@ -762,8 +968,8 @@ int match(char *expr, char *name)
   Calls       : deleteSpace, deleteQueue, unmapTshport, exit
   Notes       : This function is invoked when TSH is terminated by the user
                 i.e. when TSH is started by the user and not by CID. 
-        This is the right way to kill TSH when it is started by user
-        (i.e. by sending SIGTERM).
+		This is the right way to kill TSH when it is started by user
+		(i.e. by sending SIGTERM).
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification:
@@ -806,20 +1012,20 @@ int guardf(u_long hostid, int procid)
   Prototype   : int main(int argc, char **argv)
   Parameters  : argv[1] -  "-s" --> read initialization data from socket [or]
                            "-a" --> read initialization data from command line
-        argv[2] -  socket descriptor #
-                   application id
-        argv[3] -  TSH name
+		argv[2] -  socket descriptor #
+		           application id
+		argv[3] -  TSH name
   Returns     : Never returns 
   Called by   : System
   Calls       : initFromsocket, initFromline, start, strcmp, exit
   Notes       : TSH can be started either by CID or from the shell prompt
                 by the user. In the former case, initialization data is
-        read from the socket (from DAC). Otherwise, data is read
-        from the command line. The switch -s or -a indicate the option.
+		read from the socket (from DAC). Otherwise, data is read
+		from the command line. The switch -s or -a indicate the option.
   Date        : April '93
   Coded by    : N. Isaac Rajkumar
   Modification: Modified TSH to read appid, name from command line.
-        February '13, updated by Justin Y. Shi
+		February '13, updated by Justin Y. Shi
 ---------------------------------------------------------------------------*/
 
 int main(int argc, char **argv)

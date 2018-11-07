@@ -1,5 +1,5 @@
-#include <sys/ipc.h> 
-#include <sys/shm.h> 
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -10,8 +10,7 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <unistd.h>
-
+#include "synergy.h"
 
 char *read_line();
 /*
@@ -630,50 +629,49 @@ void loop(void)
      @param argv Argument vector.
      @return status code
  */
-int shell_entry(int argc, char **argv, int outFd)
+int shell_entry(int argc, char **argv, int sigPip)
 {
-    //printf("shell launched, shell is going to read first line");
-    //char *line = read_line();
-    char *goOn = "go on", *stop = "stop";
-    // ftok to generate unique key 
-    key_t key1 = ftok("shared memory for tuple space",65), key2 = ftok("shared memory for output space",65);
+    char *line;
+    char ***cmds;
+    int status, cmdIdx;
+    int shellSig = SHELL_COMM_NEXT;
+    char *note = "\
+####################################################################################################################################################\n\
+#   This shell is modified from the shell implementation tutorial written by Stephen Brennan: https://brennan.io/2015/01/16/write-a-shell-in-c/    #\n\
+#   The piping and redirection functionalities are added to the shell.                                                                             #\n\
+#   This shell has the following limitations:                                                                                                      #\n\
+#   * Commands must be on a single line.                                                                                                           #\n\
+#   * Arguments must be separated by whitespace.                                                                                                   #\n\
+#   * No quoting arguments or escaping whitespace.                                                                                                 #\n\
+#   * Only builtins are: cd, help, exit.                                                                                                           #\n\
+#   * No syntax error checking.                                                                                                                    #\n\
+####################################################################################################################################################\n";
+    printf("%s", note);
 
-    // shmget returns an identifier in shmid 
-    int shmid1 = shmget(key1,1024,0666|IPC_CREAT); 
-    int shmid2 = shmget(key2,1024,0666|IPC_CREAT); 
-
-    // shmat to attach to shared memory 
-    char *tupleSpace = (char*) shmat(shmid1,(void*)0,0); 
-    char *outputSpace = (char*) shmat(shmid2,(void*)0,0); 
-    
-    /*
-    while (strcmp(line, stop) != 0)
+    do
     {
-        strcpy(outputSpace, tupleSpace);
-        write(outFd, goOn, strlen(goOn)+1);
-        printf("task finished, shell is going to read new line");
-        free(line);
+        printf("> ");
+        fflush(stdout);
+        shellSig = SHELL_COMM_NEXT;
+        write(sigPip, &shellSig, sizeof(int));
+
         line = read_line();
-    }
-    free(line);*/
-    //loop();
+        cmds = split_cmds(line);
+        status = execute(cmds);
 
-    char l1[100];
-    read(STDIN_FILENO, l1, 100);
-    while (strcmp(l1, "stop") != 0)
-    {
-        //printf("child get the line from parent: %s\n", tupleSpace);
-        strcpy(outputSpace, tupleSpace);
-        strcat(outputSpace, " child touch");
-        sleep(2);
-        write(STDOUT_FILENO, "done", strlen("done") + 1);
-        //printf("%s", "done");
-        read(STDIN_FILENO, l1, 100);
-    }
+        free(line);
+        cmdIdx = 0;
+        while (cmds[cmdIdx] != NULL)
+        {
+            free(cmds[cmdIdx]);
+            cmdIdx++;
+        }
+        free(cmds);
+        fflush(stdout);
 
-    //detach from shared memory
-    shmdt(tupleSpace);
-    shmdt(outputSpace);
+    } while (status);
 
+    shellSig = SHELL_COMM_END;
+    write(sigPip, &shellSig, sizeof(int));
     return EXIT_SUCCESS;
 }

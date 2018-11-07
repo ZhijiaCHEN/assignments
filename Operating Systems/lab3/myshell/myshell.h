@@ -1,1 +1,0 @@
-int shell_entry(int argc, char **argv, int outFd);
