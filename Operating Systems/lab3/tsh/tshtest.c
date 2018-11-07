@@ -44,7 +44,6 @@ int main(int argc, char **argv)
                 exit(1);
             }
             (*op_func[this_op])();
-            printf("client is going to close tshsocket before next command.");
             close(tshsock);
         } /* validate operation & process */
         else
@@ -59,10 +58,14 @@ void MyShellClient()
     int shellStatus;
     sng_int32 msgLen;
     char *messageBuf;
-
     system("clear");
+    char *note = "Please note the shell client does not support interaction with process that launched in the shell. So please do not execute any process that requires input.\nPress any key to continue...\n";
+    write(STDOUT_FILENO, note, strlen(note) + 1);
+    getchar();
+    getchar();
     do
     {
+
         //check shell's status and make sure the shell is asking for input
         if (!readn(tshsock, (char *)&shellStatus, sizeof(int)))
         {
@@ -334,7 +337,7 @@ u_short drawMenu()
     printf("\n\t\t\t 2. Get");
     printf("\n\t\t\t 3. Read");
     printf("\n\t\t\t 4. Exit (TSH)");
-    printf("\n\t\t\t 5. MyShell");
+    printf("\n\t\t\t 5. MyShell Client");
     printf("\n\t\t\t 6. Quit from this program");
 
     printf("\n\n\n\t\t\tEnter Choice : ");
