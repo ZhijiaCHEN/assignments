@@ -135,7 +135,7 @@ int deliver_shell_message(int status, char *message, int size)
 This function forks the shell, and passes the shell input and output between
 the shell and the client.
 ---------------------------------------------------------------------------*/
-void myshell_worker(void *arg)
+void *myshell_worker(void *arg)
 {
     int shellDataOut[2], shellDataIn[2], shellHeartBeat[2], pstatus;
     pid_t pid;
@@ -145,14 +145,14 @@ void myshell_worker(void *arg)
     if (pipe(shellDataIn) < 0)
     {
         deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
-        return;
+        return NULL;
     }
     if (pipe(shellDataOut) < 0)
     {
         close(shellDataIn[0]);
         close(shellDataIn[1]);
         deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
-        return;
+        return NULL;
     }
     if (pipe(shellHeartBeat) < 0)
     {
@@ -161,7 +161,7 @@ void myshell_worker(void *arg)
         close(shellDataOut[0]);
         close(shellDataOut[1]);
         deliver_shell_message(SHELL_COMM_END, pipErrMsg, strlen(pipErrMsg) + 1);
-        return;
+        return NULL;
     }
 
     pid = fork();
@@ -174,7 +174,7 @@ void myshell_worker(void *arg)
         close(shellHeartBeat[0]);
         close(shellHeartBeat[1]);
         deliver_shell_message(SHELL_COMM_END, forkErrMsg, strlen(forkErrMsg) + 1);
-        return;
+        return NULL;
     }
     if (pid == 0)
     {
@@ -244,10 +244,11 @@ void myshell_worker(void *arg)
         pthread_join(watch_thread, NULL);
         waitpid(pid, &pstatus, 0);
     }
+    return NULL;
 }
 
 /*  This function waits for shell to change status and send out its status signal via the hear beat pipe. The status signal could be either SHELL_COMM_END or SHELL_COMM_NEXT. If the watch dog fails to read status signal from the shell, it changes status to SHELL_COMM_END */
-void myshell_watchdog(void *arg)
+void *myshell_watchdog(void *arg)
 {
     shell_watch *w = (shell_watch *)arg;
     int statusTmp;
@@ -266,6 +267,7 @@ void myshell_watchdog(void *arg)
             pthread_mutex_unlock(&(w->statusMutex));
         }
     }
+    return NULL;
 }
 
 /*---------------------------------------------------------------------------
