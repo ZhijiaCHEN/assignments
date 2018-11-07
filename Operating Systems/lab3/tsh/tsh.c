@@ -95,14 +95,12 @@ int deliver_client_message(int shellDataInFd)
         return 0;
     }
     msgLen = ntohl(msgLen);
-
     message = (char *)malloc(msgLen);
     if (!readn(newsock, message, msgLen))
     {
         free(message);
         return 0;
     }
-
     if (write(shellDataInFd, message, msgLen) < 0)
     {
         free(message);
@@ -238,6 +236,7 @@ void myshell_worker(void *arg)
                 pthread_mutex_unlock(&(w.statusMutex));
             }
         }
+        deliver_shell_message(SHELL_COMM_END, buf, 0); //notify the client to end comminication with the shell
         fclose(dataOut);
         close(shellDataIn[1]);
         close(shellDataOut[0]);

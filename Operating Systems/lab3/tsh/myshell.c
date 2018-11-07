@@ -635,6 +635,18 @@ int shell_entry(int argc, char **argv, int sigPip)
     char ***cmds;
     int status, cmdIdx;
     int shellSig = SHELL_COMM_NEXT;
+    char *note = "\
+####################################################################################################################################################\n\
+#   This shell is modified from the shell implementation tutorial written by Stephen Brennan: https://brennan.io/2015/01/16/write-a-shell-in-c/    #\n\
+#   The piping and redirection functionalities are added to the shell.                                                                             #\n\
+#   This shell has the following limitations:                                                                                                      #\n\
+#   * Commands must be on a single line.                                                                                                           #\n\
+#   * Arguments must be separated by whitespace.                                                                                                   #\n\
+#   * No quoting arguments or escaping whitespace.                                                                                                 #\n\
+#   * Only builtins are: cd, help, exit.                                                                                                           #\n\
+#   * No syntax error checking.                                                                                                                    #\n\
+####################################################################################################################################################\n";
+    printf("%s", note);
 
     do
     {

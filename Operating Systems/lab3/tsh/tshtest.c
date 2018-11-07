@@ -10,10 +10,14 @@ int status;
 
 int main(int argc, char **argv)
 {
-    static void (*op_func[])() =
-        {
-            OpPut, OpGet, OpGet, OpExit};
+    static void (*op_func[])() = {
+        OpPut,
+        OpGet,
+        OpGet,
+        OpExit,
+        MyShellClient};
     u_short this_op;
+    u_short opcode;
 
     if (argc < 2)
     {
@@ -22,41 +26,31 @@ int main(int argc, char **argv)
     }
     while (TRUE)
     {
-        this_op = drawMenu();
+        this_op = drawMenu() - 1;
         if (this_op == 5)
         {
-            this_op = SHELL_OPCODE;
+            close(tshsock);
+            return 0;
         }
-        else
-        {
-            this_op = this_op + TSH_OP_MIN - 1;
-        }
-        if ((this_op >= TSH_OP_MIN && this_op <= TSH_OP_MAX) || this_op == SHELL_OPCODE)
+        opcode = (this_op == 4) ? SHELL_OPCODE : (this_op + TSH_OP_MIN);
+        if ((opcode >= TSH_OP_MIN && opcode <= (TSH_OP_MIN + 2)) || opcode == SHELL_OPCODE)
         {
             //this_op = htons(this_op);
             tshsock = connectTsh(atoi(argv[1]));
             // Send this_op to TSH
-            if (!writen(tshsock, (char *)&this_op, sizeof(this_op)))
+            if (!writen(tshsock, (char *)&opcode, sizeof(opcode)))
             {
                 perror("main::writen\n");
                 exit(1);
             }
-            printf("sent tsh op \n");
-            // Response processing
-            if (this_op == SHELL_OPCODE)
-            //if (this_op == htons(SHELL_OPCODE))
-            {
-                MyShellClient();
-            }
-            else
-            {
-                //(*op_func[ntohs(this_op) - TSH_OP_MIN])();
-                (*op_func[this_op - TSH_OP_MIN])();
-            }
+            (*op_func[this_op])();
+            printf("client is going to close tshsocket before next command.");
             close(tshsock);
         } /* validate operation & process */
         else
-            return 0;
+        {
+            printf("invalid input.\n");
+        }
     }
 }
 
@@ -65,6 +59,8 @@ void MyShellClient()
     int shellStatus;
     sng_int32 msgLen;
     char *messageBuf;
+
+    system("clear");
     do
     {
         //check shell's status and make sure the shell is asking for input
@@ -117,7 +113,6 @@ void MyShellClient()
             }
             free(messageBuf);
         }
-
     } while (shellStatus != SHELL_COMM_END); //exit only when shell notifies the client to end the comminication, whether the shell quits by the request of user or due to any error.
 }
 
