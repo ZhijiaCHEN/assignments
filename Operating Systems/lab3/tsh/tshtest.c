@@ -99,7 +99,7 @@ void MyShellClient()
         //the shell only asks for user input when the shell status is SHELL_COMM_NEXT
         if (shellStatus == SHELL_COMM_NEXT)
         {
-            messageBuf = readline(NULL);
+            messageBuf = read_line(NULL);
             msgLen = strlen(messageBuf) + 1;
             msgLen = htonl(msgLen);
             if (!writen(tshsock, (char *)&msgLen, sizeof(msgLen)))

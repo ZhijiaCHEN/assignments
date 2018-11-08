@@ -4,7 +4,7 @@
 /*.........................................................................*/
 
 #include "synergy.h"
-#include <readline/readline.h>
+#include "myshell.h"
 
 char login[NAME_LEN];
 

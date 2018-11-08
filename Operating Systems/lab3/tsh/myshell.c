@@ -8,11 +8,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "synergy.h"
 
-char *read_line();
+char *read_line(char *prompt);
 /*
     List of builtin commands, followed by their corresponding functions.
  */
@@ -462,7 +460,7 @@ int execute(char ***cmds)
      @brief Read a line of input from stdin.
      @return The line from stdin.
  */
-char *read_line(void)
+char *read_line(char *prompt)
 {
     int bufsize = INPUT_BUFSIZE;
     int position = 0;
@@ -474,7 +472,10 @@ char *read_line(void)
         fprintf(stderr, "myshell: allocation error\n");
         exit(EXIT_FAILURE);
     }
-
+    if (prompt)
+    {
+        printf("%s\n", prompt);
+    }
     while (1)
     {
         // Read a character
@@ -607,7 +608,7 @@ void loop(void)
     do
     {
         printf("> ");
-        line = read_line();
+        line = read_line(NULL);
         cmds = split_cmds(line);
         status = execute(cmds);
 
@@ -655,7 +656,7 @@ int shell_entry(int argc, char **argv, int sigPip)
         shellSig = SHELL_COMM_NEXT;
         write(sigPip, &shellSig, sizeof(int));
 
-        line = read_line();
+        line = read_line(NULL);
         cmds = split_cmds(line);
         status = execute(cmds);
 
