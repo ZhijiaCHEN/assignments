@@ -10,54 +10,255 @@
 
 \paragraph{3.1} The base performance is $11+3+4+10+3+2+2+1+1=37$ cycles per loop iteration.
 
-\paragraph{3.14} 
-
-\begin{table}[ht!]
-\begin{center}
-\begin{tabular}{l|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+\paragraph{3.14 a.} As shown in the following table, unscheduled instruction takes 19 clock cycles per loop iteration, while scheduled instruction takes 13 clock cycles. So the scheduled instruction is 31.58\% faster, and the clock should be 31.58\% faster for the unscheduled instruction to match the performance of scheduled instruction.
+\begin{figure}[!ht]
+\makebox[1 \textwidth][c]{
+\resizebox{0.9 \textwidth}{!}{
+\begin{tabular}{c|l|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
     \toprule
     \textbf{clock cycle}&\textbf{scheduled instruction}&\textbf{unscheduled instruction}\\
     \hline
-    1&addi x4,x1,#800&addi x4,x1,#800\\
+    1&addi x4,x1,\#800&addi x4,x1,\#800\\
     \hline
-    1&fld F2,0(x1)&1&3\\
+    2&fld F2,0(x1)&fld F2,0(x1)\\
     \hline
-    1&fmul.d F4,F2,F0&2&IF&ID&EX&WB&\\
+    3&stall&fld F6,0(x2)\\
     \hline
-    i+2&&&Stall&IF&ID&EX&WB&\\
+    4&fmul.d F4,F2,F0&fmul.d F4,F2,F0\\
     \hline
-    i+3&&&&&IF&ID&EX&WB\\
+    5&fld F2,0(x1)&addi x1,x1,\#8\\
+    \hline
+    6&stall&addi x2,x2,\#8\\
+    \hline
+    7&stall&sltu x3,x1,x4\\
+    \hline
+    8&stall&stall\\
+    \hline
+    9&stall&stall\\
+    \hline
+    10&fadd.d F6,F4,F6&fadd.d F6,F4,F6\\
+    \hline
+    11&stall&bnez x3,foo\\
+    \hline
+    12&stall&stall\\
+    \hline
+    13&stall&stall\\
+    \hline
+    14&fsd F6,0(X2)&fsd F6,-8(X2)\\
+    \hline
+    15&addi x1,x1,\#8&fld F2,0(x1)\\
+    \hline
+    16&addi x2,x2,\#8&fld F6,0(x2)\\
+    \hline
+    17&sltu x3,x1,x4&fmul.d F4,F2,F0\\
+    \hline
+    18&stall x3,x1,x4&addi x1,x1,\#8\\
+    \hline
+    19&bnez x3,foo&sltu x3,x1,x4\\
+    \hline
+    20&stall&stall\\
+    \hline
+    21&fld F2,0(x1)&stall\\
+    \hline
+    22&stall&fadd.d F6,F4,F6\\
+    \hline
+    23&fmul.d F4,F2,F0&bnez x3,foo\\
+    \hline
+    24&...&...\\
     \bottomrule
+\end{tabular}
+}
+}
+\end{figure}
+
+\paragraph{3.14 b.} As shown in the following table, the loops need to be unrolled three times. The three loops take 19 clock cycles, so each iteration now takes 6.33 cycles.
+
+\begin{figure}[!ht]
+    \centering
+    %\makebox[1 \textwidth][c]{
+    %\resizebox{0.9 \textwidth}{!}{
+    \begin{tabular}{c|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \toprule
+        \textbf{clock cycle}&\textbf{scheduled instruction}\\
+        \hline
+        1&add    x4,x1,\#800\\
+        \hline
+        2&fld    F2,0(x1)\\
+        \hline
+        3&fld    F6,0(x2)\\
+        \hline
+        4&fmul.d    F4,F2,F0\\
+        \hline
+        5&fld    F2,8(x1)\\
+        \hline
+        6&fld    F8,8(x2)\\
+        \hline
+        7&fmul.d    F10,F2,F0\\
+        \hline
+        8&fld    F2,16(x1)\\
+        \hline
+        9&fld    F12,16(x2)\\
+        \hline
+        10&fmul.d    F14,F2,F0\\
+        \hline
+        11&fadd.d    F6,F4,F6\\
+        \hline
+        12&addi    x1,x1,\#24\\
+        \hline
+        13&fadd.d    F8,F10,F8\\
+        \hline
+        14&addi    x2,x2,\#24\\
+        \hline
+        15&sltu    x3,x1,x4\\
+        \hline
+        16&fadd.d    F12,F14,F12\\
+        \hline
+        17&fsd    F6,-24(X2)\\
+        \hline
+        18&fsd    F8,-16(X2)\\
+        \hline
+        19&bnez    x3,foo\\
+        \hline
+        20&fsd    F12,-8(X2)\\
+        \hline
+        21&...\\
+        \bottomrule
     \end{tabular}
-\end{center}
-\end{table}
+    %}
+    %}
+    \end{figure}
+\newpage
 
-\subparagraph{a.} What is the average memory access time of the current cache (in cycles) versus the way-predicted cache?
+\paragraph{3.15 a} See the following table.
 
-Suppose a cache hit time is 2 cycles for current cache. And for the way-predicated cashe, the hit time is 1 cycle if it prediction success and 3 cycles otherwise.
+\begin{figure}[!ht]
+    \makebox[1 \textwidth][c]{
+    \resizebox{1 \textwidth}{!}{
+    \begin{tabular}{c|l|c|c|c|c|p{2.5cm}} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \toprule
+        \textbf{Iteration}&\textbf{Instruction}&\textbf{Issues}&\textbf{Executes}&\textbf{Memory access}&\textbf{Write CDB}&\textbf{Comment}\\
+        \hline
+        1&fld F2,0(x1)&1&2&2&3&\\
+        \hline
+        1&fmul.d F4,F2,F0&2&4& &19&wait for F2\\
+        \hline
+        1&fld F2,0(x1)&3&4&4&5& \\
+        \hline
+        1&fadd.d F6,F4,F6&4&20& &30&wait for F4\\
+        \hline
+        1&fsd F6,0(X2)&5&31&31&&wait for F6\\
+        \hline
+        1&addi x1,x1,\#8&6&7& &8& \\
+        \hline
+        1&addi x2,x2,\#8&7&8& &9& \\
+        \hline
+        1&sltu x3,x1,x4&8&9& &10& \\
+        \hline
+        1&bnez x3,foo&9&11& &&wait for x3\\
+        \hline
+        2&fld F2,0(x1)&10&12&12&13&wait for bnez\\
+        \hline
+        2&fmul.d F4,F2,F0&11&19& &34&wait for F2 and \newline FP multiplier\\
+        \hline
+        2&fld F2,0(x1)&12&13&&14& \\
+        \hline
+        2&fadd.d F6,F4,F6&13&35& &45&wait for F4\\
+        \hline
+        2&fsd F6,0(X2)&14&46&46&&wait for F6\\
+        \hline
+        2&addi x1,x1,\#8&15&16& &17& \\
+        \hline
+        2&addi x2,x2,\#8&16&17& &18& \\
+        \hline
+        2&sltu x3,x1,x4&17&18& &19& \\
+        \hline
+        2&bnez x3,foo&18&20& &&wait for x3\\
+        \hline
+        3&fld F2,0(x1)&19&21&21&22&wait for bnez\\
+        \hline
+        3&fmul.d F4,F2,F0&20&34& &49&wait for F2 and \newline FP multiplier\\
+        \hline
+        3&fld F2,0(x1)&21&22&22&23& \\
+        \hline
+        3&fadd.d F6,F4,F6&22&50& &60&wait for F4\\
+        \hline
+        3&fsd F6,0(X2)&23&61&61&&wait for F6\\
+        \hline
+        3&addi x1,x1,\#8&24&25& &26& \\
+        \hline
+        3&addi x2,x2,\#8&25&26& &27& \\
+        \hline
+        3&sltu x3,x1,x4&26&27& &28& \\
+        \hline
+        3&bnez x3,foo&27&29& &&wait for x3\\
+        \bottomrule
+    \end{tabular}
+    }
+    }
+    \end{figure}
+    \newpage
 
-Average memroy access time for current cache: 2 + 0.030 $\times$ 20 = 2.6 cycles.
+\paragraph{3.17} 
 
-Average memroy access time for way-predicated cache: $0.97\times(0.8\times1+0.2\times3)+0.03\times(3+20)=2.048$ cycles.
+For the correlating predictor, as shown in the following table, there are 3 misprediction, so the misprediction rate is 33.33\%.
+\begin{figure}[!ht]
+    \makebox[1 \textwidth][c]{
+    \resizebox{0.9 \textwidth}{!}{
+    \begin{tabular}{c|c|c|c|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \toprule
+        \textbf{Branch PC mod 4}&\textbf{Entry}&\textbf{Prediction}&\textbf{Outcome}&\textbf{Update}\\
+        \hline
+        2&4&T&T&None\\
+        \hline
+        3&6&NT&NT&change prediction to "NT"\\
+        \hline
+        1&2&NT&NT&None\\
+        \hline
+        3&7&NT&NT&None\\
+        \hline
+        1&3&T&NT&change prediction to "T with one misprediction"\\
+        \hline
+        2&4&T&T&None\\
+        \hline
+        1&3&T&NT&change prediction to "NT"\\
+        \hline
+        2&4&T&T&None\\
+        \hline
+        3&7&NT&T&change prediction to "NT with one misprediction"\\
+        \bottomrule
+    \end{tabular}
+    }
+    }
+    \end{figure}
 
-\subparagraph{b.} If all other components could operate with the faster way-predicted cache cycle time (including the main memory), what would be the impact on performance from using the way-predicted cache?
-
-$\frac{2.6}{2.048}=1.27$, so the performance could be 27\% faster.
-
-
-
-\paragraph{3.15} Consider the usage of critical word first and early restart on L2 cache misses. Assume a 1 MB L2 cache with 64-byte blocks and a refill path that is 16 bytes wide. Assume that the L2 can be written with 16 bytes every 4 processor cycles, the time to receive the first 16 byte block from the memory controller is 120 cycles, each additional 16 byte block from main memory requires 16 cycles, and data can be bypassed directly into the read port of the L2 cache. Ignore any cycles to transfer the miss request to the L2 cache and the requested data to the L1 cache.
-
-\subparagraph{a.} How many cycles would it take to service an L2 cache miss with and without critical word first and early restart?
-
-Each block contains 4 words. For early restart, suppose each word has the same possibility to be the expected one.
-
-Without critical word first and early restart, it requires 120 cycles for the first word, and 16 cycles for each of the following 3 words, thus $120+3\times16=168$ cycles.
-
-With critical word first, it requires 120 cycles for the expected word.
-
-With early restart, it requires 120 cycles for the first word, and the expected cycles to wait for the remaining ones. So the expected cycles = $120 + 0.25\times(0 + 16 + 32 + 48) = 148$ cycles.
-
-\paragraph{3.17} You are designing a write buffer between a write-through L1 cache and a write-back L2 cache. The L2 cache write data bus is 16 B wide and can perform a write to an independent cache address every four processor cycles.
-
+For the local predictor, as shown in the following table, there are 4 misprediction, so the misprediction rate is 44.44\%.
+\begin{figure}[!ht]
+    \makebox[1 \textwidth][c]{
+    \resizebox{0.9 \textwidth}{!}{
+    \begin{tabular}{c|c|c|c|l} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        \toprule
+        \textbf{Branch PC mod 4}&\textbf{Entry}&\textbf{Prediction}&\textbf{Outcome}&\textbf{Update}\\
+        \hline
+        0&0&T&T&change prediction to "T"\\
+        \hline
+        1&4&T&NT&change prediction to "T with one misprediction"\\
+        \hline
+        1&5&T&NT&change prediction to "NT"\\
+        \hline
+        1&7&NT&NT&None\\
+        \hline
+        1&7&NT&NT&None\\
+        \hline
+        0&0&T&T&None\\
+        \hline
+        1&7&NT&NT&None\\
+        \hline
+        0&0&T&T&None\\
+        \hline
+        1&7&NT&T&change prediction to "NT with one misprediction"\\
+        \bottomrule
+    \end{tabular}
+    }
+    }
+    \end{figure}
 \end{document}
