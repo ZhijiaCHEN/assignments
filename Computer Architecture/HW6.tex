@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{listings}
+\title{HW6}
+\author{Zhijiia Chen}
+\begin{document}
+\maketitle
+
+\paragraph{4.10} For the vector computer, the memory acess of the vector portion of codes requires $\frac{200 MB+100 MB}{20 GB/s}=10 ms$, and the execution of scalar portion of codes requires 400 ms. Suppose that vector computations are overlapped with memory acess, then the total time for the vector computer = 410 ms.
+
+For the hybrid computer, the memory acess of the vector portion of codes requires $\frac{200 MB+100 MB}{150 GB/s}=2 ms$, and the execution of scalar portion of codes requires 400 ms, the I/O transering data from host memory to GPU local memory requires $\frac{200 MB+100 MB}{10 GB/s}=30 ms$. Suppose that GPU vector memory access is overlapped with memory transering, then the total time for the vector computer = 430 ms.
+
+\paragraph{4.13} 
+
+\subparagraph{a.} $1.5 GHz\times 0.85\times 0.8\times 0.7\times \frac{1}{4}\times 32\times 10 = 57.12$ GFLOP/s.
+\end{document}
