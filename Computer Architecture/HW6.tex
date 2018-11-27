@@ -17,4 +17,63 @@ For the hybrid computer, the memory acess of the vector portion of codes require
 \paragraph{4.13} 
 
 \subparagraph{a.} $1.5 GHz\times 0.85\times 0.8\times 0.7\times \frac{1}{4}\times 32\times 10 = 57.12$ GFLOP/s.
+
+\subparagraph{b.}
+\textbf{(1)} By increasing the number of lanes to 16, each SIMD instruction can produce 32 results in 2 cycles. So the improved throughput = $1.5 GHz\times 0.85\times 0.8\times 0.7\times \frac{1}{2}\times 32\times 10 = 114.24$ GFLOP/s, and the speedup is 2.
+
+\textbf{(2)} The improved throughput = $1.5 GHz\times 0.85\times 0.8\times 0.7\times \frac{1}{4}\times 32\times 15 = 85.68$ GFLOP/s, and the speedup is 1.5.
+
+\textbf{(3)} The improved throughput = $1.5 GHz\times 0.95\times 0.8\times 0.7\times \frac{1}{4}\times 32\times 10 = 63.84$ GFLOP/s, and the speedup is 1.118.
+
+\paragraph{4.14}
+
+\subparagraph{b.}
+
+True dependences: 
+
+S2 depends on S1 through A[i].
+
+S4 depends on S3 through A[i].
+
+Output dependences:
+
+WAW hazard between S1 and S3.
+
+Antidependences:
+
+WAR hazard between S3 and S4.
+
+Rewritten codes:
+
+\begin{lstlisting}[mathescape=true]
+    for (i = 0; i < 100; i++)
+    {
+        A[i] = A[i] * B[i]; /*S1*/
+        B[i] = A[i] + c; /*S2*/
+        E[i] = C[i] * c; /*S3*/
+        F[i] = D[i] * E[i]; /*S4*/
+    }
+\end{lstlisting}
+
+\subparagraph{c.}
+
+There are dependences between S1 and S2 in iteration i and i + 1 on B, so this loop is not parallel. To make it parallel, we can rewrite the code as following:
+
+\begin{lstlisting}[mathescape=true]
+    for (i = 0; i < 100; i++)
+    {
+        B[i+1] = C[i] * D[i]; /*S2*/
+    }
+
+    for (i = 0; i < 100; i++)
+    {
+        A[i] = A[i] * B[i]; /*S1*/
+    }
+\end{lstlisting}
+
+The second loop must run after the first loop, and all iterations in each loop can run in parallel.
+\paragraph{4.16}
+
+Peak throughput = $1.5\times 16\times 16 = 384$ GFLOPS/s. Suppose each single precision operation unit operates on 2 four-byte operands, and outputs one four-byte result, then the throughput requires 12 bytes/FLOP $\times$ 384 GFLOPS/s = 4.608 TB/s of memory bandwidth, which is not suitable for the given bandwidth.
+
 \end{document}
