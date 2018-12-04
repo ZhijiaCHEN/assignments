@@ -144,21 +144,21 @@ Table~\ref{tab:dijkstra} shows the result of each step using Dijkstra to find th
     \begin{center}
       \caption{Find shortest path using Dijkstra algorithm.}
       \label{tab:dijkstra}
-      \begin{tabular}{c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \begin{tabular}{c|c|c|c|c|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
         \toprule
-        \textbf{Picked node}& \textbf{A}&\textbf{B}&\textbf{C}&\textbf{D}&\textbf{E}&\textbf{F}\\
+        \textbf{Picked node}& \textbf{N'}& \textbf{A}&\textbf{B}&\textbf{C}&\textbf{D}&\textbf{E}&\textbf{F}\\
         \hline
-        \textbf{A}&-&A, 3&A, 7&$\infty$&$\infty$&$\infty$\\
+        A&{A}&-&A, 3&A, 7&$\infty$&$\infty$&$\infty$\\
         \hline
-        \textbf{B}&&-&A, 7&B, 4&B, 8&B, 11\\
+        B&{A, B}&&-&A, 7&B, 4&B, 8&B, 11\\
         \hline
-        \textbf{D}&&&D, 6&-&B, 8&B, 11\\
+        D&{A, B, D}&&&D, 6&-&B, 8&B, 11\\
         \hline
-        \textbf{C}&&&-&&B, 8&B, 11\\
+        C&{A, B, C, D}&&&-&&B, 8&B, 11\\
         \hline
-        \textbf{E}&&&&&-&B, 11\\
+        E&{A, B, C, D, E}&&&&&-&B, 11\\
         \hline
-        \textbf{F}&&&&&&-\\
+        F&{A, B, C, D, E, F}&&&&&&-\\
         \bottomrule
       \end{tabular}
     \end{center}
