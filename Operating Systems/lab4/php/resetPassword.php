@@ -23,7 +23,7 @@
 	$auth_data = "select * from Visitors where Email= '$Email'";
 	$result = mysqli_query($con, $auth_data);
 	if ($result->num_rows > 0) {
-	$Message = "Please click the link to Change Password: http://cis-linux2.temple.edu/~tug87941/Final_Project/php/setpassworddata.php?Email=$Email";	
+	$Message = "Please click the link to Change Password: http://cis-linux2.temple.edu/~tuh17884/Final_Project/php/setpassworddata.php?Email=$Email";	
 
 	$mail= new PHPMailer(true);
 	try { 

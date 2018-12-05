@@ -50,7 +50,7 @@
 			$mail->setFrom("zhijia.chen@temple.edu", "Zhijia Chen"); // Change to your email and name
 			$mail->addReplyTo("zhijia.chen@temple.edu","Zhijia Chen"); // Change to your email and name
 			print "After setting up mail from and reply <br>"; 	
-			$msg = "Please click link to complete registration: http://cis-linux2.temple.edu/~tug87941/Final_Project/php/authenticate.php?Email=$Email&Acode=$Acode";
+			$msg = "Please click link to complete registration: http://cis-linux2.temple.edu/~tuh17884/Final_Project/php/authenticate.php?Email=$Email&Acode=$Acode";
 			$mail->addAddress($Email,"$FirstName $LastName");
 			$mail->Subject = "Welcome";
 			$mail->Body = $msg;
