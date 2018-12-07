@@ -29,6 +29,8 @@ shell_out_list *shellOutListTail = NULL;
 int lsh_cd(char **args);
 int lsh_help(char **args);
 int lsh_exit(char **args);
+int lsh_show_process(char **args);
+int lsh_clear_process(char **args);
 
 /*
   List of builtin commands, followed by their corresponding functions.
@@ -36,12 +38,16 @@ int lsh_exit(char **args);
 char *builtin_str[] = {
     "cd",
     "help",
-    "exit"};
+    "exit",
+    "show-process",
+    "clear-process"};
 
 int (*builtin_func[])(char **) = {
     &lsh_cd,
     &lsh_help,
-    &lsh_exit};
+    &lsh_exit,
+    &lsh_show_process,
+    &lsh_clear_process};
 
 int lsh_num_builtins()
 {
@@ -122,6 +128,7 @@ int lsh_show_process(char **args)
                 shell_out = *(ptr->shellOutPtr);
                 return 0;
             }
+            ptr = ptr->next;
         }
         sprintf(shell_out.stdout, "Pid # %d does not exist.\n", pid);
     }
@@ -129,11 +136,19 @@ int lsh_show_process(char **args)
     {
         char buf[32];
         shell_out_list *ptr = shellOutListHead;
-        while (ptr)
+
+        if (ptr)
         {
-            sprintf(shell_out.stdout, "Pid #: %d, status: %d\n", ptr->shellOutPtr->pid, ptr->shellOutPtr->status);
-            strcat(shell_out.stdout, buf); // let's not worry about shell_out.stdout overflow for now.
-            ++ptr;
+            while (ptr)
+            {
+                sprintf(buf, "Pid #: %d, status: %d\n", ptr->shellOutPtr->pid, ptr->shellOutPtr->status);
+                strcat(shell_out.stdout, buf); // let's not worry about shell_out.stdout overflow for now.
+                ptr = ptr->next;
+            }
+        }
+        else
+        {
+            sprintf(shell_out.stdout, "process list is empty.\n");
         }
     }
     return 0;
@@ -146,15 +161,30 @@ int lsh_show_process(char **args)
  */
 int lsh_clear_process(char **args)
 {
-    shell_out_list *ptr = shellOutListHead;
-    while (ptr)
+    shell_out_list *previous = NULL, *this = shellOutListHead, *next;
+    int cnt = 0;
+    while (this)
     {
-        if (ptr->shellOutPtr->status != -1)
+        if (this->shellOutPtr->status != -1) //process has finished
         {
-            shellOutListHead = shellOutListHead->next; // incorrect!!!!
+            next = this->next;
+            if (this == shellOutListHead)
+                shellOutListHead = next;
+            if (previous)
+                previous->next = next;
+            free(this->shellOutPtr);
+            free(this);
+            this = next;
+            ++cnt;
         }
-        ++ptr;
+        else // process is still running, keep it
+        {
+            previous = this;
+            this = this->next;
+        }
     }
+    shellOutListTail = previous;
+    sprintf(shell_out.stdout, "%d item cleared\n", cnt);
     return 0;
 }
 
@@ -172,6 +202,7 @@ void wait_child(shell_out_list *shellOutElmPtr)
     } while (!WIFEXITED(*status) && !WIFSIGNALED(*status));
 
     /* Read from child’s stdout, read after child process has finished */
+    bzero(shellOutElmPtr->shellOutPtr->stdout, sizeof(shellOutElmPtr->shellOutPtr->stdout)); // Remove all contents
     int count = read(shellOutElmPtr->fd, shellOutElmPtr->shellOutPtr->stdout, sizeof(shellOutElmPtr->shellOutPtr->stdout));
     if (count == -1)
     {

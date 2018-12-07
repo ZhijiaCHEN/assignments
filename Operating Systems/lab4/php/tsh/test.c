@@ -8,6 +8,7 @@
 // Driver code to test above function
 int main()
 {
-    sleep(3);
+    sleep(5);
+    printf("hello world!\n");
     return 0;
 }

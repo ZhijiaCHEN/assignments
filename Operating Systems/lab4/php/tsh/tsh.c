@@ -79,7 +79,7 @@ void start()
 void OpShell()
 {
     char ***cmds;
-
+    bzero(shell_out.stdout, sizeof(shell_out.stdout)); // Remove all contents
     // read shell_in
     if (!readn(newsock, (char *)&shell_in, sizeof(shell_in)))
         return;
