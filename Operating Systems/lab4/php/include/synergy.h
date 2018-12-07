@@ -388,7 +388,6 @@ typedef struct shell_out_list
     int fd; // copy cmd output from this file descriptor to shellOut.stdout
 } shell_out_list;
 
-shell_out_list *shellOutListTail = NULL;
 /*
   PMD specific data
 */

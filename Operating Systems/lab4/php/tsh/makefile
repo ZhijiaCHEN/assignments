@@ -1,7 +1,7 @@
 SYS_LINK=-L/usr/lib
 INCS = -I../include
 OBJS = ../obj 
-FLAGS = -g 
+FLAGS = -g -pthread
 cc = gcc
 
 all : tsh tshtest 

@@ -17,7 +17,11 @@
 #include <string.h>
 #include <fcntl.h>
 #include <memory.h>
+#include <pthread.h>
 #include "synergy.h"
+
+shell_out_list *shellOutListHead = NULL;
+shell_out_list *shellOutListTail = NULL;
 
 /*
   Function Declarations for builtin shell commands:
@@ -101,6 +105,60 @@ int lsh_exit(char **args)
 }
 
 /**
+   @brief Builtin command: show the infomation of a particular process or show summary (pid, status) of all processes that are executed in the background.
+   @param args List of args.  Not examined.
+   @return Always returns 1, to continue execution.
+ */
+int lsh_show_process(char **args)
+{
+    if (args[1]) // show the pid, status, outputs of the pid given by args[1]
+    {
+        int pid = atoi(args[1]);
+        shell_out_list *ptr = shellOutListHead;
+        while (ptr)
+        {
+            if (ptr->shellOutPtr->pid == pid)
+            {
+                shell_out = *(ptr->shellOutPtr);
+                return 0;
+            }
+        }
+        sprintf(shell_out.stdout, "Pid # %d does not exist.\n", pid);
+    }
+    else // show a sumary (pid, status) of all processes that run in the background
+    {
+        char buf[32];
+        shell_out_list *ptr = shellOutListHead;
+        while (ptr)
+        {
+            sprintf(shell_out.stdout, "Pid #: %d, status: %d\n", ptr->shellOutPtr->pid, ptr->shellOutPtr->status);
+            strcat(shell_out.stdout, buf); // let's not worry about shell_out.stdout overflow for now.
+            ++ptr;
+        }
+    }
+    return 0;
+}
+
+/**
+   @brief Builtin command: clear the stored information of processes that have exited.
+   @param args List of args.  Not examined.
+   @return Always returns 1, to continue execution.
+ */
+int lsh_clear_process(char **args)
+{
+    shell_out_list *ptr = shellOutListHead;
+    while (ptr)
+    {
+        if (ptr->shellOutPtr->status != -1)
+        {
+            shellOutListHead = shellOutListHead->next; // incorrect!!!!
+        }
+        ++ptr;
+    }
+    return 0;
+}
+
+/**
     @wait for a child process to return and copy its output to the given shell_out data structure
     @param pid the child pid to wait
     @return void
@@ -121,6 +179,8 @@ void wait_child(shell_out_list *shellOutElmPtr)
     }
 
     close(shellOutElmPtr->fd);
+    if (shellOutListTail)
+        printf("child output: %s\n", shellOutListTail->shellOutPtr->stdout);
 }
 
 /**
@@ -583,17 +643,25 @@ int lsh_execute(char ***cmds)
         while (cmds[i])
             ++i;
         j = 0;
-        while (cmds[i][j])
+        while (cmds[i - 1][j])
             ++j;
-        if (cmds[i][j - 1] == '&') // run the cmd in the background
+        if (cmds[i - 1][j - 1][0] == '&') // run the cmd in the background
         {
             pthread_t wait_thread;
 
             shellOutListElmPtr->shellOutPtr = (struct shell_out_t *)malloc(sizeof(struct shell_out_t));
             shellOutListElmPtr->shellOutPtr->pid = pid;
+            shellOutListElmPtr->shellOutPtr->status = -1; // use -1 to denote running status of a process
+            strcpy(shellOutListElmPtr->shellOutPtr->stdout, "running.");
 
             if (shellOutListTail)
+            {
                 shellOutListTail->next = shellOutListElmPtr;
+            }
+            else
+            {
+                shellOutListHead = shellOutListElmPtr;
+            }
             shellOutListTail = shellOutListElmPtr;
             pthread_create(&wait_thread, NULL, wait_child, shellOutListElmPtr); //the thread will wait the child process and copy its output to the shell output list
             pthread_detach(wait_thread);
