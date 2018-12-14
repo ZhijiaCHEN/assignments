@@ -83,9 +83,13 @@ void OpShell()
     // read shell_in
     if (!readn(newsock, (char *)&shell_in, sizeof(shell_in)))
         return;
-    printf("received cmd (%s) host(%lu) port(%d)\n", shell_in.cmd, shell_in.host, shell_in.port);
+    //printf("received cmd (%s) host(%lu) port(%d)\n", shell_in.cmd, shell_in.host, shell_in.port);
     cmds = split_cmds(shell_in.cmd);
-    lsh_execute(cmds); // This call will wait and save the output to shell_out.stdout
+
+    // if the cmds needs to be run in the background ( indicated by & at the end), this call will return immediately with the pid that running the cmds, and the outputs of the cmds will be saved to a shell out put list (shell_out_list) in lsh.c.
+    // otherwise this call will wait and save the output to shell_out.stdout,
+    lsh_execute(cmds);
+
     if (!getcwd(shell_out.cwd, sizeof(shell_out.cwd)))
         strcpy(shell_out.cwd, "getcwd failure?? ");
     if (getlogin_r(shell_out.username, sizeof(shell_out.username)) < 0)
@@ -94,10 +98,10 @@ void OpShell()
         perror("getlogin_r failure?");
     }
     // write back shell_out
-    printf("shell_out.pid = %d\n", shell_out.pid);
-    printf("shell_out.stdout = %s\n", shell_out.stdout);
+    //printf("shell_out.pid = %d\n", shell_out.pid);
+    //printf("shell_out.stdout = %s\n", shell_out.stdout);
     writen(newsock, (char *)&shell_out, sizeof(shell_out));
-    printf("Finishing writing shell_out?? \n");
+    //printf("Finishing writing shell_out?? \n");
     return;
 }
 

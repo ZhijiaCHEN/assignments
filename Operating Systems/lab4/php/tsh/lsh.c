@@ -110,7 +110,7 @@ int lsh_exit(char **args)
     return 0;
 }
 
-/**
+/** Added by Zhijia Dec. 2018
    @brief Builtin command: show the infomation of a particular process or show summary (pid, status) of all processes that are executed in the background.
    @param args List of args.  Not examined.
    @return Always returns 1, to continue execution.
@@ -130,7 +130,7 @@ int lsh_show_process(char **args)
             }
             ptr = ptr->next;
         }
-        sprintf(shell_out.stdout, "Pid # %d does not exist.\n", pid);
+        sprintf(shell_out.stdout, "pid # %d does not exist.\n", pid);
     }
     else // show a sumary (pid, status) of all processes that run in the background
     {
@@ -141,7 +141,7 @@ int lsh_show_process(char **args)
         {
             while (ptr)
             {
-                sprintf(buf, "Pid #: %d, status: %d\n", ptr->shellOutPtr->pid, ptr->shellOutPtr->status);
+                sprintf(buf, "pid #: %d, status: %d\n", ptr->shellOutPtr->pid, ptr->shellOutPtr->status);
                 strcat(shell_out.stdout, buf); // let's not worry about shell_out.stdout overflow for now.
                 ptr = ptr->next;
             }
@@ -154,7 +154,7 @@ int lsh_show_process(char **args)
     return 0;
 }
 
-/**
+/** Added by Zhijia Dec. 2018
    @brief Builtin command: clear the stored information of processes that have exited.
    @param args List of args.  Not examined.
    @return Always returns 1, to continue execution.
@@ -188,18 +188,19 @@ int lsh_clear_process(char **args)
     return 0;
 }
 
-/**
+/** Added by Zhijia Dec. 2018
     @wait for a child process to return and copy its output to the given shell_out data structure
     @param pid the child pid to wait
     @return void
 **/
 void wait_child(shell_out_list *shellOutElmPtr)
 {
-    int *status = &shellOutElmPtr->shellOutPtr->status;
-    do
-    {
-        waitpid(shellOutElmPtr->shellOutPtr->pid, status, WUNTRACED);
-    } while (!WIFEXITED(*status) && !WIFSIGNALED(*status));
+    //int *status = &shellOutElmPtr->shellOutPtr->status;
+    //do
+    //{
+    //    waitpid(shellOutElmPtr->shellOutPtr->pid, status, WUNTRACED);
+    //} while (!WIFEXITED(*status) && !WIFSIGNALED(*status));
+    waitpid(shellOutElmPtr->shellOutPtr->pid, &shellOutElmPtr->shellOutPtr->status, 0);
 
     /* Read from child’s stdout, read after child process has finished */
     bzero(shellOutElmPtr->shellOutPtr->stdout, sizeof(shellOutElmPtr->shellOutPtr->stdout)); // Remove all contents
@@ -208,103 +209,17 @@ void wait_child(shell_out_list *shellOutElmPtr)
     {
         sprintf(shellOutElmPtr->shellOutPtr->stdout, "Failed to read output from process #%d.\n", shellOutElmPtr->shellOutPtr->pid);
     }
-
     close(shellOutElmPtr->fd);
-    if (shellOutListTail)
-        printf("child output: %s\n", shellOutListTail->shellOutPtr->stdout);
+    //if (shellOutListTail)
+    //    printf("child output: %s\n", shellOutListTail->shellOutPtr->stdout);
 }
 
-/**
-  @brief Launch a program and wait for it to terminate.
-  @param args Null terminated list of arguments (including program).
-  @return Always returns 1, to continue execution.
- */
-int lsh_launch(char **args)
-{
-    pid_t pid, wpid;
-    int status, count;
-    int filedes[2]; // For capture fork output
-
-    // Create the pipe for capture stdout of child process
-    if (pipe(filedes) == -1)
-    {
-        perror("pipe");
-        exit(1);
-    }
-    pid = fork();
-    if (pid == 0)
-    {
-        // Child process
-        while ((dup2(filedes[1], STDOUT_FILENO) == -1) && (errno == EINTR))
-        {
-        };
-        close(filedes[1]); // the child does not need these
-        close(filedes[0]);
-        if (execvp(args[0], args) == -1)
-        {
-            perror("lsh");
-            strcpy(shell_out.stdout, "execvp failure");
-        }
-        exit(EXIT_FAILURE);
-    }
-    else if (pid < 0)
-    {
-        // Error forking
-        perror("lsh");
-        strcpy(shell_out.stdout, "fork failure");
-    }
-    else
-    {
-        // Parent process
-        printf("launched child process id %d\n", pid);
-        do
-        {
-            wpid = waitpid(pid, &status, WUNTRACED);
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-        bzero(shell_out.stdout, sizeof(shell_out.stdout)); // Remove all contents
-        shell_out.status = 111;
-        shell_out.pid = 12345;
-        close(filedes[1]);
-        /* Read from child’s stdout */
-        while (1)
-        {
-            count = read(filedes[0], shell_out.stdout, sizeof(shell_out.stdout));
-            if (count == -1)
-            {
-                if (errno == EINTR)
-                {
-                    perror("Interrupted?");
-                    continue;
-                }
-                else
-                {
-                    perror("Pipe read error");
-                    exit(1);
-                }
-            }
-            else if (count == 0)
-            {
-                printf("Nothing to read. count=0 ??? \n");
-                break;
-            }
-            else
-            {
-                printf("%s", shell_out.stdout);
-                break;
-            }
-        }
-        close(filedes[0]);
-    }
-
-    return 1;
-}
-
-/**
+/** Modified by Zhijia Dec. 2018
     @brief Launch one or multiple piped programs and wait for it/them to terminate.
     @param cmds Null terminated list of commands.
     @return Always returns 1, to continue execution.
  */
-int pipe_launch(char ***cmds)
+int lsh_launch(char ***cmds)
 {
     pid_t pid, wpid;
     int status, cmdCnt = 0, *pipeFds, redirectFd = -1, argCnt;
@@ -585,23 +500,35 @@ int pipe_launch(char ***cmds)
             fprintf(stderr, "cmd execution failed.");
             exit(EXIT_FAILURE);
         }
-        //printf("child process %d exit with status %d\n", pid, status);
     }
 
     return 1;
 }
 
-/**
+/** Modified by Zhijia Dec.2018
      @brief Execute shell built-in or launch program.
      @param cmds Null terminated array of commands, each command is a Null terminated array of arguments.
      @return 1 if the shell should continue running, 0 if it should terminate
  */
 int lsh_execute(char ***cmds)
 {
-    int i, j, status, count;
+    int i, j, runBg, status, count;
     pid_t pid, wpid;
     int filedes[2]; // For capture output of the launch process
     shell_out_list *shellOutListElmPtr;
+
+    //check if cmds ends with &
+    i = 0;
+    while (cmds[i])
+        ++i;
+    j = 0;
+    while (cmds[i - 1][j])
+        ++j;
+    runBg = (cmds[i - 1][j - 1][strlen(cmds[i - 1][j - 1]) - 1] == '&');
+    if (runBg)
+    {
+        cmds[i - 1][j - 1][strlen(cmds[i - 1][j - 1]) - 1] = 0; //remove the '&' before execution
+    }
 
     if (cmds[0] == NULL)
     {
@@ -642,14 +569,14 @@ int lsh_execute(char ***cmds)
     pid = fork();
     if (pid == 0)
     {
-        // launch process
+        // child process to run cmd
         while ((dup2(filedes[1], STDOUT_FILENO) == -1) && (errno == EINTR))
         {
         };
         close(filedes[1]); // the child does not need these
         close(filedes[0]);
-        pipe_launch(cmds);
-        exit(0); // the launch process must exist after the cmd is executed
+        lsh_launch(cmds);
+        exit(0); // the child process must exist after the cmd is executed
     }
     else if (pid < 0)
     {
@@ -665,6 +592,10 @@ int lsh_execute(char ***cmds)
         bzero(shell_out.stdout, sizeof(shell_out.stdout)); // Remove all contents
         close(filedes[1]);
 
+        // we allocate shell output list element (which contains a shell_out pointer member)
+        // outputs of the process to execute the cmd is redirected to the output buffer pointed by the shell_out pointer
+        // if the cmd is to be executed in the background, the shell_out pointer will point to allocated dynamic memory and the element is appended to the shell output list
+        // otherwise the shell_out pointer will point to the global shell_out variable which will be send to client.
         shellOutListElmPtr = (shell_out_list *)malloc(sizeof(shell_out_list));
         shellOutListElmPtr->fd = filedes[0];
         shellOutListElmPtr->next = NULL;
@@ -676,10 +607,11 @@ int lsh_execute(char ***cmds)
         j = 0;
         while (cmds[i - 1][j])
             ++j;
-        if (cmds[i - 1][j - 1][0] == '&') // run the cmd in the background
+        if (runBg) // run the cmd in the background
         {
             pthread_t wait_thread;
-
+            //printf("run in the background \n");
+            cmds[i - 1][j - 1][strlen(cmds[i - 1][j - 1]) - 1] = 0;
             shellOutListElmPtr->shellOutPtr = (struct shell_out_t *)malloc(sizeof(struct shell_out_t));
             shellOutListElmPtr->shellOutPtr->pid = pid;
             shellOutListElmPtr->shellOutPtr->status = -1; // use -1 to denote running status of a process
