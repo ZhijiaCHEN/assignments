@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 
     gethostname(host, sizeof(host));
     t0 = wall_clock();
-    /*temp ix = 0;
+    ix = 0;
 
     printf("Before ts_init() ... \n");
     ts_init(argc, argv);
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
     }
     free(ituple_A);
 
-    / now receive the result /
+    /* now receive the result */
     received = i = 0;
     tplength = (1 + N * N) * sizeof(double);
     if ((otuple = (double *)malloc(tplength)) == NULL)
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
         ix = atoi(&tpname[1]);
         iy = 1;
         printf(" mtclnt.  tuple %d received %d) \n", ix, received);
-        / reassemble the result matrix /
+        /* reassemble the result matrix */
         if (_M[ix][0] == 0)
         {
             _M[ix][0] = 1; // Received ix
@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
     free(otuple);
 
     printf(" mtclnt.  received everything\n");
-    / insert zero size tuple as termination signal /
+    /* insert zero size tuple as termination signal */
     tplength = sizeof(double);
     if ((ituple_A = (double *)malloc(tplength)) == NULL)
         exit(1);
@@ -192,7 +192,6 @@ int main(int argc, char *argv[])
     // Purge all tuples
     ts_purge();
     free(ituple_A);
-    temp */
     t1 = wall_clock() - t0;
     /*fd = fopen("matrix.par.time", "a");
     fprintf(fd, "%s: (%s) (%f)sec. P(%d) f(%d) n(%d) ", timeStamp,
@@ -203,8 +202,9 @@ int main(int argc, char *argv[])
         fprintf(fd, "%s: MFLOPS: Not measured.\n", timeStamp);
     fclose(fd); */
     sprintf(query,
-            "INSERT INTO ScalabilityLog (P, Timestamp,Size,ElapsedTime,MFLOPS) values (%d, \"%s\",%d,%f,%f)",
-            P, asctime(timeStamp), N, t1 / 1000000, (float)N * N / t1 * N);
+            "INSERT INTO ScalabilityLog (P, Timestamp,Size,ElapsedTime,MFLOPS) values (%d, now(),%d,%f,%f)",
+            P, N, t1 / 1000000, (float)N * N / t1 * N);
+    //printf("executing query: %s\n", query);
     if (mysql_query(con, query))
     {
         perror(mysql_error(con));
