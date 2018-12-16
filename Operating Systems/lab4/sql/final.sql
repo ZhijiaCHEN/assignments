@@ -87,11 +87,13 @@ DROP TABLE IF EXISTS `ScalabilityLog`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ScalabilityLog` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `P` int(11) DEFAULT NULL,
   `TimeStamp` datetime DEFAULT NULL,
   `LogID` int(11) DEFAULT NULL,
   `Size` float DEFAULT NULL,
   `LoopOrder` varchar(45) DEFAULT NULL,
   `ElapsedTime` float DEFAULT NULL,
+  `MFLOPS` float DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
