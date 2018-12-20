@@ -141,6 +141,7 @@ int main(int argc, char *argv[])
         exit(1);
     while (received < N)
     {
+        printf("N = %d, received = %d \n------------------------------------------------", N, received);
         strcpy(tpname, "C*");
         printf(" mtclnt.  waiting for a tuple \n");
         // Setup timer here
@@ -177,7 +178,9 @@ int main(int argc, char *argv[])
                 ix++;
             }
         } // Dropping redundant results
+        printf("finish iteration N = %d-----------------------------------------------------------------\n", N);
     }
+    printf("computation finished, I am going to purge all tuples.\n------------------------------------------------");
     free(otuple);
 
     printf(" mtclnt.  received everything\n");
@@ -193,6 +196,7 @@ int main(int argc, char *argv[])
     ts_purge();
     free(ituple_A);
     t1 = wall_clock() - t0;
+    printf("purge finished, I am going to write database.\n------------------------------------------------");
     /*fd = fopen("matrix.par.time", "a");
     fprintf(fd, "%s: (%s) (%f)sec. P(%d) f(%d) n(%d) ", timeStamp,
             host, t1 / 1000000, P, G, N * 1);

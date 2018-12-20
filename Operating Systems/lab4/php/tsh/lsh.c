@@ -200,7 +200,9 @@ void wait_child(shell_out_list *shellOutElmPtr)
     //{
     //    waitpid(shellOutElmPtr->shellOutPtr->pid, status, WUNTRACED);
     //} while (!WIFEXITED(*status) && !WIFSIGNALED(*status));
+    printf("waiting thread is waiting for child pid %d, cmd %s\n", shellOutElmPtr->shellOutPtr->pid, shellOutElmPtr->cmd);
     waitpid(shellOutElmPtr->shellOutPtr->pid, &shellOutElmPtr->shellOutPtr->status, 0);
+    printf("child pid + %d, cmd %s returned\n", shellOutElmPtr->shellOutPtr->pid, shellOutElmPtr->cmd);
 
     /* Read from child’s stdout, read after child process has finished */
     bzero(shellOutElmPtr->shellOutPtr->stdout, sizeof(shellOutElmPtr->shellOutPtr->stdout)); // Remove all contents
@@ -599,6 +601,7 @@ int lsh_execute(char ***cmds)
         shellOutListElmPtr = (shell_out_list *)malloc(sizeof(shell_out_list));
         shellOutListElmPtr->fd = filedes[0];
         shellOutListElmPtr->next = NULL;
+        strcpy(shellOutListElmPtr->cmd, cmds[0][0]);
 
         //check if cmds ends with &
         i = 0;
