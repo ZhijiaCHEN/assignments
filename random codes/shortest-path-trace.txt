@@ -1,3 +1,5 @@
+# This file contains 10 pairs of input (links) and output (best paths) collected from the POX application: https://github.com/noxrepo/pox/blob/eel/pox/forwarding/l2_multi.py
+# The application are running on randomly generated topology that has 6 nodes and 10 edges.
 Input{
 	link(1,2,1),
 	link(1,3,9),
