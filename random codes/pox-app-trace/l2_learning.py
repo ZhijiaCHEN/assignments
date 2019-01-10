@@ -42,9 +42,7 @@ relDrop = [] # (switch, mac)
 mutex = Lock()
 fmutex = Lock()
 
-flowF = open('mac-learning-flow.txt', 'r+')
-for l in flowF:
-  print l
+flowF = open('mac-learning-flow.txt', 'a')
 
 class LearningSwitch (object):
   """
@@ -190,11 +188,9 @@ class LearningSwitch (object):
         return
 
     if packet.dst.is_multicast:
-      print "flood packet for multicast:"
       flood() # 3a
     else:
       if packet.dst not in self.macToPort: # 4
-        print "flood packet for unknown dst {0}:".format(packet.dst)
         flood("Port for %s unknown -- flooding" % (packet.dst,)) # 4a
       else:
         port = self.macToPort[packet.dst]
