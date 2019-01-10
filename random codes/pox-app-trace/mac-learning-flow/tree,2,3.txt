@@ -1,0 +1,11612 @@
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     25
+buffer_id: 256
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     26
+buffer_id: 256
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     27
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     28
+buffer_id: 256
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     29
+buffer_id: 256
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     30
+buffer_id: 258
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     31
+buffer_id: 257
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     32
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     33
+buffer_id: 257
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     34
+buffer_id: 257
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     35
+buffer_id: 260
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     36
+buffer_id: 258
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     37
+buffer_id: 258
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     38
+buffer_id: 258
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     39
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     40
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     41
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     42
+buffer_id: 262
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     43
+buffer_id: 260
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     44
+buffer_id: 259
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     45
+buffer_id: 260
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     46
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     47
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     48
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     49
+buffer_id: 264
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     50
+buffer_id: 262
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     51
+buffer_id: 260
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     52
+buffer_id: 262
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     53
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     54
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     55
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     56
+buffer_id: 266
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     57
+buffer_id: 264
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     58
+buffer_id: 261
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     59
+buffer_id: 264
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     60
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     61
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     62
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     63
+buffer_id: 268
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     64
+buffer_id: 266
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     65
+buffer_id: 263
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     66
+buffer_id: 265
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     67
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     68
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     69
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     70
+buffer_id: 270
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     71
+buffer_id: 268
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     72
+buffer_id: 265
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     73
+buffer_id: 266
+in_port: 4
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     74
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     75
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     76
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     77
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     78
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     79
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     80
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     81
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     82
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     83
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     84
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     85
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     86
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     87
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     88
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     89
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     90
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     91
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     92
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     93
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     94
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     95
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     96
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     97
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     98
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     99
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     100
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     101
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     102
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     103
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     104
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     105
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     106
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     107
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     108
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     109
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     110
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     111
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     112
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     113
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     114
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     115
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     116
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     117
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     118
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     119
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     120
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     121
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     122
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     123
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     124
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     125
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     126
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     127
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     128
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     129
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     130
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     131
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     132
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     133
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     134
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     135
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     136
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     137
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     138
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     139
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     140
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     141
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     142
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     143
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     144
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     145
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     146
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     147
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     148
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     149
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     150
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     151
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     152
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     153
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     154
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     155
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     156
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     157
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     158
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     159
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     160
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     161
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     162
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     163
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     164
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     165
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     166
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     167
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     168
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     169
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     170
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     171
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     172
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     173
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     174
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     175
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     176
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     177
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     178
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     179
+buffer_id: 289
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     180
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     181
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     182
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     183
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     184
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     185
+buffer_id: 291
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     186
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     187
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     188
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     189
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     190
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    13 (OFPT_PACKET_OUT)
+  length:  24
+  xid:     191
+buffer_id: 293
+in_port: 1
+actions_len: 1
+actions: 
+  type: 0
+  len: 8
+  port: 65531
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     192
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     193
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     194
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     195
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     196
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     197
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     198
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     199
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     200
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     201
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     202
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     203
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     204
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     205
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     206
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     207
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     208
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     209
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     210
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     211
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     212
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     213
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     214
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     215
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     216
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     217
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     218
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     219
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     220
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     221
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     222
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     223
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     224
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     225
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     226
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     227
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     228
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     229
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     230
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     231
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     232
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     233
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     234
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     235
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     236
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     237
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     238
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     239
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     240
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     241
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     242
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     243
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     244
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     245
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     246
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     247
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     248
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     249
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     250
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     251
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     252
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     253
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     254
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     255
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     256
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     257
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     258
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     259
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     260
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     261
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     262
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     263
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     264
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     265
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     266
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     267
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     268
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     269
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     270
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     271
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     272
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     273
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     274
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     275
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     276
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     277
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     278
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     279
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     280
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     281
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     282
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     283
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     284
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     285
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     286
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     287
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     288
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     289
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     290
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     291
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     292
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     293
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     294
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     295
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     296
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     297
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     298
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     299
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     300
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     301
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     302
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     303
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     304
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     305
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     306
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     307
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     308
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     309
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     310
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     311
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     312
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     313
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     314
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     315
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     316
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.7
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     317
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     318
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     319
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     320
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     321
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     322
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     323
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     324
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     325
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     326
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     327
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     328
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     329
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     330
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     331
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     332
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     333
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     334
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     335
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     336
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     337
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     338
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     339
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     340
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     341
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     342
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     343
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     344
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     345
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     346
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     347
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     348
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     349
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     350
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     351
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     352
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     353
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     354
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     355
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.9
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     356
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.8
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     357
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     358
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     359
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:01
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.1
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     360
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     361
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     362
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:01
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.1
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     363
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     364
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     365
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:02
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.2
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     366
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     367
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     368
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:02
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.2
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     369
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     370
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     371
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:03
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.3
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     372
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     373
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     374
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:03
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.3
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     375
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     376
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     377
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:04
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.4
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     378
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     379
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     380
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:04
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.4
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     381
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     382
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     383
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:05
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.5
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     384
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     385
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     386
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:05
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.5
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     387
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     388
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     389
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:06
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.6
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     390
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 4
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     391
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     392
+match: 
+  wildcards:  (0 = 0)
+  in_port: 4
+  dl_src: 00:00:00:00:00:06
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.6
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     393
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:07
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.7
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 1
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     394
+match: 
+  wildcards:  (0 = 0)
+  in_port: 1
+  dl_src: 00:00:00:00:00:07
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.7
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     395
+match: 
+  wildcards:  (0 = 0)
+  in_port: 3
+  dl_src: 00:00:00:00:00:09
+  dl_dst: 00:00:00:00:00:08
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.9
+  nw_dst: 10.0.0.8
+  tp_src: 8
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 2
+  max_len: 0
+
+header: 
+  version: 1
+  type:    14 (OFPT_FLOW_MOD)
+  length:  80
+  xid:     396
+match: 
+  wildcards:  (0 = 0)
+  in_port: 2
+  dl_src: 00:00:00:00:00:08
+  dl_dst: 00:00:00:00:00:09
+  dl_vlan: 65535
+  dl_vlan_pcp: 0
+  dl_type: 0x800
+  nw_tos: 0
+  nw_proto: 1
+  nw_src: 10.0.0.8
+  nw_dst: 10.0.0.9
+  tp_src: 0
+  tp_dst: 0
+cookie: 0
+command: 0
+idle_timeout: 0
+hard_timeout: 0
+priority: 32768
+buffer_id: None
+out_port: 65535
+flags: 0
+actions: 
+  type: 0
+  len: 8
+  port: 3
+  max_len: 0
+
