@@ -108,8 +108,9 @@ class LearningSwitch (object):
     Handle packet in messages from the switch to implement above algorithm.
     """
     mutex.acquire()
+    flowF.write("(\n")
     flowF.write(event.ofp.show())
-    flowF.write('\n')
+    flowF.write(",\n")
     packet = event.parsed
     packetTuple = (dpid_to_str(event.dpid), event.port, packet.src.toStr(), packet.dst.toStr()) # (switch, in port, source mac, destination mac)
     # if packetTuple not in self.packet: self.packet.append(packetTuple)
@@ -142,7 +143,7 @@ class LearningSwitch (object):
       # print 'flood'
       #fmutex.acquire()
       flowF.write(msg.show())
-      flowF.write('\n')
+      flowF.write(",\n")
       #fmutex.release()
       #print msg.show()
       flushTuple = (dpid_to_str(event.dpid), packet.dst.toStr()) # (switch, mac)
@@ -169,7 +170,7 @@ class LearningSwitch (object):
         self.connection.send(msg)
       #fmutex.acquire()
       flowF.write(msg.show())
-      flowF.write('\n')
+      flowF.write(",\n")
       #fmutex.release()
       dropTuple = (dpid_to_str(event.dpid), packet.dst.toStr()) # (switch, mac)
       relDrop.append(dropTuple)
@@ -184,24 +185,28 @@ class LearningSwitch (object):
       if packet.type == packet.LLDP_TYPE or packet.dst.isBridgeFiltered():
         print "drop packet for LLDP:"
         drop() # 2a
+        flowF.write("2a\n)\n\n")
         # print "I am releasing mutex"
         mutex.release()
         # print "I released mutex"
         return
 
     if packet.dst.is_multicast:
+      print "3a flood for multicast dst, packet src: {0}, packet dst: {1}".format(packet.src, packet.dst)
       flood() # 3a
+      flowF.write("3a\n)\n\n")
     else:
       if packet.dst not in self.macToPort: # 4
+        # print "4a flood from unknow dst, packet src: {0}, packet dst: {1}".format(packet.src, packet.dst)
         flood("Port for %s unknown -- flooding" % (packet.dst,)) # 4a
+        flowF.write("4a\n)\n\n")
       else:
         port = self.macToPort[packet.dst]
         if port == event.port: # 5
           # 5a
-          log.warning("Same port for packet from %s -> %s on %s.%s.  Drop."
-              % (packet.src, packet.dst, dpid_to_str(event.dpid), port))
+          print "5a Same port for packet from {0} -> {1} on {2}.{3}.  Drop.".format(packet.src, packet.dst, dpid_to_str(event.dpid), port)
           drop(10)
-          print "drop packet for same in port and out port:"
+          flowF.write("5a\n)\n\n")
           #print "I am releasing mutex"
           mutex.release()
           #print "I released mutex"
@@ -218,10 +223,13 @@ class LearningSwitch (object):
         self.connection.send(msg)
         #fmutex.acquire()
         flowF.write(msg.show())
-        flowF.write('\n')
+        flowF.write(",\n")
+        flowF.write("6a\n)\n\n")
         #fmutex.release()
         fwdTuple = (dpid_to_str(event.dpid), packet.dst.toStr(), port) # (swith, mac, port)
         relFwd.append(fwdTuple)
+        # print "6a installing flow for {0}.{1} -> {2}.{3}".format(packet.src, event.port, packet.dst, port)
+        
     mutex.release()
     
 
@@ -240,6 +248,7 @@ class l2_learning (object):
     core.openflow.addListeners(self)
     self.transparent = transparent
     self.ignore = set(ignore) if ignore else ()
+    self.sws = []
 
   def _handle_ConnectionUp (self, event):
     if event.dpid in self.ignore:
@@ -247,15 +256,18 @@ class l2_learning (object):
       return
     log.debug("Connection %s" % (event.connection,))
     LearningSwitch(event.connection, self.transparent)
+    self.sws.append(dpid_to_str(event.dpid))
   
   def _handle_ConnectionDown (self, event):
-    global relLearnt
-    global relDrop
-    global relFlush
-    global relPacket
-    global relFwd
+    self.sws.remove(dpid_to_str(event.dpid))
+    if len(self.sws) > 0: return
+    #global relLearnt
+    #global relDrop
+    #global relFlush
+    #global relPacket
+    #global relFwd
     
-    if relLearnt is None: return
+    #if relLearnt is None: return
     
     flowF.close()
 
@@ -280,10 +292,10 @@ class l2_learning (object):
       f.write(outputStr)
       f.write('\n')
 
-    relLearnt = None
-    relPacket = None
-    relFwd = None
-    relFlush = None
+    #relLearnt = None
+    #relPacket = None
+    #relFwd = None
+    #relFlush = None
 
 
 def launch (transparent=False, hold_down=_flood_delay, ignore = None):

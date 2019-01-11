@@ -25,24 +25,24 @@ POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
 INFO:core:POX 0.5.0 (eel) is up.
 INFO:openflow.of_01:[00-00-00-00-00-04 1] connected
 INFO:openflow.of_01:[00-00-00-00-00-03 3] connected
-INFO:openflow.of_01:[00-00-00-00-00-02 4] connected
 INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+INFO:openflow.of_01:[00-00-00-00-00-02 4] connected
 INFO:openflow.of_01:[00-00-00-00-00-04 1] closed
 INFO:openflow.of_01:[00-00-00-00-00-01 2] closed
 INFO:openflow.of_01:[00-00-00-00-00-03 3] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 4] closed
 POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
 INFO:core:POX 0.5.0 (eel) is up.
-INFO:openflow.of_01:[00-00-00-00-00-07 1] connected
-INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
-INFO:openflow.of_01:[00-00-00-00-00-06 3] connected
 INFO:openflow.of_01:[00-00-00-00-00-04 4] connected
+INFO:openflow.of_01:[00-00-00-00-00-01 3] connected
+INFO:openflow.of_01:[00-00-00-00-00-06 2] connected
+INFO:openflow.of_01:[00-00-00-00-00-07 1] connected
+INFO:openflow.of_01:[00-00-00-00-00-05 7] connected
 INFO:openflow.of_01:[00-00-00-00-00-02 6] connected
 INFO:openflow.of_01:[00-00-00-00-00-03 5] connected
-INFO:openflow.of_01:[00-00-00-00-00-05 7] connected
 INFO:openflow.of_01:[00-00-00-00-00-07 1] closed
-INFO:openflow.of_01:[00-00-00-00-00-01 2] closed
-INFO:openflow.of_01:[00-00-00-00-00-06 3] closed
+INFO:openflow.of_01:[00-00-00-00-00-06 2] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 3] closed
 INFO:openflow.of_01:[00-00-00-00-00-04 4] closed
 INFO:openflow.of_01:[00-00-00-00-00-03 5] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 6] closed

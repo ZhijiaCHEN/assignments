@@ -1,7 +1,7 @@
 echo>/home/ubuntu/assignments/random\ codes/pox-app-trace/mac-learning-trace.txt 
 echo>mnOutput.txt
 echo>poxOutput.txt
-# topo=("linear,2")
+#topo=("linear,2")
 topo=("linear,2" "linear,3" "tree,2,2" "tree,2,3" "tree,3,2")
 if [ -e "mnFifo" ]
 then
@@ -17,7 +17,7 @@ do
     mkfifo mnFifo
     sudo mn --custom ~/mininet/custom/topo-2sw-2host.py --topo $i --controller remote --mac --arp < mnFifo &>>mnOutput.txt &
     exec 100> mnFifo
-    sleep 20s
+#    sleep 20s
     ~/pox/pox.py forwarding.l2_learning &>>poxOutput.txt &
     poxPid=$!
     sleep 5s
