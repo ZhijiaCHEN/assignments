@@ -1,166 +1,49 @@
 
 POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
-
-
 INFO:core:POX 0.5.0 (eel) is up.
 INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
 INFO:openflow.of_01:[00-00-00-00-00-02 2] connected
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
 INFO:openflow.of_01:[00-00-00-00-00-01 1] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 2] closed
 POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
-
-
-INFO:core:POX 0.5.0 (eel) is up.
-INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
-INFO:openflow.of_01:[00-00-00-00-00-03 2] connected
-INFO:openflow.of_01:[00-00-00-00-00-02 3] connected
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-INFO:openflow.of_01:[00-00-00-00-00-01 1] closed
-INFO:openflow.of_01:[00-00-00-00-00-03 2] closed
-INFO:openflow.of_01:[00-00-00-00-00-02 3] closed
-POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
-
-
 INFO:core:POX 0.5.0 (eel) is up.
 INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
 INFO:openflow.of_01:[00-00-00-00-00-02 3] connected
 INFO:openflow.of_01:[00-00-00-00-00-03 2] connected
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
 INFO:openflow.of_01:[00-00-00-00-00-01 1] closed
 INFO:openflow.of_01:[00-00-00-00-00-03 2] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 3] closed
 POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
-
-
 INFO:core:POX 0.5.0 (eel) is up.
 INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
 INFO:openflow.of_01:[00-00-00-00-00-02 3] connected
 INFO:openflow.of_01:[00-00-00-00-00-03 2] connected
-INFO:openflow.of_01:[00-00-00-00-00-04 4] connected
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:09:
-flood packet for unknown dst 00:00:00:00:00:09:
-flood packet for unknown dst 00:00:00:00:00:09:
-flood packet for unknown dst 00:00:00:00:00:09:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:09:
 INFO:openflow.of_01:[00-00-00-00-00-01 1] closed
 INFO:openflow.of_01:[00-00-00-00-00-03 2] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 3] closed
-INFO:openflow.of_01:[00-00-00-00-00-04 4] closed
 POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
-
-
 INFO:core:POX 0.5.0 (eel) is up.
-INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
+INFO:openflow.of_01:[00-00-00-00-00-04 1] connected
 INFO:openflow.of_01:[00-00-00-00-00-03 3] connected
-INFO:openflow.of_01:[00-00-00-00-00-04 6] connected
-INFO:openflow.of_01:[00-00-00-00-00-05 7] connected
-INFO:openflow.of_01:[00-00-00-00-00-07 5] connected
-INFO:openflow.of_01:[00-00-00-00-00-06 2] connected
 INFO:openflow.of_01:[00-00-00-00-00-02 4] connected
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:02:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:03:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:04:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:05:
-flood packet for unknown dst 00:00:00:00:00:06:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:08:
-flood packet for unknown dst 00:00:00:00:00:07:
-flood packet for unknown dst 00:00:00:00:00:08:
-INFO:openflow.of_01:[00-00-00-00-00-01 1] closed
-INFO:openflow.of_01:[00-00-00-00-00-06 2] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+INFO:openflow.of_01:[00-00-00-00-00-04 1] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 2] closed
 INFO:openflow.of_01:[00-00-00-00-00-03 3] closed
 INFO:openflow.of_01:[00-00-00-00-00-02 4] closed
-INFO:openflow.of_01:[00-00-00-00-00-07 5] closed
-INFO:openflow.of_01:[00-00-00-00-00-04 6] closed
+POX 0.5.0 (eel) / Copyright 2011-2014 James McCauley, et al.
+INFO:core:POX 0.5.0 (eel) is up.
+INFO:openflow.of_01:[00-00-00-00-00-07 1] connected
+INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+INFO:openflow.of_01:[00-00-00-00-00-06 3] connected
+INFO:openflow.of_01:[00-00-00-00-00-04 4] connected
+INFO:openflow.of_01:[00-00-00-00-00-02 6] connected
+INFO:openflow.of_01:[00-00-00-00-00-03 5] connected
+INFO:openflow.of_01:[00-00-00-00-00-05 7] connected
+INFO:openflow.of_01:[00-00-00-00-00-07 1] closed
+INFO:openflow.of_01:[00-00-00-00-00-01 2] closed
+INFO:openflow.of_01:[00-00-00-00-00-06 3] closed
+INFO:openflow.of_01:[00-00-00-00-00-04 4] closed
+INFO:openflow.of_01:[00-00-00-00-00-03 5] closed
+INFO:openflow.of_01:[00-00-00-00-00-02 6] closed
 INFO:openflow.of_01:[00-00-00-00-00-05 7] closed

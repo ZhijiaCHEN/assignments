@@ -28,7 +28,7 @@ s1 s2
 *** Stopping 2 hosts
 h1 h2 
 *** Done
-completed in 28.182 seconds
+completed in 28.145 seconds
 mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
@@ -59,7 +59,7 @@ s1 s2 s3
 *** Stopping 3 hosts
 h1 h2 h3 
 *** Done
-completed in 28.311 seconds
+completed in 28.258 seconds
 mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
@@ -91,7 +91,7 @@ s1 s2 s3
 *** Stopping 4 hosts
 h1 h2 h3 h4 
 *** Done
-completed in 28.429 seconds
+completed in 28.323 seconds
 mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
@@ -128,7 +128,7 @@ s1 s2 s3 s4
 *** Stopping 9 hosts
 h1 h2 h3 h4 h5 h6 h7 h8 h9 
 *** Done
-completed in 28.567 seconds
+completed in 28.586 seconds
 mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
@@ -164,5 +164,5 @@ s1 s2 s3 s4 s5 s6 s7
 *** Stopping 8 hosts
 h1 h2 h3 h4 h5 h6 h7 h8 
 *** Done
-completed in 29.177 seconds
+completed in 28.780 seconds
 mininet> mininet> 

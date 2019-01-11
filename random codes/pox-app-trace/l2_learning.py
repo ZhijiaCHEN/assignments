@@ -42,7 +42,7 @@ relDrop = [] # (switch, mac)
 mutex = Lock()
 fmutex = Lock()
 
-flowF = open('mac-learning-flow.txt', 'a')
+flowF = open('mac-learning-flow.txt', 'r+')
 
 class LearningSwitch (object):
   """
@@ -108,6 +108,8 @@ class LearningSwitch (object):
     Handle packet in messages from the switch to implement above algorithm.
     """
     mutex.acquire()
+    flowF.write(event.ofp.show())
+    flowF.write('\n')
     packet = event.parsed
     packetTuple = (dpid_to_str(event.dpid), event.port, packet.src.toStr(), packet.dst.toStr()) # (switch, in port, source mac, destination mac)
     # if packetTuple not in self.packet: self.packet.append(packetTuple)
@@ -138,10 +140,10 @@ class LearningSwitch (object):
       msg.in_port = event.port
       self.connection.send(msg)
       # print 'flood'
-      fmutex.acquire()
+      #fmutex.acquire()
       flowF.write(msg.show())
       flowF.write('\n')
-      fmutex.release()
+      #fmutex.release()
       #print msg.show()
       flushTuple = (dpid_to_str(event.dpid), packet.dst.toStr()) # (switch, mac)
       relFlush.append(flushTuple)
@@ -165,10 +167,10 @@ class LearningSwitch (object):
         msg.buffer_id = event.ofp.buffer_id
         msg.in_port = event.port
         self.connection.send(msg)
-      fmutex.acquire()
+      #fmutex.acquire()
       flowF.write(msg.show())
       flowF.write('\n')
-      fmutex.release()
+      #fmutex.release()
       dropTuple = (dpid_to_str(event.dpid), packet.dst.toStr()) # (switch, mac)
       relDrop.append(dropTuple)
 
@@ -214,10 +216,10 @@ class LearningSwitch (object):
         msg.actions.append(of.ofp_action_output(port = port))
         msg.data = event.ofp # 6a
         self.connection.send(msg)
-        fmutex.acquire()
+        #fmutex.acquire()
         flowF.write(msg.show())
         flowF.write('\n')
-        fmutex.release()
+        #fmutex.release()
         fwdTuple = (dpid_to_str(event.dpid), packet.dst.toStr(), port) # (swith, mac, port)
         relFwd.append(fwdTuple)
     mutex.release()
