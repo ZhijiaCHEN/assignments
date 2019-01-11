@@ -1,3 +1,16 @@
+# This file contains 5 pairs of input and output, and each pair starts with the Mininet topology string I used to collect the data.
+# Topology 'linear,n' is string of n switches and each switch is connected to a host.
+# The following figure shows topology 'linear,3'.
+# 	s1--s2--s3
+# 	|   |   |
+# 	h1  h2  h3
+# Topology 'tree,m,n' has a tree structure of depth m (hosts are not counted!) and fanout n. And each edge switch is connected to n hosts.
+# The following figure shows topology 'tree,2,2'.
+#       s1
+#       /\
+#     s2  s3
+#     /\    /\
+#   h1  h2 h3 h4
 
 linear,2
 Input{
