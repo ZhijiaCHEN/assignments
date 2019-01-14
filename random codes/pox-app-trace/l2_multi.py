@@ -491,6 +491,7 @@ class l2_multi (EventMixin):
       if sw1 in adjacency[sw2]: del adjacency[sw2][sw1]
 
       # But maybe there's another way to connect these...
+      # There may be more than one link connecting sw1 and sw2
       for ll in core.openflow_discovery.adjacency:
         if ll.dpid1 == l.dpid1 and ll.dpid2 == l.dpid2:
           if flip(ll) in core.openflow_discovery.adjacency:
