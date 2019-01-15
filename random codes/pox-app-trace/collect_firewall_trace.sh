@@ -3,10 +3,8 @@ echo>mac-learning-with-fw-trace.txt
 echo>mnOutput.txt
 echo>poxOutput.txt
 
-#topo=("linear,2" "linear,3" "tree,2,2" "tree,2,3" "tree,3,2")
-#maxHost=(2 3 4 9 8)
-allTopo=("linear,2" "linear,3")
-maxHost=(2 3)
+allTopo=("linear,2" "linear,3" "tree,2,2" "tree,2,3" "tree,3,2")
+maxHost=(2 3 4 9 8)
 if [ -e "mnFifo" ]
 then
     echo y|rm mnFifo
