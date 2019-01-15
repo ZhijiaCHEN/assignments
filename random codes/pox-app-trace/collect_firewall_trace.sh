@@ -16,6 +16,11 @@ for ((idx=0; idx<${#allTopo[@]}; ++idx)); do
     topo=${allTopo[idx]}
     h1=$(($RANDOM%$range+1))
     h2=$(($RANDOM%$range+1))
+    while (($h1 == $h2))
+    do
+        h1=$(($RANDOM%$range+1))
+        h2=$(($RANDOM%$range+1))
+    done
     echo id,mac_0,mac_1>firewall-policies.csv
     echo "1,00:00:00:00:00:$h1,00:00:00:00:00:$h2">>firewall-policies.csv
     echo "I am starting the topology $topo"
@@ -37,7 +42,8 @@ for ((idx=0; idx<${#allTopo[@]}; ++idx)); do
         for ((j=1; j<=$range; ++j)); do
             if (($i != $j))
             then
-                echo h$i ping -c 1 -W 1 h$j >&100
+                printf "h$i ping -c 1 -W 1 h$j\n" >&100
+                printf "\n" >&100
             fi
         done
     done

@@ -1,1 +1,97 @@
 
+*** Creating network
+*** Adding controller
+Unable to contact the remote controller at 127.0.0.1:6633
+*** Adding hosts:
+h1 h2 
+*** Adding switches:
+s1 s2 
+*** Adding links:
+(h1, s1) (h2, s2) (s2, s1) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 2 switches
+s1 s2 ...
+*** Starting CLI:
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+
+--- 10.0.0.2 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
+
+--- 10.0.0.1 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+*** Stopping 1 controllers
+c0 
+*** Stopping 3 links
+...
+*** Stopping 2 switches
+s1 s2 
+*** Stopping 2 hosts
+h1 h2 
+*** Done
+completed in 10.115 seconds
+mininet> mininet> mininet> mininet> *** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2 h3 
+*** Adding switches:
+s1 s2 s3 
+*** Adding links:
+(h1, s1) (h2, s2) (h3, s3) (s2, s1) (s3, s2) 
+*** Configuring hosts
+h1 h2 h3 
+*** Starting controller
+c0 
+*** Starting 3 switches
+s1 s2 s3 ...
+*** Starting CLI:
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=10.3 ms
+
+--- 10.0.0.2 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 10.353/10.353/10.353/0.000 ms
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=27.6 ms
+
+--- 10.0.0.3 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 27.646/27.646/27.646/0.000 ms
+PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=41.2 ms
+
+--- 10.0.0.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 41.217/41.217/41.217/0.000 ms
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+
+--- 10.0.0.3 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=48.5 ms
+
+--- 10.0.0.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 48.581/48.581/48.581/0.000 ms
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+
+--- 10.0.0.2 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+*** Stopping 1 controllers
+c0 
+*** Stopping 5 links
+.....
+*** Stopping 3 switches
+s1 s2 s3 
+*** Stopping 3 hosts
+h1 h2 h3 
+*** Done
+completed in 10.342 seconds
+mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> 

@@ -108,11 +108,14 @@ class LearningSwitch (object):
         Handle packet in messages from the switch to implement above algorithm.
         """
         mutex.acquire()
-        flowF = open('mac-learning-with-fw-flow.txt', 'r+')
+        packet = event.parsed
+        flowF = open('mac-learning-with-fw-flow.txt', 'a')
         flowF.write("(\n")
         flowF.write(event.ofp.show())
+        flowF.write("matching fields: \n")
+        flowF.write(of.ofp_match.from_packet(packet).show())
         flowF.write(",\n")
-        packet = event.parsed
+
         packetTuple = (dpid_to_str(event.dpid), event.port, packet.src.toStr(
         ), packet.dst.toStr())  # (switch, in port, source mac, destination mac)
         # if packetTuple not in self.packet: self.packet.append(packetTuple)
@@ -284,7 +287,8 @@ class l2_learning (object):
             inputStr += '\tpacket{0},\n'.format(str(t))
         for t in relLearnt:
             inputStr += '\tlearnt{0},\n'.format(str(t))
-        inputStr = inputStr[0:-2]
+        if len(relPacket)+len(relLearnt) > 0:
+            inputStr = inputStr[0:-2]
         inputStr += '\n}\n'
 
         outputStr = 'Output{\n'
@@ -292,7 +296,8 @@ class l2_learning (object):
             outputStr += '\tfwd{0},\n'.format(str(t))
         for t in relFlush:
             outputStr += '\tflush{0},\n'.format(str(t))
-        outputStr = outputStr[0:-2]
+        if len(relFwd)+len(relFlush) > 0:
+            outputStr = outputStr[0:-2]
         outputStr += '\n}\n'
 
         with open('mac-learning-with-fw-trace.txt', 'a') as f:
