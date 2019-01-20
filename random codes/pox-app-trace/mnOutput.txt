@@ -15,16 +15,10 @@ c0
 *** Starting 2 switches
 s1 s2 ...
 *** Starting CLI:
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
+*** Ping: testing ping reachability
+h1 -> h2 
+h2 -> h1 
+*** Results: 0% dropped (2/2 received)
 *** Stopping 1 controllers
 c0 
 *** Stopping 3 links
@@ -34,8 +28,8 @@ s1 s2
 *** Stopping 2 hosts
 h1 h2 
 *** Done
-completed in 10.337 seconds
-mininet> mininet> mininet> mininet> mininet> *** Creating network
+completed in 8.044 seconds
+mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
 *** Adding hosts:
@@ -51,40 +45,11 @@ c0
 *** Starting 3 switches
 s1 s2 s3 ...
 *** Starting CLI:
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=42.9 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 42.916/42.916/42.916/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=30.7 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 30.781/30.781/30.781/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=21.4 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 21.494/21.494/21.494/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=37.7 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 37.761/37.761/37.761/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
+*** Ping: testing ping reachability
+h1 -> h2 h3 
+h2 -> h1 h3 
+h3 -> h1 h2 
+*** Results: 0% dropped (6/6 received)
 *** Stopping 1 controllers
 c0 
 *** Stopping 5 links
@@ -94,9 +59,10 @@ s1 s2 s3
 *** Stopping 3 hosts
 h1 h2 h3 
 *** Done
-completed in 10.277 seconds
-mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> *** Creating network
+completed in 8.224 seconds
+mininet> mininet> *** Creating network
 *** Adding controller
+Unable to contact the remote controller at 127.0.0.1:6633
 *** Adding hosts:
 h1 h2 h3 h4 
 *** Adding switches:
@@ -110,76 +76,12 @@ c0
 *** Starting 3 switches
 s1 s2 s3 ...
 *** Starting CLI:
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=37.2 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 37.297/37.297/37.297/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=12.0 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 12.035/12.035/12.035/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=17.6 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 17.632/17.632/17.632/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=18.3 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 18.311/18.311/18.311/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=28.4 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 28.469/28.469/28.469/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=23.2 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 23.292/23.292/23.292/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=27.0 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.082/27.082/27.082/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=26.2 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 26.264/26.264/26.264/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=45.0 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 45.052/45.052/45.052/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=24.1 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 24.112/24.112/24.112/0.000 ms
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 
+h2 -> h1 h3 h4 
+h3 -> h1 h2 h4 
+h4 -> h1 h2 h3 
+*** Results: 0% dropped (12/12 received)
 *** Stopping 1 controllers
 c0 
 *** Stopping 6 links
@@ -189,8 +91,8 @@ s1 s2 s3
 *** Stopping 4 hosts
 h1 h2 h3 h4 
 *** Done
-completed in 10.506 seconds
-mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> *** Creating network
+completed in 8.226 seconds
+mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
 *** Adding hosts:
@@ -206,137 +108,17 @@ c0
 *** Starting 4 switches
 s1 s2 s3 s4 ...
 *** Starting CLI:
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=51.5 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 51.582/51.582/51.582/0.000 ms
-*** Unknown command: 7 ping -c 1 -W 1 h3
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=50.4 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 50.409/50.409/50.409/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=19.8 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 19.886/19.886/19.886/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=27.5 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.513/27.513/27.513/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.9 (10.0.0.9) 56(84) bytes of data.
-64 bytes from 10.0.0.9: icmp_seq=1 ttl=64 time=23.8 ms
-
---- 10.0.0.9 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 23.837/23.837/23.837/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=32.2 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 32.276/32.276/32.276/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=24.8 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 24.809/24.809/24.809/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=28.6 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 28.684/28.684/28.684/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=16.0 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 16.050/16.050/16.050/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=25.1 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 25.114/25.114/25.114/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=38.6 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 38.699/38.699/38.699/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.9 (10.0.0.9) 56(84) bytes of data.
-64 bytes from 10.0.0.9: icmp_seq=1 ttl=64 time=18.0 ms
-
---- 10.0.0.9 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 18.065/18.065/18.065/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=39.1 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 39.172/39.172/39.172/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=27.4 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.438/27.438/27.438/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=13.8 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 13.854/13.854/13.854/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=19.0 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 19.050/19.050/19.050/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=24.4 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 24.468/24.468/24.468/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=26.8 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 26.805/26.805/26.805/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=16.7 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 16.707/16.707/16.707/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=18.1 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 18.164/18.164/18.164/0.000 ms
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 h5 h6 h7 h8 h9 
+h2 -> h1 h3 h4 h5 h6 h7 h8 h9 
+h3 -> h1 h2 h4 h5 h6 h7 h8 h9 
+h4 -> h1 h2 h3 h5 h6 h7 h8 h9 
+h5 -> h1 h2 h3 h4 h6 h7 h8 h9 
+h6 -> h1 h2 h3 h4 h5 h7 h8 h9 
+h7 -> h1 h2 h3 h4 h5 h6 h8 h9 
+h8 -> h1 h2 h3 h4 h5 h6 h7 h9 
+h9 -> h1 h2 h3 h4 h5 h6 h7 h8 
+*** Results: 0% dropped (72/72 received)
 *** Stopping 1 controllers
 c0 
 *** Stopping 12 links
@@ -346,8 +128,8 @@ s1 s2 s3 s4
 *** Stopping 9 hosts
 h1 h2 h3 h4 h5 h6 h7 h8 h9 
 *** Done
-completed in 10.578 seconds
-mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> *** Creating network
+completed in 8.408 seconds
+mininet> mininet> *** Creating network
 *** Adding controller
 Unable to contact the remote controller at 127.0.0.1:6633
 *** Adding hosts:
@@ -363,329 +145,16 @@ c0
 *** Starting 7 switches
 s1 s2 s3 s4 s5 s6 s7 ...
 *** Starting CLI:
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=38.1 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 38.113/38.113/38.113/0.000 ms
-bash: h1: command not found
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=32.2 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 32.250/32.250/32.250/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=33.3 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 33.326/33.326/33.326/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=34.4 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 34.487/34.487/34.487/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=17.1 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 17.119/17.119/17.119/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=9.36 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 9.366/9.366/9.366/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=27.8 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.827/27.827/27.827/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=21.2 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 21.292/21.292/21.292/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=54.0 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 54.087/54.087/54.087/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=66.5 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 66.533/66.533/66.533/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=73.4 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 73.438/73.438/73.438/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=24.3 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 24.325/24.325/24.325/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=29.0 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 29.043/29.043/29.043/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=18.9 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 18.929/18.929/18.929/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=36.6 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 36.661/36.661/36.661/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=23.1 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 23.180/23.180/23.180/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=39.7 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 39.762/39.762/39.762/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=25.8 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 25.832/25.832/25.832/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=42.7 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 42.720/42.720/42.720/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=40.3 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 40.372/40.372/40.372/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=16.6 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 16.671/16.671/16.671/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=51.0 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 51.044/51.044/51.044/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=39.4 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 39.417/39.417/39.417/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=30.1 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 30.113/30.113/30.113/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=37.6 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 37.696/37.696/37.696/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=36.2 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 36.255/36.255/36.255/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=32.0 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 32.063/32.063/32.063/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=42.6 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 42.663/42.663/42.663/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=50.0 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 50.058/50.058/50.058/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=11.2 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 11.253/11.253/11.253/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=25.6 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 25.661/25.661/25.661/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=31.1 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 31.133/31.133/31.133/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=22.5 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 22.591/22.591/22.591/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=35.0 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 35.097/35.097/35.097/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=33.2 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 33.203/33.203/33.203/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=36.8 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 36.839/36.839/36.839/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=11.2 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 11.272/11.272/11.272/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=26.6 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 26.624/26.624/26.624/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=27.6 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.689/27.689/27.689/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=43.6 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 43.662/43.662/43.662/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 0 received, 100% packet loss, time 0ms
-
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=48.3 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 48.310/48.310/48.310/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=38.3 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 38.324/38.324/38.324/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=22.7 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 22.758/22.758/22.758/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=27.8 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 27.874/27.874/27.874/0.000 ms
-PING 10.0.0.8 (10.0.0.8) 56(84) bytes of data.
-64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=17.5 ms
-
---- 10.0.0.8 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 17.533/17.533/17.533/0.000 ms
-PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
-64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=28.3 ms
-
---- 10.0.0.1 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 28.368/28.368/28.368/0.000 ms
-PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=37.5 ms
-
---- 10.0.0.2 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 37.541/37.541/37.541/0.000 ms
-PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
-64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=42.3 ms
-
---- 10.0.0.3 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 42.382/42.382/42.382/0.000 ms
-PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
-64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=32.8 ms
-
---- 10.0.0.4 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 32.828/32.828/32.828/0.000 ms
-PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
-64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=32.6 ms
-
---- 10.0.0.5 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 32.639/32.639/32.639/0.000 ms
-PING 10.0.0.6 (10.0.0.6) 56(84) bytes of data.
-64 bytes from 10.0.0.6: icmp_seq=1 ttl=64 time=23.4 ms
-
---- 10.0.0.6 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 23.438/23.438/23.438/0.000 ms
-PING 10.0.0.7 (10.0.0.7) 56(84) bytes of data.
-64 bytes from 10.0.0.7: icmp_seq=1 ttl=64 time=13.3 ms
-
---- 10.0.0.7 ping statistics ---
-1 packets transmitted, 1 received, 0% packet loss, time 0ms
-rtt min/avg/max/mdev = 13.311/13.311/13.311/0.000 ms
+*** Ping: testing ping reachability
+h1 -> h2 h3 h4 h5 h6 h7 h8 
+h2 -> h1 h3 h4 h5 h6 h7 h8 
+h3 -> h1 h2 h4 h5 h6 h7 h8 
+h4 -> h1 h2 h3 h5 h6 h7 h8 
+h5 -> h1 h2 h3 h4 h6 h7 h8 
+h6 -> h1 h2 h3 h4 h5 h7 h8 
+h7 -> h1 h2 h3 h4 h5 h6 h8 
+h8 -> h1 h2 h3 h4 h5 h6 h7 
+*** Results: 0% dropped (56/56 received)
 *** Stopping 1 controllers
 c0 
 *** Stopping 14 links
@@ -695,5 +164,5 @@ s1 s2 s3 s4 s5 s6 s7
 *** Stopping 8 hosts
 h1 h2 h3 h4 h5 h6 h7 h8 
 *** Done
-completed in 10.732 seconds
-mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> mininet> 
+completed in 8.751 seconds
+mininet> mininet> 

@@ -1,0 +1,35 @@
+Examples {
+    EDB {
+      ////////////////// Configs ////////////////////////////
+      // Some multicast address _11_, if any
+      multicast(11),
+
+      ////////////////// Staes: the mac-port table //////////
+      // (1) Switch ID _1_
+      // (2) Mac Address _2_
+      // (3) Forward on port _3_
+      state(1,2,3)
+
+        ////////////////// packet_in message /////////////////
+        // (1) from switch _1_
+        // (2) from port _1_,
+        // (3) source mac address is _1_,
+        // (4) destination mac address is _2_,
+      packet_in(1,1,1,2)
+      }
+
+    IDB {
+      /////////////////// decision ////////////////////////
+      // (1) for switch _1_,
+      // (2) flood packets with destination mac _2_
+      flood (1, 2),
+
+      ///////////////// new state: new entry to mac-port table ///////////
+          // format same as state relation
+      next_state (1, 1, 1)
+    }
+
+        EDB{}
+IDB{}
+
+...

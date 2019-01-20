@@ -53,6 +53,14 @@ IDBS = ''
 descisionS = ''
 nextStateS = ''
 
+macToPort = {} # let's have a global mac to port table
+
+def write_trace():
+    flowF = open('mac-learning-flow.txt', 'a')
+    flowF.write('EDB{{\n{0}{1}{2}{3}}}\n'.format(multicastS, currentStateS, packetInS, tabS))
+    flowF.write('IDB{{\n{0}{1}{2}}}\n\n'.format(descisionS, nextStateS, tabS))
+    flowF.close()
+
 class LearningSwitch (object):
     """
     The learning switch "brain" associated with a single OpenFlow switch.
@@ -101,7 +109,9 @@ class LearningSwitch (object):
         self.transparent = transparent
 
         # Our table
-        self.macToPort = {}
+        # self.macToPort = {} # why make each switch has a mac to port table?
+        self.macToPort = macToPort
+
 
         # We want to hear PacketIn messages, so we listen
         # to the connection
@@ -121,7 +131,6 @@ class LearningSwitch (object):
 
         mutex.acquire()
         packet = event.parsed
-        flowF = open('mac-learning-flow.txt', 'a')
         #flowF.write("(\n")
         #flowF.write(event.ofp.show())
         #flowF.write("matching fields: \n")
@@ -132,7 +141,7 @@ class LearningSwitch (object):
         ), packet.dst.toStr())  # (switch, in port, source mac, destination mac)
         # if packetTuple not in self.packet: self.packet.append(packetTuple)
         relPacket.append(packetTuple)
-        packetInS = '{}packetin{}\n'.format(tabS, packetTuple)
+        packetInS = '{}packet_in{}\n'.format(tabS, packetTuple)
 
         def flood(message=None):
             """ Floods the packet """
@@ -187,11 +196,14 @@ class LearningSwitch (object):
 
         currentStateS = ''
         for k in self.macToPort.keys():
-            currentStateS += '{}({},{},{})\n'.format(tabS, k[0], k[1], self.macToPort[k])    
+            currentStateS += '{}state({},{},{}),\n'.format(tabS, k[0], k[1], self.macToPort[k])    
         self.macToPort[(dpid_to_str(event.dpid), packet.src.toStr())] = event.port  # 1
         nextStateS = ''
         for k in self.macToPort.keys():
-            nextStateS += '{}({},{},{})\n'.format(tabS, k[0], k[1], self.macToPort[k])
+            nextStateS += '{}state({},{},{}),\n'.format(tabS, k[0], k[1], self.macToPort[k])
+        if len(nextStateS) > 0: 
+            nextStateS = nextStateS[0:-2]
+            nextStateS += '\n'
 
         learntTuple = (dpid_to_str(event.dpid), packet.src.toStr(),
                        event.port)  # (switch, mac, port)
@@ -202,26 +214,27 @@ class LearningSwitch (object):
             if packet.type == packet.LLDP_TYPE or packet.dst.isBridgeFiltered():
                 descisionS = '{}drop{}\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
                 drop()  # 2a
+                write_trace()
                 mutex.release()
                 return
 
         multicastS = ''
         if packet.dst.is_multicast:
-            multicastS = '{}multicast({})\n'.format(tabS, packet.dst)
-            descisionS = '{}flood{}\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
+            multicastS = '{}multicast({}),\n'.format(tabS, packet.dst)
+            descisionS = '{}flood{},\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
             flood()  # 3a
         else:
             if (dpid_to_str(event.dpid), packet.dst.toStr()) not in self.macToPort:  # 4
                 # print "4a flood from unknow dst, packet src: {0}, packet dst: {1}".format(packet.src, packet.dst)
-                descisionS = '{}flood{}\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
+                descisionS = '{}flood{},\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
                 flood("Port for %s unknown -- flooding" % (packet.dst,))  # 4a
             else:
                 port = self.macToPort[(dpid_to_str(event.dpid), packet.dst.toStr())]
                 if port == event.port:  # 5
                     # 5a
-                    descisionS = '{}drop{}\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
+                    descisionS = '{}drop{},\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr()))
                     drop(10)
-                    flowF.close()
+                    write_trace()
                     mutex.release()
                     return
                 # 6
@@ -234,14 +247,12 @@ class LearningSwitch (object):
                 msg.actions.append(of.ofp_action_output(port=port))
                 msg.data = event.ofp  # 6a
                 self.connection.send(msg)
-                # fmutex.acquire()
-                descisionS = '{}fwd{}\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr(), port))
-                flowF.close()
-                # fmutex.release()
+                descisionS = '{}fwd{},\n'.format(tabS, (dpid_to_str(event.dpid), packet.dst.toStr(), port))
                 # (swith, mac, port)
                 fwdTuple = (dpid_to_str(event.dpid), packet.dst.toStr(), port)
                 relFwd.append(fwdTuple)
                 # print "6a installing flow for {0}.{1} -> {2}.{3}".format(packet.src, event.port, packet.dst, port)
+        write_trace()
         mutex.release()
 
 
@@ -273,6 +284,8 @@ class l2_learning (object):
     def _handle_ConnectionDown(self, event):
         self.sws.remove(dpid_to_str(event.dpid))
         if len(self.sws) > 0:
+            return
+        else:
             return
         #global relLearnt
         #global relDrop
