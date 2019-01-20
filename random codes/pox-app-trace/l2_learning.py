@@ -195,15 +195,12 @@ class LearningSwitch (object):
             relDrop.append(dropTuple)
 
         currentStateS = ''
-        for k in self.macToPort.keys():
-            currentStateS += '{}state({},{},{}),\n'.format(tabS, k[0], k[1], self.macToPort[k])    
-        self.macToPort[(dpid_to_str(event.dpid), packet.src.toStr())] = event.port  # 1
         nextStateS = ''
         for k in self.macToPort.keys():
-            nextStateS += '{}state({},{},{}),\n'.format(tabS, k[0], k[1], self.macToPort[k])
-        if len(nextStateS) > 0: 
-            nextStateS = nextStateS[0:-2]
-            nextStateS += '\n'
+            currentStateS += '{}state({},{},{}),\n'.format(tabS, k[0], k[1], self.macToPort[k])
+        if (dpid_to_str(event.dpid), packet.src.toStr()) not in self.macToPort.keys():
+            self.macToPort[(dpid_to_str(event.dpid), packet.src.toStr())] = event.port  # 1
+            nextStateS = '{}next_state({},{},{})\n'.format(tabS, dpid_to_str(event.dpid), packet.src.toStr(), event.port)
 
         learntTuple = (dpid_to_str(event.dpid), packet.src.toStr(),
                        event.port)  # (switch, mac, port)
