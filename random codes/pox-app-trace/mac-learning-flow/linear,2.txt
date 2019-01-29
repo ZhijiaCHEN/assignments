@@ -45,7 +45,7 @@ EDB{
     packet_in(s2, p1, m2, m1)
     }
 IDB{
-    fwd(s2, m1, p2),
+    fwd(s2, m1, p2)
     }
 
 EDB{
@@ -56,7 +56,7 @@ EDB{
     packet_in(s1, p2, m2, m1)
     }
 IDB{
-    fwd(s1, m1, p1),
+    fwd(s1, m1, p1)
     }
 
 EDB{
@@ -67,7 +67,7 @@ EDB{
     packet_in(s1, p1, m1, m2)
     }
 IDB{
-    fwd(s1, m2, p2),
+    fwd(s1, m2, p2)
     }
 
 EDB{
@@ -78,6 +78,6 @@ EDB{
     packet_in(s2, p2, m1, m2)
     }
 IDB{
-    fwd(s2, m2, p1),
+    fwd(s2, m2, p1)
     }
 
