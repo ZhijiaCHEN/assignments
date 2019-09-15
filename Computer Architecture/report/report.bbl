@@ -1,0 +1,62 @@
+\begin{thebibliography}{10}
+
+\bibitem{Horton}
+{\sc Breslow, A.~D., Zhang, D.~P., Greathouse, J.~L., Jayasena, N., and
+  Tullsen, D.~M.}
+\newblock Horton tables: Fast hash tables for in-memory data-intensive
+  computing.
+\newblock In {\em USENIX Annual Technical Conference\/} (2016), pp.~281--294.
+
+\bibitem{perfectHashing}
+{\sc Chang, C.}
+\newblock The study of an ordered minimal perfect hashing scheme.
+\newblock {\em Communications of the ACM 27}, 4 (1984), 384--387.
+
+\bibitem{coolCuckoo}
+{\sc Erlingsson, U., Manasse, M., and McSherry, F.}
+\newblock A cool and practical alternative to traditional hash tables.
+\newblock In {\em Proc. 7th Workshop on Distributed Data and Structures
+  (WDAS’06)\/} (2006).
+
+\bibitem{memC3}
+{\sc Fan, B., Andersen, D.~G., and Kaminsky, M.}
+\newblock Memc3: Compact and concurrent memcache with dumber caching and
+  smarter hashing.
+\newblock In {\em NSDI\/} (2013), vol.~13, pp.~371--384.
+
+\bibitem{CHS}
+{\sc Kirsch, A., Mitzenmacher, M., and Wieder, U.}
+\newblock More robust hashing: Cuckoo hashing with a stash.
+\newblock {\em SIAM Journal on Computing 39}, 4 (2009), 1543--1561.
+
+\bibitem{li2014algorithmic}
+{\sc Li, X., Andersen, D.~G., Kaminsky, M., and Freedman, M.~J.}
+\newblock Algorithmic improvements for fast concurrent cuckoo hashing.
+\newblock In {\em Proceedings of the Ninth European Conference on Computer
+  Systems\/} (2014), ACM, p.~27.
+
+\bibitem{cuckoo}
+{\sc Pagh, R., and Rodler, F.~F.}
+\newblock Cuckoo hashing.
+\newblock {\em Journal of Algorithms 51}, 2 (2004), 122--144.
+
+\bibitem{cuckooTutorial}
+{\sc Schwarz, K.}
+\newblock Cuckoo hashing.
+\newblock
+  \url{https://web.stanford.edu/class/archive/cs/cs166/cs166.1146/lectures/13/Small13.pdf}.
+
+\bibitem{SmartCuckoo}
+{\sc Sun, Y., Hua, Y., Jiang, S., Li, Q., Cao, S., and Zuo, P.}
+\newblock Smartcuckoo: a fast and cost-efficient hashing index scheme for cloud
+  storage systems.
+\newblock In {\em 2017 USENIX Annual Technical Conference, USENIX ATC 2017,
+  Santa Clara, CA, USA, July 12\/} (2017), vol.~14, pp.~553--565.
+
+\bibitem{IDC}
+{\sc Turner, V., Gantz, J.~F., Reinsel, D., and Minton, S.}
+\newblock The digital universe of opportunities: Rich data and the increasing
+  value of the internet of things.
+\newblock {\em IDC Analyze the Future 16\/} (2014).
+
+\end{thebibliography}

@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{cleveref}
+\usepackage{geometry}
+\geometry{legalpaper, margin=1in}
+\begin{document}
+\noindent\textbf{1.} Compose an Insertion Sort program to sort N=10,000 randomly generated integers.\\
+\indent See the function \texttt{insert\_sort} in "main.c".\\
+
+\noindent\textbf{2.} Compose a program to run the same program on two N/2 randomly generated integers and then merge-sort them onto a single output file.\\
+\indent My program runs the \texttt{insert\_sort} function on the first half of the array and then on the second half of the array, and then merge them into the 'mergeSort.log'. \\
+
+\noindent\textbf{3.} Verify that the two output files are identical\\
+\indent The output for the two sorting approach are "insertSort.log" and "mergeSort.log", we can use the diff command to verify they are the same.\\
+
+\noindent\textbf{4.} Verify the elapsed times of two programs. Explain why the performance differences?\\
+\indent The sort with the merge step uses only 50\% of the time of the insertion sort. The complexity of insertion sort for an array of size $N$ is $O(N^2)$, so the complexity of the two insertion sort for an array of size $\frac{N}{2}$ is $\left(\frac{N}{2}\right)^2\times 2=\frac{N^2}{2}$ (the complexity of the merge step is $N$), which is half of the insertion sort complexity.\\
+\end{document}
