@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 from numpy import log, power
+from numpy.random import poisson
 from math import e
 from matplotlib.colors import BoundaryNorm
 from matplotlib.ticker import MaxNLocator
@@ -9,8 +10,26 @@ from scipy.special import factorial
 
 lambdaPrint = '\u03BB'
 
+def word_occuren(v, Y):
+    return [poisson(v*y/100) for y in Y]
+
+
+
 def log_likelihood(X, Lambda):
     return log(Lambda) * sum(X) - len(X) * Lambda - sum([log(factorial(x)) for x in X])
+
+def log_likelihood2(X, Y, V):
+    return [sum([xi*log(v*yi/1000)-v*yi/1000-log(factorial(xi)) for xi, yi in zip(X, Y)]) for v in V]
+
+Y = [1730, 947, 1830, 1210, 1100]
+v = 10
+X = word_occuren(v, Y)
+V = np.arange(0.01, 30, 0.01)
+P = log_likelihood2(X, Y, V)
+plt.plot(V, P)
+plt.xlabel('v')
+plt.ylabel('l({v})')
+plt.show()
 
 X = [12, 4, 5, 3, 7, 5, 6]
 lambdaStart = 0.01
