@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
-from numpy import log, power
-from numpy.random import poisson, binomial
+from numpy import log, power, mean, var
+from numpy.random import poisson, binomial, gamma
 from math import e
 from matplotlib.colors import BoundaryNorm
 from matplotlib.ticker import MaxNLocator
@@ -142,7 +142,19 @@ def q_3_3():
     plt.xlabel('X')
     plt.ylabel('frequency')
     plt.show()
+
+def q_4_3():
+    alpha = 10
+    theta = 1
+    X1 = [poisson(lambdai) for lambdai in gamma(alpha, theta, 1000)]
+    meanX1 = mean(X1)
+    varX1 = var(X1)
+    X2 = poisson(10, 1000)
+    meanX2 = mean(X2)
+    varX2 = var(X2)
+    return X1
 #q_1_9()
 #q_1_10()
 #q_2_10()
-q_3_3()
+#q_3_3()
+q_4_3()
