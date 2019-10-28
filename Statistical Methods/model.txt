@@ -1,0 +1,26 @@
+
+ARMR model tutorial: https://www.youtube.com/playlist?reload=9&list=PLvcbYUQ5t0UHOLnBzl46_Q6QKtFgfMGc3
+
+MATLAB ARMR model reference page: https://www.mathworks.com/help/econ/arma-models.html
+
+arima with properties:
+
+    Description: "ARIMA(13,0,9) Model (Gaussian Distribution)"
+Distribution: Name = "Gaussian"
+            P: 13
+            D: 0
+            Q: 9
+    Constant: 0
+            AR: {0.534857 0.987108 -0.683918 0.0751617 0.236828 -0.0339807 -0.314331 0.193613} at lags [1 2 4 5 6 9 10 13]
+            SAR: {}
+            MA: {0.753191 -0.475666 -0.790889 0.0897831 0.324148 -0.424401 -0.644086 0.00855108 0.301072} at lags [1 2 3 4 5 6 7 8 9]
+            SMA: {}
+    Seasonality: 0
+        Beta: [1×0]
+    Variance: 0.00193629
+
+AIC for the fitted data: -2.6640e+03
+BIC for the fitted data: -2.5802e+03
+
+AIC for the forecated data: ?
+BIC for the forecated data: ?
