@@ -69,7 +69,7 @@ Figure ~\ref{fig:returns} shows the S\&P 500 annual returns After 1950. We perfo
 
 The most important step in building the $ARMA(p, q)$ model is selecting the autoregression lag order $p$ and the moving average lag order $q$. As we use the MATLAB Econometrics Toolbox to build the model, we follow it's documentation\cite{lags} to plot autocorrelation function(ACF) and partial autocorrelation function to choose potential lags. We also compute the mean of the returns to estimate the constant $c$.
 
-Figure ~\ref{fig:acf} and figure ~\ref{fig:pacf} show the autocorrelation function and partial autocorrelation function of the S\&P 500 annual returns respectively. In the ACF plot, we see that the function shuts off at lag 10, so we choose the first 10 lags as potential lags for the moving average model. And similarly, we only choose those lags that exceeds the confidence bounds (marked by the blue lines) as potential values (1, 2, 4, 5, 6, 9, 10, 13, 14) for the autoregression model.
+Figure ~\ref{fig:acf} and figure ~\ref{fig:pacf} show the autocorrelation function and partial autocorrelation function of the S\&P 500 annual returns respectively. In the ACF plot, we see that the function shuts off at lag 10, so we choose the first 10 lags as potential lags for the moving average model. And similarly, we only choose those lags that exceeds the confidence bounds (marked by the blue lines) as potential values (1, 2, 4, 5, 6, 9, 10, 13, 14, 25) for the autoregression model.
 
 \begin{figure}
     \centering
@@ -89,13 +89,13 @@ Figure ~\ref{fig:acf} and figure ~\ref{fig:pacf} show the autocorrelation functi
     %\label{fig:test}
 \end{figure}
 
-With potential lags chosen above, we explore the best best combination of the autoregression lags and moving averages lags for model. However, there are $2^{19}$ possible combinations of the choose lags which is impossible for us to do a brutal search, thus we loop through 1 to 10 for the autoregression lag order $p$ and loop through 1 to 14 for the moving average lag order $q$. In each loop of $p_i$ and $q_j$, if both $p_i$ and $q_j$ are in the choose lag for their corresponding models, we then estimate the $ARMA(p_i, q_j)$ model with the choose lags that within the order using maximum likelihood method. Thus we only need to explore $9\times9=81$ combinations of the lags. Finally, we choose the model that has the minium AIC as our final model which is given below (all the coefficients are rounded to 3 decimal places):
+With potential lags chosen above, we explore the best best combination of the autoregression lags and moving averages lags for model. However, there are $2^{20}$ possible combinations of the choose lags which is impossible for us to do a brutal search, thus we loop through 1 to 10 for the autoregression lag order $p$ and loop through 1 to 25 for the moving average lag order $q$. In each loop of $p_i$ and $q_j$, if both $p_i$ and $q_j$ are in the potential lags for their corresponding models, we then estimate the $ARMA(p_i, q_j)$ model with the chosen lags that within the order using maximum likelihood method. Thus we only need to explore $10\times10=100$ combinations of the lags. Finally, we choose the model that has the minium AIC as our final model which is given below (all the coefficients are rounded to 3 decimal places):
 
 \begin{align*}
     X_t=&0.015X_{t-1}+0.678X_{t-2}-0.602X_{t-4}+0.147X_{t-5}+\\
         &0.263X_{t-6}+0.062X_{t-9}-0.056X_{t-10}-0.153X_{t-13}-0.089X_{t-14}+\\
-        &1.108\epsilon_{t-1}+0.261\epsilon_{t-2}+0.140\epsilon_{t-4}+1\epsilon_{t-5}+1\epsilon_{t-6}+\\
-        &0.213\epsilon_{t-9}+0.051\epsilon_{t-10}+0.640\epsilon_{t-13}+0.674\epsilon_{t-14}+\\
+        &1.108\epsilon_{t-1}+0.261\epsilon_{t-2}+0.140\epsilon_{t-3}+1\epsilon_{t-4}+1\epsilon_{t-5}+\\
+        &0.213\epsilon_{t-6}+0.051\epsilon_{t-7}+0.640\epsilon_{t-8}+0.674\epsilon_{t-9}+\\
         &0.10152+\epsilon_t\\
 \end{align*}
 
