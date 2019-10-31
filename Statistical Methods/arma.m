@@ -10,7 +10,7 @@ SP500kYearsIncrease = (SP500(k+1:end)-SP500(1:end-k))./SP500(1:end-k);
 
 figure;
 plot(Date, SP500kYearsIncrease);
-maxLag = 30;
+maxLag = 15;
 figure;
 autocorr(SP500kYearsIncrease, 'NumLags',maxLag);
 [acf,acfLags,acfBounds] = autocorr(SP500kYearsIncrease, 'NumLags',maxLag);
@@ -20,19 +20,18 @@ parcorr(SP500kYearsIncrease, 'NumLags',maxLag);
 
 
 %split train and test data
-testYearNum = 1;
-testSize = testYearNum*12;
-trainDate = Date(1:end-testSize);
-trainY = SP500kYearsIncrease(1:end-testSize);
+trainYearNum = 50;
+trainDate = Date(1:trainYearNum*12);
+trainY = SP500kYearsIncrease(1:trainYearNum*12);
 trainY = trainY(:);
-testDate = Date(end-testSize+1:end);
-testY = SP500kYearsIncrease(end-testSize+1:end);
+c = mean(trainY);
 
-minErr = inf;
+minAic = inf;
 %estimate ARMA model
 MALags = (1:9);
 ARLags = pacfLags(abs(pacf) > abs(pacfBounds(1)));
 ARLags = ARLags(2:end);%the first element is 0 lag
+
 for mri = 1:length(MALags)
     MALagsChosen = MALags(1:mri);
     MALagsChosen = MALagsChosen(:)';
@@ -40,14 +39,16 @@ for mri = 1:length(MALags)
         try
             ARLagsChosen = ARLags(1:ari);
             ARLagsChosen = ARLagsChosen(:)';
-            model = arima('ARLags',ARLagsChosen,'MALags',MALagsChosen,'Constant',0);
-            estModel = estimate(model,trainY);
-            [forecastY,YMSE] = forecast(estModel,testSize,trainY);
-            msqerr = sum((testY-forecastY).^2)/testSize;
-            if msqerr < minErr
-                minErr = msqerr;
+            model = arima('ARLags',ARLagsChosen,'MALags',MALagsChosen,'Constant',c);
+            [estModel, ~, logL] = estimate(model,trainY);
+            [aic,bic] = aicbic(logL, length(MALagsChosen)+length(ARLagsChosen), length(trainY));
+            %[forecastY,YMSE] = forecast(estModel,testSize,trainY);
+            %msqerr = sum((testY-forecastY).^2)/testSize;
+            if aic < minAic
+                minAic = aic;
+                minBic = bic;
                 bestModel = estModel;
-                bestForecast = forecastY;
+                %bestForecast = forecastY;
                 bestARLags = ARLagsChosen;
                 bestMALags = MALagsChosen;
             end
@@ -57,13 +58,30 @@ for mri = 1:length(MALags)
     end
 end
 
+testYearNum = 10;
+testSize = testYearNum*12;
+testDate10Year = Date(length(trainY)+1: length(trainY)+testSize);
+testY10Year = SP500kYearsIncrease(length(trainY)+1: length(trainY)+testSize);
+
+
+[forecastY10Year,YMSE] = forecast(bestModel,testSize,trainY);
+msqerr = sum((testY10Year-forecastY10Year).^2)/testSize;
 figure;
 hold on;
-trueDataHdl = plot(testDate, testY);
-forecastDataHdl = plot(testDate, bestForecast);
+trueDataHdl = plot(testDate10Year, testY10Year);
+forecastDataHdl = plot(testDate10Year, forecastY10Year);
 legend([trueDataHdl forecastDataHdl],'truth','forecast', 'Location','NorthWest');
 hold off;
-save('arma.mat','minErr','bestModel','bestForecast','bestARLags','bestMALags');
+
+t1 = array2table(testDate10Year);
+t2 = array2table(testY10Year);
+t3 = array2table(forecastY10Year);
+forecastData = [t1, t2, t3];
+
+save('arma.mat','minAic', 'minBic', 'bestModel', 'bestARLags','bestMALags', 'forecastData');
+
+
+
 
         
 

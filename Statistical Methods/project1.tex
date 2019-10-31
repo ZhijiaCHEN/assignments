@@ -44,13 +44,24 @@ Where:
 
 \textbf{Exploratory Data Analysis}
 
-Figure ~\ref{fig:returns} shows the S\&P 500 annual returns After 1950. We use the ... to test if the data is a stationary time series. 
+Figure ~\ref{fig:returns} shows the S\&P 500 annual returns After 1950. We perform a augmented Dickey-Fuller test on the data and the alternative hypothesis indicates that the annual returns is a stationary time series. Figure ~\ref{fig:adf} shows the test result produced by the adf.test function in R.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-        \includegraphics[width=0.5\textwidth]{sp500-annual-increase.jpg}
-    \caption{S\&P 500 Annual Returns After 1950}
-    \label{fig:returns}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{sp500-annual-increase.jpg}
+        \caption{S\&P 500 Annual Returns After 1950}
+        \label{fig:returns}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{stationary-test.png}
+        \caption{Augmented Dickey-Fuller Test}
+        \label{fig:adf}
+    \end{subfigure}
+    %\caption{A figure with two subfigures}
+    %\label{fig:test}
 \end{figure}
 
 \vspace{\baselineskip}
@@ -81,8 +92,10 @@ Figure ~\ref{fig:acf} and figure ~\ref{fig:pacf} show the autocorrelation functi
 With potential lags chosen above, we explore the best best combination of the autoregression lags and moving averages lags for model. However, there are $2^{19}$ possible combinations of the choose lags which is impossible for us to do a brutal search, thus we loop through 1 to 10 for the autoregression lag order $p$ and loop through 1 to 14 for the moving average lag order $q$. In each loop of $p_i$ and $q_j$, if both $p_i$ and $q_j$ are in the choose lag for their corresponding models, we then estimate the $ARMA(p_i, q_j)$ model with the choose lags that within the order using maximum likelihood method. Thus we only need to explore $9\times9=81$ combinations of the lags. Finally, we choose the model that has the minium AIC as our final model which is given below (all the coefficients are rounded to 3 decimal places):
 
 \begin{align*}
-    X_t=&0.015X_{t-1}+0.678X_{t-2}-0.602X_{t-4}+0.147X_{t-5} 0.263X_{t-6}+0.062X_{t-9}-0.056X_{t-10}-0.153X_{t-13}-0.089X_{t-14}+\\
-        &1.108\epsilon_{t-1}+0.261\epsilon_{t-2}+0.140\epsilon_{t-4}+1\epsilon_{t-5}+1\epsilon_{t-6}+0.213\epsilon_{t-9}+0.051\epsilon_{t-10}+0.640\epsilon_{t-13}+0.674\epsilon_{t-14}+\\
+    X_t=&0.015X_{t-1}+0.678X_{t-2}-0.602X_{t-4}+0.147X_{t-5}+\\
+        &0.263X_{t-6}+0.062X_{t-9}-0.056X_{t-10}-0.153X_{t-13}-0.089X_{t-14}+\\
+        &1.108\epsilon_{t-1}+0.261\epsilon_{t-2}+0.140\epsilon_{t-4}+1\epsilon_{t-5}+1\epsilon_{t-6}+\\
+        &0.213\epsilon_{t-9}+0.051\epsilon_{t-10}+0.640\epsilon_{t-13}+0.674\epsilon_{t-14}+\\
         &0.10152+\epsilon_t\\
 \end{align*}
 
@@ -90,7 +103,7 @@ Figure ~\ref{fig:fit} shows the fitted data and the residual plot. We can see th
 
 \begin{figure}[h!]
     \centering
-        \includegraphics[width=0.5\textwidth]{fit.jpg}
+    \includegraphics[width=0.5\textwidth]{fit.jpg}
     \caption{the fitted data and residual plot of the best model}
     \label{fig:fit}
 \end{figure}
