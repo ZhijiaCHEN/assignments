@@ -1,3 +1,4 @@
+ID,Treat,tot04,tot08,tot12,adt04,adt08,adt12,length,width,speed,shoulder,driveways,intersections,curves,curvature
 1,0,1,1,1,7853,7928,8391.33333333333,0.663,>= 24,High,> 6,None,None,None,0
 2,0,1,1,1,7853,7928,8391.33333333333,0.643,>= 24,High,> 6,None,None,None,0
 3,0,2,3,0,9677,11759,10786.3333333333,0.426,>= 24,Low,> 6,> 0 and <= 10,None,None,0
