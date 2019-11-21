@@ -24,6 +24,12 @@ drivewaysVSCrash = {}
 speedVSCrash = {}
 
 curvatureDistribution = {}
+"""
+plt.scatter([width_category[x] for x in crash["width"]], crash["adt04"], alpha=0.1)
+plt.xlabel('width(feet)')
+plt.ylabel('AADT')
+plt.xticks([0, 1, 2], ['<= 20', '> 20 and < 24', '>= 24'])
+plt.show()
 for x, y, treat in zip(crash["tot04"], crash["curvature"], crash["Treat"]):
     #if x == 0 or not treat:continue
     y = floor(y)
@@ -62,18 +68,18 @@ crashDistributionY = [crashes[x] for x in crashDistributionX]
 crashDistributionY = [y/sum(crashDistributionY) for y in crashDistributionY]
 plt.bar(crashDistributionX, crashDistributionY)
 plt.xlabel('# crashes')
-plt.ylabel('possibility')
+plt.ylabel('probability')
 plt.show()
-
+"""
 # two sample t-test on crash differences
 #treatDiff = [x for x, y in zip(crash["totDiff"], crash["Treat"]) if y]
 #untreatDiff = [x for x, y in zip(crash["totDiff"], crash["Treat"]) if not y]
 #plt.hist(crash["curvature"], 50)
 #plt.show()
-treatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if y and curvature > 10]
-untreatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if not y and curvature > 10]
-#treatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if y and width_category[width] == 2]
-#untreatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if not y and width_category[width] == 2]
+#treatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if y and curvature > 3]
+#untreatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if not y and curvature > 3]
+#treatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if y and width_category[width] == 0]
+#untreatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if not y and width_category[width] == 0]
 #treatDiff = [x for x, y, speed in zip(crash["totDiff"], crash["Treat"], crash["speed"]) if y and speed_category[speed] == 1]
 #untreatDiff = [x for x, y, speed in zip(crash["totDiff"], crash["Treat"], crash["speed"]) if not y and speed_category[speed] == 1]
 treatDiff = [x for x, y, tot04, tot08 in zip(crash["totDiff"], crash["Treat"], crash["tot04"], crash["tot08"]) if y and tot04 >= 1]
@@ -104,14 +110,14 @@ plt.subplots_adjust(hspace=0.5)
 ax1=plt.subplot(2, 1, 1)
 ax1.set_title('without rumble, population size: {}'.format(len(untreatDiff)))
 ax1.set_xlabel('tot12 - tot04')
-ax1.set_ylabel('possibility')
+ax1.set_ylabel('probability')
 ax1.set_xlim([-7, 7])
 plt.bar(untreatDiffX, untreatDiffY)
 
 ax2=plt.subplot(2, 1, 2)
 ax2.set_title('with rumble, population size: {}'.format(len(treatDiff)))
 ax2.set_xlabel('tot12 - tot04')
-ax2.set_ylabel('possibility')
+ax2.set_ylabel('probability')
 ax2.set_xlim([-7, 7])
 plt.bar(treatDiffX, treatDiffY)
 plt.show()
