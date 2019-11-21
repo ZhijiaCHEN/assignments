@@ -21,14 +21,36 @@
     \maketitle
 \end{titlepage}
 
-\textbf{Summary}
-Rumble strips has been widely applied as an econimic measure to alert inattentive drivers of potential dangers.
-Stock performance forecast is always an intriguing topic. Many indexes has been proposed as indicator for the market performance, within which the S\&P 500 index is arguably the most widely recognized. The S\&P 500 index is a composite index of 500 largest U.S. stocks and it generally shows the overall performance of the whole stock market.Thus S\&P 500 prediction is of great interests in the field of market forecast. While predicting S\&P 500 based on relevant variables might produce a stable model that is more tolerant of market disturbance, it requires a deep insight of the market and tremendous efforts in sorting out accurate relationships between the index and it's dependent variables, predicting the future of the S\&P 500 solely based on it's past, however, is a much simpler method. In this study, we show that ARMA model, or Autoregressive Moving Average model, is able to fit the S\&P 500 annual returns very well, and can also produce a reliable prediction of changes in the near future. We used the returns after 1950 to fit the ARMA model and use the last 12 months (Jan, 2017 - Dec, 2017) to test the forecast. The AIC and BIC for the model are pretty low, with the former being -2.067e+03 and and the later being -1.988e+03. But we do notice that the changes in the fitted data usually lag behind the actual data, and the error of the forecast data increases as the forecast span increases. The ARMA model might not able to produce an accurate prediction, especially when there are dramatic changes, but when only the short time trend is of interest, it's much more efficient compared to those modeling methods such as linear regression that requires finding the dependent variables of the target variable and the corresponding relationships.
+\section*{Summary}
+Rumble strips has been widely adopted as an economic measure to alert inattentive drivers of potential dangers. A rumble strip is a raised or grooved pattern on travel lanes and has different texture with the road on with it is installed. When vehicle tires pass over the strip, they produce a sudden rumbling sound and cause the automobile to vibrate so as to alert inattentive or drowsy drivers[]. It is expected that drivers will pay more attention when passing the road and thus reduce the possibility of potential car accidents. A car accident is such a complex random event that contributed by many factors, it is hard to tell how effective rumble strips are in reducing crashes. So, in this study, we explore the effectiveness of rumble strips by comparing the changes in yearly car crashes number between roads with and without rumble installed in an observed time span (2004 to 2012). We find that there isn't strong evidence that rumble stripes have a general effects in reducing average number of crash on all roads. But when we focus on roads with certain condition, such as road curvature, road width, speed limit, etc., we found that on roads with curvature degree greater than 5, rumble strips can prevent \% of car crashes on average. We also find that rumble strips is also likely to reduce ?\% of car crashes on roads of width greater than 24 feet while they have positive effects in narrower roads, which is unexpected as by intuition we think a crash is more likely to happen if the road is narrower. By further investing the annual traffic volume, we realize that wider roads usually hold more traffic volume and thus higher car accident possibility. We also suspect that rumble strips would help on crash-prone roads, i.e., roads with car accident records in 2004, but we didn't find any strong evidence to support that. 
 
-\vspace{\baselineskip}
-\textbf{Model Introduction}
+\section*{Dataset and Assumption}
 
-In this study, our goal is to model the annual returns of the S\&P 500 index after 1950. We use the ARMA model to fit the data of the first 50 years, i.e. 1950~2000, and try to do a 1-year-span forecast. An ARMA model, or Autoregressive Moving Average model, is used to describe weakly stationary stochastic time series in terms of two polynomials. The first of these polynomials is for autoregression, the second for the moving average\cite{arma}. The model is usually referred as the $ARMA(p,q)$ Model, where $p$ is the order of the autoregressive polynomial and q is the order of the moving average polynomial. The model is given by:
+This study works with the dataset "PennCrash.txt"[] that provides number of crashes occurred on about 2000 road segments (sites) in Pennsylvania in the year 2004, 2008 and 2012. Among these sites, rumble strips were installed in 331 of them between year 2008 and 2012. The dataset also gives some features of the roads including annual average daily traffic (AADT) volume, curvature, width, posted speed limit and so on. As we do not know if rumble stripes were installed in 2008 or not, we only use the data of the year 2004 and 2012, and we assume that by the beginning of 2012, all the rumble stripes in this dataset had been installed. Thus we have a clean data to study the crash number before and after rumble strips installation.
+
+\section*{Methodology}
+
+To study if rumble strips help in reducing the number of car crashes, a naive approach is to compare the car accident number before and after rumble strip installation. However, 8 years (2004 to 2012) is quite a long time span and many factors that affect car crash could have changed over time, such as better traffic control system, improved overall driving behavior, better car control system, higher/lower traffic volume, etc., and we cannot simply claim the changes in car crashes as being the effect of rumble stripes. So we take data of roads that do not have rumble strips treatment as a control group, and those that have rumble strips treatment as treat group. We will study the total crash number changes between year 2012 and year 2004 of the two groups, and test the differences between the two population. When investigating rumble strips' effects on roads of particular features, we will filter the data using the corresponding column before testing the differences. 
+
+And to compare two population, we perform single-tailed two sample t-test to test their means are equal and get the p value. Generally, we have the following null hypothesis and alternative hypothesis:
+
+\begin{align*}
+    H_0: &Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n)) >= Mean(tot12-tot04)|(not treat, condition(c_1, c_2, ..., c_n))\\
+    H_1: &Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n)) < Mean(tot12-tot04)|(not treat, condition(c_1, c_2, ..., c_n))\\
+\end{align*}
+
+Where $tot04$ and $tot12$ are the total number of crashes in year 2004 and 2012 respectively, and $Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n))$ denotes the mean value of $tot12-tot04$ of roads that have rumble stripe treatment with conditions on road features $c_1, c_2, ..., c_n$. We set $\alpha$ value to 0.05 in this study.
+
+\section*{Rumble Strips Effectiveness Tests}
+
+We first study rumble strips' effects on all the roads in the dataset regardless of any road features. Figure ~\ref{fig:general-effect} shows the distribution of the two population. The mean value for the population with rumble strips treatment is -0.066 and 0.028 for that without treatment. While the mean value of the treatment group is slightly smaller than the control group, the p value is 0.057 so we accept the null hypothesis. But still, we can see that the distribution at 1 is marginally smaller than the value at -1 in the group with treatment, and the other way around in the other group. This is a good sign that we can find a more significant difference if we refine the two groups with certain condition on some road features.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{with-and-without-rumble-diff.png}
+    \caption{distribution of tot12-tot04 on roads with and without rumble treatment}
+    \label{fig:general-effect}
+\end{figure}
 
 \begin{align*}
     X_t=c+\epsilon_t+\sum_{i=1}^p\phi X_{t-i}+\sum_{i=1}^q\theta_i\epsilon_{t-i}
