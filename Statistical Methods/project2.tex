@@ -35,11 +35,13 @@ To study if rumble strips help in reducing the number of car crashes, a naive ap
 And to compare two population, we perform single-tailed two sample t-test to test their means are equal and get the p value. Generally, we have the following null hypothesis and alternative hypothesis:
 
 \begin{align*}
-    H_0: &Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n)) >= Mean(tot12-tot04)|(not treat, condition(c_1, c_2, ..., c_n))\\
-    H_1: &Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n)) < Mean(tot12-tot04)|(not treat, condition(c_1, c_2, ..., c_n))\\
+    H_0: &Mean(tot12-tot04)|(treat, condition(f_1, f_2, ..., f_n)) >= \\
+         &Mean(tot12-tot04)|(not treat, condition(f_1, f_2, ..., f_n))\\
+    H_1: &Mean(tot12-tot04)|(treat, condition(f_1, f_2, ..., f_n)) < \\
+         &Mean(tot12-tot04)|(not treat, condition(f_1, f_2, ..., f_n))\\
 \end{align*}
 
-Where $tot04$ and $tot12$ are the total number of crashes in year 2004 and 2012 respectively, and $Mean(tot12-tot04)|(treat, condition(c_1, c_2, ..., c_n))$ denotes the mean value of $tot12-tot04$ of roads that have rumble stripe treatment with conditions on road features $c_1, c_2, ..., c_n$. We set $\alpha$ value to 0.05 in this study.
+Where $tot04$ and $tot12$ are the total number of crashes in year 2004 and 2012 respectively, and $Mean(tot12-tot04)|(treat, condition(f_1, f_2, ..., f_n))$ denotes the mean value of $tot12-tot04$ of roads that have rumble stripe treatment with conditions on road features $f_1, f_2, ..., f_n$. $H_0$ means rumble strips treatment has no effect or has reverse effect in reducing car crash number on roads with features safisfying $condition(f_1, f_2, ..., f_n)$. We set $\alpha$ value to 0.05 in this study.
 
 \section*{Rumble Strips Effectiveness Tests}
 
@@ -52,82 +54,24 @@ We first study rumble strips' effects on all the roads in the dataset regardless
     \label{fig:general-effect}
 \end{figure}
 
-\begin{align*}
-    X_t=c+\epsilon_t+\sum_{i=1}^p\phi X_{t-i}+\sum_{i=1}^q\theta_i\epsilon_{t-i}
-\end{align*}
-
-Where:
-\begin{itemize}
-    \item $\phi$ is the autoregressive model's parameters.
-    \item $\theta$ is the moving average model's parameters.
-    \item c is a constant.
-    \item $\epsilon_t$ is the prediction error at time $t$.
-\end{itemize}
-
-\textbf{Exploratory Data Analysis}
-
-Figure ~\ref{fig:returns} shows the S\&P 500 annual returns After 1950. We perform a augmented Dickey-Fuller test on the data and the alternative hypothesis indicates that the annual returns is a stationary time series. Figure ~\ref{fig:adf} shows the test result produced by the adf.test function in R.
+Then we consider the roads of large curvature. We first check roads with curve degree greater than 3, the mean value of $tot12-tot04$ for the treat group is ? against ? for the control group, and the p value is ?, which rejects the null hyposthesis. When we further increase the curve degree threshold to 5, the difference is more significant, with the mean value difference increase to ? and p value decrease to ?. Figure ~\ref{fig:curve-grt3} and figure ~\ref{fig:curve-grt5} shows the distribution of $tot12-tot04$ of the two cases respectively. 
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}{.5\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{sp500-annual-increase.jpg}
-        \caption{S\&P 500 Annual Returns After 1950}
-        \label{fig:returns}
+        \includegraphics[width=1\textwidth]{with-and-without-rumble-curvature-grt3-diff.png}
+        \caption{distribution of tot12-tot04 on roads of curve degree $>$ 3     with and without rumble treatment}
+        \label{fig:curve-grt3}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{stationary-test.png}
-        \caption{Augmented Dickey-Fuller Test}
-        \label{fig:adf}
+        \includegraphics[width=1\textwidth]{with-and-without-rumble-curvature-grt5-diff.png}
+        \caption{distribution of tot12-tot04 on roads of curve degree $>$ 5     with and without rumble treatment}
+        \label{fig:curve-grt5}
     \end{subfigure}
     %\caption{A figure with two subfigures}
     %\label{fig:test}
-\end{figure}
-
-\vspace{\baselineskip}
-\textbf{Model Development and Test}
-
-The most important step in building the $ARMA(p, q)$ model is selecting the autoregression lag order $p$ and the moving average lag order $q$. As we use the MATLAB Econometrics Toolbox to build the model, we follow it's documentation\cite{lags} to plot autocorrelation function(ACF) and partial autocorrelation function to choose potential lags. We also compute the mean of the returns to estimate the constant $c$.
-
-Figure ~\ref{fig:acf} and figure ~\ref{fig:pacf} show the autocorrelation function and partial autocorrelation function of the S\&P 500 annual returns respectively. In the ACF plot, we see that the function shuts off at lag 10, so we choose the first 10 lags as potential lags for the moving average model. And similarly, we only choose those lags that exceeds the confidence bounds (marked by the blue lines) as potential values (1, 2, 4, 5, 6, 9, 10, 13, 14, 25) for the autoregression model.
-
-\begin{figure}
-    \centering
-    \begin{subfigure}{.5\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{acf.jpg}
-        \caption{autocorrelation function plot}
-        \label{fig:acf}
-    \end{subfigure}%
-    \begin{subfigure}{.5\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{pacf.jpg}
-        \caption{partial autocorrelation function plot}
-        \label{fig:pacf}
-    \end{subfigure}
-    %\caption{A figure with two subfigures}
-    %\label{fig:test}
-\end{figure}
-
-With potential lags chosen above, we explore the best best combination of the autoregression lags and moving averages lags for model. However, there are $2^{20}$ possible combinations of the choose lags which is impossible for us to do a brutal search, thus we loop through 1 to 10 for the autoregression lag order $p$ and loop through 1 to 25 for the moving average lag order $q$. In each loop of $p_i$ and $q_j$, if both $p_i$ and $q_j$ are in the potential lags for their corresponding models, we then estimate the $ARMA(p_i, q_j)$ model with the chosen lags that within the order using maximum likelihood method. Thus we only need to explore $10\times10=100$ combinations of the lags. Finally, we choose the model that has the minium AIC as our final model which is given below (all the coefficients are rounded to 3 decimal places):
-
-\begin{align*}
-    X_t=&0.015X_{t-1}+0.678X_{t-2}-0.602X_{t-4}+0.147X_{t-5}+\\
-        &0.263X_{t-6}+0.062X_{t-9}-0.056X_{t-10}-0.153X_{t-13}-0.089X_{t-14}+\\
-        &1.108\epsilon_{t-1}+0.261\epsilon_{t-2}+0.140\epsilon_{t-3}+1\epsilon_{t-4}+1\epsilon_{t-5}+\\
-        &0.213\epsilon_{t-6}+0.051\epsilon_{t-7}+0.640\epsilon_{t-8}+0.674\epsilon_{t-9}+\\
-        &0.10152+\epsilon_t\\
-\end{align*}
-
-Figure ~\ref{fig:fit} shows the fitted data and the residual plot. We can see that the model fits the data very well with maximum residual at only around 0.15. The AIC and BIC for the model are also at a very low level which are -2.0673e+03 and -1.9882e+03 respectively.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{fit.jpg}
-    \caption{the fitted data and residual plot of the best model}
-    \label{fig:fit}
 \end{figure}
 
 To test our model, we do a 1-year span forecast and compare it against the actual data. Figure ~\ref{fig:forecast1} presents the forecast data and the error. We notice that the change trend of the forecast generally matches the actual data, but the data change scale diminishes as the time goes which makes the future predication approaching to a constant. Figure ~\ref{fig:forecast10} shows a 10-year forecast and the predicated data indeed level off after 3 years. Overall, the results show that our model is capable of doing a good short term forecast but would need further improvements to increase the reliable forecast span.

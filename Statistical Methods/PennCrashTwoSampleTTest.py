@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 from scipy import stats
+from math import floor
 width_category = {'<= 20':0, '> 20 and < 24':1, '>= 24':2}
 shoulder_category = {'<= 3': 0, '> 3 and <= 6': 1, '> 6': 2}
 driveways_category = {'None':0, '> 0 and <= 10':1, '> 10': 2}
@@ -22,6 +23,35 @@ intersectionVSCrash = {}
 drivewaysVSCrash = {}
 speedVSCrash = {}
 
+curvatureDistribution = {}
+for x, y, treat in zip(crash["tot04"], crash["curvature"], crash["Treat"]):
+    #if x == 0 or not treat:continue
+    y = floor(y)
+    curvatureVSCrash[y] = curvatureVSCrash.get(y, 0) + x
+    curvatureDistribution[y] = curvatureDistribution.get(y, 0) + 1
+
+curvatureDistributionX = list(curvatureDistribution.keys())
+curvatureDistributionX.sort()
+curvatureVSMeanCrashY = [curvatureDistribution[k] for k in curvatureDistributionX]
+curvatureVSMeanCrashY = [y / sum(curvatureVSMeanCrashY) for y in curvatureVSMeanCrashY]
+plt.bar(curvatureDistributionX, curvatureVSMeanCrashY)
+plt.xlabel('curve degree')
+plt.ylabel('probability')
+plt.xlim(0, 50)
+#plt.yscale('log')
+plt.show()
+
+curvatureVSMeanCrashX = list(curvatureDistribution.keys())
+curvatureVSMeanCrashX.sort()
+curvatureVSMeanCrashY = [curvatureVSCrash[k]/curvatureDistribution[k] for k in curvatureVSMeanCrashX]
+plt.bar(curvatureVSMeanCrashX, curvatureVSMeanCrashY)
+plt.xlabel('curve degree')
+plt.ylabel('# crashes')
+plt.xlim(0, 50)
+#plt.yscale('log')
+plt.show()
+
+
 crashes = {}
 for c in crash["tot04"]:
     if c > 0:
@@ -40,8 +70,8 @@ plt.show()
 #untreatDiff = [x for x, y in zip(crash["totDiff"], crash["Treat"]) if not y]
 #plt.hist(crash["curvature"], 50)
 #plt.show()
-#treatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if y and curvature > 5]
-#untreatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if not y and curvature > 5]
+treatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if y and curvature > 10]
+untreatDiff = [x for x, y, curvature in zip(crash["totDiff"], crash["Treat"], crash["curvature"]) if not y and curvature > 10]
 #treatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if y and width_category[width] == 2]
 #untreatDiff = [x for x, y, width in zip(crash["totDiff"], crash["Treat"], crash["width"]) if not y and width_category[width] == 2]
 #treatDiff = [x for x, y, speed in zip(crash["totDiff"], crash["Treat"], crash["speed"]) if y and speed_category[speed] == 1]
