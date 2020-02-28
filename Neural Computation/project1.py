@@ -236,7 +236,7 @@ def task2_method1():
                     clusterLoss = clusterLoss + (D*W).sum()
                 #clusterLoss = clusterLoss/N
                 #calculate accuracy
-                embedingLoss = (fX.mm(W3.pinverse()).mm(W2.pinverse()).mm(W1.pinverse())-X).pow(2).sum()
+                embedingLoss = (fX.mm(W3.t()).mm(W2.t()).mm(W1.t())-X).pow(2).sum()
                 loss = (embedingLoss+lossLambda*clusterLoss)/N
                 accuracy.append(0)
                 clusters = [[] for i in range(K)]
@@ -266,5 +266,5 @@ def task2_method1():
                 print(U)
                 data = U.grad.data
                 f.write('{} {}\n'.format(loss.data, accuracy[-1]))
-#nanTest()
-task1_method1()
+
+task2_method1()
