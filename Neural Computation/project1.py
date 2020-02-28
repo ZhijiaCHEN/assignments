@@ -5,6 +5,21 @@ import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 
+def KL_loss(X, U, device = None):
+    if device is None:
+        loss = torch.tensor(0.0, requires_grad=True)
+    else:
+        loss = torch.tensor(0.0, requires_grad=True).to(device)
+    Q = []
+    for xi in X:
+        Di = (xi.reshape(2, 1).mm(torch.ones(1, U.size()[0]).to(device)).t()-U).pow(2).sum(1)
+        Qi = (1+Di).pow(-1)/(1+Di).pow(-1).sum()
+        Q.append(Qi)
+    F = sum(Q)
+    P = [(Qi.pow(2)/F)/(Qi.pow(2)/F).sum() for Qi in Q]
+    loss = sum([(Pi*(Pi/Qi).log()).sum() for Pi, Qi in zip(P, Q)])
+    return loss
+
 def task0_method1():
     X = Variable(torch.cat((torch.randn(2000, 2), torch.randn(1500, 2) + 13, torch.mm(torch.randn(1000, 2) + 6,3 * (torch.rand(2, 2) - 0.2))), 0).cuda(), requires_grad=False)
     K = 3
@@ -15,10 +30,10 @@ def task0_method1():
         f.write('# x y\n')
         for x in X:
             f.write('{} {} \n'.format(x[0], x[1]))
-    Alpha = [1, 50]
-    T = [100, 100]
+    Alpha = [10, 50]
+    T = [50, 100]
     U = Variable((torch.rand(K, 2)).cuda(), requires_grad=True)
-    learningRate = 0.1
+    learningRate = 0.01
     device = torch.device("cuda")
     #optimizer = optim.SGD([U], lr=learningRate)
     with open('toy-output.txt', 'w') as f:
@@ -28,13 +43,12 @@ def task0_method1():
             for i in range(t):
                 loss = torch.tensor(0.0, requires_grad=True).to(device)
                 for x in X:
-                    D = (x.reshape(2, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)/2
+                    D = (x.reshape(2, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)
                     expD = (-1*D*alpha).exp()+1e-32
                     W = expD/expD.sum()
                     loss = loss + (D*W).sum()
-                    #loss = loss + (D*expD/expD.sum()).sum()
                 loss = loss/X.size()[0]
-                
+                #loss = KL_loss(X, U, device)
                 if U.grad is not None: U.grad.data.zero_()
                 loss.backward()
                 U.data -= learningRate*U.grad.data
@@ -64,13 +78,13 @@ def task1_method1():
     Xmax = Variable(torch.max(X), requires_grad=False)
     Xmin = Variable(torch.min(X), requires_grad=False)
     X = (X-Xmin)/(Xmax-Xmin)
-    Alpha = [1, 50]
-    T = [100, 100]
+    Alpha = [10, 50]
+    T = [10, 50]
     U = Variable((torch.rand(K, DIn)).cuda(), requires_grad=True)
-    learningRate = 0.1
+    learningRate = 0.2
 
-    #optimizer = optim.SGD([U], lr=learningRate)
-    with open('minist-output.txt', 'w') as f:
+    optimizer = optim.SGD([U], lr=learningRate)
+    with open('task1_method1.txt', 'w') as f:
         f.write('# loss accuracy\n')
         accuracy = []
         for alpha, t in zip(Alpha, T):
@@ -84,7 +98,7 @@ def task1_method1():
                     W = expD/expD.sum()
                     predict.append(max(range(len(W)), key=W.__getitem__))
                     loss = loss + (D*W).sum()
-                loss = loss/N
+                #loss = loss/N
                 #calculate accuracy
                 accuracy.append(0)
                 clusters = [[] for i in range(K)]
@@ -98,11 +112,11 @@ def task1_method1():
                 accuracy[-1]/=len(X)
 
                 if U.grad is not None: U.grad.data.zero_()
-                loss.backward()
-                U.data -= learningRate*U.grad.data
-
                 #loss.backward()
-                #optimizer.step()
+                #U.data -= learningRate*U.grad.data
+
+                loss.backward()
+                optimizer.step()
                 print('Round {}: loss = {}; accuracy= {}; U = '.format(i+1, loss.data, accuracy[-1]))
                 print(U)
                 data = U.grad.data
@@ -133,7 +147,7 @@ def task1_method2():
     learningRate = 0.1
 
     #optimizer = optim.SGD([U], lr=learningRate)
-    with open('minist-output.txt', 'w') as f:
+    with open('task1_method2.txt', 'w') as f:
         f.write('# loss accuracy\n')
         accuracy = []
         for alpha, t in zip(Alpha, T):
@@ -252,4 +266,5 @@ def task2_method1():
                 print(U)
                 data = U.grad.data
                 f.write('{} {}\n'.format(loss.data, accuracy[-1]))
-task0_method1()
+#nanTest()
+task1_method1()
