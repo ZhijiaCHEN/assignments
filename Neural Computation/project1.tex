@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\usepackage{float}
+\usepackage[useregional]{datetime2}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\usepackage[font=small,skip=0pt]{caption}
+\geometry{legalpaper, margin=1in}
+\title{CIS 5525 Project 1}
+\author{Zhijia Chen}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\textbf{Task 0.}
+\vspace{\baselineskip}
+In this task, we use the following loss function:
+
+\begin{align*}
+    loss = \sum_{x\in \chi}{\left(\sum_{k=1}^{K}\|x-u_k\|^2\frac{e^{-\alpha\|x-u_k\|^2}}{\sum_{k'=1}^{K}e^{-\alpha\|x-u_{k'}\|^2}}\right)}
+\end{align*}
+
+The number of target clusters $K$ is set to 3. The data is normalized so that its mean is 0 and standard deviation is 1. We apply SGD to optimize the loss function. Figure ... shows the clustering results and the loss curve function over epochs with different $\alpha$ values. The upper two sub-figures shows the results when $\alpha=1$ and the bottom two are for $\alpha=3$. We find that the loss function is likely to converge faster with a bigger $\alpha$ value, but 
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{task0-cluster-alpha-1.pdf}
+      \caption{Clustering result for $\alpha$=1.}
+      \label{fig:cluster3}
+    \end{subfigure}%
+    \begin{subfigure}{.66\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{task0-loss-alpha-1.pdf}
+      \caption{Loss function curve for $\alpha$=1.}
+      \label{fig:loss3}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{.33\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{task0-cluster-alpha-3.pdf}
+      \caption{Clustering result for $\alpha$=3.}
+      \label{fig:cluster3}
+    \end{subfigure}%
+    \begin{subfigure}{.66\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{task0-loss-alpha-3.pdf}
+      \caption{Loss function curve for $\alpha$=3.}
+      \label{fig:loss3}
+    \end{subfigure}
+    \caption{Clustering result and loss curve function with different $\alpha$.}
+    \label{task0}
+\end{figure}
+
+\textbf{Task 1.}
+\vspace{\baselineskip}
+
+\end{document}
+
