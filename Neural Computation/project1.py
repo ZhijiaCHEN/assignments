@@ -4,9 +4,33 @@ from torch import optim
 import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+import numpy as np
+from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
+from scipy import optimize
+
+nmi = normalized_mutual_info_score
+ari = adjusted_rand_score
 
 device = torch.device("cuda")
 train_loader = torch.utils.data.DataLoader(torchvision.datasets.MNIST('./minist/', train=True, download=True, transform=torchvision.transforms.Compose([torchvision.transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])), batch_size=1000, shuffle=False)
+
+def acc(y_true, y_pred):
+    """
+    Calculate clustering accuracy. Require scikit-learn installed
+    # Arguments
+        y: true labels, numpy.array with shape `(n_samples,)`
+        y_pred: predicted labels, numpy.array with shape `(n_samples,)`
+    # Return
+        accuracy, in [0,1]
+    """
+    y_true = y_true.astype(np.int64)
+    assert y_pred.size == y_true.size
+    D = max(y_pred.max(), y_true.max()) + 1
+    w = np.zeros((D, D), dtype=np.int64)
+    for i in range(y_pred.size):
+        w[y_pred[i], y_true[i]] += 1
+    ind = optimize.linear_sum_assignment(w.max() - w)
+    return sum([w[i, j] for i, j in zip(ind[0], ind[1])]) * 1.0 / y_pred.size
 
 def my_normalize(x):
     return (x-x.mean())/x.std()
@@ -82,10 +106,10 @@ def task1_method1():
     N = X.size()[0]
     DIn = X.size()[1] 
     K = 10
-    alpha = [1, 3]
-    T = [50, 100]
+    alpha = [1]
+    T = [100]
     U = Variable((torch.rand(K, DIn)).cuda(), requires_grad=True)
-    learningRate = 0.1
+    learningRate = 1
 
     optimizer = optim.SGD([U], lr=learningRate)
     with open('task1_method1.txt', 'w') as f:
@@ -97,23 +121,14 @@ def task1_method1():
                 loss = torch.tensor(0.0, requires_grad=True).to(device)
                 predict = []
                 for x in X:
-                    D = (x.reshape(DIn, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)/DIn
+                    D = (x.reshape(DIn, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)/N
                     expD = (-1*D*alpha).exp()+1e-32
                     W = expD/expD.sum()
                     predict.append(max(range(len(W)), key=W.__getitem__))
                     loss = loss + (D*W).sum()
                 #loss = loss/N
                 #calculate accuracy
-                accuracy.append(0)
-                clusters = [[] for i in range(K)]
-                for yp, y in zip(predict, Y):
-                    clusters[yp].append(y)
-                for cluster in clusters:
-                    labelCnt = [0]*K
-                    for c in cluster:
-                        labelCnt[c] += 1
-                    accuracy[-1] += max(labelCnt)
-                accuracy[-1]/=len(X)
+                accuracy.append(acc(Y.cpu().numpy(), np.asarray(predict)))
 
                 if U.grad is not None: U.grad.data.zero_()
                 #loss.backward()
@@ -121,8 +136,7 @@ def task1_method1():
 
                 loss.backward()
                 optimizer.step()
-                print('Round {}: loss = {}; accuracy= {}; U = '.format(i+1, loss.data, accuracy[-1]))
-                print(U)
+                print('Round {}: loss = {}; accuracy= {};'.format(i+1, loss.data, accuracy[-1]))
                 data = U.grad.data
                 f.write('{} {}\n'.format(loss.data, accuracy[-1]))
 
@@ -133,22 +147,17 @@ def task1_method2():
     X.requires_grad_(False)
     Y = example_targets.to(device)
     Y.requires_grad_(False)
-    #X = torch.tensor(example_data.view(-1,784), requires_grad=False).to(device)
-    #Y = torch.tensor(example_targets, requires_grad=False).to(device)
 
     N = X.size()[0]
     DIn = X.size()[1] 
     K = 10
-    Xmax = Variable(torch.max(X), requires_grad=False)
-    Xmin = Variable(torch.min(X), requires_grad=False)
-    X = (X-Xmin)/(Xmax-Xmin)
-    alpha = [50, 100]
-    T = [100, 100]
-    U = Variable((torch.rand(K, DIn)).cuda(), requires_grad=True)
-    W = Variable((torch.rand(N, K)).cuda(), requires_grad=True)
-    learningRate = 0.1
+    alpha = [1]
+    T = [100]
+    U = Variable((torch.randn(K, DIn)).cuda(), requires_grad=True)
+    W = Variable((torch.randn(N, K)).cuda(), requires_grad=True)
+    learningRate = 1
 
-    #optimizer = optim.SGD([U], lr=learningRate)
+    optimizer = optim.SGD([U], lr=learningRate)
     with open('task1_method2.txt', 'w') as f:
         f.write('# loss accuracy\n')
         accuracy = []
@@ -157,23 +166,16 @@ def task1_method2():
             for i in range(t):
                 loss = torch.tensor(0.0, requires_grad=True).to(device)
                 predict = []
-                for x, w in zip(X, W.clamp(min=0)):
+                for x, w in zip(X, W):
+                    w = w-w.min()
+                    w = w/w.max()
                     D = (x.reshape(DIn, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)
                     predict.append(max(range(len(w)), key=w.__getitem__))
                     expW = (w*alpha).exp()/(w*alpha).exp().sum()
                     loss = loss + (D*w).sum() # w may be negative in the process of updating, what should we do?
                 loss = loss/N
                 #calculate accuracy
-                accuracy.append(0)
-                clusters = [[] for i in range(K)]
-                for yp, y in zip(predict, Y):
-                    clusters[yp].append(y)
-                for cluster in clusters:
-                    labelCnt = [0]*K
-                    for c in cluster:
-                        labelCnt[c] += 1
-                    accuracy[-1] += max(labelCnt)
-                accuracy[-1]/=len(X)
+                accuracy.append(acc(Y.cpu().numpy(), np.asarray(predict)))
 
                 if U.grad is not None: U.grad.data.zero_()
                 if W.grad is not None: W.grad.data.zero_()
@@ -283,7 +285,7 @@ def task2_method1():
         f.write('# x y k\n')
         for x,y in zip(fX, Y):
             f.write('{} {} {}\n'.format(x[0], x[1], y))
-fun = task0_method1
+fun = task1_method1
 detectAnomaly = False
 if detectAnomaly:
     with torch.autograd.detect_anomaly():
