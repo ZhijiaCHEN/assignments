@@ -282,11 +282,7 @@ def task2_method1():
         f.write('# x y k\n')
         for x,y in zip(fX, Y):
             f.write('{} {} {}\n'.format(x[0], x[1], y))
-<<<<<<< HEAD
 fun = task0_method1
-=======
-fun = task1_method2
->>>>>>> fc2af2e911334ced35b2e3f2322f875b8d9682e6
 detectAnomaly = False
 if detectAnomaly:
     with torch.autograd.detect_anomaly():
