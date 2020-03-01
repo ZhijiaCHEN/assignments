@@ -56,20 +56,51 @@ def task0_method1():
     Xmax = Variable(torch.max(X), requires_grad=False)
     Xmin = Variable(torch.min(X), requires_grad=False)
     X = (X-Xmin)/(Xmax-Xmin)
+    with open('task0_method1-input.txt', 'w') as f:
+        f.write('# x y\n')
+        for x in X:
+            f.write('{} {} \n'.format(x[0], x[1]))
+    input('aa')
     UBackup = Variable((torch.rand(K, 2)).cuda(), requires_grad=False)
-    alpha = [1, 10]
-    T = [100, 100]
-    for alpha, t in zip(alpha, T):
+    Alpha = [1, 10]
+    device = torch.device("cuda")
+    U = UBackup.clone()
+    U.requires_grad_(True)
+    learningRate = 1e-1
+    optimizer = None
+    #optimizer = optim.SGD([U], lr=learningRate, weight_decay=1e-5)
+    T = [50, 100]
+    with open('task0_method1-output.txt', 'w') as f:
+        f.write('# u1x u1y u2x u2y u3x u3y loss\n')
+        for alpha, t in zip(Alpha, T):
+            for i in range(t):
+                loss = torch.tensor(0.0, requires_grad=True).to(device)
+                for x in X:
+                    D = (x.reshape(2, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)
+                    expD = (-1*D*alpha).exp()+1e-32
+                    W = expD/expD.sum()
+                    loss = loss + (D*W).sum()
+                loss = loss/X.numel()
+                #loss = KL_loss(X, U, device)
+
+                if U.grad is not None: U.grad.data.zero_()
+                loss.backward()
+                if optimizer is None:
+                    U.data -= learningRate*U.grad.data
+                else:
+                    optimizer.step()
+                print('Round {}: loss = {}; U = '.format(i+1, loss.data))
+                print(U)
+                data = U.data
+                f.write('{} {} {} {} {} {} {}\n'.format(data[0][0], data[0][1], data[1][0], data[1][1], data[2][0], data[2][1], loss.data))
+    input('aa')
+
+    T = [150, 150]
+    for alpha, t in zip(Alpha, T):
         U = UBackup.clone()
         U.requires_grad_(True)
-        learningRate = 1e-1
-        device = torch.device("cuda")
-        #optimizer = None
-        optimizer = optim.SGD([U], lr=learningRate, weight_decay=1e-5)
-        with open('task0_method1-alpha-{}-input.txt'.format(alpha), 'w') as f:
-            f.write('# x y\n')
-            for x in X:
-                f.write('{} {} \n'.format(x[0], x[1]))
+        optimizer = None
+        #optimizer = optim.SGD([U], lr=learningRate, weight_decay=1e-5)
         with open('task0_method1-alpha-{}-output.txt'.format(alpha), 'w') as f:
             f.write('# u1x u1y u2x u2y u3x u3y loss\n')
             for i in range(t):

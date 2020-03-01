@@ -25,43 +25,62 @@
 In this task, we use the following loss function:
 
 \begin{align*}
-    loss = \sum_{x\in \chi}{\left(\sum_{k=1}^{K}\|x-u_k\|^2\frac{e^{-\alpha\|x-u_k\|^2}}{\sum_{k'=1}^{K}e^{-\alpha\|x-u_{k'}\|^2}}\right)}
+    loss = \sum_{i=i}^{N}{\left(\sum_{k=1}^{K}\|x_i-u_k\|^2\frac{e^{-\alpha\|x_i-u_k\|^2}}{\sum_{k'=1}^{K}e^{-\alpha\|x_i-u_{k'}\|^2}}\right)}
 \end{align*}
 
-The number of target clusters $K$ is set to 3. The data is normalized so that its mean is 0 and standard deviation is 1. We apply SGD to optimize the loss function. Figure ... shows the clustering results and the loss curve function over epochs with different $\alpha$ values. The upper two sub-figures shows the results when $\alpha=1$ and the bottom two are for $\alpha=3$. We find that the loss function is likely to converge faster with a bigger $\alpha$ value, but 
+The number of target clusters $K$ is set to 3. The data is normalized so that its mean is 0 and standard deviation is 1. We apply SGD to optimize the loss function. We first try different $\alpha$ values. Figure~\ref{fig:task0} shows the clustering results and the loss curve function over epochs with different $\alpha$ values. The upper two sub-figures shows the results when $\alpha=1$ and the bottom two are for $\alpha=3$. In the experiments, we find that the loss function is likely to converge faster with a greater $\alpha$ value, but the gradient is also likely to run into 'nan' problem if the scale of $\alpha$ is choose improperly, possibly due to gradient overflow.  
 \begin{figure}[h!]
     \centering
     \begin{subfigure}{.33\textwidth}
       \centering
       \includegraphics[width=.9\linewidth]{task0-cluster-alpha-1.pdf}
       \caption{Clustering result for $\alpha$=1.}
-      \label{fig:cluster3}
+      \label{fig:cluster1}
     \end{subfigure}%
     \begin{subfigure}{.66\textwidth}
       \centering
       \includegraphics[width=.9\linewidth]{task0-loss-alpha-1.pdf}
       \caption{Loss function curve for $\alpha$=1.}
-      \label{fig:loss3}
+      \label{fig:loss1}
     \end{subfigure}
     \centering
     \begin{subfigure}{.33\textwidth}
       \centering
       \includegraphics[width=.9\linewidth]{task0-cluster-alpha-10.pdf}
-      \caption{Clustering result for $\alpha$=3.}
-      \label{fig:cluster3}
+      \caption{Clustering result for $\alpha$=10.}
+      \label{fig:cluster10}
     \end{subfigure}%
     \begin{subfigure}{.66\textwidth}
       \centering
       \includegraphics[width=.9\linewidth]{task0-loss-alpha-10.pdf}
-      \caption{Loss function curve for $\alpha$=3.}
-      \label{fig:loss3}
+      \caption{Loss function curve for $\alpha$=10.}
+      \label{fig:loss10}
     \end{subfigure}
-    \caption{Clustering result and loss curve function with different $\alpha$.}
-    \label{task0}
+    \caption{Clustering result and loss curve function with different $\alpha$ values.}
+    \label{fig:task0}
 \end{figure}
 
 \textbf{Task 1.}
 \vspace{\baselineskip}
+In this task, we try to perform unsupervised clustering on 10000 samples of the MNIST dataset in the original feature space. The loss function
+
+\begin{align*}
+  loss = \sum_{i=1}^{N}{\left(\sum_{k=1}^{K}\|x_i-u_k\|^2w_{ik}\right)}
+\end{align*}
+
+Where $w_{ik}$ is the probability that $x_i$ belongs to cluster $k$. We use two methods to optimize the loss function. The first one is define $w_{ik}$ as a function of the distance between the $x_i$ and the cluster center $k$. For this method, we will use the same loss function as Task 0, where $w_{ik}$ is comuted using the softmax function. For the second method, we will treat $w_{ik}$ as independent variable that being optimized with cluster centers.
+
+Again, we use the SGD to optimize the loss function, and the $alpha$ is set to 10 for the method 1. After each epoch, we assgin each sample to the cluster of the maximum probability and then compute the accuracy. Figure~\ref{fig:task1} shows the accuracy function curve over epochs. We find that it's hard for both the methods to cluster the samples in the original feature space. The clustering accuracy using the first method experiences some fluctuation during the training process but never goes beyond 0.3. On the other hand, the accuracy of the second method remain unchanged at 0.15, and the reason is that all the samples are assigned to the same cluster. Since we do not expect a good clustering performance in the original feature space, we do not try to improve the model, but focuse on the deep clustering method in Task 2.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.9\linewidth]{task1.pdf}
+  \caption{Clustering accuracy in the original feature space with different $W$.}
+  \label{fig:task1}
+\end{figure}
+
+
+\textbf{Task 2.}
 
 \end{document}
 
