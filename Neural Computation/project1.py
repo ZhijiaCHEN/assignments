@@ -55,8 +55,8 @@ def task0_method1():
     K = 3
     Xmax = Variable(torch.max(X), requires_grad=False)
     Xmin = Variable(torch.min(X), requires_grad=False)
-    X = (X-X.mean())/X.std()
-    UBackup = Variable((torch.randn(K, 2)).cuda(), requires_grad=False)
+    X = (X-Xmin)/(Xmax-Xmin)
+    UBackup = Variable((torch.rand(K, 2)).cuda(), requires_grad=False)
     alpha = [1, 10]
     T = [100, 100]
     for alpha, t in zip(alpha, T):
@@ -285,7 +285,7 @@ def task2_method1():
         f.write('# x y k\n')
         for x,y in zip(fX, Y):
             f.write('{} {} {}\n'.format(x[0], x[1], y))
-fun = task1_method1
+fun = task0_method1
 detectAnomaly = False
 if detectAnomaly:
     with torch.autograd.detect_anomaly():
