@@ -1,18 +1,19 @@
 import torch, math
 from torch.autograd import Variable
-from torch import optim
+from torch import optim, nn
 import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import numpy as np
 from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
+from sklearn.cluster import KMeans
 from scipy import optimize
 
 nmi = normalized_mutual_info_score
 ari = adjusted_rand_score
 
 device = torch.device("cuda")
-train_loader = torch.utils.data.DataLoader(torchvision.datasets.MNIST('./minist/', train=True, download=True, transform=torchvision.transforms.Compose([torchvision.transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])), batch_size=1000, shuffle=False)
+train_loader = torch.utils.data.DataLoader(torchvision.datasets.MNIST('./minist/', train=True, download=True, transform=torchvision.transforms.Compose([torchvision.transforms.ToTensor(), transforms.Normalize([0.5], [0.5])])), batch_size=1000, shuffle=True)
 
 def acc(y_true, y_pred):
     """
@@ -219,22 +220,14 @@ def task1_method2():
                 f.write('{} {}\n'.format(loss.data, accuracy[-1]))
 
 def task2_method1():
-    examples = enumerate(train_loader)
-    batch_idx, (example_data, example_targets) = next(examples)
-    X = example_data.view(-1,784).to(device)
-    X.requires_grad_(False)
-    Y = example_targets.to(device)
-    Y.requires_grad_(False)
-
-    N = X.size()[0]
-    DIn = X.size()[1]
-    DH1 = 128
-    DH2 = 64
-    DH3 = 12
-    DH4 = 3
     K = 10
-    alpha = 5
-    T = 1000
+    DIn = 784
+    DH1 = 500
+    DH2 = 500
+    DH3 = 2000
+    DH4 = K
+    alpha = 1
+    T = 200
     W1 = Variable((torch.randn(DIn, DH1)).cuda(), requires_grad=True)
     b1 = Variable((torch.randn(1, DH1)).cuda(), requires_grad=True)
     W2 = Variable((torch.randn(DH1, DH2)).cuda(), requires_grad=True)
@@ -243,77 +236,64 @@ def task2_method1():
     b3 = Variable((torch.randn(1, DH3)).cuda(), requires_grad=True)
     W4 = Variable((torch.randn(DH3, DH4)).cuda(), requires_grad=True)
     b4 = Variable((torch.randn(1, DH4)).cuda(), requires_grad=True)
-    U = Variable(torch.randn(K, DIn).cuda().mm(W1).mm(W2).mm(W3), requires_grad=True)
-    lossLambda = 0.5
-    learningRate = 1e-2
+    U = Variable(torch.randn(K, DH4).cuda(), requires_grad=True)
+    nn.init.xavier_uniform_(U)
+    lossLambda = 0.2
+    learningRate = 1e-3
     optimizer = None
     optimizer = optim.Adam([W1, W2, W3, W4, b1, b2, b3, b4], lr=learningRate, weight_decay=1e-5)
     with open('task2_method1.txt', 'w') as f:
         #f.write('# loss accuracy\n')
-        accuracy = []
-        #for i in range(T):
-        embedingLoss = None
-        while embedingLoss is None or embedingLoss > 1e-3:
-            clusterLoss = torch.tensor(0.0, requires_grad=True).to(device)
-            predict = []
-            fX = (((X.mm(W1) + b1.repeat(N, 1)).relu().mm(W2) + b2.repeat(N, 1)).relu().mm(W3) + b3.repeat(N, 1)).relu().mm(W4) + b4.repeat(N, 1)
-            #if U is None: # initialize U after first embedding computation
-            #    fXmax = Variable(torch.max(fX), requires_grad=False)
-            #    fXmin = Variable(torch.min(fX), requires_grad=False)
-            #    U = Variable((torch.rand(K, DH3)*(fXmax-fXmin)+fXmin).cuda(), requires_grad=True)
+        accuracy = [0]
+        for i in range(T):
+            idx = 0
+            for data in train_loader:
+                idx += 1
+                X, Y = data
+                X = X.view(-1,784).to(device)
+                Y = Y.to(device)
+                N = X.size()[0]
+                clusterLoss = torch.tensor(0.0, requires_grad=True).to(device)
+                predict = []
+                fX = (((X.mm(W1) + b1.repeat(N, 1)).relu().mm(W2) + b2.repeat(N, 1)).relu().mm(W3) + b3.repeat(N, 1)).relu().mm(W4) + b4.repeat(N, 1)
+                fX = (fX-fX.mean())/fX.std()
+                for x in fX:
+                    D = (x.repeat(K, 1)-U).pow(2).sum(1)
+                    expD = (-1*D*1e-3).exp()+1e-32
+                    W = expD/expD.sum()
+                    predict.append(max(range(len(W)), key=W.__getitem__))
+                    clusterLoss = clusterLoss + (D*W).sum()
+                clusterLoss = clusterLoss/fX.numel()
 
-            """
-            for x in fX:
-                D = (x.repeat(K, 1)-U).pow(2).sum(1)
-                #D = D-D.min()
-                expD = (-1*D*alpha).exp()+1e-32
-                W = expD/expD.sum()
-                predict.append(max(range(len(W)), key=W.__getitem__))
-                clusterLoss = clusterLoss + (D*W).sum()
-            clusterLoss = clusterLoss/N
-            """
-            #calculate accuracy
+                #calculate accuracy
 
-            embedingLoss = ((((fX.mm(W4.t()) + b3.repeat(N, 1)).relu().mm(W3.t()) + b2.repeat(N, 1)).relu().mm(W2.t()) + b1.repeat(N, 1)).relu().mm(W1.t()).tanh()-X).pow(2).sum()/X.numel()
-            
-            #loss = embedingLoss+lossLambda*clusterLoss
-            loss = embedingLoss
-            accuracy.append(0)
-            clusters = [[] for i in range(K)]
-            for yp, y in zip(predict, Y):
-                clusters[yp].append(y)
-            for cluster in clusters:
-                labelCnt = [0]*K
-                for c in cluster:
-                    labelCnt[c] += 1
-                accuracy[-1] += max(labelCnt)
-            accuracy[-1]/=len(X)
+                embedingLoss = ((((fX.mm(W4.t()) + b3.repeat(N, 1)).relu().mm(W3.t()) + b2.repeat(N, 1)).relu().mm(W2.t()) + b1.repeat(N, 1)).relu().mm(W1.t()).tanh()-X).pow(2).sum()/X.numel()
+                
+                #loss = embedingLoss+lossLambda*clusterLoss
+                loss = embedingLoss
+                accuracy.append(acc(Y.cpu().numpy(), np.asarray(predict)))
+                if U.grad is not None: U.grad.data.zero_()
+                if W1.grad is not None: W1.grad.data.zero_()
+                if W2.grad is not None: W2.grad.data.zero_()
+                if W3.grad is not None: W3.grad.data.zero_()
 
-            if U.grad is not None: U.grad.data.zero_()
-            if W1.grad is not None: W1.grad.data.zero_()
-            if W2.grad is not None: W2.grad.data.zero_()
-            if W3.grad is not None: W3.grad.data.zero_()
-
-            loss.backward()
-            if optimizer is None:
-                #U.data -= learningRate*U.grad.clamp(-1, 1).data
-                W1.data -= learningRate*W1.grad.clamp(-1, 1).data
-                W2.data -= learningRate*W2.grad.clamp(-1, 1).data
-                W3.data -= learningRate*W3.grad.clamp(-1, 1).data
-                b1.data -= learningRate*b1.grad.clamp(-1, 1).data
-                b2.data -= learningRate*b2.grad.clamp(-1, 1).data
-                b3.data -= learningRate*b3.grad.clamp(-1, 1).data
-            else:
-                optimizer.step()
-            print('cluster loss: {}, embeding loss: {}, accuracy = {}'.format(clusterLoss.data, embedingLoss.data, accuracy[-1]))
-            #print('Round {}: loss = {}; accuracy= {}; U = '.format(i+1, loss.data, accuracy[-1]))
-            #print(U)
-            #data = U.grad.data
-            #f.write('{} {}\n'.format(loss.data, accuracy[-1]))
-        f.write('# x y k\n')
-        for x,y in zip(fX, Y):
-            f.write('{} {} {}\n'.format(x[0], x[1], y))
-fun = task0_method1
+                loss.backward()
+                if optimizer is None:
+                    U.data -= learningRate*U.grad.clamp(-1, 1).data
+                    W1.data -= learningRate*W1.grad.clamp(-1, 1).data
+                    W2.data -= learningRate*W2.grad.clamp(-1, 1).data
+                    W3.data -= learningRate*W3.grad.clamp(-1, 1).data
+                    b1.data -= learningRate*b1.grad.clamp(-1, 1).data
+                    b2.data -= learningRate*b2.grad.clamp(-1, 1).data
+                    b3.data -= learningRate*b3.grad.clamp(-1, 1).data
+                else:
+                    optimizer.step()
+                print('Epoch {}, batch {}, cluster loss: {}, embeding loss: {}, accuracy = {}'.format(i+1, idx, clusterLoss.data, embedingLoss.data, accuracy[-1]))
+                #print('Round {}: loss = {}; accuracy= {}; U = '.format(i+1, loss.data, accuracy[-1]))
+                #print(U)
+                #data = U.grad.data
+            f.write('{} {}\n'.format(loss.data, accuracy[-1]))
+fun = task2_method1
 detectAnomaly = False
 if detectAnomaly:
     with torch.autograd.detect_anomaly():
