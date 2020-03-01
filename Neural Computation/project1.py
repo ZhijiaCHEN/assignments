@@ -32,15 +32,16 @@ def task0_method1():
     Xmax = Variable(torch.max(X), requires_grad=False)
     Xmin = Variable(torch.min(X), requires_grad=False)
     X = (X-X.mean())/X.std()
-    
-    alpha = [1, 3]
+    UBackup = Variable((torch.randn(K, 2)).cuda(), requires_grad=False)
+    alpha = [1, 10]
     T = [100, 100]
     for alpha, t in zip(alpha, T):
-        U = Variable((torch.randn(K, 2)).cuda(), requires_grad=True)
+        U = UBackup.clone()
+        U.requires_grad_(True)
         learningRate = 1e-1
         device = torch.device("cuda")
-        optimizer = None
-        #optimizer = optim.Adam([W1, W2, W3, W4, b1, b2, b3, b4], lr=learningRate, weight_decay=1e-5)
+        #optimizer = None
+        optimizer = optim.SGD([U], lr=learningRate, weight_decay=1e-5)
         with open('task0_method1-alpha-{}-input.txt'.format(alpha), 'w') as f:
             f.write('# x y\n')
             for x in X:
