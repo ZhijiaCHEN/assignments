@@ -157,7 +157,7 @@ def task1_method2():
     W = Variable((torch.randn(N, K)).cuda(), requires_grad=True)
     learningRate = 1
 
-    optimizer = optim.SGD([U], lr=learningRate)
+    optimizer = optim.SGD([U, W], lr=learningRate)
     with open('task1_method2.txt', 'w') as f:
         f.write('# loss accuracy\n')
         accuracy = []
@@ -169,24 +169,21 @@ def task1_method2():
                 for x, w in zip(X, W):
                     w = w-w.min()
                     w = w/w.max()
-                    D = (x.reshape(DIn, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)
+                    D = (x.reshape(DIn, 1).mm(torch.ones(1, K).to(device)).t()-U).pow(2).sum(1)/N
                     predict.append(max(range(len(w)), key=w.__getitem__))
                     expW = (w*alpha).exp()/(w*alpha).exp().sum()
                     loss = loss + (D*w).sum() # w may be negative in the process of updating, what should we do?
-                loss = loss/N
+                #loss = loss/N
                 #calculate accuracy
                 accuracy.append(acc(Y.cpu().numpy(), np.asarray(predict)))
 
                 if U.grad is not None: U.grad.data.zero_()
                 if W.grad is not None: W.grad.data.zero_()
                 loss.backward()
-                U.data -= learningRate*U.grad.data
-                W.data -= learningRate*W.grad.data
-
-                #loss.backward()
-                #optimizer.step()
-                print('Round {}: loss = {}; accuracy= {}; U = '.format(i+1, loss.data, accuracy[-1]))
-                print(U)
+                #U.data -= learningRate*U.grad.data
+                #W.data -= learningRate*W.grad.data
+                optimizer.step()
+                print('Round {}: loss = {}; accuracy= {};'.format(i+1, loss.data, accuracy[-1]))
                 data = U.grad.data
                 f.write('{} {}\n'.format(loss.data, accuracy[-1]))
 
@@ -285,7 +282,11 @@ def task2_method1():
         f.write('# x y k\n')
         for x,y in zip(fX, Y):
             f.write('{} {} {}\n'.format(x[0], x[1], y))
+<<<<<<< HEAD
 fun = task0_method1
+=======
+fun = task1_method2
+>>>>>>> fc2af2e911334ced35b2e3f2322f875b8d9682e6
 detectAnomaly = False
 if detectAnomaly:
     with torch.autograd.detect_anomaly():
