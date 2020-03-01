@@ -22,13 +22,13 @@
 
 \textbf{Task 0.}
 \vspace{\baselineskip}
-In this task, we use the following loss function:
+In this task, I use the following loss function:
 
 \begin{align*}
     loss = \sum_{i=i}^{N}{\left(\sum_{k=1}^{K}\|x_i-u_k\|^2\frac{e^{-\alpha\|x_i-u_k\|^2}}{\sum_{k'=1}^{K}e^{-\alpha\|x_i-u_{k'}\|^2}}\right)}
 \end{align*}
 
-The number of target clusters $K$ is set to 3. The data is normalized so that its mean is 0 and standard deviation is 1. We apply SGD to optimize the loss function. We first try different $\alpha$ values. Figure~\ref{fig:task0} shows the clustering results and the loss curve function over epochs with different $\alpha$ values. The upper two sub-figures shows the results when $\alpha=1$ and the bottom two are for $\alpha=3$. In the experiments, we find that the loss function is likely to converge faster with a greater $\alpha$ value, but the gradient is also likely to run into 'nan' problem if the scale of $\alpha$ is choose improperly, possibly due to gradient overflow.  
+The number of target clusters $K$ is set to 3. The data is normalized so that its mean is 0 and standard deviation is 1. I apply SGD to optimize the loss function. I first try different $\alpha$ values. Figure~\ref{fig:task0} shows the clustering results and the loss curve function over epochs with different $\alpha$ values. The upper two sub-figures shows the results when $\alpha=1$ and the bottom two are for $\alpha=3$. In the experiments, I find that the loss function is likely to converge faster with a greater $\alpha$ value, but the gradient is also likely to run into 'nan' problem if the scale of $\alpha$ is choose improperly, possibly due to gradient overflow.  
 \begin{figure}[h!]
     \centering
     \begin{subfigure}{.33\textwidth}
@@ -62,15 +62,15 @@ The number of target clusters $K$ is set to 3. The data is normalized so that it
 
 \textbf{Task 1.}
 \vspace{\baselineskip}
-In this task, we try to perform unsupervised clustering on 10000 samples of the MNIST dataset in the original feature space. The loss function
+In this task, I try to perform unsupervised clustering on 10000 samples of the MNIST dataset in the original feature space. The loss function
 
 \begin{align*}
   loss = \sum_{i=1}^{N}{\left(\sum_{k=1}^{K}\|x_i-u_k\|^2w_{ik}\right)}
 \end{align*}
 
-Where $w_{ik}$ is the probability that $x_i$ belongs to cluster $k$. We use two methods to optimize the loss function. The first one is define $w_{ik}$ as a function of the distance between the $x_i$ and the cluster center $k$. For this method, we will use the same loss function as Task 0, where $w_{ik}$ is comuted using the softmax function. For the second method, we will treat $w_{ik}$ as independent variable that being optimized with cluster centers.
+Where $w_{ik}$ is the probability that $x_i$ belongs to cluster $k$. I use two methods to optimize the loss function. The first one is define $w_{ik}$ as a function of the distance betIen the $x_i$ and the cluster center $k$. For this method, I will use the same loss function as Task 0, where $w_{ik}$ is comuted using the softmax function. For the second method, I will treat $w_{ik}$ as independent variable that being optimized with cluster centers.
 
-Again, we use the SGD to optimize the loss function, and the $alpha$ is set to 10 for the method 1. After each epoch, we assgin each sample to the cluster of the maximum probability and then compute the accuracy. Figure~\ref{fig:task1} shows the accuracy function curve over epochs. We find that it's hard for both the methods to cluster the samples in the original feature space. The clustering accuracy using the first method experiences some fluctuation during the training process but never goes beyond 0.3. On the other hand, the accuracy of the second method remain unchanged at 0.15, and the reason is that all the samples are assigned to the same cluster. Since we do not expect a good clustering performance in the original feature space, we do not try to improve the model, but focuse on the deep clustering method in Task 2.
+Again, I use the SGD to optimize the loss function, and the $alpha$ is set to 10 for the method 1. After each epoch, I assgin each sample to the cluster of the maximum probability and then compute the accuracy. Figure~\ref{fig:task1} shows the accuracy function curve over epochs. I find that it's hard for both the methods to cluster the samples in the original feature space. The clustering accuracy using the first method experiences some fluctuation during the training process but never goes beyond 0.3. On the other hand, the accuracy of the second method remain unchanged at 0.15, and the reason is that all the samples are assigned to the same cluster. Since I do not expect a good clustering performance in the original feature space, I do not try to improve the model, but focuse on the deep clustering method in Task 2.
 
 \begin{figure}[h!]
   \centering
@@ -81,6 +81,16 @@ Again, we use the SGD to optimize the loss function, and the $alpha$ is set to 1
 
 
 \textbf{Task 2.}
+In this task, I first follow \cite{fard2018deep} to implement the deep clustering which optimize the reconstrurction loss and the clustering loss jointly. But the performance of my implementation turns out to be very poor as shown in Figure ... I then use the method proposed in [] which first pretrains the autoencoder. Fater the pretaining stage, the cluster centers are initialized using K-Means++, and jointly optimized with the autoencoder. The objective function is defined as a KL divergence loss between the soft assignment $q_i$ and the auxiliary distribution $p_i$:
+
+\begin{align*}
+  loss = KL(P\|Q)=\sum_{i=1}^{N}\sum_{k=1}^{K}p_{ik}log\frag{p_{ik}}{q_{ik}}.
+\end{align*}
+
+Where $q_{ik}$ is the similarity between embedded point $z_i=f_\theta(x_i)$ and centroid $u_k$ that measured by $t$-distribution kernel function, and $p_{ik}$ is computed by first raising $q_{ik}$ to the second power and the normalizing by frequency per cluster:
+\begin{align*}
+  $p_{ik}$ = \frac{q_{ik}^2/f_k}{\sum_{k'=1}^{K}q_{ik'}^2/f_{k'}}.
+\end{align*}
 
 \end{document}
 
