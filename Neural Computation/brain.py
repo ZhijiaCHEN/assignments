@@ -12,7 +12,7 @@ class Brain(InMemoryDataset):
 
     @property
     def raw_file_names(self):
-        return [f for f in os.listdir(join(self.root, 'raw')) if f[:5] == 'train']
+        return [f for f in os.listdir(join(self.root)) if f[:5] == 'train']
 
     @property
     def processed_file_names(self):
@@ -37,7 +37,7 @@ class Brain(InMemoryDataset):
             return(Data(edge_index=edge_index, x=x, y=y))
     def process(self):
         # Read data into huge `Data` list.
-        rawFiles = [join(self.root, 'raw', f) for f in self.raw_file_names]
+        rawFiles = [join(self.root, f) for f in self.raw_file_names]
         data_list = [self.csv2data(f) for f in rawFiles]
 
         if self.pre_filter is not None:
