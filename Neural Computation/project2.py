@@ -15,9 +15,9 @@ class SAGE(torch.nn.Module):
 
         self.pool = TopKPooling(hiddenChannels, ratio=0.8)
 
-        self.lin1 = torch.nn.Linear(hiddenChannels, 128)
-        self.lin2 = torch.nn.Linear(128, 64)
-        self.lin3 = torch.nn.Linear(64, outChannels)
+        self.lin1 = torch.nn.Linear(hiddenChannels, 64)
+        self.lin2 = torch.nn.Linear(64, 16)
+        self.lin3 = torch.nn.Linear(16, outChannels)
 
        
     def set_aggr(self, aggr):
@@ -30,10 +30,10 @@ class SAGE(torch.nn.Module):
 
         x1 = F.relu(self.conv1(x0, edgeIndex))
         x2 = F.relu(self.conv2(x1, edgeIndex))
-        x3 = F.relu(self.conv3(x2, edgeIndex))
+        #x3 = F.relu(self.conv3(x2, edgeIndex))
 
         #x, edgeIndex, _, batch, _, _ = self.pool(x3, edgeIndex, None, batch)
-        x4 = global_add_pool(x3, batch)
+        x4 = global_add_pool(x2, batch)
         x = F.relu(self.lin3(F.relu(self.lin2(F.relu(self.lin1(x4)))))).log_softmax(dim=-1)
         return x
 
@@ -76,9 +76,9 @@ def test(model, testLoader):
     return accs
 
 if __name__ == "__main__":
-    dataset = Brain(root='Brain').shuffle()
+    dataset = Brain(root='data/brain').shuffle()
     model = SAGE(dataset.num_features, 128, dataset.num_classes).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=5e-5)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
     n = (len(dataset)+7) // 8
     batchSize = 20
     testDataset = dataset[:n]
