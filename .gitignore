@@ -10,5 +10,10 @@
 *.fls
 *.log
 *.synctex.gz
+*.bbl
+*.blg
 *.dSYM/
 *.out
+*/data
+*/minist
+data
