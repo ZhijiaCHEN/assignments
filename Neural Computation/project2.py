@@ -1,9 +1,10 @@
-import csv, os, torch, re, numpy as np, torch.nn.functional as F, pickle
-from numpy import array
+import csv, os, torch, re, numpy as np, torch.nn.functional as F, pickle, matplotlib.pyplot as plt
+from numpy import array, arange
 from os.path import join
 from torch_geometric.data import Data, InMemoryDataset, DataLoader
 from torch_geometric.nn import SAGEConv, GraphConv, TopKPooling, global_add_pool, global_max_pool, global_mean_pool, global_sort_pool
 from brain import FFT, OneHot, AllOne
+from matplotlib.ticker import StrMethodFormatter, MaxNLocator
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 class SAGE(torch.nn.Module):
@@ -142,7 +143,7 @@ def test(model, testLoader):
 
     return accs
 
-if __name__ == "__main__":
+def experiment():
     sage = 'sage'
     graph = 'graph'
     fft = 'fft'
@@ -158,9 +159,10 @@ if __name__ == "__main__":
     modelName = [sage, graph]
     datasetName = [fft, onehot, allone]
     learnRate = {sage:1e-5, graph:5e-4}
-    totalEpoch = 500
+    totalEpoch = 300
     crossFoldNum = 10
     batchSize = 30
+    repeat = 10
     for mn in modelName:
         for dn in datasetName:
 
@@ -190,26 +192,94 @@ if __name__ == "__main__":
                 else:
                     baseline.append(nTestDataCnt/len(testDataset))
 
-                accuracyi = []
-                lossi = []
+                accuracyPerFold = []
+                lossPerFold = []
+                for r in range(repeat):
+                    model = modelDict[mn](dataset.num_features, 128, dataset.num_classes).to(device)
+                    optimizer = torch.optim.Adam(model.parameters(), lr=learnRate[mn])
+                    accuracyPerRepeat = []
+                    lossPerRepeat = []
+                    for epoch in range(totalEpoch):
+                        trainLoader = DataLoader(trainDataset, batch_size=batchSize, shuffle=True)
+                        testLoader = DataLoader(testDataset, batch_size=batchSize, shuffle=True)
 
-                model = modelDict[mn](dataset.num_features, 128, dataset.num_classes).to(device)
-                optimizer = torch.optim.Adam(model.parameters(), lr=learnRate[mn])
-                for epoch in range(totalEpoch):
-                    trainLoader = DataLoader(trainDataset, batch_size=batchSize, shuffle=True)
-                    testLoader = DataLoader(testDataset, batch_size=batchSize, shuffle=True)
+                        lossPerRepeat.append(train(model, optimizer, trainLoader))
+                        accuracyPerRepeat.append(test(model, testLoader))
 
-                    lossi.append(train(model, optimizer, trainLoader))
-                    accuracyi.append(test(model, testLoader))
+                        print('Model {} on dataset {} in fold {} repeat {}, epoch: {:02d}, Loss: {}, Test: {:.4f}'.format(mn, dn, foldNum + 1, r + 1, epoch + 1, lossPerRepeat[-1], accuracyPerRepeat[-1]))
+                    accuracyPerFold.append(array(accuracyPerRepeat).mean(axis=0))
+                    lossPerFold.append(array(lossPerRepeat).mean(axis=0))
+                accuracy.append(accuracyPerFold)
+                loss.append(lossPerFold)
 
-                    print('Model {} on dataset {} in fold {}, epoch: {:02d}, Loss: {}, Test: {:.4f}'.format(mn, dn, foldNum + 1, epoch + 1, lossi[-1], accuracyi[-1]))
-
-                accuracy.append(accuracyi)
-                loss.append(lossi)
-
-            result[(mn, dn)] = Result(baseline=baseline, accuracy=accuracy, loss=loss)
+            result[(mn, dn)] = Result(baseline=array(baseline), accuracy=array(accuracy), loss=array(loss))
             with open('result.pickle', 'wb') as f:
                 pickle.dump(result, f)
+
+def plot():
+    model = ['sage', 'graph']
+    dataset = ['fft', 'onehot', 'allone']
+    color = ['red', 'green', 'blue']
+    with open('result.pickle', 'rb') as f:
+        result = pickle.load(f)
+    plot = plt.plot
+    bar = plt.bar
+
+    accrsMean = {}
+    accrsStd = {}
+    for dn in dataset:
+        accrsMean[dn] = []
+        accrsStd[dn] = []
+    for mn in model:
+        for dn, clr in zip(dataset, color):
+            plt.figure(figsize=(5, 2))
+            plt.margins(0)
+            plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}')) # 2 decimal places
+            plt.xlabel('epoch')
+            plt.ylabel('accuracy')
+
+            data = result[(mn, dn)]
+            loss = data.loss.mean(axis=0)
+            accuracy = data.accuracy.mean(axis=0)
+            baseline = data.baseline.mean()
+            epoch = arange(1, len(accuracy)+1, dtype='i')
+
+            accrsMean[dn].append(accuracy[-1])
+            accrsStd[dn].append(data.accuracy[:, -1].std())
+
+            plot(epoch, accuracy, label=dn)
+            plot(epoch, [baseline]*len(accuracy), '-.', label='baseline')
+
+            plt.gca().set_ylim(bottom=0, top=1)
+            plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(join('figure', '{}-{}.pdf'.format(mn, dn)))
+            plt.close()
+
+        plt.figure(figsize=(4, 3))
+        plt.margins(0)
+        plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.1f}'))
+        plt.ylabel('accuracy')
+        barLabelLocation = array([1, 3])
+        barWidth = 0.25
+
+        barGroup = {}
+        for i,dn in enumerate(dataset):
+            barGroup[dn] = bar(barLabelLocation + (i - 1)*1.25*barWidth, accrsMean[dn], barWidth, label = dn)
+        plt.gca().set_xticks(barLabelLocation)
+        plt.gca().set_xticklabels(model)
+        plt.gca().set_xlim(left = 0, right = 4)
+        plt.gca().set_ylim(bottom=0, top=1)
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(join('figure', '{}.pdf'.format(mn)))
+        plt.close()
+
+
+if __name__ == "__main__":
+    experiment()
+    plot()
 
     # #dataset = FFT(root='data/brain/fft').shuffle()
     # dataset = OneHot(root='data/brain/onehot').shuffle()
