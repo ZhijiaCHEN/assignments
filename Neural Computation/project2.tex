@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\usepackage{float}
+\usepackage[useregional]{datetime2}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\usepackage[font=small,skip=0pt]{caption}
+\geometry{legalpaper, margin=1in}
+\title{CIS 5525 Project 2}
+\author{Zhijia Chen}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\section{Method}
+
+In this project we use the GNN method to perform the classification, and two algorithms are implemented. One is the basic Graph Convolutional Networks(GCN) and the other is the Graph-SAGE algorithm. The node update rules for the two algorithms are given below.
+
+GCN node update rule: 
+ \begin{equation}
+    h_i^{(l+1)}=\text{ReLU} \left( h_i^{(l)}W_0^{(l)}+\sum_{j\in N_i}\frac{1}{|N_i|} h_j^{(l)}W_1^{(l)} \right)
+\end{equation}
+
+Graph-SAGE node update rule: 
+\begin{equation}
+    h_i^{(l+1)}=\text{ReLU} \left( h_i^{(l)}W^{(l)}, \sum_{j\in N_i} \left( \text{ReLU}(Q^{(l)}h_j^{(l)}) \right) \right)
+\end{equation}
+where $\sum\left( \cdot \right)$ is the global add pool aggregator.
+
+\section{Graph Neural Network Design}
+Figure~\ref{fig:networks} shows the dataflow of the neural networks designed for the classification task, where Figure~\ref{fig:graph-net} is for the GCN algorithm, Figure~\ref{fig:sage-net} is for the Graph-SAGE algorithm, and Figure~\ref{fig:dense-net} is the dense layers shared by the two convolution layers. On the figures, each rectangle is a matrix and each circle is an operator, where $|F|$ is the input node feature size; $\Theta$ is a graph convolution operator, implemented either using GCN algorithm or the Graph-SAGE algorithm; $\sigma$ is an activation function which we use the ReLU throughout this project; and $L$ is a linear transform operator.
+\begin{figure*}[h]
+\centering
+
+    \begin{subfigure}{1\linewidth}
+        \centering
+        \includegraphics[width=.5\textwidth]{figure/graph-net.pdf}
+        \caption{GCN}
+        \label{fig:graph-net}
+    \end{subfigure}
+    %\hspace{-5pt}
+    \begin{subfigure}{1\linewidth}
+        \centering
+        \includegraphics[width=.588\textwidth]{figure/sage-net.pdf}
+        \caption{Graph-SAGE}
+        \label{fig:sage-net}
+    \end{subfigure}
+    %\hspace{-5pt}
+    \begin{subfigure}{1\linewidth}
+        \centering
+        \includegraphics[width=.466\textwidth]{figure/dense-net.pdf}
+        \caption{Dense Layers}
+        \label{fig:dense-net}
+    \end{subfigure}
+    \caption{Graph Neural Networks}
+    %\vspace{-10pt}
+    \label{fig:networks}
+\end{figure*}
+
+\section{Graph Construction}
+
+To construct graph from the fMRI data, each brain region is treated as a node, and the edges are decided by the correlation matrix. Each pair of different nodes are linked with a link if the correlation coefficient of their time series are greater than a threshold $C_{th}$. To best exploit the graph structure difference between the two classes, we set $C_{th}$ to a value that maximizes the edge number difference between the two classes. We increase $C_{th}$ from -1 to 1, get the average number of edges per graph and then compute the difference. As shown in Figure~\ref{fig:cth}, when $C_{th}$ is 0.38, the two class have the maximum edge number difference.
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+    \includegraphics[width=1\linewidth]{figure/cth.pdf}
+    \caption{Edge number difference over $C_{th}$.}
+    \label{fig:cth}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+    \includegraphics[width=1\linewidth]{figure/fft.pdf}
+    \caption{Single Side Frequency Spectrum}
+    \label{fig:fft}
+\end{minipage}
+\end{figure}
+
+We use the following three types of node features:
+
+\textbf{1. Uniform feature}. Nodes are assigned an uniform feature, and this is to test if the two classes can be separated by the graph structure.
+
+\textbf{2. One hot encoding}.
+
+\textbf{3. Frequency spectrum}. The time series are transformed to the frequency domain to get the frequency spectrum, and a significant portion of the spectrum is taken for the node feature. Since the frequency spectrum of a real time series is symmetric, the second half is discarded. Figure~\ref{fig:fft} shows the summation of the frequency spectrums of all the time series, and we can see that the spectrum are concentrated between point 6 and point 47, so we use the spectrum in this range as node features.
+
+
+\section{Experiments}
+We test the performance of the two algorithms on the dataset with 10-fold cross-validation and the training stage runs for 200 epochs. Figure~\ref{fig:graph-accuracy} and Figure~\ref{fig:sage-accuracy} shows performance for the GCN and Graph-SAGE with the three types of node features respectively. Each figure displays the training accuracy, the test accuracy and the accuracy of a naive baseline classier, which always outputs the same label that it has seen most frequently in the training stage.
+\begin{figure*}[h]
+\centering
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/graph-allone.pdf}
+        \caption{Uniform Feature}
+        \label{fig:graph-allone}
+    \end{subfigure}
+    \hspace{-5pt}
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/graph-onehot.pdf}
+        \caption{One Hot Encoding}
+        \label{fig:graph-onehot}
+    \end{subfigure}
+    \hspace{-5pt}
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/graph-fft.pdf}
+        \caption{Frequency Feature}
+        \label{fig:graph-fft}
+    \end{subfigure}
+    \caption{GCN Performance}
+    %\vspace{-10pt}
+    \label{fig:graph-accuracy}
+\end{figure*}
+
+\begin{figure*}[h]
+\centering
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/sage-allone.pdf}
+        \caption{Uniform Feature}
+        \label{fig:sage-allone}
+    \end{subfigure}
+    \hspace{-5pt}
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/sage-onehot.pdf}
+        \caption{One Hot Encoding}
+        \label{fig:sage-onehot}
+    \end{subfigure}
+    \hspace{-5pt}
+    \begin{subfigure}{.33\linewidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figure/sage-fft.pdf}
+        \caption{Frequency Feature}
+        \label{fig:sage-fft}
+    \end{subfigure}
+    \caption{Graph-SAGE Performance}
+    %\vspace{-10pt}
+    \label{fig:sage-accuracy}
+\end{figure*}
+
+We can see that the accuracy curves of the Graph-SAGE algorithm remains quite steady around the baseline, and this is most likely because that the designed neural network has very poor leaning ability and need to be improved. As for the GCN, it performance with the one-hot encoding feature is significantly better than the other two. However, although it achieves almost 100\% training accuracy with the one-hot encoding feature, the test accuracy is just marginally better than the baseline. It is also note worthy that regardless the poor performance, the accuracy curves of the Graph-SAGE model for all the three types of features are showing the same trend as the curves of the CCN model, which validates that the one-hot encoding feature is better than the other two in this classification task. 
+\section{Conclusion \& Future Works}
+
+\bibliographystyle{abbrv}
+\bibliography{project2}
+\end{document}
+

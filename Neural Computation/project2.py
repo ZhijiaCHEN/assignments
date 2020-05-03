@@ -5,6 +5,7 @@ from torch_geometric.data import Data, InMemoryDataset, DataLoader
 from torch_geometric.nn import SAGEConv, GraphConv, TopKPooling, global_add_pool, global_max_pool, global_mean_pool, global_sort_pool
 from brain import FFT, OneHot, AllOne
 from matplotlib.ticker import StrMethodFormatter, MaxNLocator
+from torch import nn
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 class SAGE(torch.nn.Module):
@@ -16,6 +17,12 @@ class SAGE(torch.nn.Module):
         self.lin1 = torch.nn.Linear(hiddenChannels, 32)
         self.lin2 = torch.nn.Linear(32, 8)
         self.lin3 = torch.nn.Linear(8, outChannels)
+
+        nn.init.normal_(self.conv1.weight)
+        nn.init.normal_(self.conv2.weight)
+        nn.init.normal_(self.lin1.weight)
+        nn.init.normal_(self.lin2.weight)
+        nn.init.normal_(self.lin3.weight)
 
         self.set_aggr('add')
 
@@ -30,8 +37,9 @@ class SAGE(torch.nn.Module):
         x2 = F.relu(self.conv2(x1, edgeIndex))
 
         xz = global_add_pool(x2, batch)
-        x = F.relu(self.lin3(F.relu(self.lin2(F.relu(self.lin1(xz)))))).log_softmax(dim=-1)
-        return x
+        #x = F.relu(self.lin3(F.relu(self.lin2(F.relu(self.lin1(xz)))))).log_softmax(dim=-1)
+        x = F.relu(self.lin3(F.relu(self.lin2(F.relu(self.lin1(xz))))))
+        return (x**2).log_softmax(dim=-1)
 
 class GRAPHOld(torch.nn.Module):
     def __init__(self, inChannels, hiddenChannels, outChannels):
@@ -101,9 +109,10 @@ class GRAPH(torch.nn.Module):
         return x
 
 class Result(object):
-    def __init__(self, baseline=None, accuracy=None, loss=None):
+    def __init__(self, baseline=None, trainAccuracy=None, testAccuracy=None, loss=None):
         self.baseline = baseline
-        self.accuracy = accuracy
+        self.trainAccuracy = trainAccuracy
+        self.testAccuracy = testAccuracy
         self.loss = loss
         super().__init__()
 
@@ -111,7 +120,7 @@ def train(model, optimizer, trainLoader):
     global device
     model.train()
 
-    totalLoss = totalExamples = 0
+    totalLoss = totalExamples = correctExamples = 0
     for data in trainLoader:
         data = data.to(device)
         optimizer.zero_grad()
@@ -123,7 +132,10 @@ def train(model, optimizer, trainLoader):
         optimizer.step()
         totalLoss += loss.item()# * data.num_graphs
         totalExamples += data.num_graphs
-    return totalLoss / totalExamples
+        correctExamples += (predicted == data.y).sum().item()
+    accs = correctExamples/totalExamples
+    loss = totalLoss / totalExamples
+    return (loss, accs)
 
 @torch.no_grad()
 def test(model, testLoader):
@@ -133,14 +145,10 @@ def test(model, testLoader):
         data = data.to(device)
         out = model(data)
         _, predicted = torch.max(out, 1)
-        totalExamples += data.y.size(0)
+        totalExamples += data.num_graphs
         correctExamples += (predicted == data.y).sum().item()
         #print('predicted: {}'.format(predicted))
-    #out = model(data.x.to(device), data.edge_index.to(device))
-    #pred = out.argmax(dim=-1)
-    #correct = pred.eq(data.y.to(device))
     accs = correctExamples/totalExamples
-
     return accs
 
 def experiment():
@@ -158,16 +166,17 @@ def experiment():
         result = {}
     modelName = [sage, graph]
     datasetName = [fft, onehot, allone]
-    learnRate = {sage:1e-5, graph:5e-4}
-    totalEpoch = 300
+    learnRate = {sage:1e-2, graph:5e-4}
+    totalEpoch = 200
     crossFoldNum = 10
-    batchSize = 30
-    repeat = 10
+    batchSize = 25
+    repeat = 1
     for mn in modelName:
         for dn in datasetName:
 
             baseline = []
-            accuracy = []
+            trainAccuracy = []
+            testAccuracy = []
             loss = []
 
             if (mn, dn) in result:
@@ -176,8 +185,8 @@ def experiment():
             foldSize = len(dataset) / crossFoldNum
             for foldNum in range(crossFoldNum):
                 if int((foldNum + 1) * foldSize) > len(dataset):
-                    testData = dataset[int(foldNum * foldSize): ]
-                    trainData = dataset[ :int(foldNum * foldSize)]
+                    testDataset = dataset[int(foldNum * foldSize): ]
+                    trainDataset = dataset[ :int(foldNum * foldSize)]
                 else:
                     testDataset = dataset[int(foldNum * foldSize):int((foldNum + 1) * foldSize)]
                     trainDataset = dataset[ :int(foldNum * foldSize)] + dataset[int((foldNum + 1) * foldSize): ]
@@ -192,27 +201,37 @@ def experiment():
                 else:
                     baseline.append(nTestDataCnt/len(testDataset))
 
-                accuracyPerFold = []
+                trainAccsPerFold = []
+                testAccsPerFold = []
                 lossPerFold = []
                 for r in range(repeat):
                     model = modelDict[mn](dataset.num_features, 128, dataset.num_classes).to(device)
                     optimizer = torch.optim.Adam(model.parameters(), lr=learnRate[mn])
-                    accuracyPerRepeat = []
+
+                    trainAccsPerRepeat = []
+                    testAccsPerRepeat = []
                     lossPerRepeat = []
+
                     for epoch in range(totalEpoch):
                         trainLoader = DataLoader(trainDataset, batch_size=batchSize, shuffle=True)
                         testLoader = DataLoader(testDataset, batch_size=batchSize, shuffle=True)
 
-                        lossPerRepeat.append(train(model, optimizer, trainLoader))
-                        accuracyPerRepeat.append(test(model, testLoader))
+                        (lossi, accsi) = train(model, optimizer, trainLoader)
+                        lossPerRepeat.append(lossi)
+                        trainAccsPerRepeat.append(accsi)
+                        testAccsPerRepeat.append(test(model, testLoader))
 
-                        print('Model {} on dataset {} in fold {} repeat {}, epoch: {:02d}, Loss: {}, Test: {:.4f}'.format(mn, dn, foldNum + 1, r + 1, epoch + 1, lossPerRepeat[-1], accuracyPerRepeat[-1]))
-                    accuracyPerFold.append(array(accuracyPerRepeat).mean(axis=0))
-                    lossPerFold.append(array(lossPerRepeat).mean(axis=0))
-                accuracy.append(accuracyPerFold)
-                loss.append(lossPerFold)
+                        print('Model {} on dataset {} in fold {} repeat {}, epoch: {:02d}, Loss: {}, Test: {:.4f}'.format(mn, dn, foldNum + 1, r + 1, epoch + 1, lossPerRepeat[-1], testAccsPerRepeat[-1]))
+                        
+                    testAccsPerFold.append(testAccsPerRepeat)
+                    trainAccsPerFold.append(trainAccsPerRepeat)
+                    lossPerFold.append(lossPerRepeat)
 
-            result[(mn, dn)] = Result(baseline=array(baseline), accuracy=array(accuracy), loss=array(loss))
+                trainAccuracy.append(array(trainAccsPerFold).mean(axis=0))
+                testAccuracy.append(array(testAccsPerFold).mean(axis=0))
+                loss.append(array(lossPerFold).mean(axis=0))
+
+            result[(mn, dn)] = Result(baseline=array(baseline), testAccuracy=array(testAccuracy), trainAccuracy=array(trainAccuracy), loss=array(loss))
             with open('result.pickle', 'wb') as f:
                 pickle.dump(result, f)
 
@@ -232,7 +251,7 @@ def plot():
         accrsStd[dn] = []
     for mn in model:
         for dn, clr in zip(dataset, color):
-            plt.figure(figsize=(5, 2))
+            plt.figure(figsize=(4, 3))
             plt.margins(0)
             plt.gca().yaxis.set_major_formatter(StrMethodFormatter('{x:,.2f}')) # 2 decimal places
             plt.xlabel('epoch')
@@ -240,15 +259,17 @@ def plot():
 
             data = result[(mn, dn)]
             loss = data.loss.mean(axis=0)
-            accuracy = data.accuracy.mean(axis=0)
+            trainAccuracy = data.trainAccuracy.mean(axis=0)
+            testAccuracy = data.testAccuracy.mean(axis=0)
             baseline = data.baseline.mean()
-            epoch = arange(1, len(accuracy)+1, dtype='i')
+            epoch = arange(1, len(loss)+1, dtype='i')
 
-            accrsMean[dn].append(accuracy[-1])
-            accrsStd[dn].append(data.accuracy[:, -1].std())
+            accrsMean[dn].append(testAccuracy[-1])
+            accrsStd[dn].append(data.testAccuracy[:, -1].std())
 
-            plot(epoch, accuracy, label=dn)
-            plot(epoch, [baseline]*len(accuracy), '-.', label='baseline')
+            plot(epoch, trainAccuracy, label='train')
+            plot(epoch, testAccuracy, label='test')
+            plot(epoch, [baseline]*len(loss), '-.', label='baseline')
 
             plt.gca().set_ylim(bottom=0, top=1)
             plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
