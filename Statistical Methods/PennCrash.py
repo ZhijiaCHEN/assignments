@@ -19,6 +19,40 @@ intersectionVSCrash = {}
 drivewaysVSCrash = {}
 speedVSCrash = {}
 
+"""
+curveDistribution = {}
+dangerCurveDistribution = {}
+for curvature, tot04 in zip(crash["curvature"], crash["tot04"]):
+    curvature = round(curvature)
+    if tot04 == 0: continue
+    curveDistribution[curvature] = curveDistribution.get(curvature, 0) + tot04
+    if tot04 >= 3:
+        dangerCurveDistribution[curvature] = dangerCurveDistribution.get(curvature, 0) + tot04
+curveDistributionX = [k for k in curveDistribution.keys()]
+curveDistributionX.sort()
+curveDistributionY = [curveDistribution[x] for x in curveDistributionX]
+
+dangerCurveDistributionX = [k for k in dangerCurveDistribution.keys()]
+dangerCurveDistributionX.sort()
+dangerCurveDistributionY = [dangerCurveDistribution[x] for x in dangerCurveDistributionX]
+
+plt.subplots_adjust(hspace=0.5)
+ax1=plt.subplot(2, 1, 1)
+ax1.set_title('curvature distribution of all crashes')
+ax1.set_xlabel('curvature')
+ax1.set_ylabel('frequency')
+#ax1.set_xlim([-7, 7])
+plt.bar(curveDistributionX, curveDistributionY)
+
+ax2=plt.subplot(2, 1, 2)
+ax2.set_title('curvature distribution of frequent crashes')
+ax2.set_xlabel('curvature')
+ax2.set_ylabel('frequency')
+#ax2.set_xlim([-7, 7])
+plt.bar(dangerCurveDistributionX, dangerCurveDistributionY)
+plt.show()
+"""
+
 crash04 = {}
 crash12 = {}
 for treat, tot04, tot12 in zip(crash["Treat"], crash["tot04"], crash["tot12"]):
@@ -51,8 +85,10 @@ plt.show()
 
 treatedDiff = {}
 untreatedDiff = {}
-for treat, tot04, tot12, curvature in zip(crash["Treat"], crash["tot04"], crash["tot12"], crash["curvature"]):
-    if curvature < 1: continue
+for treat, tot04, tot12, curvature, speed, adt04, adt12 in zip(crash["Treat"], crash["tot04"], crash["tot12"], crash["curvature"], crash["speed"], crash["adt04"], crash["adt12"]):
+    #if speed == "Low": continue
+    if curvature < 10: continue
+    if adt04 > 8000 or adt12 > 8000: continue
     #if tot12 < 3 and tot04 < 3: continue
     diff = tot12 - tot04
     if diff == 0:
@@ -113,6 +149,7 @@ ax3=plt.subplot(2, 1, 1)
 ax3.set_title('adt04 vs # Crashes')
 ax3.set_xlabel('AADT')
 ax3.set_ylabel('# crashes')
+loadVSCrash = []
 for x, y in zip(crash["tot04"], crash["adt04"]):
     loadVSCrash += [round(y)]*x
 n, bins, patches = plt.hist(loadVSCrash, 100, facecolor='blue', alpha=0.5)
@@ -125,6 +162,7 @@ ax3.set_ylabel('# crashes')
 for x, y in zip(crash["tot12"], crash["adt12"]):
     loadVSCrash += [round(y)]*x
 n, bins, patches = plt.hist(loadVSCrash, 100, facecolor='blue', alpha=0.5)
+plt.show()
 
 """
 plt.subplots_adjust(hspace=0.5)
