@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{cleveref}
+\usepackage{float}
+\usepackage[useregional]{datetime2}
+\usepackage{url}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\usepackage[font=small,skip=0pt]{caption}
+\geometry{legalpaper, margin=1in}
+\title{Homework 2 }
+\author{Zhijia Chen}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+1.
+\begin{align*}
+    E(X)&=1P(X=1)+0P(X=0)\\
+    &=1p\\
+    &=p\\
+    Var(X)&=E((X-E(X))^2)\\
+    &=E(X^2-2XE(X)+E(X)^2)\\
+    &=E(X^2)-2E(X)^2+E(X)^2\\
+    &=E(X^2)-E(X)^2\\
+    &=1^2P(X=1)+0^2P(X=0)-p^2\\
+    &=p-p^2
+\end{align*}
+
+\begin{align*}
+    Var(X)&=E((X-E(X))^2)\\
+    &=E(X^2-2XE(X)+E(X)^2)\\
+    &=E(X^2)-2E(X)^2+E(X)^2\\
+    &=E(X^2)-E(X)^2\\
+    &=1^2P(X=1)+0^2P(X=0)-p^2\\
+    &=p-p^2
+\end{align*}
+
+2.
+\begin{align*}
+    E(X)&=\int_0^1xdx\\
+    &=\left.\frac{1}{2}x^2\right|_0^1\\
+    &=\frac{1}{2}\\
+\end{align*}
+
+\begin{align*}
+    Var(X)&=E(X^2)-E(X)^2\\
+    &=\int_0^1x^2dx-\frac{1}{4}\\
+    &=\left.\frac{x^3}{3}\right|_0^1-\frac{1}{4}\\
+    &=\frac{1}{12}\\
+\end{align*}
+
+\begin{align*}
+    Std(X)&=\sqrt{Var(X)}\\
+    &=\frac{1}{\sqrt{12}}
+\end{align*}
+
+3.
+
+When $X$ and $Y$ are discrete: 
+\begin{align*}
+    E(aX+bY)&=\sum_x\left[aP(X=x)x+\sum_ybP(Y=y)y\right]\\
+    &=\sum_x\left[aP(X=x)x+bE(Y)\right]\\
+    &=aE(X)+bE(Y)
+\end{align*}
+
+When $X$ and $Y$ are continuous:
+\begin{align*}
+    E(aX+bY)&=\int\left[aP(X=x)dx+\int bP(Y=y)dy\right]\\
+    &=\int\left[aP(X=x)dx+bE(Y)\right]\\
+    &=aE(X)+bE(Y)
+\end{align*}
+
+4.
+\begin{align*}
+    &E\left[\left[X-E(X)\right]\left[Y-E(Y)\right]\right]\\
+    =&E\left[XY-XE(Y)-YE(X)+E(X)E(Y)\right]\\
+    =&E(XY)-E(X)E(Y)
+\end{align*}
+Because $X$ and $Y$ are independent, so $E(XY)=E(X)E(Y)$, and thus
+\begin{align*}
+    &E(XY)-E(X)E(Y)=0
+\end{align*}
+When $X$ and $Y$ are bound to the same constant, thought they are not independent, their covariance is 0.
+\end{document}
+
